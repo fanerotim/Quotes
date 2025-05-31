@@ -10,7 +10,7 @@ const expressConfig = (app) => {
         origin: 'http://localhost',
         credentials: true
     }))
-
+    
     return app;
 }
 
