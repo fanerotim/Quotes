@@ -41,4 +41,17 @@ router.post('/add-quote', async (req, res) => {
     }
 })
 
+router.put('/update-quote', async (req, res) => {
+    const {id, author, text, category} = req.body;
+    
+    try {
+        //update quote
+        const quote = await quoteService.updateQuote(id, author, text, category);
+        res.status(200).send(quote)
+    } catch (err) {
+        return res.status(500).send({...err});
+    }
+    
+})
+
 module.exports = router;
