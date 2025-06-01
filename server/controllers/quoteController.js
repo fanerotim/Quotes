@@ -1,6 +1,4 @@
-const mysqlConfig = require('../mySqlConfig');
 const router = require('express').Router();
-const db = mysqlConfig();
 // import quote service
 const quoteService = require('../services/quoteService');
 
