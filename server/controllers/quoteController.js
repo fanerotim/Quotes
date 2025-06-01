@@ -47,11 +47,12 @@ router.put('/update-quote', async (req, res) => {
     try {
         //update quote
         const quote = await quoteService.updateQuote(id, author, text, category);
-        res.status(200).send(quote)
+        //return updated quote
+        const updatedQuote = await quoteService.getQuote(id)
+        res.status(200).send(updatedQuote)
     } catch (err) {
         return res.status(500).send({...err});
-    }
-    
+    }   
 })
 
 module.exports = router;
