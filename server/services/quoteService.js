@@ -56,9 +56,23 @@ const updateQuote = (id, author, text, category) => {
     })
 }
 
+const deleteQuote = (id) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM quotes WHERE id = ?';
+
+        db.query(sql, [id], (err, result) => {
+            if (err) {
+                return reject({...err})
+            }
+            return resolve(result);
+        })
+    })
+}
+
 module.exports = {
     getAll,
     getQuote,
     addQuote,
-    updateQuote
+    updateQuote,
+    deleteQuote
 }
