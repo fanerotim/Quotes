@@ -1,21 +1,29 @@
 const mysqlConfig = require('../mySqlConfig');
 const router = require('express').Router();
 const db = mysqlConfig();
+// import quote service
+const quoteService = require('../services/quoteService');
 
-router.get('/', (req, res) => {
-    res.status(200).send('Hello from me - the Router!');
+router.get('/', async (req, res) => {
+
+    try {
+        const quotes = await quoteService.getAll();
+        res.status(200).send(quotes);
+    } catch (err) {
+        // return error message
+        throw err.message;
+    }
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     const { id } = req.params;
-    
-    // this will be exported into a service, but not yet
-    const sql = 'SELECT * FROM quotes WHERE id = ?'
-    db.query(sql, id, (err, result) => {
-        if (err) throw {...err}
-        res.status(200).send(result);
-    })
-
+  
+    try {
+        const quote = await quoteService.getQuote(id);
+        res.status(200).send(quote);
+    } catch (err) {
+        throw err.message;
+    }
 })
 
 module.exports = router;

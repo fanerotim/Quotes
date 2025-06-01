@@ -4,6 +4,7 @@ const expressConfig = require('./expressConfig');
 
 const app = express();
 const db = mysqlConfig(); // create MySQL connection
+
 expressConfig(app); // attach middlewares
 
 // import routes and create a middleware that listens for routes on every request
