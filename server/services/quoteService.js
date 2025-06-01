@@ -27,7 +27,22 @@ const getQuote = (id) => {
     })
 }
 
+const addQuote = (author, text, category) => {
+    return new Promise((resolve, reject) => {
+        const sql = `INSERT INTO quotes 
+                        (author, text, category)
+                    VALUES(?, ?, ?)`;
+        db.query(sql, [author, text, category], (err, result) => {
+            if (err) {
+                return reject({...err})
+            }
+            return resolve(result);
+        })
+    })
+}
+
 module.exports = {
     getAll,
-    getQuote
+    getQuote,
+    addQuote
 }
