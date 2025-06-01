@@ -17,12 +17,27 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-  
+
     try {
         const quote = await quoteService.getQuote(id);
         res.status(200).send(quote);
     } catch (err) {
         throw err.message;
+    }
+})
+
+router.post('/add-quote', async (req, res) => {
+    const { author, text, category } = req.body;
+    
+    try {
+        // add new quote
+        const quote = await quoteService.addQuote(author, text, category);
+        // get new quote
+        const quoteId = quote.insertId; // first get id of newly added quote
+        const newQuote = await quoteService.getQuote(quoteId);
+        res.status(200).send(newQuote[0]);
+    } catch (err) {
+        res.status(500).send(err);
     }
 })
 
