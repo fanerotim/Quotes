@@ -41,8 +41,24 @@ const addQuote = (author, text, category) => {
     })
 }
 
+const updateQuote = (id, author, text, category) => {
+    return new Promise((resolve, reject) => {
+        const sql = `UPDATE quotes 
+                    SET author = ?, text =?, category =?
+                    WHERE id = ?`
+
+        db.query(sql, [author, text, category, id], (err, result) => {
+            if (err) {
+                return reject({...err})
+            }
+            return resolve(result);
+        })
+    })
+}
+
 module.exports = {
     getAll,
     getQuote,
-    addQuote
+    addQuote,
+    updateQuote
 }
