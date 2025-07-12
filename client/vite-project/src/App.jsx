@@ -1,48 +1,16 @@
 import './App.scss'
-import { useEffect, useState, useRef } from 'react';
+import Home from './components/home/Home';
+import Quotes from './components/quotes/Quotes';
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
-  const [quotes, setQuotes] = useState([]);
-  const [isUnmounting, setIsUnmounting] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [scrollCoordinates, setScrollCoordinantes] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    fetch(import.meta.env.VITE_QUOTES_URL)
-      .then(response => response.json())
-      .then(data => {
-        setQuotes(data)
-        setIsUnmounting(false)
-      });
-
-    return (() => setIsUnmounting(true))
-  }, [])
-
-  if (isUnmounting) {
-    return (<h1>Loading...</h1>)
-  }
-
-  
 
   return (
     <>
-      <section ref={(node) => {
-        console.log('attached', node);
-
-        return () => {
-          console.log('detached', node)
-        }
-      }}>
-        {quotes.map(q => (
-          <div
-            key={q.id}
-            className='item'>
-            <h3>{q.author}</h3>
-            <p>{q.text}</p>
-          </div>
-
-        ))}
-      </section>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/quotes' element={<Quotes />}></Route>
+      </Routes>
     </>
   )
 }
