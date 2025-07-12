@@ -21,6 +21,7 @@ app.use(routes);
 // Connect to DB and start server
 db.connect((err) => {
     if (err) {
+        console.log('failed to connect to db')
         throw ({ ...err });
     }
     console.log('Database SUCCESSFULLY connected!');
