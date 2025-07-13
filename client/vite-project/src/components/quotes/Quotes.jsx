@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react';
-import http from '../../requester/http';
+import { useEffect, useState } from 'react';
+import useQuotes from '../hooks/useQuotes';
 
 const Quotes = () => {
     const [quotes, setQuotes] = useState([]);
+    const { getAllQuotes } = useQuotes();
 
     useEffect(() => {
-        const getQuotes = async () => {
-            const result = await http.get(import.meta.env.VITE_QUOTES_URL);
-            setQuotes(result);
-        }
-        getQuotes();
+
+        (async () => {
+            const result = await getAllQuotes();
+        })();
+        
     }, [quotes])
 
     return (
