@@ -9,8 +9,9 @@ const Quotes = () => {
 
         (async () => {
             const result = await getAllQuotes();
+            setQuotes(result);
         })();
-        
+
     }, [quotes])
 
     return (
