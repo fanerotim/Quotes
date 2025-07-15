@@ -1,10 +1,16 @@
+import http from "../requester/http";
+import { useNavigate } from "react-router-dom";
+
 const useAddQuote = () => {
-    
-    const addQuote = (values) => {
-        
+
+    const navigate  = useNavigate();
+
+    const addQuote = async (values) => {
         try {
-            console.log('values from addQuote', values)
-        } catch(err) {
+            const newQuote = await http.post(`${import.meta.env.VITE_QUOTES_URL}/add-quote`, values);
+            navigate('/quotes')
+            // return newQuote;
+        } catch (err) {
             console.log(err);
             return err;
         }
