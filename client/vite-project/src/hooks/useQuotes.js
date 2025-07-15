@@ -1,4 +1,4 @@
-import http from "../../requester/http";
+import http from "../requester/http";
 
 const useQuotes = () => {
 

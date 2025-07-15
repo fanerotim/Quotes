@@ -1,5 +1,6 @@
 import './AddQuote.scss'
-import useForm from '../hooks/useForm';
+import useForm from '../../hooks/useForm';
+import useAddQuote from '../../hooks/useAddQuote';
 
 const initialValues = {
     author: '',
@@ -10,10 +11,11 @@ const initialValues = {
 const AddQuote = () => {
 
     const { values, handleChange } = useForm(initialValues);
+    const { addQuote } = useAddQuote();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('user data', values)
+        addQuote(values);
     }
 
     return (
@@ -23,24 +25,24 @@ const AddQuote = () => {
                 <section>
                     <label>Author</label>
                     <input
-                        onChange={handleChange} 
+                        onChange={handleChange}
                         value={values.author}
                         name='author'
-                        type="text"/>
+                        type="text" />
                 </section>
 
                 <section>
                     <label>Text</label>
-                    <input 
+                    <input
                         onChange={handleChange}
                         value={values.text}
                         name='text'
-                        type="text"/>
+                        type="text" />
                 </section>
 
                 <section>
                     <label>Category</label>
-                    <select 
+                    <select
                         onChange={handleChange}
                         name="category"
                         value={values.category}>
@@ -48,7 +50,6 @@ const AddQuote = () => {
                         <option value="comedy">Comedy</option>
                         <option value="history">History</option>
                     </select>
-
                 </section>
                 <button>Submit</button>
             </form>

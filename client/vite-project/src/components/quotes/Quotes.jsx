@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useQuotes from '../hooks/useQuotes';
+import useQuotes from '../../hooks/useQuotes';
 
 const Quotes = () => {
     const [quotes, setQuotes] = useState([]);
