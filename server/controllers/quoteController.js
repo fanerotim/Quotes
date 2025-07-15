@@ -28,6 +28,7 @@ router.post('/add-quote', async (req, res) => {
     const { author, text, category } = req.body;
     
     try {
+        // TODO: ERROR HANDLING - CHECK IF QUOTE EXISTS
         // add new quote
         const quote = await quoteService.addQuote(author, text, category);
         // get new quote
