@@ -13,7 +13,7 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/quotes' element={<Quotes />}></Route>
         <Route path='/quotes/add-quote' element={<AddQuote/>}></Route>
-        <Route path='/quotes/edit-quote' element={<EditQuote/>}></Route>
+        <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote/>}></Route>
       </Routes>
     </>
   )
