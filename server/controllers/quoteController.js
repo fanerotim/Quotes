@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-
     try {
         const quote = await quoteService.getQuote(id);
         res.status(200).send(quote);

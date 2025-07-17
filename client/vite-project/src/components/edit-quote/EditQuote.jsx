@@ -1,13 +1,27 @@
+import { useEffect, useState } from 'react';
 import useForm from '../../hooks/useForm';
 import './EditQuote.scss'
 import { useParams } from 'react-router-dom';
 import useEditQuote from '../../hooks/useEditQuote';
+import useGetQuote from '../../hooks/useGetQuote';
 
 const EditQuote = () => {
 
     const { quoteId } = useParams();
     const { values, handleChange } = useForm();
     const { edit } = useEditQuote();
+    const { getQuote } = useGetQuote();
+    const [quote, setQuote] = useState({
+        author: '',
+        text: '',
+        category: ''
+    })
+
+    useEffect(() => {
+        const newQuote = 
+            getQuote(quoteId)
+            .then(result => setQuote(result))
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -24,6 +38,7 @@ const EditQuote = () => {
                     <label>Author</label>
                     <input
                         onChange={handleChange}
+                        value={quote.author}
                         name='author'
                     />
                 </section>
@@ -32,6 +47,7 @@ const EditQuote = () => {
                     <label>Text</label>
                     <textarea
                         onChange={handleChange}
+                        value={quote.text}
                         name="text">
                     </textarea>
                 </section>

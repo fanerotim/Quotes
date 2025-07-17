@@ -19,7 +19,7 @@ const Quotes = () => {
             <h1>Welcome to my Quotes!</h1>
             <ul>
                 {quotes.map(quote => (
-                    <li key={quote.id}>{quote.text}</li>
+                    <li key={quote.id}>{quote.text}{quote.id}</li>
                 ))}
             </ul>
         </>
