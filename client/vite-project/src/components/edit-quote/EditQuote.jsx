@@ -7,20 +7,24 @@ import useGetQuote from '../../hooks/useGetQuote';
 
 const EditQuote = () => {
 
-    const { quoteId } = useParams();
-    const { values, handleChange } = useForm();
-    const { edit } = useEditQuote();
-    const { getQuote } = useGetQuote();
     const [quote, setQuote] = useState({
         author: '',
         text: '',
         category: ''
     })
 
+    const { quoteId } = useParams();
+    const { values, handleChange } = useForm(quote);
+    const { edit } = useEditQuote();
+    const { getQuote } = useGetQuote();
+    
+
     useEffect(() => {
+        // this piece of code makes sure edit form is prepopulated with accurate data on initial load
         const newQuote = 
-            getQuote(quoteId)
-            .then(result => setQuote(result))
+        getQuote(quoteId)
+        .then(result => setQuote(result))
+        .catch(err => console.log(err))
     }, []);
 
     const handleSubmit = (e) => {
@@ -38,7 +42,7 @@ const EditQuote = () => {
                     <label>Author</label>
                     <input
                         onChange={handleChange}
-                        value={quote.author}
+                        value={values.author}
                         name='author'
                     />
                 </section>
@@ -47,7 +51,7 @@ const EditQuote = () => {
                     <label>Text</label>
                     <textarea
                         onChange={handleChange}
-                        value={quote.text}
+                        value={values.text}
                         name="text">
                     </textarea>
                 </section>
