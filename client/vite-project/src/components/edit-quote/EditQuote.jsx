@@ -29,7 +29,7 @@ const EditQuote = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const updatedQuote = edit(values, quoteId)
+        const updatedQuote = edit(values, quoteId);
     }
 
     return (

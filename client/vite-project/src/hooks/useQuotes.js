@@ -5,7 +5,7 @@ const useQuotes = () => {
     const getAllQuotes = async () => {
 
         try {
-            const result = await http.get(import.meta.env.VITE_QUOTES_URL);
+            const result = await http.get(import.meta.env.VITE_BASE_URL);
             return result;
         } catch (err) {
             // TODO: ADD ERROR HANDLING
