@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/add-quote', async (req, res) => {
     const { author, text, category } = req.body;
-    
+
     try {
         // TODO: ERROR HANDLING - CHECK IF QUOTE EXISTS
         // add new quote
@@ -39,9 +39,10 @@ router.post('/add-quote', async (req, res) => {
     }
 })
 
-router.put('/update-quote', async (req, res) => {
-    const {id, author, text, category} = req.body;
-    
+router.put('/edit-quote/:id', async (req, res) => {
+    const { id } = req.params;
+    const {author, text, category } = req.body;
+
     try {
         //update quote
         const quote = await quoteService.updateQuote(id, author, text, category);
@@ -49,18 +50,18 @@ router.put('/update-quote', async (req, res) => {
         const updatedQuote = await quoteService.getQuote(id)
         res.status(200).send(updatedQuote)
     } catch (err) {
-        return res.status(500).send({...err});
-    }   
+        return res.status(500).send({ ...err });
+    }
 })
 
 router.delete('/delete-quote', async (req, res) => {
-    const {id} = req.body;
+    const { id } = req.body;
 
     try {
         const deletedQuote = await quoteService.deleteQuote(id);
         res.status(200).send('Quote DELETED successfully.');
-    } catch(err) {
-        return res.status(500).send({...err})
+    } catch (err) {
+        return res.status(500).send({ ...err })
     }
 })
 
