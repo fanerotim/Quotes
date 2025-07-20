@@ -25,11 +25,12 @@ router.get('/:id', async (req, res) => {
 
 router.post('/add-quote', async (req, res) => {
     const { author, text, category } = req.body;
-
+    // TODO: UPDATE TABLE TEXT COLUMN DEFINITION / LIMITS CHARACTERS TOO MUCH
     try {
         // TODO: ERROR HANDLING - CHECK IF QUOTE EXISTS
         // add new quote
         const quote = await quoteService.addQuote(author, text, category);
+        console.log(quote);
         // get new quote
         const quoteId = quote.insertId; // first get id of newly added quote
         const newQuote = await quoteService.getQuote(quoteId);
