@@ -1,9 +1,17 @@
 import { useEffect, useState } from 'react';
 import useQuotes from '../../hooks/useQuotes';
+import { useNavigate } from 'react-router-dom';
 
 const Quotes = () => {
     const [quotes, setQuotes] = useState([]);
     const { getAllQuotes } = useQuotes();
+    const navigate = useNavigate();
+
+    // THIS HANDLE IS HERE DURING DEV
+    // BUTTON AND EVENT HANDLER NEED TO BE ABSTRACTED
+    const clickHandler = (id) => {
+        navigate(`/quotes/${id}`)
+    }
 
     useEffect(() => {
 
@@ -19,7 +27,12 @@ const Quotes = () => {
             <h1>Welcome to my Quotes!</h1>
             <ul>
                 {quotes.map(quote => (
-                    <li key={quote.id}>{quote.text}{quote.id}</li>
+                    <>
+                        <li key={quote.id}>{quote.text}{quote.id}</li>
+                        <button 
+                            onClick={() => clickHandler(quote.id)}
+                        >Show details</button>
+                    </>
                 ))}
             </ul>
         </>
