@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const EditButton = ({text, id}) => {
+const EditButton = ({ id }) => {
 
     const navigate = useNavigate();
 
@@ -9,7 +9,7 @@ const EditButton = ({text, id}) => {
     }
 
     return (
-        <button onClick={clickHandler}>{text}</button>
+        <button onClick={clickHandler}>Edit</button>
     )
 }
 

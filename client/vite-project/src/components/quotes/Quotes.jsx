@@ -27,12 +27,13 @@ const Quotes = () => {
             <h1>Welcome to my Quotes!</h1>
             <ul>
                 {quotes.map(quote => (
-                    <>
-                        <li key={quote.id}>{quote.text}{quote.id}</li>
-                        <button 
-                            onClick={() => clickHandler(quote.id)}
-                        >Show details</button>
-                    </>
+                    <div key={quote.id}>
+                        <li>{quote.text}{quote.id}</li>
+                        <button
+                            onClick={() => clickHandler(quote.id)}>
+                                Show details
+                        </button>
+                    </div>
                 ))}
             </ul>
         </>
