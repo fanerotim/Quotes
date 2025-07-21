@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import useGetQuote from "../../hooks/useGetQuote";
 import { useEffect, useState } from "react";
+import EditButton from "../button/EditButton";
 
 const QuoteDetails = () => {
 
@@ -18,6 +19,9 @@ const QuoteDetails = () => {
             <h1>Welcome to quote details page</h1>
             <h2>{quote?.text}</h2>
             <h3>{quote?.author}</h3>
+            {/* <Button text={'Delete'}/> */}
+            <br/>
+            <EditButton text={'Edit'} id={quote?.id}/>
         </>
     )
 }
