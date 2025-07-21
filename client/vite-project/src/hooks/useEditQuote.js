@@ -9,7 +9,7 @@ const useEditQuote = () => {
         // TODO: ADD ERROR HANDLING
         try {
             const updatedQuote = await http.put(`${import.meta.env.VITE_BASE_URL}/edit-quote/${quoteId}`, values);
-            navigate('/quotes')
+            navigate(`/quotes/${quoteId}`)
         } catch(err) {
             console.log(err);
             return err;
