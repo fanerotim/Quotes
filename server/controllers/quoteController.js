@@ -57,10 +57,9 @@ router.put('/edit-quote/:id', async (req, res) => {
 
 router.delete('/delete-quote', async (req, res) => {
     const { id } = req.body;
-
     try {
         const deletedQuote = await quoteService.deleteQuote(id);
-        res.status(200).send('Quote DELETED successfully.');
+        res.status(200).send({"message":'Quote DELETED successfully.'});
     } catch (err) {
         return res.status(500).send({ ...err })
     }
