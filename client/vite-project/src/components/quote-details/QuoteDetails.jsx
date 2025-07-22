@@ -20,7 +20,7 @@ const QuoteDetails = () => {
             <h1>Welcome to quote details page</h1>
             <h2>{quote?.text}</h2>
             <h3>{quote?.author}</h3>
-            <DeleteButton/>
+            <DeleteButton quoteId={quote?.id}/>
             <br/>
             <EditButton id={quote?.id}/>
         </>
