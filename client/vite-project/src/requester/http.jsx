@@ -6,10 +6,10 @@ const http = async (method, url, values) => {
         options.headers = {
             'Content-Type': 'application/json'
         }
-        options.method = method;
+        options.method = method; 
         options.body = JSON.stringify(values);
     }
-
+ 
     const response = await fetch(url, options)
 
     // TODO: CREATE AN EXAMPLE FOR THE FOLLOWING
@@ -21,16 +21,17 @@ const http = async (method, url, values) => {
     }
 
     const result = await response.json()
-
     return result;
 }
 
 const get = http.bind('', 'GET');
 const post = http.bind('', 'POST');
 const put = http.bind('', 'PUT');
+const deleteOne = http.bind('', 'DELETE')
 
 export default {
     get,
     post,
-    put
+    put,
+    deleteOne
 }
