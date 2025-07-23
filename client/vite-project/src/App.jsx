@@ -5,11 +5,13 @@ import AddQuote from './components/add-quote/addQuote';
 import EditQuote from './components/edit-quote/EditQuote';
 import { Routes, Route } from 'react-router-dom'
 import QuoteDetails from './components/quote-details/QuoteDetails';
+import Navigation from './components/navigation/Navigation';
 
 function App() {
 
   return (
     <>
+      <Navigation/>
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/quotes' element={<Quotes />}></Route>
