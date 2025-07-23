@@ -19,7 +19,7 @@ const AddQuote = () => {
     }
 
     return (
-        <>
+        <div className='add-form__container'>
             <form
                 onSubmit={(e) => handleSubmit(e)}>
                 <section>
@@ -53,7 +53,7 @@ const AddQuote = () => {
                 </section>
                 <button>Submit</button>
             </form>
-        </>
+        </div>
     )
 }
 

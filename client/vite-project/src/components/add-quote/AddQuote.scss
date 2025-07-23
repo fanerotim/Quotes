@@ -1,3 +1,14 @@
+.add-form__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form {
+    width: fit-content;
+    padding: 5rem;
+}
+
 form label {
     display: block;
     text-align: left;
