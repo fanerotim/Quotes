@@ -6,19 +6,21 @@ import EditQuote from './components/edit-quote/EditQuote';
 import { Routes, Route } from 'react-router-dom'
 import QuoteDetails from './components/quote-details/QuoteDetails';
 import Navigation from './components/navigation/Navigation';
+import Footer from './components/footer/Footer';
 
 function App() {
 
   return (
     <>
-      <Navigation/>
+      <Navigation />
       <Routes>
         <Route path='/' element={<Home />}></Route>
         <Route path='/quotes' element={<Quotes />}></Route>
-        <Route path='/quotes/:quoteId' element={<QuoteDetails/>}></Route>
-        <Route path='/quotes/add-quote' element={<AddQuote/>}></Route>
-        <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote/>}></Route>
+        <Route path='/quotes/:quoteId' element={<QuoteDetails />}></Route>
+        <Route path='/quotes/add-quote' element={<AddQuote />}></Route>
+        <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote />}></Route>
       </Routes>
+      <Footer />
     </>
   )
 }
