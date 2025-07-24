@@ -1,3 +1,4 @@
+import './Quotes.scss'
 import { useEffect, useState } from 'react';
 import useQuotes from '../../hooks/useQuotes';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +24,7 @@ const Quotes = () => {
     }, [quotes])
 
     return (
-        <>
+        <section className='quotes-container'>
             <h1>Welcome to my Quotes!</h1>
             <ul>
                 {quotes.map(quote => (
@@ -36,7 +37,7 @@ const Quotes = () => {
                     </div>
                 ))}
             </ul>
-        </>
+        </section>
     )
 }
 

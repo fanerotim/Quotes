@@ -11,7 +11,7 @@ import Footer from './components/footer/Footer';
 function App() {
 
   return (
-    <>
+    <div className='app-container'>
       <Navigation />
       <Routes>
         <Route path='/' element={<Home />}></Route>
@@ -21,7 +21,7 @@ function App() {
         <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote />}></Route>
       </Routes>
       <Footer />
-    </>
+    </div>
   )
 }
 
