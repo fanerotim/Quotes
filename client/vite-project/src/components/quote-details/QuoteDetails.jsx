@@ -1,3 +1,4 @@
+import './QuoteDetails.scss';
 import { useParams } from "react-router-dom";
 import useGetQuote from "../../hooks/useGetQuote";
 import { useEffect, useState } from "react";
@@ -16,14 +17,14 @@ const QuoteDetails = () => {
     }, [])
         
     return (
-        <>
+        <section className="quote-details__container">
             <h1>Welcome to quote details page</h1>
             <h2>{quote?.text}</h2>
             <h3>{quote?.author}</h3>
             <DeleteButton quoteId={quote?.id}/>
             <br/>
             <EditButton id={quote?.id}/>
-        </>
+        </section>
     )
 }
 
