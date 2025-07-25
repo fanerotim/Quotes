@@ -33,7 +33,7 @@ const EditQuote = () => {
     }
 
     return (
-        <>
+        <section className='edit-quote__container'>
             <h1>Edit quote</h1>
 
             <form
@@ -57,6 +57,7 @@ const EditQuote = () => {
                 </section>
 
                 <section>
+                    <label>Category</label>
                     <select
                         onChange={handleChange}
                         name="category">
@@ -67,7 +68,7 @@ const EditQuote = () => {
                 </section>
                 <button>Submit</button>
             </form>
-        </>
+        </section>
     )
 }
 

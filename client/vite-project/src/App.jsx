@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom'
 import QuoteDetails from './components/quote-details/QuoteDetails';
 import Navigation from './components/navigation/Navigation';
 import Footer from './components/footer/Footer';
+import Register from './components/register/Register';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Route path='/quotes/:quoteId' element={<QuoteDetails />}></Route>
         <Route path='/quotes/add-quote' element={<AddQuote />}></Route>
         <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote />}></Route>
+        <Route path='users/register' element={<Register />}>Register</Route>
       </Routes>
       <Footer />
     </div>
