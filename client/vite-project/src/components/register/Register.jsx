@@ -1,4 +1,5 @@
 import useForm from '../../hooks/useForm';
+import useRegister from '../../hooks/useRegister';
 import './Register.scss'
 
 const initialValues = {
@@ -10,10 +11,11 @@ const initialValues = {
 const Register = () => {
 
     const { values, handleChange } = useForm(initialValues);
+    const { register } = useRegister();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(values)
+        register(values);
     }
 
     return (
@@ -31,6 +33,7 @@ const Register = () => {
                         onChange={(e) => handleChange(e)}
                         type="email"
                         name='email'
+                        autoComplete='off'
                     />
                 </div>
 
@@ -43,6 +46,7 @@ const Register = () => {
                         onChange={(e) => handleChange(e)}
                         type="password"
                         name='password'
+                        autoComplete='off'
                     />
                 </div>
 
@@ -55,6 +59,7 @@ const Register = () => {
                         onChange={(e) => handleChange(e)}
                         type="password"
                         name='rePassword'
+                        autoComplete='off'
                     />
                 </div>
                 <button>Submit</button>
