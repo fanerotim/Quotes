@@ -38,11 +38,11 @@ const register = async (email, password) => {
             if (err) {
                 return reject(err)
             }
+            // TODO: Send a confirmation email to end user to welcome them to the app
             return resolve(result);
         })
     })
 }
-
 
 
 module.exports = {
