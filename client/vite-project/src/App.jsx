@@ -8,6 +8,7 @@ import QuoteDetails from './components/quote-details/QuoteDetails';
 import Navigation from './components/navigation/Navigation';
 import Footer from './components/footer/Footer';
 import Register from './components/register/Register';
+import NotFound from './components/not-found/NotFound';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/quotes/add-quote' element={<AddQuote />}></Route>
         <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote />}></Route>
         <Route path='users/register' element={<Register />}>Register</Route>
+        <Route path='*' element={<NotFound/>}></Route>
       </Routes>
       <Footer />
     </div>
