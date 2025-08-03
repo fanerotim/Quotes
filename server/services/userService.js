@@ -24,7 +24,7 @@ const register = async (email, password) => {
 
     // throw error if user already registered (we get an array, so check item at index 0 to verify if user exists)
     if (userExists[0]) {
-        throw new Error('User is already registered. Please try again.')
+        throw new Error('User is already registered. Please try again')
     }
 
     // if user DOES NOT exist hash their password
@@ -54,8 +54,32 @@ const register = async (email, password) => {
     })
 }
 
+const login = async (email, password) => {
+    // check if user exists
+    const userExists = await hasUser(email);
+
+    // if it does not throw error
+    if (!userExists[0]) {
+        throw new Error('User does not exist!');
+    }
+
+    // if it exists, check password
+    const isValid = await bcrypt.compare(password, userExists[0].password)
+    console.log('this is isValid', isValid);
+    
+    if (!isValid) {
+        throw new Error('Incorrect password! Try again.')
+    }
+    const payload = {
+        email
+    }
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '4h'});
+    console.log(token);
+    return token;
+} 
 
 module.exports = {
     register,
-    hasUser
+    login
 }

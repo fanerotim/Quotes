@@ -19,7 +19,7 @@ const useRegister = () => {
         }
 
         try {
-            const newUser = await http.post('http://localhost:3000/user/register', {email, password, rePassword});
+            const newUser = await http.post('http://localhost:3000/user/register', {email, password});
             // redirect to login on success
             navigate('/login')
         } catch(err) {
