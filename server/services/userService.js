@@ -1,6 +1,7 @@
 const mysqlConfig = require('../mySqlConfig');
 const db = mysqlConfig();
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const hasUser = async (email) => {
 
@@ -26,9 +27,10 @@ const register = async (email, password) => {
         throw new Error('User is already registered. Please try again.')
     }
 
-    // if user does not exist hash their password
+    // if user DOES NOT exist hash their password
     const hashedPassword = await bcrypt.hash(password, 10);
     
+    // and then ADD them to db
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO users
                     (email, password)
@@ -38,8 +40,16 @@ const register = async (email, password) => {
             if (err) {
                 return reject(err)
             }
+            
+            const payload = {
+                email
+            }
+            
+            // return the jwt token of the newly registered user
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '4h'})
+            
             // TODO: Send a confirmation email to end user to welcome them to the app
-            return resolve(result);
+            return resolve(token);
         })
     })
 }

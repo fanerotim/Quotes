@@ -5,9 +5,8 @@ router.post('/register', async (req, res) => {
     const { email, password, rePassword } = req.body;
 
     try {
-        const registeredUser = await userService.register(email, password);
-        res.status(200).send({"message": "User successfully registered"});
-        // TODO: On success redirect
+        const token = await userService.register(email, password);
+        res.status(200).send({token});
     } catch (err) {
         console.log(err);
         res.status(500).send({ ...err })
