@@ -1,5 +1,6 @@
 import './Login.scss'
 import useForm from '../../hooks/useForm';
+import useLogin from '../../hooks/useLogin';
 
 const initialValues = {
     email: '',
@@ -8,34 +9,36 @@ const initialValues = {
 
 const Login = () => {
 
-    const {values, handleChange} = useForm(initialValues);
+    const { values, handleChange } = useForm(initialValues);
+    const { login } = useLogin();
 
     const clickHandler = (e) => {
         e.preventDefault();
-        console.log(values);
+        const isSuccess = login(values);
+        console.log('login attempt was', isSuccess)
     }
 
     return (
-        <section>   
+        <section>
             <h1>Please log in</h1>
             <form onSubmit={(e) => clickHandler(e)}>
                 <div>
                     <label>Email</label>
                     <input
-                        onChange={(e) => handleChange(e)} 
+                        onChange={(e) => handleChange(e)}
                         value={values.email}
-                        type="text" 
-                        name="email"/>
+                        type="text"
+                        name="email" />
                 </div>
 
                 <div>
                     <label>Password</label>
                     <input
                         onChange={(e) => handleChange(e)}
-                        value={values.password} 
+                        value={values.password}
                         type="password"
-                        name="password" 
-                        autoComplete='off'/>
+                        name="password"
+                        autoComplete='off' />
                 </div>
                 <button>Submit</button>
             </form>
