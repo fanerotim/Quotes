@@ -9,6 +9,7 @@ import Navigation from './components/navigation/Navigation';
 import Footer from './components/footer/Footer';
 import Register from './components/register/Register';
 import NotFound from './components/not-found/NotFound';
+import Login from './components/login/Login';
 
 function App() {
 
@@ -21,7 +22,8 @@ function App() {
         <Route path='/quotes/:quoteId' element={<QuoteDetails />}></Route>
         <Route path='/quotes/add-quote' element={<AddQuote />}></Route>
         <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote />}></Route>
-        <Route path='users/register' element={<Register />}>Register</Route>
+        <Route path='/users/register' element={<Register />}>Register</Route>
+        <Route path='/users/login' element={<Login/>}></Route>
         <Route path='*' element={<NotFound/>}></Route>
       </Routes>
       <Footer />

@@ -8,6 +8,7 @@ const Navigation = () => {
             <Link to='/quotes'>Quotes</Link>
             <Link to='/quotes/add-quote'>Add quote</Link>
             <Link to='/users/register'>Register</Link>
+            <Link to='/users/login'>Login</Link>
         </nav>
     )
 }
