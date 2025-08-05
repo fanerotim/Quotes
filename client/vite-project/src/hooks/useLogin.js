@@ -1,11 +1,15 @@
+import http from '../requester/http';
+
 const useLogin = () => {
 
-    const login = ({ email, password }) => {
-        console.log(`this is user email: ${email} and this is their password ${password}`)
+    const login = async (values) => {
         
-        const randomNumber = Math.floor(Math.random() * 100);
-
-        return randomNumber > 50 ? 'successfull' : 'unsucessful';
+        try {
+            const token = await http.post(`${import.meta.env.VITE_USER_URL}/login`, values)
+            return token
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     return {

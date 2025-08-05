@@ -29,7 +29,7 @@ const register = async (email, password) => {
 
     // if user DOES NOT exist hash their password
     const hashedPassword = await bcrypt.hash(password, 10);
-    
+
     // and then ADD them to db
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO users
@@ -40,14 +40,14 @@ const register = async (email, password) => {
             if (err) {
                 return reject(err)
             }
-            
+
             const payload = {
                 email
             }
-            
+
             // return the jwt token of the newly registered user
-            const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '4h'})
-            
+            const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' })
+
             // TODO: Send a confirmation email to end user to welcome them to the app
             return resolve(token);
         })
@@ -66,7 +66,7 @@ const login = async (email, password) => {
     // if it exists, check password
     const isValid = await bcrypt.compare(password, userExists[0].password)
     console.log('this is isValid', isValid);
-    
+
     if (!isValid) {
         throw new Error('Incorrect password! Try again.')
     }
@@ -74,9 +74,9 @@ const login = async (email, password) => {
         email
     }
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '4h'});
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' });
     return token;
-} 
+}
 
 module.exports = {
     register,

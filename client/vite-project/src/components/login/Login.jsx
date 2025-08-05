@@ -12,10 +12,11 @@ const Login = () => {
     const { values, handleChange } = useForm(initialValues);
     const { login } = useLogin();
 
-    const clickHandler = (e) => {
+    const clickHandler = async (e) => {
         e.preventDefault();
-        const isSuccess = login(values);
-        console.log('login attempt was', isSuccess)
+
+        const token = await login({email: values.email, password: values.password});
+        console.log('this is user token: ', token)
     }
 
     return (
