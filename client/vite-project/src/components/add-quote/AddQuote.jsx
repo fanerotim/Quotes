@@ -13,9 +13,9 @@ const AddQuote = () => {
     const { values, handleChange } = useForm(initialValues);
     const { addQuote } = useAddQuote();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        addQuote(values);
+        await addQuote(values);
     }
 
     return (

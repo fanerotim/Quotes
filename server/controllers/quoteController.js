@@ -1,6 +1,6 @@
 const router = require('express').Router();
-// import quote service
 const quoteService = require('../services/quoteService');
+const { isAuth } = require('../middlewares/isAuthenticated');
 
 router.get('/', async (req, res) => {
 
@@ -8,13 +8,13 @@ router.get('/', async (req, res) => {
         const quotes = await quoteService.getAll();
         res.status(200).send(quotes);
     } catch (err) {
-        // return error message
         throw err.message;
     }
 })
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
+
     try {
         const quote = await quoteService.getQuote(id);
         res.status(200).send(quote);
@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/add-quote', async (req, res) => {
+router.post('/add-quote', isAuth, async (req, res) => {
     const { author, text, category } = req.body;
     // TODO: UPDATE TABLE TEXT COLUMN DEFINITION / LIMITS CHARACTERS TOO MUCH
     try {
@@ -42,7 +42,7 @@ router.post('/add-quote', async (req, res) => {
 
 router.put('/edit-quote/:id', async (req, res) => {
     const { id } = req.params;
-    const {author, text, category } = req.body;
+    const { author, text, category } = req.body;
 
     try {
         //update quote
@@ -59,7 +59,7 @@ router.delete('/delete-quote', async (req, res) => {
     const { id } = req.body;
     try {
         const deletedQuote = await quoteService.deleteQuote(id);
-        res.status(200).send({"message":'Quote DELETED successfully.'});
+        res.status(200).send({ "message": 'Quote DELETED successfully.' });
     } catch (err) {
         return res.status(500).send({ ...err })
     }

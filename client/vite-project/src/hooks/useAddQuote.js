@@ -8,11 +8,12 @@ const useAddQuote = () => {
     const addQuote = async (values) => {
         try {
             const newQuote = await http.post(`${import.meta.env.VITE_BASE_URL}/add-quote`, values);
-            navigate('/quotes')
+            navigate('/')
             // return newQuote;
         } catch (err) {
+            // TODO ERROR HANDLING
             console.log(err);
-            return err;
+            // return err;
         }
     }
 
