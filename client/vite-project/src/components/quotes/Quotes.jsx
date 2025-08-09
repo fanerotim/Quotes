@@ -21,7 +21,7 @@ const Quotes = () => {
             setQuotes(result);
         })();
 
-    }, [quotes])
+    }, [])
 
     return (
         <section className='quotes-container'>
