@@ -13,6 +13,7 @@ exports.auth = async (req, res, next) => {
         req.user = decodedToken;
         next();
     } catch (err) {
+        req.user = null;
         console.log(err);
     }
 }
