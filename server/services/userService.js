@@ -1,7 +1,7 @@
 const mysqlConfig = require('../mySqlConfig');
 const db = mysqlConfig();
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const jwt = require('../lib/jwt');
 
 const hasUser = async (email) => {
 
@@ -36,7 +36,7 @@ const register = async (email, password) => {
                     (email, password)
                     VALUES(?, ?)`;
 
-        db.query(sql, [email, hashedPassword], (err, result) => {
+        db.query(sql, [email, hashedPassword], async (err, result) => {
             if (err) {
                 return reject(err)
             }
@@ -47,7 +47,6 @@ const register = async (email, password) => {
 
             // return the jwt token of the newly registered user
             const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' })
-
             // TODO: Send a confirmation email to end user to welcome them to the app
             return resolve(token);
         })
@@ -65,7 +64,6 @@ const login = async (email, password) => {
 
     // if it exists, check password
     const isValid = await bcrypt.compare(password, userExists[0].password)
-    console.log('this is isValid', isValid);
 
     if (!isValid) {
         throw new Error('Incorrect password! Try again.')

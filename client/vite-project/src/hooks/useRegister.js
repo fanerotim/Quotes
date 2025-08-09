@@ -21,7 +21,7 @@ const useRegister = () => {
         try {
             const newUser = await http.post('http://localhost:3000/user/register', {email, password});
             // redirect to login on success
-            navigate('/login')
+            navigate('/users/login')
         } catch(err) {
             console.log(err);
         }
