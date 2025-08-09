@@ -19,7 +19,10 @@ const useRegister = () => {
         }
 
         try {
-            const newUser = await http.post('http://localhost:3000/user/register', {email, password});
+            const token = await http.post('http://localhost:3000/user/register', {email, password});
+
+            // add token to localStorage
+            localStorage.setItem('accessToken', JSON.stringify(token))
             // redirect to login on success
             navigate('/users/login')
         } catch(err) {
