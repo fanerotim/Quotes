@@ -46,7 +46,7 @@ const register = async (email, password) => {
             }
 
             // return the jwt token of the newly registered user
-            const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' })
+            const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' })
             // TODO: Send a confirmation email to end user to welcome them to the app
             return resolve(token);
         })
@@ -72,7 +72,7 @@ const login = async (email, password) => {
         email
     }
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' });
+    const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' });
     return token;
 }
 
