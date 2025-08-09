@@ -7,7 +7,7 @@ const useLogin = () => {
         try {
             const token = await http.post(`${import.meta.env.VITE_USER_URL}/login`, values);
 
-            // add token to localStorage
+            // add token to localStorage / TODO: make this abstract, so it does not have to exist in useRegister too;
             localStorage.setItem('accessToken', JSON.stringify(token));
 
             return token;

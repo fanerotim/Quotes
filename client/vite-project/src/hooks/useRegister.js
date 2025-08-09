@@ -21,10 +21,11 @@ const useRegister = () => {
         try {
             const token = await http.post('http://localhost:3000/user/register', {email, password});
 
-            // add token to localStorage
-            localStorage.setItem('accessToken', JSON.stringify(token))
+            // currently user does not log in automatically on successful register, so this is commented for now (we do not want to set token yet)
+            // localStorage.setItem('accessToken', JSON.stringify(token));
+
             // redirect to login on success
-            navigate('/users/login')
+            navigate('/users/login');
         } catch(err) {
             console.log(err);
         }

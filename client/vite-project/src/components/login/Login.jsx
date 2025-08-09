@@ -15,8 +15,11 @@ const Login = () => {
     const clickHandler = async (e) => {
         e.preventDefault();
 
-        const token = await login({email: values.email, password: values.password});
-        console.log('this is user token: ', token)
+        try {
+            const token = await login({email: values.email, password: values.password});
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     return (

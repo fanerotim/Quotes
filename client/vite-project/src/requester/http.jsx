@@ -1,15 +1,21 @@
 const http = async (method, url, values) => {
 
     const options = {};
+    const accessToken = JSON.parse(localStorage.getItem('accessToken'));
 
     if (method !== 'GET') {
         options.headers = {
             'Content-Type': 'application/json'
         }
-        options.method = method; 
+
+        if (accessToken) {
+            options.headers['accessToken'] = accessToken.auth;
+        }
+
+        options.method = method;
         options.body = JSON.stringify(values);
     }
- 
+
     const response = await fetch(url, options)
 
     // TODO: CREATE AN EXAMPLE FOR THE FOLLOWING
