@@ -11,23 +11,27 @@ import Register from './components/register/Register';
 import NotFound from './components/not-found/NotFound';
 import Login from './components/login/Login';
 
+import { AuthContext }  from './contexts/authContext';
+
 function App() {
 
   return (
-    <div className='app-container'>
-      <Navigation />
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/quotes' element={<Quotes />}></Route>
-        <Route path='/quotes/:quoteId' element={<QuoteDetails />}></Route>
-        <Route path='/quotes/add-quote' element={<AddQuote />}></Route>
-        <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote />}></Route>
-        <Route path='/users/register' element={<Register />}>Register</Route>
-        <Route path='/users/login' element={<Login/>}></Route>
-        <Route path='*' element={<NotFound/>}></Route>
-      </Routes>
-      <Footer />
-    </div>
+    <AuthContext.Provider value={'thisismyuserstoken'}>
+      <div className='app-container'>
+        <Navigation />
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/quotes' element={<Quotes />}></Route>
+          <Route path='/quotes/:quoteId' element={<QuoteDetails />}></Route>
+          <Route path='/quotes/add-quote' element={<AddQuote />}></Route>
+          <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote />}></Route>
+          <Route path='/users/register' element={<Register />}>Register</Route>
+          <Route path='/users/login' element={<Login />}></Route>
+          <Route path='*' element={<NotFound />}></Route>
+        </Routes>
+        <Footer />
+      </div>
+    </AuthContext.Provider>
   )
 }
 
