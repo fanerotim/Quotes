@@ -1,8 +1,6 @@
 import './Login.scss'
 import useForm from '../../hooks/useForm';
 import useLogin from '../../hooks/useLogin';
-import { useReducer } from 'react';
-import { authReducer } from '../../contexts/authContext';
 
 const initialValues = {
     email: '',
@@ -13,13 +11,10 @@ const Login = () => {
 
     const { values, handleChange } = useForm(initialValues);
     const { login } = useLogin();
-    const [isAuthenticated, dispatch] = useReducer(authReducer, {});
 
     const clickHandler = async (e) => {
         e.preventDefault();
-        dispatch({
-            'type': 'LOGIN'
-        })
+
         try {
             const token = await login({ email: values.email, password: values.password });
         } catch (err) {

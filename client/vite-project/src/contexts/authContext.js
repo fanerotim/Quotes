@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext('default token');
 
@@ -18,4 +18,19 @@ export const authReducer = (state, action) => {
         default: 
             return state;
     }
+}
+
+export const isAuthenticated = () => {
+
+    const [auth, setAuth] = useState(null);
+
+    useEffect(() => {
+        const token = JSON.parse(localStorage.getItem('accessToken'));
+        
+        if (token) {
+            setAuth(true)
+        }
+    })
+
+    return auth;
 }

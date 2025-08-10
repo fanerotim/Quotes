@@ -2,6 +2,7 @@ import './Navigation.scss'
 import { Link } from "react-router-dom";
 
 const Navigation = () => {
+
     return (
         <nav>
             <Link to='/'>Home</Link>
