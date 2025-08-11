@@ -1,6 +1,7 @@
 import './Login.scss'
 import useForm from '../../hooks/useForm';
 import useLogin from '../../hooks/useLogin';
+import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
     email: '',
@@ -11,12 +12,14 @@ const Login = () => {
 
     const { values, handleChange } = useForm(initialValues);
     const { login } = useLogin();
+    const navigate = useNavigate();
 
     const clickHandler = async (e) => {
         e.preventDefault();
 
         try {
             const token = await login({ email: values.email, password: values.password });
+            navigate('/')
         } catch (err) {
             console.log(err);
         }
