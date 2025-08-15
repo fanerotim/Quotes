@@ -1,20 +1,24 @@
+import { useAuth } from '../../contexts/authContext';
 import './Logout.scss'
 import { useNavigate } from "react-router-dom";
 
 export const Logout = () => {
-    
+
     const navigate = useNavigate();
+    const { dispatch } = useAuth();
 
     const handleLogout = () => {
-        localStorage.removeItem('accessToken');
+        dispatch({
+            type: 'LOGOUT'
+        })
         navigate('/')
     }
 
     return (
-        <button 
+        <button
             onClick={handleLogout}
             className="logout">
-                Logout
+            Logout
         </button>
     )
 }
