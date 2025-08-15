@@ -1,36 +1,23 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext } from "react";
 
-export const AuthContext = createContext('default token');
+export const AuthContext = createContext(null);
 
-export const authReducer = (state, action) => {
+export const authReducer = (auth, action) => {
 
-    // JUST IDEA OF HOW WE CAN USE THE REDUCER
-
-    switch(action.type) {
-        case 'LOGIN':
-            // some logic here
-            const token = JSON.parse(localStorage.getItem('accessToken'));
-            console.log('this is my token', token)
-            return token;
-        case 'LOGOUT':
-            // some logic here
-            return;
-        default: 
-            return state;
+    switch (action.type) {
+        case 'LOGIN': {
+            const accessToken = localStorage.setItem('accessToken', JSON.stringify(action.accessToken));
+            return accessToken;    
+        }
+        case 'LOGOUT': {
+            localStorage.removeItem('accessToken');
+            return null;
+        }
+        default:
+            return auth;
     }
 }
 
-export const isAuthenticated = () => {
-
-    const [auth, setAuth] = useState(null);
-
-    useEffect(() => {
-        const token = JSON.parse(localStorage.getItem('accessToken'));
-        
-        if (token) {
-            setAuth(true)
-        }
-    })
-
-    return auth;
+export const useAuth = () => {
+    return useContext(AuthContext);
 }
