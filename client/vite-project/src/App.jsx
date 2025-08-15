@@ -11,12 +11,12 @@ import Register from './components/register/Register';
 import NotFound from './components/not-found/NotFound';
 import Login from './components/login/Login';
 
-import { AuthContext }  from './contexts/authContext';
+import AuthProvider from './contexts/AuthProvider';
 
 function App() {
 
   return (
-    <AuthContext.Provider value={'thisismyuserstoken'}>
+    <AuthProvider>
       <div className='app-container'>
         <Navigation />
         <Routes>
@@ -31,7 +31,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </AuthContext.Provider>
+    </AuthProvider>
   )
 }
 
