@@ -47,8 +47,11 @@ const AddQuote = () => {
                         name="category"
                         value={values.category}>
                         <option value="sport">Sport</option>
-                        <option value="comedy">Comedy</option>
-                        <option value="history">History</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="non-fiction">Non-Fiction</option>
+                        <option value="poetry">Poetry</option>
+                        <option value="science">Science</option>
+                        <option value="science-fiction">Science-Fiction</option>
                     </select>
                 </section>
                 <button>Submit</button>
