@@ -1,12 +1,16 @@
 import { useReducer } from "react";
-import { AuthContext, authReducer, useAuth } from "./authContext"
+import { AuthContext, authReducer } from "./authContext"
 
 const AuthProvider = ({ children }) => {
 
-    // changing the auth value renders navigation properly, so this is how we pass token down the tree
-    // const { auth } = useAuth();
-    const [auth, dispatch] = useReducer(authReducer, {auth: null});
+    let accessToken = JSON.parse(localStorage.getItem('accessToken'));
+    
+    if (!accessToken) {
+        accessToken = {auth: null}
+    }
 
+    const [auth, dispatch] = useReducer(authReducer, accessToken);
+  
     return (
         <AuthContext.Provider
             value={{ auth, dispatch }}>

@@ -11,10 +11,10 @@ const Navigation = () => {
         <nav>
             <Link to='/'>Home</Link>
             <Link to='/quotes'>Quotes</Link>
-            {auth ? <Link to='/quotes/add-quote'>Add quote</Link> : ''}
-            {!auth ? <Link to='/users/register'>Register</Link> : ''}
-            {!auth ? <Link to='/users/login'>Login</Link> : ''}
-            {auth ? <Logout /> : ''}
+            {auth?.auth ? <Link to='/quotes/add-quote'>Add quote</Link> : ''}
+            {!auth?.auth ? <Link to='/users/register'>Register</Link> : ''}
+            {!auth?.auth ? <Link to='/users/login'>Login</Link> : ''}
+            {auth?.auth ? <Logout /> : ''}
         </nav>
     )
 }
