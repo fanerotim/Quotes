@@ -12,8 +12,8 @@ const Navigation = () => {
             <Link to='/'>Home</Link>
             <Link to='/quotes'>Quotes</Link>
             {auth ? <Link to='/quotes/add-quote'>Add quote</Link> : ''}
-            <Link to='/users/register'>Register</Link>
-            <Link to='/users/login'>Login</Link>
+            {!auth ? <Link to='/users/register'>Register</Link> : ''}
+            {!auth ? <Link to='/users/login'>Login</Link> : ''}
             {auth ? <Logout /> : ''}
         </nav>
     )

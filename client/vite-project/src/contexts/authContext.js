@@ -6,8 +6,8 @@ export const authReducer = (auth, action) => {
 
     switch (action.type) {
         case 'LOGIN': {
-            const accessToken = localStorage.setItem('accessToken', JSON.stringify(action.accessToken));
-            return accessToken;    
+            localStorage.setItem('accessToken', JSON.stringify(action.accessToken));
+            return action.accessToken;    
         }
         case 'LOGOUT': {
             localStorage.removeItem('accessToken');
