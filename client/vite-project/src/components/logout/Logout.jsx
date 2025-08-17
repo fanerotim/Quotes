@@ -9,8 +9,7 @@ export const Logout = () => {
 
     const handleLogout = () => {
         dispatch({
-            type: 'LOGOUT',
-            payload: null,
+            type: 'LOGOUT'
         })
         navigate('/')
     }
