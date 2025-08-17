@@ -27,30 +27,39 @@ const AddQuote = () => {
                     <input
                         onChange={handleChange}
                         value={values.author}
+                        placeholder='Enter author here'
                         name='author'
                         type="text" />
                 </section>
 
                 <section>
                     <label>Text</label>
-                    <input
+                    <textarea
                         onChange={handleChange}
                         value={values.text}
+                        placeholder='Enter text here'
                         name='text'
                         type="text" />
                 </section>
 
+                {/* options below should be looped through from an object (for example) */}
                 <section>
                     <label>Category</label>
                     <select
                         onChange={handleChange}
                         name="category"
                         value={values.category}>
-                        <option value="sport">Sport</option>
+                            {/* TODO: style çhoose category to be like placeholder */}
+                        <option>Choose category</option>
+                        <option value="sports">Sports</option>
+                        <option value="psychology">Psychology</option>
                         <option value="fiction">Fiction</option>
-                        <option value="non-fiction">Non-Fiction</option>
+                        <option value="comics">Comics</option>
                         <option value="poetry">Poetry</option>
                         <option value="science">Science</option>
+                        <option value="art">Art</option>
+                        <option value="biography">Biography</option>
+                        <option value="travel">Travel</option>
                         <option value="science-fiction">Science-Fiction</option>
                     </select>
                 </section>
