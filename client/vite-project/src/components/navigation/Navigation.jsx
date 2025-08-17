@@ -1,12 +1,12 @@
 import './Navigation.scss'
 import { Link } from "react-router-dom";
 import Logout from '../logout/logout';
-import { useAuth } from '../../contexts/authContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const Navigation = () => {
 
-    const { auth } = useAuth();
-    console.log(auth, 'this is my auth')
+    const { auth } = useAuthContext();
+
     return (
         <nav>
             <Link to='/'>Home</Link>

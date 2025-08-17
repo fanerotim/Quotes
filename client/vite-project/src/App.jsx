@@ -11,12 +11,12 @@ import Register from './components/register/Register';
 import NotFound from './components/not-found/NotFound';
 import Login from './components/login/Login';
 
-import AuthProvider from './contexts/AuthProvider';
+import AuthContextProvider from './contexts/AuthContextProvider';
 
 function App() {
 
   return (
-    <AuthProvider>
+    <AuthContextProvider>
       <div className='app-container'>
         <Navigation />
         <Routes>
@@ -31,7 +31,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </AuthProvider>
+    </AuthContextProvider>
   )
 }
 

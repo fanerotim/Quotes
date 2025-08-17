@@ -1,7 +1,9 @@
-const http = async (method, url, values) => {
+import useGetAccessToken from "../hooks/useGetAccessToken";
 
+const http = async (method, url, values) => {
+    const getToken = useGetAccessToken();
     const options = {};
-    const accessToken = JSON.parse(localStorage.getItem('accessToken'));
+    const accessToken = getToken();
 
     if (method !== 'GET') {
         options.headers = {
@@ -9,7 +11,7 @@ const http = async (method, url, values) => {
         }
 
         if (accessToken) {
-            options.headers['accessToken'] = accessToken;
+            options.headers['accessToken'] = accessToken.auth;
         }
 
         options.method = method;
