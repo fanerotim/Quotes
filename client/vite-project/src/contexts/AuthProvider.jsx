@@ -1,16 +1,14 @@
 import { useReducer } from "react";
 import { AuthContext, authReducer } from "./authContext"
+import useGetAccessToken from "../hooks/useGetAccessToken";
 
 const AuthProvider = ({ children }) => {
 
-    let accessToken = JSON.parse(localStorage.getItem('accessToken'));
-    
-    if (!accessToken) {
-        accessToken = {auth: null}
-    }
+    const getToken = useGetAccessToken();
+    let accessToken = getToken();
 
     const [auth, dispatch] = useReducer(authReducer, accessToken);
-  
+
     return (
         <AuthContext.Provider
             value={{ auth, dispatch }}>

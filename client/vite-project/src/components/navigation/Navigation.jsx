@@ -6,15 +6,15 @@ import { useAuth } from '../../contexts/authContext';
 const Navigation = () => {
 
     const { auth } = useAuth();
-
+    console.log(auth, 'this is my auth')
     return (
         <nav>
             <Link to='/'>Home</Link>
             <Link to='/quotes'>Quotes</Link>
-            {auth?.auth ? <Link to='/quotes/add-quote'>Add quote</Link> : ''}
-            {!auth?.auth ? <Link to='/users/register'>Register</Link> : ''}
-            {!auth?.auth ? <Link to='/users/login'>Login</Link> : ''}
-            {auth?.auth ? <Logout /> : ''}
+            {auth ? <Link to='/quotes/add-quote'>Add quote</Link> : ''}
+            {!auth ? <Link to='/users/register'>Register</Link> : ''}
+            {!auth ? <Link to='/users/login'>Login</Link> : ''}
+            {auth ? <Logout /> : ''}
         </nav>
     )
 }

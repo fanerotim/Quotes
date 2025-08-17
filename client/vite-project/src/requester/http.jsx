@@ -9,7 +9,7 @@ const http = async (method, url, values) => {
         }
 
         if (accessToken) {
-            options.headers['accessToken'] = accessToken.auth;
+            options.headers['accessToken'] = accessToken;
         }
 
         options.method = method;
