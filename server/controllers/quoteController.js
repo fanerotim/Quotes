@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
 
     try {
         const quotes = await quoteService.getAll();
-        res.status(200).send(quotes);
+        res.status(200).json(quotes);
     } catch (err) {
         throw err.message;
     }
@@ -17,7 +17,7 @@ router.get('/:id', async (req, res) => {
 
     try {
         const quote = await quoteService.getQuote(id);
-        res.status(200).send(quote);
+        res.status(200).json(quote);
     } catch (err) {
         throw err.message;
     }
@@ -34,9 +34,9 @@ router.post('/add-quote', isAuth, async (req, res) => {
         // get new quote
         const quoteId = quote.insertId; // first get id of newly added quote
         const newQuote = await quoteService.getQuote(quoteId);
-        res.status(200).send(newQuote[0]);
+        res.status(200).json(newQuote[0]);
     } catch (err) {
-        res.status(500).send(err);
+        res.status(500).json(err);
     }
 })
 
@@ -49,9 +49,9 @@ router.put('/edit-quote/:id', async (req, res) => {
         const quote = await quoteService.updateQuote(id, author, text, category);
         //return updated quote
         const updatedQuote = await quoteService.getQuote(id)
-        res.status(200).send(updatedQuote)
+        res.status(200).json(updatedQuote)
     } catch (err) {
-        return res.status(500).send({ ...err });
+        return res.status(500).json({ ...err });
     }
 })
 
@@ -59,9 +59,9 @@ router.delete('/delete-quote', async (req, res) => {
     const { id } = req.body;
     try {
         const deletedQuote = await quoteService.deleteQuote(id);
-        res.status(200).send({ "message": 'Quote DELETED successfully.' });
+        res.status(200).json({ "message": 'Quote DELETED successfully.' });
     } catch (err) {
-        return res.status(500).send({ ...err })
+        return res.status(500).json({ ...err })
     }
 })
 
