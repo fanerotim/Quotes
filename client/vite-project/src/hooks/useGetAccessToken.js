@@ -1,5 +1,5 @@
 const useGetAccessToken = () => {
-    
+
     const getToken = () => {
         const accessToken = JSON.parse(localStorage.getItem('accessToken'));
         return accessToken;
