@@ -1,6 +1,9 @@
 import http from "../requester/http";
+import { useAuthContext } from "./useAuthContext";
 
 const useQuotes = () => {
+
+    const {dispatch} = useAuthContext();
 
     const getAllQuotes = async () => {
 
@@ -9,8 +12,10 @@ const useQuotes = () => {
             return result;
         } catch (err) {
             // TODO: ADD ERROR HANDLING
-            console.log(err);
-            return(err)
+            dispatch({
+                type: 'LOGOUT'
+            })
+            // return(err)
         }
     }
 
