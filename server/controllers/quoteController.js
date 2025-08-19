@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const quoteService = require('../services/quoteService');
 const { isAuth } = require('../middlewares/isAuthenticated');
+const {auth} = require('../middlewares/authMiddleware');
 
 router.get('/', async (req, res) => {
 
@@ -40,7 +41,7 @@ router.post('/add-quote', isAuth, async (req, res) => {
     }
 })
 
-router.put('/edit-quote/:id', async (req, res) => {
+router.put('/edit-quote/:id', auth, async (req, res) => {
     const { id } = req.params;
     const { author, text, category } = req.body;
 
