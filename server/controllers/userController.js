@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
         res.status(200).json({ "auth": token, email })
     } catch (err) {
         // TODO: Fix error - it needs to be detected dynamically
-        res.status(500).json({ error: "User does not exist!" })
+        res.status(500).json({ error: err.message })
     }
 })
 
