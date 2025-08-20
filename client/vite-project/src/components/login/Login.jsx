@@ -11,7 +11,7 @@ const initialValues = {
 const Login = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { login } = useLogin();
+    const { login, error, loading  } = useLogin();
     const navigate = useNavigate();
 
     const clickHandler = async (e) => {
@@ -21,7 +21,7 @@ const Login = () => {
             const token = await login({ email: values.email, password: values.password });
             navigate('/')
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
 
@@ -35,7 +35,8 @@ const Login = () => {
                         onChange={(e) => handleChange(e)}
                         value={values.email}
                         type="text"
-                        name="email" />
+                        name="email"
+                        placeholder="Enter email" />
                 </div>
 
                 <div>
@@ -45,9 +46,11 @@ const Login = () => {
                         value={values.password}
                         type="password"
                         name="password"
-                        autoComplete='off' />
+                        autoComplete='off'
+                        placeholder='Password' />
                 </div>
-                <button>Submit</button>
+                {error && <p>{error}</p>}
+                <button disabled={loading}>Submit</button>
             </form>
         </section>
     )
