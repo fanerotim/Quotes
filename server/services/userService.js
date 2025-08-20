@@ -59,14 +59,14 @@ const login = async (email, password) => {
 
     // if it does not throw error
     if (!userExists[0]) {
-        throw new Error('User does not exist!');
+        throw new Error('Login details are incorrect. Please try again.');
     }
 
     // if it exists, check password
     const isValid = await bcrypt.compare(password, userExists[0].password)
 
     if (!isValid) {
-        throw new Error('Incorrect password! Try again.')
+        throw new Error('Login details are incorrect. Please try again.')
     }
     const payload = {
         email
