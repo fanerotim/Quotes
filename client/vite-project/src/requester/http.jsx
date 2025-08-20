@@ -16,7 +16,7 @@ const http = async (method, url, values) => {
 
         options.method = method;
         options.body = JSON.stringify(values);
-    }
+    }   
 
     const response = await fetch(url, options)
 
@@ -24,11 +24,12 @@ const http = async (method, url, values) => {
     // The fetch() function will reject the promise on some errors, 
     // but not if the server responds with an error status like 404: so we also check the response status and throw if it is not OK.
 
+    const result = await response.json()
+
     if (!response.ok) {
-        throw new Error('Error in making the request', response.status)
+        throw result.error;
     }
 
-    const result = await response.json()
     return result;
 }
 
