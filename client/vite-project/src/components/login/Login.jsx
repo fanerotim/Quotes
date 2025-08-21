@@ -49,7 +49,7 @@ const Login = () => {
                         autoComplete='off'
                         placeholder='Password' />
                 </div>
-                {error && <p>{error}</p>}
+                {error && <p className='errorMessage'>{error}</p>}
                 <button disabled={loading}>Submit</button>
             </form>
         </section>
