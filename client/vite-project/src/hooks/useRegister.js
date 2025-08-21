@@ -1,10 +1,9 @@
 import http from "../requester/http";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const useRegister = () => {
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const register = async ({ email, password, rePassword }) => {
         setError(null);
@@ -21,21 +20,21 @@ const useRegister = () => {
         }
 
         try {
-            setLoading(true)
+            setIsLoading(true)
             const token = await http.post('http://localhost:3000/user/register', { email, password });
             return token;
         } catch (err) {
             setError(err);
             throw error;
         } finally {
-            setLoading(false);
+            setIsLoading(false);
         }
     }
 
     return {
         register,
         error,
-        loading
+        isLoading
     }
 }
 

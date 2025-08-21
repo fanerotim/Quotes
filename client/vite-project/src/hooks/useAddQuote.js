@@ -1,7 +1,10 @@
+import { useState } from "react";
 import http from "../requester/http";
 import { useNavigate } from "react-router-dom";
 
 const useAddQuote = () => {
+    const [error, setError] = useState(null);
+    const [isLoading, setLoading] = useState(false);
 
     const navigate  = useNavigate();
 
@@ -9,7 +12,7 @@ const useAddQuote = () => {
         try {
             const newQuote = await http.post(`${import.meta.env.VITE_BASE_URL}/add-quote`, values);
             navigate('/quotes')
-            // return newQuote;
+            return newQuote;
         } catch (err) {
             // TODO ERROR HANDLING
             console.log(err);
@@ -18,7 +21,9 @@ const useAddQuote = () => {
     }
 
     return {
-        addQuote
+        addQuote,
+        error,
+        isLoading
     }
 }
 

@@ -12,7 +12,7 @@ const initialValues = {
 const Register = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { register, error, loading } = useRegister();
+    const { register, error, isLoading } = useRegister();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -72,7 +72,7 @@ const Register = () => {
                     />
                 </div>
                 {error && <p className='errorMessage'>{error}</p>}
-                <button disabled={loading}>Submit</button>
+                <button disabled={isLoading}>Submit</button>
             </form>
 
         </section>
