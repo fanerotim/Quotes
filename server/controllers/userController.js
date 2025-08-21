@@ -7,7 +7,7 @@ router.post('/register', async (req, res) => {
     try {
         // TODO: I do not really want to return the token, as we are not logging the user automatically
         const token = await userService.register(email, password);
-        res.status(200).json({ "message": 'Successfully registered!' });
+        res.status(200).json({ "message": `User with email ${email} successfully registered!` });
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
