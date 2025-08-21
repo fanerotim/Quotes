@@ -1,22 +1,27 @@
 import { useState } from "react";
 import http from "../requester/http";
-import { useNavigate } from "react-router-dom";
 
 const useAddQuote = () => {
     const [error, setError] = useState(null);
     const [isLoading, setLoading] = useState(false);
 
-    const navigate  = useNavigate();
-
     const addQuote = async (values) => {
+        setError(null);
+
+        if (values.author === '' || values.text === '' || values.category === '') {
+            setError('All fields need to be filled in order to add a quote');
+            throw error;
+        }
+
         try {
+            setLoading(true);
             const newQuote = await http.post(`${import.meta.env.VITE_BASE_URL}/add-quote`, values);
-            navigate('/quotes')
             return newQuote;
         } catch (err) {
-            // TODO ERROR HANDLING
-            console.log(err);
-            // return err;
+            setError(err);
+            throw error;
+        } finally {
+            setLoading(false);
         }
     }
 
