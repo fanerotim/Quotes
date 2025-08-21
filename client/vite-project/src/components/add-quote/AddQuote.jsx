@@ -1,6 +1,7 @@
 import './AddQuote.scss'
 import useForm from '../../hooks/useForm';
 import useAddQuote from '../../hooks/useAddQuote';
+import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
     author: '',
@@ -11,11 +12,18 @@ const initialValues = {
 const AddQuote = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { addQuote } = useAddQuote();
+    const { addQuote, error, isLoading } = useAddQuote();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await addQuote(values);
+
+        try {
+            const newQuote = await addQuote(values);
+            navigate('/quotes')
+        } catch(err) {
+            console.error(err);
+        }
     }
 
     return (
@@ -63,7 +71,8 @@ const AddQuote = () => {
                         <option value="science-fiction">Science-Fiction</option>
                     </select>
                 </section>
-                <button>Submit</button>
+                {error && <p className='errorMessage'>{error}</p>}
+                <button disabled={isLoading}>Submit</button>
             </form>
         </div>
     )
