@@ -11,7 +11,7 @@ const initialValues = {
 const Login = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { login, error, loading } = useLogin();
+    const { login, error, isLoading } = useLogin();
     const navigate = useNavigate();
 
     const clickHandler = async (e) => {
@@ -50,7 +50,7 @@ const Login = () => {
                         placeholder='Password' />
                 </div>
                 {error && <p className='errorMessage'>{error}</p>}
-                <button disabled={loading}>Submit</button>
+                <button disabled={isLoading}>Submit</button>
             </form>
         </section>
     )
