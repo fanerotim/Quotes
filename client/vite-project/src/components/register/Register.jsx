@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
 import useRegister from '../../hooks/useRegister';
 import './Register.scss'
@@ -11,15 +12,23 @@ const initialValues = {
 const Register = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { register } = useRegister();
+    const { register, error, loading } = useRegister();
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        register(values);
+
+        try {
+            const newUser = await register(values);
+            navigate('/users/login');
+        } catch (err) { 
+            console.log('this is the error from register', err);
+        }
     }
 
     return (
         <section className='register-form__container'>
+
             <h1>Welcome to Register page</h1>
             <form
                 onSubmit={(e) => handleSubmit(e)}
@@ -62,7 +71,8 @@ const Register = () => {
                         autoComplete='off'
                     />
                 </div>
-                <button>Submit</button>
+                {error && <p className='errorMessage'>{error}</p>}
+                <button disabled={loading}>Submit</button>
             </form>
 
         </section>
