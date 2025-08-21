@@ -9,7 +9,7 @@ router.post('/register', async (req, res) => {
         const token = await userService.register(email, password);
         res.status(200).json({ "auth": token, email });
     } catch (err) {
-        res.status(500).json({ error: "User is already registered. Please try again." })
+        res.status(500).json({ error: err.message })
     }
 })
 

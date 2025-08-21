@@ -24,7 +24,7 @@ const register = async (email, password) => {
 
     // throw error if user already registered (we get an array, so check item at index 0 to verify if user exists)
     if (userExists[0]) {
-        throw new Error('User is already registered. Please try again')
+        throw new Error('User is already registered!')
     }
 
     // if user DOES NOT exist hash their password
