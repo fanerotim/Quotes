@@ -25,7 +25,6 @@ const useRegister = () => {
             const token = await http.post('http://localhost:3000/user/register', { email, password });
             return token;
         } catch (err) {
-            console.log('useRegister logs this error', err);
             setError(err);
             throw error;
         } finally {
