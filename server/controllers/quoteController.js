@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
         const quotes = await quoteService.getAll();
         res.status(200).json(quotes);
     } catch (err) {
-        throw err.message;
+        res.status(500).json({error: err.message});
     }
 })
 
@@ -20,24 +20,27 @@ router.get('/:id', async (req, res) => {
         const quote = await quoteService.getQuote(id);
         res.status(200).json(quote);
     } catch (err) {
-        throw err.message;
+        res.status(500).json({error: err.message});
     }
 })
 
 router.post('/add-quote', isAuth, async (req, res) => {
     const { author, text, category } = req.body;
-    // TODO: UPDATE TABLE TEXT COLUMN DEFINITION / LIMITS CHARACTERS TOO MUCH
+    
     try {
-        // TODO: ERROR HANDLING - CHECK IF QUOTE EXISTS
-        // add new quote
+        // check if quote exists; 
+        // if it does not the service will throw an error that will be caught in the catch clause below;
+        await quoteService.isQuoteAdded(text);  
+
+        // if quote does not exist, add the new quote
         const quote = await quoteService.addQuote(author, text, category);
-        console.log(quote);
+        
         // get new quote
         const quoteId = quote.insertId; // first get id of newly added quote
         const newQuote = await quoteService.getQuote(quoteId);
         res.status(200).json(newQuote[0]);
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json({error: err});
     }
 })
 

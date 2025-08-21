@@ -69,10 +69,30 @@ const deleteQuote = (id) => {
     })
 }
 
+const isQuoteAdded = async (text) => {
+    const quote = await new Promise((resolve, reject) => {
+        const sql = `SELECT *
+                    FROM quotes
+                    WHERE LOWER(text) = LOWER(?)`
+
+        db.query(sql, [text], (err, result) => {
+            if (err) {
+                return reject({...err})
+            }
+            return resolve(result);
+        })
+    })
+
+    if (quote[0]) {
+        throw 'Quote already exists! It cannot be added twice.';
+    }
+}
+
 module.exports = {
     getAll,
     getQuote,
     addQuote,
     updateQuote,
-    deleteQuote
+    deleteQuote,
+    isQuoteAdded
 }
