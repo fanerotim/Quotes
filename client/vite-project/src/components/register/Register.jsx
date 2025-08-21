@@ -17,12 +17,12 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+         
         try {
             const newUser = await register(values);
             navigate('/users/login');
         } catch (err) { 
-            console.log('this is the error from register', err);
+            console.error(err);
         }
     }
 

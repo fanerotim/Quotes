@@ -11,7 +11,7 @@ const initialValues = {
 const Login = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { login, error, loading  } = useLogin();
+    const { login, error, loading } = useLogin();
     const navigate = useNavigate();
 
     const clickHandler = async (e) => {
