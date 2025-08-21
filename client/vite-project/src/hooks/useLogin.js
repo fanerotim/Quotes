@@ -10,9 +10,14 @@ const useLogin = () => {
 
     const login = async (values) => {
         setError(null);
-        setLoading(true);
+        
+        if (values.email === '' || values.password === '') {
+            setError('No login details provided.');
+            throw error;
+        }
 
         try {
+            setLoading(true);
             const token = await http.post(`${import.meta.env.VITE_USER_URL}/login`, values);
 
             dispatch({
@@ -23,9 +28,8 @@ const useLogin = () => {
             return token;
 
         } catch (err) {
-            setLoading(false);
             setError(err);
-            throw new Error(err);
+            throw error;
         } finally {
             setLoading(false);
         }
