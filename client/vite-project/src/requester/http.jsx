@@ -16,19 +16,26 @@ const http = async (method, url, values) => {
 
         options.method = method;
         options.body = JSON.stringify(values);
-    }   
+    }
 
     const response = await fetch(url, options)
+    const result = await response.json()
+
+    if (!response.ok) {
+
+        // TODO: think if this needs to have this new error constructed / can't response be used to throw?
+        if (response.status === 401) {
+            const error = new Error('Authorization is required for this request.');
+            error.status = 401;
+            throw error;
+        }
+
+        throw result.error;
+    }
 
     // TODO: CREATE AN EXAMPLE FOR THE FOLLOWING
     // The fetch() function will reject the promise on some errors, 
     // but not if the server responds with an error status like 404: so we also check the response status and throw if it is not OK.
-
-    const result = await response.json()
-
-    if (!response.ok) {
-        throw result.error;
-    }
 
     return result;
 }

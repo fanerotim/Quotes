@@ -34,6 +34,7 @@ const EditQuote = () => {
             await edit(values, quoteId);
             navigate(`/quotes/${quoteId}`)
         } catch (err) {
+            // logging error for now, but could be used to show a toast;
             console.error(err);
         }
     }
@@ -67,13 +68,13 @@ const EditQuote = () => {
                     <select
                         onChange={handleChange}
                         name="category">
-                            {/* TODO: the options need to be looped through, so I can create a util */}
+                        {/* TODO: the options need to be looped through, so I can create a util */}
                         <option value="sport">Sport</option>
                         <option value="comedy">Comedy</option>
                         <option value="history">History</option>
                     </select>
                 </section>
-                {error && <p className='errorMessage'>{error}</p>}
+                {error && <p className='errorMessage'>{error.message}</p>}
                 <button disabled={isLoading}>Submit</button>
             </form>
         </section>
