@@ -18,7 +18,7 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            const token = await login({ email: values.email, password: values.password });
+            await login({ email: values.email, password: values.password });
             navigate('/')
         } catch (err) {
             console.error(err);

@@ -14,6 +14,6 @@ exports.auth = async (req, res, next) => {
         next();
     } catch (err) {
         req.user = null;
-        res.status(403).json({error: 'Forbidden - editing this resource requires authentication'})
+        res.status(401).json({error: 'Authorization required for this request'});
     }
 }
