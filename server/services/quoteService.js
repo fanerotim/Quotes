@@ -29,6 +29,16 @@ const getQuote = (id) => {
 
 const addQuote = async (author, text, category) => {
 
+    // validate input / do not accept empty fields
+    if (
+        !author || !author.trim() || 
+        !text || !text.trim() ||
+        !category || !category.trim()) {
+            const error = new Error('All fields must be filled!');
+            error.statusCode = 400;
+            throw error;
+    }
+
     // first check if quote is added / exists already
     const isQuoteAdded = await new Promise((resolve, reject) => {
         const sql = `
