@@ -31,7 +31,7 @@ router.post('/add-quote', isAuth, async (req, res) => {
         // add new quote
         const quote = await quoteService.addQuote(author, text, category);
 
-        // get new quote
+        // get new quote to return it to front-end, don't really need to return it, it's a small app, so doesn't cause performane issues (for now)
         const quoteId = quote.insertId; // first get id of newly added quote
         const newQuote = await quoteService.getQuote(quoteId);
         res.status(200).json(newQuote[0]);
@@ -41,7 +41,7 @@ router.post('/add-quote', isAuth, async (req, res) => {
     }
 })
 
-router.put('/edit-quote/:id', auth, async (req, res) => {
+router.put('/edit-quote/:id', async (req, res) => {
     const { id } = req.params;
     const { author, text, category } = req.body;
 
@@ -52,7 +52,8 @@ router.put('/edit-quote/:id', auth, async (req, res) => {
         const updatedQuote = await quoteService.getQuote(id)
         res.status(200).json(updatedQuote)
     } catch (err) {
-        return res.status(500).json({ ...err });
+        const status = err.statusCode || 500;
+        return res.status(status).json({ error: err.message });
     }
 })
 

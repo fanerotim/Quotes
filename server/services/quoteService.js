@@ -76,6 +76,14 @@ const addQuote = async (author, text, category) => {
 }
 
 const updateQuote = (id, author, text, category) => {
+
+    // validate input values before making any db calls
+    if (!id || !id.trim() || !author || !author.trim() || !text || !text.trim() || !category || !category.trim()) {
+        const error = new Error('Please fill all fields in order to update the quote!')
+        error.statusCode = 409;
+        throw error;
+    }
+
     return new Promise((resolve, reject) => {
         const sql = `UPDATE quotes 
                     SET author = ?, text =?, category =?
