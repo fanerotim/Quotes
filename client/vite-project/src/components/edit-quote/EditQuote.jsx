@@ -4,7 +4,6 @@ import './EditQuote.scss'
 import { useNavigate, useParams } from 'react-router-dom';
 import useEditQuote from '../../hooks/useEditQuote';
 import useGetQuote from '../../hooks/useGetQuote';
-import { useAuthContext } from '../../hooks/useAuthContext';
 
 const EditQuote = () => {
 
@@ -16,9 +15,8 @@ const EditQuote = () => {
 
     const { quoteId } = useParams();
     const { values, handleChange } = useForm(quote);
-    const { edit } = useEditQuote();
+    const { edit, error, isLoading } = useEditQuote();
     const { getQuote } = useGetQuote();
-    const { dispatch } = useAuthContext();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -26,22 +24,17 @@ const EditQuote = () => {
         const newQuote =
             getQuote(quoteId)
                 .then(result => setQuote(result))
-                .catch(err => console.log(err))
+                .catch(err => console.error(err))
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const updatedQuote = await edit(values, quoteId);
+            await edit(values, quoteId);
+            navigate(`/quotes/${quoteId}`)
         } catch (err) {
-            // if token has been modified (in local storage) and didn't verify
-            // then logout and navigate to login
-            // TODO: show an error to the user
-            dispatch({
-                type: 'LOGOUT'
-            });
-            navigate('/users/login');
+            console.error(err);
         }
     }
 
@@ -74,12 +67,14 @@ const EditQuote = () => {
                     <select
                         onChange={handleChange}
                         name="category">
+                            {/* TODO: the options need to be looped through, so I can create a util */}
                         <option value="sport">Sport</option>
                         <option value="comedy">Comedy</option>
                         <option value="history">History</option>
                     </select>
                 </section>
-                <button>Submit</button>
+                {error && <p className='errorMessage'>{error}</p>}
+                <button disabled={isLoading}>Submit</button>
             </form>
         </section>
     )

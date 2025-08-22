@@ -14,6 +14,7 @@ const QuoteDetails = () => {
     useEffect(() => {
         getQuote(quoteId)
             .then(data => setQuote(data))
+            .catch(err => console.error(err));
     }, [])
         
     return (

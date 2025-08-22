@@ -15,3 +15,9 @@ form textarea {
 form select {
     width: 100%;
 }
+
+// for dev purposes // TODO: adjust accordingly when time comes to focus on css
+.errorMessage {
+    color: red;
+    font-size: 1rem;
+}
