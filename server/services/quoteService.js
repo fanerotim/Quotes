@@ -27,7 +27,31 @@ const getQuote = (id) => {
     })
 }
 
-const addQuote = (author, text, category) => {
+const addQuote = async (author, text, category) => {
+
+    // first check if quote is added / exists already
+    const isQuoteAdded = await new Promise((resolve, reject) => {
+        const sql = `
+        SELECT *
+        FROM quotes
+        WHERE LOWER(text) = LOWER(?)`; // checks for quote text (case-insensitive)
+
+        db.query(sql, [text], (err, result) => {
+            if (err) {
+                return reject({err})
+            }
+            return resolve(result);
+        })
+    })
+
+    // if quote already exists throw error with status code 409
+    if (isQuoteAdded.length > 0) {
+        const error = new Error('Quote already exists and it cannot be added twice!');
+        error.statusCode = 409;
+        throw error;
+    }
+
+    // if quote does not exist then add the new quote and return a promise
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO quotes 
                     (author, text, category)
@@ -69,30 +93,10 @@ const deleteQuote = (id) => {
     })
 }
 
-const isQuoteAdded = async (text) => {
-    const quote = await new Promise((resolve, reject) => {
-        const sql = `SELECT *
-                    FROM quotes
-                    WHERE LOWER(text) = LOWER(?)`
-
-        db.query(sql, [text], (err, result) => {
-            if (err) {
-                return reject({...err})
-            }
-            return resolve(result);
-        })
-    })
-
-    if (quote[0]) {
-        throw 'Quote already exists! It cannot be added twice.';
-    }
-}
-
 module.exports = {
     getAll,
     getQuote,
     addQuote,
     updateQuote,
     deleteQuote,
-    isQuoteAdded
 }

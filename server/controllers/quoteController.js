@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const quoteService = require('../services/quoteService');
 const { isAuth } = require('../middlewares/isAuthenticated');
-const {auth} = require('../middlewares/authMiddleware');
+const { auth } = require('../middlewares/authMiddleware');
 
 router.get('/', async (req, res) => {
 
@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
         const quotes = await quoteService.getAll();
         res.status(200).json(quotes);
     } catch (err) {
-        res.status(500).json({error: err.message});
+        res.status(500).json({ error: err.message });
     }
 })
 
@@ -20,27 +20,24 @@ router.get('/:id', async (req, res) => {
         const quote = await quoteService.getQuote(id);
         res.status(200).json(quote);
     } catch (err) {
-        res.status(500).json({error: err.message});
+        res.status(500).json({ error: err.message });
     }
 })
 
 router.post('/add-quote', isAuth, async (req, res) => {
     const { author, text, category } = req.body;
-    
-    try {
-        // check if quote exists; 
-        // if it does not the service will throw an error that will be caught in the catch clause below;
-        await quoteService.isQuoteAdded(text);  
 
-        // if quote does not exist, add the new quote
+    try {
+        // add new quote
         const quote = await quoteService.addQuote(author, text, category);
-        
+
         // get new quote
         const quoteId = quote.insertId; // first get id of newly added quote
         const newQuote = await quoteService.getQuote(quoteId);
         res.status(200).json(newQuote[0]);
     } catch (err) {
-        res.status(500).json({error: err});
+        const status = err.statusCode || 500;
+        res.status(status).json({ error: err.message });
     }
 })
 
