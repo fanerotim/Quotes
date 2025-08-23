@@ -80,5 +80,5 @@ const login = async (email, password) => {
 
 module.exports = {
     register,
-    login
+    login,
 }
