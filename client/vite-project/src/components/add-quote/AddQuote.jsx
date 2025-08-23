@@ -71,7 +71,7 @@ const AddQuote = () => {
                         <option value="science-fiction">Science-Fiction</option>
                     </select>
                 </section>
-                {error && <p className='errorMessage'>{error.message}</p>}
+                {error && <p className='errorMessage'>{error}</p>}
                 <button disabled={isLoading}>Submit</button>
             </form>
         </div>

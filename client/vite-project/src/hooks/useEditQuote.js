@@ -4,7 +4,7 @@ import useLogoutOn401Error from "./useLogoutOn401Error";
 import validateInputs from "../utils/validateInputs";
 
 const useEditQuote = () => {
-    const [error, setError] = useState({message: null});
+    const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const { useLogoutOn401 } = useLogoutOn401Error();
 

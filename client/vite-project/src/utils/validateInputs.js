@@ -8,10 +8,11 @@ const validateInputs = (inputAsObj) => {
 
     inputAsArr.map((value) => {
         if (!value || !value.trim()) {
-            throw new Error('All fields must be filled!');
+            // TODO: for now I am not throwing new Error to align with the format of errors returned from the REST API
+            throw 'All fields must be filled';
         }
     })
-
+    
     return inputAsObj;
 }
 

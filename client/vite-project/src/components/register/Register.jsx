@@ -17,7 +17,7 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-         
+
         try {
             const newUser = await register(values);
             navigate('/users/login');
@@ -71,7 +71,7 @@ const Register = () => {
                         autoComplete='off'
                     />
                 </div>
-                {error && <p className='errorMessage'>{error.message}</p>}
+                {error && <p className='errorMessage'>{error}</p>}
                 <button disabled={isLoading}>Submit</button>
             </form>
 

@@ -11,14 +11,14 @@ const useRegister = () => {
 
         // additional check to make sure passwords match / this logic no yet added to my validateInputs function
         if (values.password !== values.rePassword) {
-            setError({message: 'Password mismatch!'});
+            setError('Password mismatch!');
             throw error;
         }
 
         try {
             validateInputs(values)
             setIsLoading(true)
-            const token = await http.post('http://localhost:3000/user/register', { email, password });
+            const token = await http.post('http://localhost:3000/user/register', { email: values.email, password: values.password });
             return token;
         } catch (err) {
             setError(err);

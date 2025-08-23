@@ -7,9 +7,10 @@ router.post('/register', async (req, res) => {
     try {
         // TODO: I do not really want to return the token, as we are not logging the user automatically
         const token = await userService.register(email, password);
-        res.status(200).json({ "message": `User with email ${email} successfully registered!` });
+        res.status(200).json('User successfully registered');
     } catch (err) {
-        res.status(500).json({ error: err.message })
+        const status = err.statusCode || 500;
+        res.status(status).json({error: err.message})
     }
 })
 
@@ -20,8 +21,7 @@ router.post('/login', async (req, res) => {
         const token = await userService.login(email, password);
         res.status(200).json({ "auth": token, email })
     } catch (err) {
-        // TODO: Fix error - it needs to be detected dynamically
-        res.status(500).json({ error: err.message })
+        res.status(500).json({error: err.message})
     }
 })
 
