@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import http from '../requester/http';
 import { useAuthContext } from './useAuthContext';
+import validateInputs from '../utils/validateInputs';
 
 const useLogin = () => {
 
@@ -11,12 +12,8 @@ const useLogin = () => {
     const login = async (values) => {
         setError(null);
         
-        if (values.email === '' || values.password === '') {
-            setError('No login details provided.');
-            throw error;
-        }
-
         try {
+            validateInputs(values);
             setIsLoading(true);
             const token = await http.post(`${import.meta.env.VITE_USER_URL}/login`, values);
 

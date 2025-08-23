@@ -1,5 +1,6 @@
 import { useState } from "react";
 import http from "../requester/http";
+import validateInputs from "../utils/validateInputs";
 
 const useAddQuote = () => {
     const [error, setError] = useState(null);
@@ -8,12 +9,8 @@ const useAddQuote = () => {
     const addQuote = async (values) => {
         setError(null);
 
-        if (values.author === '' || values.text === '' || values.category === '') {
-            setError('All fields need to be filled in order to add a quote');
-            throw error;
-        }
-
         try {
+            validateInputs(values);
             setLoading(true);
             const newQuote = await http.post(`${import.meta.env.VITE_BASE_URL}/add-quote`, values);
             return newQuote;

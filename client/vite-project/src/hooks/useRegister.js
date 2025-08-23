@@ -1,25 +1,22 @@
 import http from "../requester/http";
 import { useState } from "react";
+import validateInputs from "../utils/validateInputs";
 
 const useRegister = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const register = async ({ email, password, rePassword }) => {
+    const register = async (values) => {
         setError(null);
-        
 
-        if (email === '' || password === '' || rePassword === '') {
-            setError('Cannot register without filling in the form.');
-            throw error;
-        }
-
-        if (password !== rePassword) {
-            setError('Password mismatch!');
+        // additional check to make sure passwords match / this logic no yet added to my validateInputs function
+        if (values.password !== values.rePassword) {
+            setError({message: 'Password mismatch!'});
             throw error;
         }
 
         try {
+            validateInputs(values)
             setIsLoading(true)
             const token = await http.post('http://localhost:3000/user/register', { email, password });
             return token;
