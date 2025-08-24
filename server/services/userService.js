@@ -74,11 +74,47 @@ const login = async (email, password) => {
         email
     }
 
-    const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1m' });
+    const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' });
     return token;
+}
+
+const blacklistToken = async (accessToken) => {
+
+    const isBlacklisted = await new Promise((resolve, reject) => {
+        const sql = `SELECT *
+                    FROM blacklisted_tokens
+                    WHERE accessToken = ?`;
+
+        db.query(sql, [accessToken], (err, result) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(result);
+        })
+    })
+
+    if (isBlacklisted.length > 0) {
+        const error = new Error('accessToken has already been blacklisted');
+        error.statusCode = 409;
+        throw error;
+    }
+
+    return new Promise((resolve, reject) => {
+        const sql = `INSERT INTO blacklisted_tokens 
+                    (accessToken)
+                    VALUES(?)`;
+
+        db.query(sql, [accessToken], (err, result) => {
+            if (err) {
+                return reject(err)
+            }
+            return resolve(result);
+        })
+    })
 }
 
 module.exports = {
     register,
     login,
+    blacklistToken
 }
