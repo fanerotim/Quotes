@@ -25,12 +25,17 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.get('/logout', async (req, res) => {
-    // APART FROM nullifying the req.user I also need to invalidate the token
-    // the idea is to create a blacklist and a table where i will keep all tokens of logged out users and then validate if tokens sent with requests are valid
-    // i will clear that table once a week as this will be a small app for now
-    req.user = null;
-    return res.status(200).json({ message: 'Successfully logged out' })
+router.post('/logout', async (req, res) => {
+    const accessToken = req.body.auth;
+
+    try {
+        req.user = null;
+        const blacklistedToken = await userService.blacklistToken(accessToken);
+        return res.status(200).json({ message: 'Successfully logged out' })
+    } catch (err) {
+        const status = err.statusCode || 500;
+        return res.status(status).json({error: err.message})
+    }
 })
 
 module.exports = router;
