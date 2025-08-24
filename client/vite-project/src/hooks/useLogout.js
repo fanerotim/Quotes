@@ -1,15 +1,18 @@
 import http from "../requester/http";
 import { useAuthContext } from '../hooks/useAuthContext'
+import useGetAccessToken from "./useGetAccessToken";
 
 const useLogout = () => {
 
     const { dispatch } = useAuthContext();
+    const getToken = useGetAccessToken();
+    const accessToken = getToken();
 
     const logout = async () => {
 
         try {
-            const result = await http.get(`${import.meta.env.VITE_USER_URL}/logout`)
-            
+            const result = await http.post(`${import.meta.env.VITE_USER_URL}/logout`, accessToken)
+
             dispatch({
                 type: 'LOGOUT'
             })
