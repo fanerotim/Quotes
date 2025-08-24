@@ -1,1 +1,0 @@
-export const blacklistedTokens = ['eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImlAYWJ2LmJnIiwiaWF0IjoxNzU2MDEzODIzLCJleHAiOjE3NTYwMTM4ODN9.nEzJSvPEvJQYBhDhKpzdd17cW0COUpCXpmjCDqbw-WQ'];
