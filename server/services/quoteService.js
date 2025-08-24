@@ -1,6 +1,7 @@
 const mysqlConfig = require("../mySqlConfig")
 const db = mysqlConfig();
 
+
 const getAll = () => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM quotes';

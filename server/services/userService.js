@@ -78,8 +78,8 @@ const login = async (email, password) => {
     return token;
 }
 
-const blacklistToken = async (accessToken) => {
-
+const isTokenBlacklisted = async (accessToken) => {
+    
     const isBlacklisted = await new Promise((resolve, reject) => {
         const sql = `SELECT *
                     FROM blacklisted_tokens
@@ -94,7 +94,18 @@ const blacklistToken = async (accessToken) => {
     })
 
     if (isBlacklisted.length > 0) {
-        const error = new Error('accessToken has already been blacklisted');
+        return true;
+    }
+
+    return false;
+}
+
+const blacklistToken = async (accessToken) => {
+
+    const isBlacklisted = await isTokenBlacklisted(accessToken);
+
+    if (isBlacklisted) {
+        const error = new Error('Authorization required for this request.');
         error.statusCode = 409;
         throw error;
     }
@@ -116,5 +127,6 @@ const blacklistToken = async (accessToken) => {
 module.exports = {
     register,
     login,
+    isTokenBlacklisted,
     blacklistToken
 }
