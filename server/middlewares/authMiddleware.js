@@ -1,4 +1,5 @@
 const jwt = require('../lib/jwt');
+const userService = require('../services/userService');
 
 exports.auth = async (req, res, next) => {
 
