@@ -43,7 +43,7 @@ router.post('/add-quote', isAuth, async (req, res) => {
 router.put('/edit-quote/:id', async (req, res) => {
     const { id } = req.params;
     const { author, text, category } = req.body;
-    
+
     try {
         //update quote
         const quote = await quoteService.updateQuote(id, author, text, category);
@@ -62,7 +62,8 @@ router.delete('/delete-quote', async (req, res) => {
         const deletedQuote = await quoteService.deleteQuote(id);
         res.status(200).json({ "message": 'Quote DELETED successfully.' });
     } catch (err) {
-        return res.status(500).json({ ...err })
+        const status = err.statusCode || 500;
+        return res.status(status).json({ error: err.message })
     }
 })
 

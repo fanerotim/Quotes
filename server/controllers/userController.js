@@ -21,7 +21,8 @@ router.post('/login', async (req, res) => {
         const token = await userService.login(email, password);
         res.status(200).json({ "auth": token, email })
     } catch (err) {
-        res.status(500).json({ error: err.message })
+        const status = err.statusCode || 500;
+        res.status(status).json({ error: err.message })
     }
 })
 

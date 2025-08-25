@@ -1,5 +1,6 @@
 const mysqlConfig = require("../mySqlConfig")
 const db = mysqlConfig();
+const {validateInputs} = require('../utils/validateInputs');
 
 
 const getAll = () => {
@@ -31,14 +32,7 @@ const getQuote = (id) => {
 const addQuote = async (author, text, category) => {
 
     // validate input / do not accept empty fields
-    if (
-        !author || !author.trim() || 
-        !text || !text.trim() ||
-        !category || !category.trim()) {
-            const error = new Error('All fields must be filled!');
-            error.statusCode = 400;
-            throw error;
-    }
+    validateInputs([author, text, category])
 
     // first check if quote is added / exists already
     const isQuoteAdded = await new Promise((resolve, reject) => {
@@ -79,11 +73,7 @@ const addQuote = async (author, text, category) => {
 const updateQuote = (id, author, text, category) => {
 
     // validate input values before making any db calls
-    if (!id || !id.trim() || !author || !author.trim() || !text || !text.trim() || !category || !category.trim()) {
-        const error = new Error('Please fill all fields in order to update the quote!')
-        error.statusCode = 409;
-        throw error;
-    }
+    validateInputs([author, text, category])
 
     return new Promise((resolve, reject) => {
         const sql = `UPDATE quotes 
@@ -100,6 +90,9 @@ const updateQuote = (id, author, text, category) => {
 }
 
 const deleteQuote = (id) => {
+    //validate input
+    validateInputs([id])
+
     return new Promise((resolve, reject) => {
         const sql = 'DELETE FROM quotes WHERE id = ?';
 

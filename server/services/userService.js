@@ -2,12 +2,14 @@ const mysqlConfig = require('../mySqlConfig');
 const db = mysqlConfig();
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jwt');
+const { validateInputs } = require('../utils/validateInputs')
+
 
 const hasUser = async (email) => {
 
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM users WHERE email = ?';
-   
+
         db.query(sql, [email], (err, result) => {
             if (err) {
                 console.log(err);
@@ -19,6 +21,9 @@ const hasUser = async (email) => {
 }
 
 const register = async (email, password) => {
+
+    //validate user input
+    validateInputs([email, password])
 
     // first check if user with this email is already registered
     const userExists = await hasUser(email);
@@ -57,6 +62,9 @@ const register = async (email, password) => {
 }
 
 const login = async (email, password) => {
+
+    //validate user input
+    validateInputs([email, password])
 
     // check if user exists
     const userExists = await hasUser(email);
