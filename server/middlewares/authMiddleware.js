@@ -1,5 +1,4 @@
 const jwt = require('../lib/jwt');
-const { blacklistedTokens } = require('../utils/blacklistedTokens');
 
 exports.auth = async (req, res, next) => {
 
@@ -9,13 +8,11 @@ exports.auth = async (req, res, next) => {
         return next();
     }
 
+    // TODO: TROUBLESHOOT WHY IMPORTING USER SERVICE RETURNS THIS ERROR:
+    // {"error":"Cannot enqueue Query after fatal error."}
+    // I NEED TO CHECK IF TOKEN IS BLACKLISTED IN THE AUTH MIDDLEWARE
+
     try {
-
-        // demo logic that invalidates 
-        if (blacklistedTokens.some((token) => token === accessToken)) {
-            throw new Error('Invalid token - please login again.')
-        }
-
         const decodedToken = await jwt.verify(accessToken, process.env.JWT_SECRET);
         req.user = decodedToken;
         next();

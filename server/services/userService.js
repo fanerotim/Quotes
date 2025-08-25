@@ -79,7 +79,7 @@ const login = async (email, password) => {
 }
 
 const isTokenBlacklisted = async (accessToken) => {
-    
+
     const isBlacklisted = await new Promise((resolve, reject) => {
         const sql = `SELECT *
                     FROM blacklisted_tokens

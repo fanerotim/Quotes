@@ -9,7 +9,7 @@ const useLogout = () => {
     const accessToken = getToken();
 
     const logout = async () => {
-
+        
         try {
             const result = await http.post(`${import.meta.env.VITE_USER_URL}/logout`, accessToken)
 

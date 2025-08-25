@@ -17,6 +17,7 @@ const useEditQuote = () => {
             setIsLoading(true);
             await http.put(`${import.meta.env.VITE_BASE_URL}/edit-quote/${quoteId}`, values);
         } catch (err) {
+            // check if error is 401 to logout the user
             useLogoutOn401(err);
             setError(err);
             throw error;
