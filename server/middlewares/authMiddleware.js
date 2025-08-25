@@ -9,16 +9,21 @@ exports.auth = async (req, res, next) => {
         return next();
     }
 
-    // TODO: TROUBLESHOOT WHY IMPORTING USER SERVICE RETURNS THIS ERROR:
-    // {"error":"Cannot enqueue Query after fatal error."}
-    // I NEED TO CHECK IF TOKEN IS BLACKLISTED IN THE AUTH MIDDLEWARE
-
     try {
+        // first check to make sure token is not blacklisted;
+        const isBlacklisted = await userService.isTokenBlacklisted(accessToken);
+
+        if (isBlacklisted) {
+            const error = new Error('Authorization required for this request!');
+            error.statusCode = 401;
+            throw error;
+        }
+
         const decodedToken = await jwt.verify(accessToken, process.env.JWT_SECRET);
         req.user = decodedToken;
         next();
     } catch (err) {
         req.user = null;
-        res.status(401).json({ error: 'Authorization required for this request' });
+        res.status(401).json({ error: err.message });
     }
 }
