@@ -1,5 +1,5 @@
 import './Navigation.scss'
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logout from '../logout/logout';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -11,11 +11,11 @@ const Navigation = () => {
     return (
         <nav>
             {auth && (<span className='greeting'>Hello, {auth.email}</span>)}
-            <Link to='/'>Home</Link>
-            <Link to='/quotes'>Quotes</Link>
-            {auth && (<Link to='/quotes/add-quote'>Add quote</Link>)}
-            {!auth && (<Link to='/users/register'>Register</Link>)}
-            {!auth && (<Link to='/users/login'>Login</Link>)}
+            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/quotes'>Quotes</NavLink>
+            {auth && (<NavLink to='/quotes/add-quote'>Add quote</NavLink>)}
+            {!auth && (<NavLink to='/users/register'>Register</NavLink>)}
+            {!auth && (<NavLink to='/users/login'>Login</NavLink>)}
             {auth && (<Logout />)}
         </nav>
     )
