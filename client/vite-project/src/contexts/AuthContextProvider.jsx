@@ -5,7 +5,7 @@ export const AuthContext = createContext(null);
 
 const AuthContextProvider = ({ children }) => {
 
-    const [state, dispatch] = useReducer(authReducer, { auth: null });
+    const [state, dispatch] = useReducer(authReducer, { auth: null, sessionExpired: false });
 
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('accessToken'));
