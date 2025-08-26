@@ -7,7 +7,11 @@ export const authReducer = (state, action) => {
         }
         case 'LOGOUT': {
             localStorage.removeItem('accessToken');
-            return { auth: null };
+            return { auth: null, sessionExpired: false };
+        }
+        case 'SESSION-EXPIRED': {
+            // shows modal and nullufies state
+            return { auth: null, sessionExpired: true };
         }
         default:
             return state;
