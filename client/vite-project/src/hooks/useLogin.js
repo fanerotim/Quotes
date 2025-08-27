@@ -25,7 +25,7 @@ const useLogin = () => {
             return token;
 
         } catch (err) {
-            setError(err);
+            setError(err.message);
             throw error;
         } finally {
             setIsLoading(false);

@@ -21,7 +21,7 @@ const useRegister = () => {
             const token = await http.post('http://localhost:3000/user/register', { email: values.email, password: values.password });
             return token;
         } catch (err) {
-            setError(err);
+            setError(err.message);
             throw error;
         } finally {
             setIsLoading(false);
