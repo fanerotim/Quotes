@@ -30,8 +30,8 @@ const http = async (method, url, values) => {
             error.status = 401;
             throw error;
         }
-
-        throw result.error;
+ 
+        throw result;
     }
 
     // TODO: CREATE AN EXAMPLE FOR THE FOLLOWING
