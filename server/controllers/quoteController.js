@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         const quotes = await quoteService.getAll();
         res.status(200).json(quotes);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ message: err.message });
     }
 })
 
@@ -19,7 +19,7 @@ router.get('/:id', async (req, res) => {
         const quote = await quoteService.getQuote(id);
         res.status(200).json(quote);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ message: err.message });
     }
 })
 
@@ -36,7 +36,7 @@ router.post('/add-quote', isAuth, async (req, res) => {
         res.status(200).json(newQuote[0]);
     } catch (err) {
         const status = err.statusCode || 500;
-        res.status(status).json({ error: err.message });
+        res.status(status).json({ message: err.message });
     }
 })
 
@@ -52,7 +52,7 @@ router.put('/edit-quote/:id', async (req, res) => {
         res.status(200).json(updatedQuote)
     } catch (err) {
         const status = err.statusCode || 500;
-        return res.status(status).json({ error: err.message });
+        return res.status(status).json({ message: err.message });
     }
 })
 
@@ -63,7 +63,7 @@ router.delete('/delete-quote', async (req, res) => {
         res.status(200).json({ "message": 'Quote DELETED successfully.' });
     } catch (err) {
         const status = err.statusCode || 500;
-        return res.status(status).json({ error: err.message })
+        return res.status(status).json({ message: err.message })
     }
 })
 

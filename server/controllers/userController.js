@@ -10,7 +10,7 @@ router.post('/register', async (req, res) => {
         res.status(200).json('User successfully registered');
     } catch (err) {
         const status = err.statusCode || 500;
-        res.status(status).json({ error: err.message })
+        res.status(status).json({ message: err.message })
     }
 })
 
@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
         res.status(200).json({ "auth": token, email })
     } catch (err) {
         const status = err.statusCode || 500;
-        res.status(status).json({ error: err.message })
+        res.status(status).json({ message: err.message })
     }
 })
 
@@ -35,7 +35,7 @@ router.post('/logout', async (req, res) => {
         return res.status(200).json({ message: 'Successfully logged out' })
     } catch (err) {
         const status = err.statusCode || 500;
-        return res.status(status).json({error: err.message})
+        return res.status(status).json({message: err.message})
     }
 })
 
