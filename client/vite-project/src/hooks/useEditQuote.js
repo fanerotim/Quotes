@@ -19,7 +19,7 @@ const useEditQuote = () => {
         } catch (err) {
             // check if error is 401 to logout the user
             useLogoutOn401(err);
-            setError(err);
+            setError(err.message);
             throw error;
         } finally {
             setIsLoading(false);

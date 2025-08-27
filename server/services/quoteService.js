@@ -1,6 +1,6 @@
 const mysqlConfig = require("../mySqlConfig")
 const db = mysqlConfig();
-const {validateInputs} = require('../utils/validateInputs');
+const { validateInputs } = require('../utils/validateInputs');
 
 
 const getAll = () => {
@@ -43,7 +43,7 @@ const addQuote = async (author, text, category) => {
 
         db.query(sql, [text], (err, result) => {
             if (err) {
-                return reject({err})
+                return reject({ err })
             }
             return resolve(result);
         })
@@ -63,7 +63,7 @@ const addQuote = async (author, text, category) => {
                     VALUES(?, ?, ?)`;
         db.query(sql, [author, text, category], (err, result) => {
             if (err) {
-                return reject({...err})
+                return reject({ ...err })
             }
             return resolve(result);
         })
@@ -82,7 +82,7 @@ const updateQuote = (id, author, text, category) => {
 
         db.query(sql, [author, text, category, id], (err, result) => {
             if (err) {
-                return reject({...err})
+                return reject({ ...err })
             }
             return resolve(result);
         })
@@ -98,7 +98,7 @@ const deleteQuote = (id) => {
 
         db.query(sql, [id], (err, result) => {
             if (err) {
-                return reject({...err})
+                return reject({ ...err })
             }
             return resolve(result);
         })
