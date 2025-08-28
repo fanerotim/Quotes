@@ -4,6 +4,7 @@ import './EditQuote.scss'
 import { useNavigate, useParams } from 'react-router-dom';
 import useEditQuote from '../../hooks/useEditQuote';
 import useGetQuote from '../../hooks/useGetQuote';
+import { CATEGORIES } from '../../utils/genres';
 
 const EditQuote = () => {
 
@@ -68,10 +69,13 @@ const EditQuote = () => {
                     <select
                         onChange={handleChange}
                         name="category">
-                        {/* TODO: the options need to be looped through, so I can create a util */}
-                        <option value="sport">Sport</option>
-                        <option value="comedy">Comedy</option>
-                        <option value="history">History</option>
+                        {CATEGORIES.map(category => (
+                            <option
+                                key={category.id}
+                                value={category.id}>
+                                {genre.id}
+                            </option>
+                        ))}
                     </select>
                 </section>
                 {error && <p className='errorMessage'>{error}</p>}

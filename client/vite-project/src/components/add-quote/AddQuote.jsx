@@ -2,6 +2,7 @@ import './AddQuote.scss'
 import useForm from '../../hooks/useForm';
 import useAddQuote from '../../hooks/useAddQuote';
 import { useNavigate } from 'react-router-dom';
+import { CATEGORIES } from '../../utils/genres';
 
 const initialValues = {
     author: '',
@@ -57,18 +58,13 @@ const AddQuote = () => {
                         onChange={handleChange}
                         name="category"
                         value={values.category}>
-                            {/* TODO: style çhoose category to be like placeholder */}
-                        <option>Choose category</option>
-                        <option value="sports">Sports</option>
-                        <option value="psychology">Psychology</option>
-                        <option value="fiction">Fiction</option>
-                        <option value="comics">Comics</option>
-                        <option value="poetry">Poetry</option>
-                        <option value="science">Science</option>
-                        <option value="art">Art</option>
-                        <option value="biography">Biography</option>
-                        <option value="travel">Travel</option>
-                        <option value="science-fiction">Science-Fiction</option>
+                        {CATEGORIES.map(category => (
+                            <option
+                            key={category.id} 
+                            value={category.id}>
+                            {category.id}
+                            </option>
+                        ))}
                     </select>
                 </section>
                 {error && <p className='errorMessage'>{error}</p>}
