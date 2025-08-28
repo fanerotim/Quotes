@@ -12,6 +12,7 @@ import NotFound from './components/not-found/NotFound';
 import Login from './components/login/Login';
 import SessionExpired from './components/session-expired/SessionExpires';
 import { useAuthContext } from './hooks/useAuthContext';
+import UserProfile from './components/user-profile/UserProfile';
 
 function App() {
 
@@ -21,16 +22,26 @@ function App() {
     <div className='app-container'>
       <Navigation />
       {sessionExpired && <SessionExpired />}
+
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/quotes' element={<Quotes />}></Route>
-        <Route path='/quotes/:quoteId' element={<QuoteDetails />}></Route>
-        <Route path='/quotes/add-quote' element={<AddQuote />}></Route>
-        <Route path='/quotes/edit-quote/:quoteId' element={<EditQuote />}></Route>
-        <Route path='/users/register' element={<Register />}>Register</Route>
-        <Route path='/users/login' element={<Login />}></Route>
+        <Route index element={<Home />}></Route>
+
+        <Route path='users'>
+          <Route path='register' element={<Register />}></Route>
+          <Route path='login' element={<Login />}></Route>
+          <Route path='user-profile' element={<UserProfile />}></Route>
+        </Route>
+
+        <Route path='quotes'>
+          <Route index element={<Quotes />}></Route>
+          <Route path=':quoteId' element={<QuoteDetails />}></Route>
+          <Route path='add-quote' element={<AddQuote />}></Route>
+          <Route path='edit-quote/:quoteId' element={<EditQuote />}></Route>
+        </Route>
+
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
+      
       <Footer />
     </div>
   )
