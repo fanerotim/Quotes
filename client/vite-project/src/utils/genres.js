@@ -1,4 +1,4 @@
-export const GENRES = [
+export const CATEGORIES = [
     {
         id: "Fiction"
     },
