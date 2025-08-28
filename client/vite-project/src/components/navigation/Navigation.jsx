@@ -5,7 +5,6 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 
 const Navigation = () => {
 
-    // TODO: fix this bug - on refresh auth.email is no longer working
     const { auth } = useAuthContext();
 
     return (
@@ -16,6 +15,7 @@ const Navigation = () => {
             {auth && (<NavLink to='/quotes/add-quote'>Add quote</NavLink>)}
             {!auth && (<NavLink to='/users/register'>Register</NavLink>)}
             {!auth && (<NavLink to='/users/login'>Login</NavLink>)}
+            {auth && <NavLink to='/users/user-profile'>Profile</NavLink>}
             {auth && (<Logout />)}
         </nav>
     )
