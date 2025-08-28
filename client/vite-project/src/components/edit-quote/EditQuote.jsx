@@ -73,7 +73,7 @@ const EditQuote = () => {
                             <option
                                 key={category.id}
                                 value={category.id}>
-                                {genre.id}
+                                {category.id}
                             </option>
                         ))}
                     </select>
