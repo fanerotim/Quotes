@@ -1,5 +1,4 @@
 import useGetAccessToken from "../hooks/useGetAccessToken";
-import useLogoutOn401Error from "../hooks/useLogoutOn401Error";
 
 const http = async (method, url, values) => {
     const getToken = useGetAccessToken();
@@ -30,14 +29,13 @@ const http = async (method, url, values) => {
             error.status = 401;
             throw error;
         }
- 
+
         throw result;
     }
 
     // TODO: CREATE AN EXAMPLE FOR THE FOLLOWING
     // The fetch() function will reject the promise on some errors, 
     // but not if the server responds with an error status like 404: so we also check the response status and throw if it is not OK.
-
     return result;
 }
 
