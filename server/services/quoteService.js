@@ -29,10 +29,25 @@ const getQuote = (id) => {
     })
 }
 
+const getUserQuotes = (userId) => {
+    
+    return new Promise((resolve, reject) => {
+        const sql = `SELECT * 
+                    FROM quotes
+                    WHERE ownerId = ?`
+        db.query(sql, [userId], (err, result) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(result);
+        })
+    })
+}
+
 const addQuote = async (author, text, category, ownerId) => {
     // validate input / do not accept empty fields
     validateInputs([author, text, category])
-   
+
     // first check if quote is added / exists already
     const isQuoteAdded = await new Promise((resolve, reject) => {
         const sql = `
@@ -107,6 +122,7 @@ const deleteQuote = (id) => {
 module.exports = {
     getAll,
     getQuote,
+    getUserQuotes,
     addQuote,
     updateQuote,
     deleteQuote,
