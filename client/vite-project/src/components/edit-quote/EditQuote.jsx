@@ -30,7 +30,7 @@ const EditQuote = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
             await edit(values, quoteId);
             navigate(`/quotes/${quoteId}`)
