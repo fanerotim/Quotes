@@ -29,11 +29,10 @@ const getQuote = (id) => {
     })
 }
 
-const addQuote = async (author, text, category) => {
-
+const addQuote = async (author, text, category, ownerId) => {
     // validate input / do not accept empty fields
     validateInputs([author, text, category])
-
+   
     // first check if quote is added / exists already
     const isQuoteAdded = await new Promise((resolve, reject) => {
         const sql = `
@@ -59,9 +58,9 @@ const addQuote = async (author, text, category) => {
     // if quote does not exist then add the new quote and return a promise
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO quotes 
-                    (author, text, category)
-                    VALUES(?, ?, ?)`;
-        db.query(sql, [author, text, category], (err, result) => {
+                    (author, text, ownerId, category)
+                    VALUES(?, ?, ?, ?)`;
+        db.query(sql, [author, text, ownerId, category], (err, result) => {
             if (err) {
                 return reject({ ...err })
             }

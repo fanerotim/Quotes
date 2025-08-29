@@ -24,11 +24,11 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/add-quote', isAuth, async (req, res) => {
-    const { author, text, category } = req.body;
-
+    const { author, text, category, ownerId } = req.body;
+    
     try {
         // add new quote
-        const quote = await quoteService.addQuote(author, text, category);
+        const quote = await quoteService.addQuote(author, text, category, ownerId);
 
         // get new quote to return it to front-end, don't really need to return it, it's a small app, so doesn't cause performane issues (for now)
         const quoteId = quote.insertId; // first get id of newly added quote
