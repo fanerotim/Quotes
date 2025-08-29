@@ -10,9 +10,8 @@ const hasUser = async (email) => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM users WHERE email = ?';
 
-        db.query(sql, [email], (err, result) => {
+        db.query(sql, [email], async (err, result) => {
             if (err) {
-                console.log(err);
                 return reject(err)
             }
             return resolve(result);
@@ -26,16 +25,17 @@ const register = async (email, password) => {
     validateInputs([email, password])
 
     // first check if user with this email is already registered
-    const userExists = await hasUser(email);
+    const userSearchResult = await hasUser(email);
+    const user = userSearchResult[0];
 
     // throw error if user already registered (we get an array, so check item at index 0 to verify if user exists)
-    if (userExists.length > 0) {
+    if (user) {
         const error = new Error('User is already registered!');
         error.statusCode = 409;
         throw error;
     }
 
-    // if user DOES NOT exist hash their password
+    // if user DOES NOT exist, first hash their password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // and then ADD them to db
@@ -54,7 +54,7 @@ const register = async (email, password) => {
             }
 
             // return the jwt token of the newly registered user
-            const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' })
+            const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' })
             // TODO: Send a confirmation email to end user to welcome them to the app
             return resolve(token);
         })
@@ -67,25 +67,32 @@ const login = async (email, password) => {
     validateInputs([email, password])
 
     // check if user exists
-    const userExists = await hasUser(email);
+    const userSearchResult = await hasUser(email);
+    const user = userSearchResult[0];
 
-    // if it does not throw error
-    if (!userExists[0]) {
+    if (!user) {
         throw new Error('Login details are incorrect. Please try again.');
     }
 
-    // if it exists, check password
-    const isValid = await bcrypt.compare(password, userExists[0].password)
+    // if it exists, check if password is correct
+    const isPasswordCorrect = await bcrypt.compare(password, user.password)
 
-    if (!isValid) {
+    if (!isPasswordCorrect) {
         throw new Error('Login details are incorrect. Please try again.')
     }
-    const payload = {
-        email
-    }
 
-    const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '4h' });
-    return token;
+    const payload = {
+        email,
+        id: user.id
+    }
+    
+    const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
+
+    return {
+        token,
+        email,
+        id: user.id
+    };
 }
 
 const isTokenBlacklisted = async (accessToken) => {
