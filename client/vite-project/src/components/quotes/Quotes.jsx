@@ -7,13 +7,14 @@ const Quotes = () => {
     const [quotes, setQuotes] = useState([]);
     const { getAllQuotes } = useQuotes();
     const navigate = useNavigate();
-
+    console.log(quotes);
     // THIS HANDLE IS HERE DURING DEV
     // BUTTON AND EVENT HANDLER NEED TO BE ABSTRACTED
     const clickHandler = (id) => {
         navigate(`/quotes/${id}`)
     }
 
+    // TODO: TOO MANY RERENDERS; FIX THIS;
     useEffect(() => {
 
         (async () => {
@@ -26,17 +27,20 @@ const Quotes = () => {
     return (
         <section className='quotes-container'>
             <h1>Welcome to my Quotes!</h1>
-            <ul>
-                {quotes.map(quote => (
-                    <div key={quote.id}>
-                        <li>{quote.text}{quote.id}</li>
-                        <button
-                            onClick={() => clickHandler(quote.id)}>
+            {/* TODO: if no quotes, we get an empty array, so h1 tag below does not render: FIX THIS */}
+            {quotes ? (
+                <ul>
+                    {quotes.map(quote => (
+                        <div key={quote.id}>
+                            <li>{quote.text}{quote.id}</li>
+                            <button
+                                onClick={() => clickHandler(quote.id)}>
                                 Show details
-                        </button>
-                    </div>
-                ))}
-            </ul>
+                            </button>
+                        </div>
+                    ))}
+                </ul>)
+                : <h1>Currently we do not have quotes to display</h1>}
         </section>
     )
 }
