@@ -23,9 +23,21 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.post('/user-quotes', async (req, res) => {
+    const { userId } = req.body;
+   
+    try {
+        const userQuotes = await quoteService.getUserQuotes(userId);
+        return res.status(200).json(userQuotes);
+    } catch (err) {
+        // TODO: add proper err response statement / still in dev now
+        return res.status(500).json({message: err.message})
+    }
+})
+
 router.post('/add-quote', isAuth, async (req, res) => {
     const { author, text, category, ownerId } = req.body;
-    
+
     try {
         // add new quote
         const quote = await quoteService.addQuote(author, text, category, ownerId);
