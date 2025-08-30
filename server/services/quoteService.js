@@ -104,8 +104,10 @@ const updateQuote = (id, author, text, category) => {
 }
 
 const deleteQuote = (id) => {
-    //validate input
-    validateInputs([id])
+    
+    if (!id) {
+        throw new Error('Quote id is required in order for the quote to be deleted.')
+    }
 
     return new Promise((resolve, reject) => {
         const sql = 'DELETE FROM quotes WHERE id = ?';
