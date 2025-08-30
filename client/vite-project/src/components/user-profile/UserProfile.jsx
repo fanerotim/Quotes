@@ -17,7 +17,7 @@ const UserProfile = () => {
         <>
             <h1>Please find the quotes you have added below:</h1>
             {userQuotes.map((quote) => (
-                <div>
+                <div key={quote.id}>
                     <p>{quote.author}</p>
                     <h3>{quote.text}</h3>
                     <h5>{quote.category}</h5>
