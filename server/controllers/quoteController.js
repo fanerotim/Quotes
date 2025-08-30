@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const quoteService = require('../services/quoteService');
-const { isAuth } = require('../middlewares/isAuthenticated');
+const { isGuest } = require('../route-guards/isGuest');
 
 router.get('/', async (req, res) => {
 
@@ -25,17 +25,17 @@ router.get('/:id', async (req, res) => {
 
 router.post('/user-quotes', async (req, res) => {
     const { userId } = req.body;
-   
+
     try {
         const userQuotes = await quoteService.getUserQuotes(userId);
         return res.status(200).json(userQuotes);
     } catch (err) {
         // TODO: add proper err response statement / still in dev now
-        return res.status(500).json({message: err.message})
+        return res.status(500).json({ message: err.message })
     }
 })
 
-router.post('/add-quote', isAuth, async (req, res) => {
+router.post('/add-quote', async (req, res) => {
     const { author, text, category, ownerId } = req.body;
 
     try {
@@ -52,7 +52,7 @@ router.post('/add-quote', isAuth, async (req, res) => {
     }
 })
 
-router.put('/edit-quote/:id', async (req, res) => {
+router.put('/edit-quote/:id', isGuest, async (req, res) => {
     const { id } = req.params;
     const { author, text, category } = req.body;
 

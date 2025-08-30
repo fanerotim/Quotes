@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const userService = require('../services/userService');
+const { isLoggedIn } = require('../route-guards/isLoggedIn');
 
-router.post('/register', async (req, res) => {
+router.post('/register', isLoggedIn, async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -9,22 +10,22 @@ router.post('/register', async (req, res) => {
         // I do not really want to return the token for now, as currently we are not logging the user automatically
         // so now, I have the token, but am not doing anything with it;
         const token = await userService.register(email, password);
-        res.status(200).json({message: 'User successfully registered'});
+        res.status(200).json({ message: 'User successfully registered' });
     } catch (err) {
         const status = err.statusCode || 500;
         res.status(status).json({ message: err.message })
     }
 })
 
-router.post('/login', async (req, res) => {
+router.post('/login', isLoggedIn, async (req, res) => {
     const { email, password } = req.body;
 
     try {
         const authData = await userService.login(email, password);
-        res.status(200).json({ 
-            auth: authData.token, 
-            email: authData.email, 
-            id: authData.id 
+        res.status(200).json({
+            auth: authData.token,
+            email: authData.email,
+            id: authData.id
         })
     } catch (err) {
         const status = err.statusCode || 500;
@@ -34,6 +35,14 @@ router.post('/login', async (req, res) => {
 
 router.post('/logout', async (req, res) => {
     const accessToken = req.body.auth;
+
+    // TODO: fix this / find a better solution
+    // adding this conditional check as if a request through postman is made without accessToken, blacklisted_tokens talbe in db gets a null value inserted
+    if (!accessToken) {
+        const error = new Error('Cannot logout as guest!');
+        error.statusCode = 403;
+        throw error;
+    }
 
     try {
         req.user = null;
