@@ -14,11 +14,12 @@ const useAddQuote = () => {
 
     const addQuote = async (values) => {
         setError(null);
-        
+
         try {
             validateInputs(values);
             // TODO: check above comment: getToken() should be renamed
-            const userId = getToken().id;
+            // TODO: using optional chaining to check if there is id, but we need to fix this - without an id, the app does not break, but it displays a weird error to the user;
+            const userId = getToken()?.id;
             setLoading(true);
             const newQuote = await http.post(`${import.meta.env.VITE_BASE_URL}/add-quote`, {...values, ownerId: userId});
             return newQuote;
