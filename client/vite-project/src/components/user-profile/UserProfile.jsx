@@ -14,16 +14,16 @@ const UserProfile = () => {
     }, [])
 
     return (
-        <>
+        <section className='page__wrapper'>
             <h1>Please find the quotes you have added below:</h1>
             {userQuotes.map((quote) => (
-                <div key={quote.id}>
-                    <p>{quote.author}</p>
-                    <h3>{quote.text}</h3>
-                    <h5>{quote.category}</h5>
+                <div className='quote__container' key={quote.id}>
+                    <h1>{quote.author}</h1>
+                    <p className='quote__container__quote__text'>{quote.text}</p>
+                    <h4 className='quote__container__category'>{quote.category}</h4>
                 </div>
             ))}
-        </>
+        </section>
     )
 }
 
