@@ -39,18 +39,17 @@ router.post('/logout', async (req, res) => {
     // TODO: fix this / find a better solution
     // adding this conditional check as if a request through postman is made without accessToken, blacklisted_tokens talbe in db gets a null value inserted
     if (!accessToken) {
-        const error = new Error('Cannot logout as guest!');
-        error.statusCode = 403;
-        throw error;
+        res.status(403).json({message:'Cannot logout as guest!'})
     }
 
     try {
         req.user = null;
         const blacklistedToken = await userService.blacklistToken(accessToken);
-        return res.status(200).json({ message: 'Successfully logged out' })
+        res.status(200).json({ message: 'Successfully logged out' })
     } catch (err) {
+        console.log('this is error', err)
         const status = err.statusCode || 500;
-        return res.status(status).json({ message: err.message })
+        res.status(status).json({ message: err.message })
     }
 })
 
