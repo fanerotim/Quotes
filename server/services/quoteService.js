@@ -51,8 +51,8 @@ const addQuote = async (author, text, category, ownerId) => {
     // TODO: Fix this, adding a conditional check for now
     // adding this additional check as if a request is made through postman and userId is not provided, db gets null added for userId
     if (!ownerId) {
-        const error = new Error('Cannot add a quote as guest!');
-        error.statusCode = 403;
+        const error = new Error('You are not authorized to add quotes. Please log in!');
+        error.statusCode = 401;
         throw error;
     }
 
