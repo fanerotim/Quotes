@@ -30,7 +30,7 @@ const EditQuote = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+        
         try {
             await edit(values, quoteId);
             navigate(`/quotes/${quoteId}`)
@@ -68,12 +68,15 @@ const EditQuote = () => {
                     <label>Category</label>
                     <select
                         onChange={handleChange}
-                        name="category">
+                        name="category"
+                        // TODO: Fix this - find a better way to implement it
+                        // Using toLowerCase() as values in genres.js are written in lower case, so if I do not lowercase it, it does not get detected and updated in the UI.
+                        value={values.category.toLowerCase()}>
                         {CATEGORIES.map(category => (
                             <option
-                                key={category.id}
-                                value={category.id}>
-                                {category.id}
+                                key={category.value}
+                                value={category.value}>
+                                {category.name}
                             </option>
                         ))}
                     </select>
