@@ -22,7 +22,7 @@ const AddQuote = () => {
         try {
             const newQuote = await addQuote(values);
             navigate('/quotes')
-        } catch(err) {
+        } catch (err) {
             console.error(err);
         }
     }
@@ -30,7 +30,7 @@ const AddQuote = () => {
     return (
         <div className='add-form__container'>
             <form
-                onSubmit={(e) => handleSubmit(e)}>
+                onSubmit={(e) => handleSubmit(e)}>    
                 <section>
                     <label>Author</label>
                     <input
@@ -40,7 +40,6 @@ const AddQuote = () => {
                         name='author'
                         type="text" />
                 </section>
-
                 <section>
                     <label>Text</label>
                     <textarea
@@ -50,19 +49,16 @@ const AddQuote = () => {
                         name='text'
                         type="text" />
                 </section>
-
-                {/* options below should be looped through from an object (for example) */}
                 <section>
                     <label>Category</label>
                     <select
                         onChange={handleChange}
-                        name="category"
-                        value={values.category}>
+                        name="category">
                         {CATEGORIES.map(category => (
                             <option
-                            key={category.id} 
-                            value={category.id}>
-                            {category.id}
+                                key={category.value}
+                                value={category.value}>
+                                {category.name}
                             </option>
                         ))}
                     </select>
