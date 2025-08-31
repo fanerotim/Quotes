@@ -22,6 +22,7 @@ router.post('/login', isLoggedIn, async (req, res) => {
 
     try {
         const authData = await userService.login(email, password);
+
         return res.status(200).json({
             auth: authData.token,
             email: authData.email,
