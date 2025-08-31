@@ -35,7 +35,8 @@ router.post('/user-quotes', isGuest, async (req, res) => {
 })
 
 router.post('/add-quote', isGuest, async (req, res) => {
-    const { author, text, category, ownerId } = req.body;
+    const ownerId = req.user.id;
+    const { author, text, category } = req.body;
 
     try {
         // add new quote

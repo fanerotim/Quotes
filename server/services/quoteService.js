@@ -48,14 +48,6 @@ const addQuote = async (author, text, category, ownerId) => {
     // validate input / do not accept empty fields
     validateInputs([author, text, category])
 
-    // TODO: Fix this, adding a conditional check for now
-    // adding this additional check as if a request is made through postman and userId is not provided, db gets null added for userId
-    if (!ownerId) {
-        const error = new Error('You are not authorized to add quotes. Please log in!');
-        error.statusCode = 401;
-        throw error;
-    }
-
     // first check if quote is added / exists already
     const isQuoteAdded = await new Promise((resolve, reject) => {
         const sql = `
