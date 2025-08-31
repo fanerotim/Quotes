@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/user-quotes', async (req, res) => {
+router.post('/user-quotes', isGuest, async (req, res) => {
     const { userId } = req.body;
 
     try {
@@ -35,7 +35,7 @@ router.post('/user-quotes', async (req, res) => {
     }
 })
 
-router.post('/add-quote', async (req, res) => {
+router.post('/add-quote', isGuest, async (req, res) => {
     const { author, text, category, ownerId } = req.body;
 
     try {
@@ -68,7 +68,7 @@ router.put('/edit-quote/:id', isGuest, async (req, res) => {
     }
 })
 
-router.delete('/delete-quote', async (req, res) => {
+router.delete('/delete-quote', isGuest, async (req, res) => {
     const { id } = req.body;
     try {
         const deletedQuote = await quoteService.deleteQuote(id);
