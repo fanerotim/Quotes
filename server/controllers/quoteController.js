@@ -12,17 +12,6 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/user-quotes', isGuest, async (req, res) => {
-    const userId = req.user.id;
-
-    try {
-        const userQuotes = await quoteService.getUserQuotes(userId);
-        return res.status(200).json(userQuotes);
-    } catch (err) {
-        return res.status(500).json({ message: err.message })
-    }
-})
-
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
 
@@ -31,6 +20,17 @@ router.get('/:id', async (req, res) => {
         return res.status(200).json(quote);
     } catch (err) {
         return res.status(500).json({ message: err.message });
+    }
+})
+
+router.post('/user-quotes', isGuest, async (req, res) => {
+    const userId = req.user.id;
+
+    try {
+        const userQuotes = await quoteService.getUserQuotes(userId);
+        return res.status(200).json(userQuotes);
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
     }
 })
 
