@@ -10,10 +10,10 @@ router.post('/register', isLoggedIn, async (req, res) => {
         // I do not really want to return the token for now, as currently we are not logging the user automatically
         // so now, I have the token, but am not doing anything with it;
         const token = await userService.register(email, password);
-        res.status(200).json({ message: 'User successfully registered' });
+        return res.status(200).json({ message: 'User successfully registered' });
     } catch (err) {
         const status = err.statusCode || 500;
-        res.status(status).json({ message: err.message })
+        return res.status(status).json({ message: err.message })
     }
 })
 
@@ -22,14 +22,14 @@ router.post('/login', isLoggedIn, async (req, res) => {
 
     try {
         const authData = await userService.login(email, password);
-        res.status(200).json({
+        return res.status(200).json({
             auth: authData.token,
             email: authData.email,
             id: authData.id
         })
     } catch (err) {
         const status = err.statusCode || 500;
-        res.status(status).json({ message: err.message })
+        return res.status(status).json({ message: err.message })
     }
 })
 
@@ -47,11 +47,10 @@ router.post('/logout', async (req, res) => {
     try {
         req.user = null;
         const blacklistedToken = await userService.blacklistToken(accessToken);
-        res.status(200).json({ message: 'Successfully logged out' })
+        return res.status(200).json({ message: 'Successfully logged out' })
     } catch (err) {
-        console.log('this is error', err)
         const status = err.statusCode || 500;
-        res.status(status).json({ message: err.message })
+        return res.status(status).json({ message: err.message })
     }
 })
 

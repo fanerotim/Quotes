@@ -10,7 +10,7 @@ const useEditQuote = () => {
 
     const edit = async (values, quoteId) => {
         setError(null);
-        console.log(values)
+
         try {
             // validate input / throws error on empty field
             validateInputs(values);
