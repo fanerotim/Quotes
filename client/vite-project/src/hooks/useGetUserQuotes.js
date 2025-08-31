@@ -4,7 +4,8 @@ import useGetAccessToken from "./useGetAccessToken";
 const useGetUserQuotes = () => {
 
     const getToken = useGetAccessToken();
-    const userId = getToken().id;
+    // TODO: fix this; for now using optional chaining; improve it;
+    const userId = getToken()?.id;
    
     const getUserQuotes = async () => {
 
