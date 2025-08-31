@@ -2,8 +2,8 @@ const mysqlConfig = require('../mySqlConfig');
 const db = mysqlConfig();
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jwt');
-const { validateInputs } = require('../utils/validateInputs')
-
+const { validateInputs } = require('../utils/validateInputs');
+const { sendWelcomeEmail } = require('../mail/sendWelcomeEmail');
 
 const hasUser = async (email) => {
 
@@ -53,16 +53,20 @@ const register = async (email, password) => {
                 email
             }
 
-            // return the jwt token of the newly registered user
-            const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' })
-            // TODO: Send a confirmation email to end user to welcome them to the app
-            return resolve(token);
+            try {
+                // return the jwt token of the newly registered user
+                const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' })
+                // Send a welcome email to user
+                const sentEmail = await sendWelcomeEmail(email);
+                return resolve(token);
+            } catch (err) {
+                console.error(err);
+            }
         })
     })
 }
 
 const login = async (email, password) => {
-
     //validate user input
     validateInputs([email, password])
 
@@ -85,7 +89,7 @@ const login = async (email, password) => {
         email,
         id: user.id
     }
-    
+
     const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
 
     return {
