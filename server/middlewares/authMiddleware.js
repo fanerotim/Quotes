@@ -4,7 +4,7 @@ const userService = require('../services/userService');
 exports.auth = async (req, res, next) => {
 
     const accessToken = req.headers.accesstoken;
- 
+
     if (!accessToken) {
         return next();
     }
@@ -24,6 +24,6 @@ exports.auth = async (req, res, next) => {
         next();
     } catch (err) {
         req.user = null;
-        res.status(401).json({ error: err.message });
+        return res.status(401).json({ error: err.message });
     }
 }
