@@ -3,7 +3,7 @@ const validateInputs = (inputAsObj) => {
     // filter the input object to make sure it does not contain id
     // id is of type number, so if kept then .trim() method returns error, as it's a string method
     const inputAsArr = Object.entries(inputAsObj)
-        .filter(([key, value]) => typeof value !== 'number')
+        .filter(([key, value]) => typeof value !== 'number') 
         .map(([key, value]) => value);
 
     inputAsArr.map((value) => {

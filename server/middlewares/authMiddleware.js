@@ -4,7 +4,7 @@ const userService = require('../services/userService');
 exports.auth = async (req, res, next) => {
 
     const accessToken = req.headers.accesstoken;
-
+ 
     if (!accessToken) {
         return next();
     }

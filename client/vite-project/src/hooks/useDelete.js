@@ -8,7 +8,7 @@ const useDelete = () => {
     const { useLogoutOn401 } = useLogoutOn401Error();
 
     const deleteOne = async (url, values) => {
-
+  
         try {
             await http.deleteOne(`${import.meta.env.VITE_BASE_URL}/${url}`, values)
             navigate('/quotes')
