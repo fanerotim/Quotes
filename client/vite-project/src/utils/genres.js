@@ -1,66 +1,91 @@
 export const CATEGORIES = [
     {
-        id: "Fiction"
+        name: "Select a category",
+        value: ''
+    },
+    {
+        name: "Fiction",
+        value: 'fiction'
     },
         {
-        id: "Novel"
+        name: "Novel",
+        value: 'novel'
     },
         {
-        id: "Science-Fiction"
+        name: "Science-Fiction",
+        value: 'science-fiction'
     },
         {
-        id: "Short-Story"
+        name: "Short-Story",
+        value: 'short-story'
     },
         {
-        id: "Memoir"
+        name: "Memoir",
+        value: 'memoir'
     },
         {
-        id: "Biography"
+        name: "Biography",
+        value: 'biography'
     },
         {
-        id: "Thriller"
+        name: "Thriller",
+        value: 'thriller'
     },
         {
-        id: "History"
+        name: "History",
+        value: 'history',
     },
         {
-        id: "Autobiography"
+        name: "Autobiography",
+        value: 'autobiography'
     },
         {
-        id: "Humor"
+        name: "Humor",
+        value: 'humor'
     },
         {
-        id: "Science"
+        name: "Science",
+        value: 'science'
     },
         {
-        id: "Fairy-Tale"
+        name: "Fairy-Tale",
+        value: 'fairy-tale'
     },
         {
-        id: "Poetry"
+        name: "Poetry",
+        value: 'poetry'
     },
         {
-        id: "Drama"
+        name: "Drama",
+        value: 'drama'
     },
         {
-        id: "Satire"
+        name: "Satire",
+        value: 'satire'
     },
         {
-        id: "Psychology"
+        name: "Psychology",
+        value: 'psychology'
     },
         {
-        id: "Social-Science"
+        name: "Social-Science",
+        value: 'social-science',
     },
         {
-        id: "Magical-Realism"
+        name: "Magical-Realism",
+        value: 'magical-realism'
     },
         {
-        id: "Self-Help"
+        name: "Self-Help",
+        value: 'self-help'
     },
         {
-        id: "Sports"
+        name: "Sports",
+        value: 'sports'
     },
         {
-        id: "Art"
+        name: "Art",
+        value: 'art'
     },
 
 ]
