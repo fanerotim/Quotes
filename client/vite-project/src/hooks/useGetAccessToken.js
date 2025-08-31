@@ -4,7 +4,6 @@ const useGetAccessToken = () => {
         const accessToken = JSON.parse(localStorage.getItem('accessToken'));
         return accessToken;
     }
-
     return getToken;
 }
 

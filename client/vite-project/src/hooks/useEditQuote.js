@@ -6,7 +6,7 @@ import validateInputs from "../utils/validateInputs";
 const useEditQuote = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const { useLogoutOn401 } = useLogoutOn401Error();
+    const { logoutOn401 } = useLogoutOn401Error();
 
     const edit = async (values, quoteId) => {
         setError(null);
@@ -18,7 +18,7 @@ const useEditQuote = () => {
             await http.put(`${import.meta.env.VITE_BASE_URL}/edit-quote/${quoteId}`, values);
         } catch (err) {
             // check if error is 401 to logout the user
-            useLogoutOn401(err);
+            logoutOn401(err);
             setError(err.message);
             throw error;
         } finally {

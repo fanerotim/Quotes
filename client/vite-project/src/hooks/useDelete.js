@@ -5,7 +5,7 @@ import useLogoutOn401Error from "./useLogoutOn401Error";
 const useDelete = () => {
 
     const navigate = useNavigate();
-    const { useLogoutOn401 } = useLogoutOn401Error();
+    const { logoutOn401 } = useLogoutOn401Error();
 
     const deleteOne = async (url, values) => {
   
@@ -15,7 +15,7 @@ const useDelete = () => {
             // There is no returned item, as I simply return success msg;
             // TODO: think if you want to return a success msg instead of redirecting
         } catch (err) {
-            useLogoutOn401(err);
+            logoutOn401(err);
             throw err;
         }
     }

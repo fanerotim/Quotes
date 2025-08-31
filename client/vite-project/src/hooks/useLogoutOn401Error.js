@@ -4,7 +4,7 @@ const useLogoutOn401Error = () => {
 
     const { dispatch } = useAuthContext();
 
-    const useLogoutOn401 = (err) => {
+    const logoutOn401 = (err) => {
         if (err.status === 401) {   
             dispatch({
                 type: 'SESSION-EXPIRED'
@@ -13,7 +13,7 @@ const useLogoutOn401Error = () => {
     }
 
     return {
-        useLogoutOn401
+        logoutOn401
     }
 }
 

@@ -7,7 +7,7 @@ import useGetAccessToken from "./useGetAccessToken";
 const useAddQuote = () => {
     const [error, setError] = useState(null);
     const [isLoading, setLoading] = useState(false);
-    const { useLogoutOn401 } = useLogoutOn401Error();
+    const { logoutOn401 } = useLogoutOn401Error();
     // TODO: getToken function retrieves not only the token, but also user email and id
     // Fix this: improve naming, maybe getUserAuthData, or something like that
     const getToken = useGetAccessToken();
@@ -25,7 +25,7 @@ const useAddQuote = () => {
             return newQuote;
         } catch (err) {
             // check if error is 401 to logout the user
-            useLogoutOn401(err);
+            logoutOn401(err);
             // standardaze error handling // with this set up err.message the validator errors do not show, if i set it to err, then the front-end breaks as error comes as obj
             setError(err.message);
             throw error;
