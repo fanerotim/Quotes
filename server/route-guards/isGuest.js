@@ -1,4 +1,4 @@
-export const isGuest = (req, res, next) => {
+exports.isGuest = (req, res, next) => {
     const user = req.user;
 
     if (!user) {
