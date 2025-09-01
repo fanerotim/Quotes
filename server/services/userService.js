@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('../lib/jwt');
 const { validateInputs } = require('../utils/validateInputs');
 const { sendWelcomeEmail } = require('../mail/sendWelcomeEmail');
+const { generateRandomPassword } = require('../utils/generateRandomPassword');
 
 const hasUser = async (email) => {
 
@@ -145,9 +146,49 @@ const blacklistToken = async (accessToken) => {
     })
 }
 
+const resetUserPassword = async (email) => {
+
+    const userSearchResult = await hasUser(email);
+    const user = userSearchResult[0];
+
+    if (!user) {
+        const error = new Error('Incorrect email! User does not exist.')
+        error.statusCode = 404;
+        throw error;
+    }
+
+    // generate a new password and store it in a variable. 
+    const newPassword = generateRandomPassword();
+    
+    // pass that variable to the email transporter function, so it can be sent to the user
+    // leaving this for now, as I am still working on email templates that will be sent to the user
+
+    // hash the password 
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    
+    // update the db
+    return new Promise((resolve, reject) => {
+        const sql = `
+            UPDATE users
+            SET password = ?
+            WHERE email = ?
+            `
+
+        db.query(sql, [hashedPassword, email], (err, result) => {
+            if (err) {
+                return reject(err)
+            }
+            return resolve(result);
+        })
+    })
+
+
+}
+
 module.exports = {
     register,
     login,
     isTokenBlacklisted,
-    blacklistToken
+    blacklistToken,
+    resetUserPassword
 }
