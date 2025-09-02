@@ -3,8 +3,9 @@ const db = mysqlConfig();
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jwt');
 const { validateInputs } = require('../utils/validateInputs');
-const { sendWelcomeEmail } = require('../mail/sendWelcomeEmail');
+const { sendEmail } = require('../mail/sendEmail');
 const { generateRandomPassword } = require('../utils/generateRandomPassword');
+const { generateEmailTemplate } = require('../mail/templates/generateEmailTemplate');
 
 const hasUser = async (email) => {
 
@@ -58,7 +59,10 @@ const register = async (email, password) => {
                 // return the jwt token of the newly registered user
                 const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' })
                 // Send a welcome email to user
-                const sentEmail = await sendWelcomeEmail(email);
+                // generate an html template that is used in the email message
+                const html = generateEmailTemplate({type: 'WELCOME_EMAIL', email})
+                // finally send the email
+                const sentEmail = await sendEmail(email, html);
                 return resolve(token);
             } catch (err) {
                 console.error(err);
@@ -157,11 +161,8 @@ const resetUserPassword = async (email) => {
         throw error;
     }
 
-    // generate a new password and store it in a variable. 
+    // generate a new password and store it in a variable, so we can email the user with it
     const newPassword = generateRandomPassword();
-    
-    // pass that variable to the email transporter function, so it can be sent to the user
-    // leaving this for now, as I am still working on email templates that will be sent to the user
 
     // hash the password 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -174,15 +175,18 @@ const resetUserPassword = async (email) => {
             WHERE email = ?
             `
 
-        db.query(sql, [hashedPassword, email], (err, result) => {
+        db.query(sql, [hashedPassword, email], async (err, result) => {
             if (err) {
                 return reject(err)
             }
+            //send the new password to the user
+            // 1. first generate the email / html template
+            const html = generateEmailTemplate({type: 'PASSWORD_RESET', email, password: newPassword})
+            // 2. send new pass to user
+            const sentEmail = await sendEmail(email, html)
             return resolve(result);
         })
     })
-
-
 }
 
 module.exports = {
