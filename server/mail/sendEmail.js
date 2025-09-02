@@ -1,21 +1,21 @@
 const { setUpTransporter } = require('./transporter');
 
-const sendWelcomeEmail = async (recipientEmail) => {
+const sendEmail = async (email, html) => {
     const transporter = setUpTransporter();
 
     try {
-        const transactionResult = await transporter.sendMail({
+        const emailTransaction = await transporter.sendMail({
             from: "Quotes <info@quotes.fanerotim.dev>",
-            to: recipientEmail,
+            to: email,
             subject: 'Welcome to Quotes!',
-            text: 'We are glad to have you on board'
+            html: html
         })
-        return transactionResult;
+        return emailTransaction;
     } catch (err) {
         console.error(err);
     }
 }
 
 module.exports = {
-    sendWelcomeEmail
+    sendEmail
 }
