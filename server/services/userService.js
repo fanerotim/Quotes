@@ -60,7 +60,7 @@ const register = async (email, password) => {
                 const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' })
                 // Send a welcome email to user
                 // generate an html template that is used in the email message
-                const html = generateEmailTemplate({type: 'WELCOME_EMAIL', email})
+                const html = generateEmailTemplate({ type: 'WELCOME_EMAIL', email })
                 // finally send the email
                 const sentEmail = await sendEmail(email, html);
                 return resolve(token);
@@ -166,7 +166,7 @@ const resetUserPassword = async (email) => {
 
     // hash the password 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    
+
     // update the db
     return new Promise((resolve, reject) => {
         const sql = `
@@ -181,7 +181,7 @@ const resetUserPassword = async (email) => {
             }
             //send the new password to the user
             // 1. first generate the email / html template
-            const html = generateEmailTemplate({type: 'PASSWORD_RESET', email, password: newPassword})
+            const html = generateEmailTemplate({ type: 'PASSWORD_RESET', email, password: newPassword })
             // 2. send new pass to user
             const sentEmail = await sendEmail(email, html)
             return resolve(result);

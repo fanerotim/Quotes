@@ -1,10 +1,16 @@
 const generateEmailTemplate = ({type, email = 'user', password = 'default'}) => {
+
+    
     switch (type) {
         case 'WELCOME_EMAIL': {
+
+            const loginUrl = '<a href=http://localhost:5173/users/login>Click here to login</a>'
+
             return `
-            <h1>Welcome to our Quotes app ${email}, we are glad to have you on board!</h1>
+            <h1 style="color: green">Welcome to our Quotes app ${email}, we are glad to have you on board!</h1>
             <h3>On our platform you can browse quotes that we think are inspiring and worthy!</h3>
             <h4>We cannot wait to see what quotes you'd share as well!</h4>
+            <h5>You can quickly log in by using this link ${loginUrl}</h5>
             `
         }
         case 'PASSWORD_RESET': {
