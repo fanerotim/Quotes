@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userService = require('../services/userService');
 const { isLoggedIn } = require('../route-guards/isLoggedIn');
+const { isGuest } = require('../route-guards/isGuest');
 
 router.post('/register', isLoggedIn, async (req, res) => {
     const { email, password } = req.body;
@@ -34,18 +35,8 @@ router.post('/login', isLoggedIn, async (req, res) => {
     }
 })
 
-router.post('/logout', async (req, res) => {
-    const accessToken = req.body.auth;
-
-    // TODO: fix this / find a better solution
-    // adding this conditional check as if a request through postman is made without accessToken, blacklisted_tokens talbe in db gets a null value inserted
-    // should work if i just add a route guard, but I am now working on reset pass functionality
-    if (!accessToken) {
-        const error = new Error('You must login in order to logout!');
-        error.statusCode = 403;
-        throw error;
-    }
-
+router.post('/logout', isGuest, async (req, res) => {
+    
     try {
         req.user = null;
         const blacklistedToken = await userService.blacklistToken(accessToken);
@@ -58,17 +49,17 @@ router.post('/logout', async (req, res) => {
 
 router.post('/reset-password', isLoggedIn, async (req, res) => {
     const { email } = req.body;
-    
+
     if (!email) {
-        return res.status(400).json({message: 'You need to provide an email address in order to reset your password'});
+        return res.status(400).json({ message: 'You need to provide an email address in order to reset your password' });
     }
 
     try {
         await userService.resetUserPassword(email);
-        return res.status(200).json({message: 'Password updated successfully. Please check your email.'})
+        return res.status(200).json({ message: 'Password updated successfully. Please check your email.' })
     } catch (err) {
         console.log(err);
-        return res.status(err.statusCode).json({message: err.message})
+        return res.status(err.statusCode).json({ message: err.message })
     }
 })
 
