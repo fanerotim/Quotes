@@ -12,8 +12,8 @@ const expressConfig = (app) => {
         credentials: true
     }))
     app.use(auth);
-    // middleware that schedules a cron, which clears blacklisted tokens
-    app.use(clearBlacklistedJWTCron)
+    // initialize cron responsible for clearing blacklisted tokens
+    clearBlacklistedJWTCron()
 
     return app;
 }
