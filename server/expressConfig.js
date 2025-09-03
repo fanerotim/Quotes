@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const { auth } = require('./middlewares/authMiddleware');
+const { clearBlacklistedJWTCron } = require('./cron-jobs/clearBlacklistedJWTCron');
 dotenv.config();
 
 const expressConfig = (app) => {
@@ -11,6 +12,8 @@ const expressConfig = (app) => {
         credentials: true
     }))
     app.use(auth);
+    // middleware that schedules a cron, which clears blacklisted tokens
+    app.use(clearBlacklistedJWTCron)
 
     return app;
 }
