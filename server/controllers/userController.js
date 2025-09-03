@@ -36,7 +36,7 @@ router.post('/login', isLoggedIn, async (req, res) => {
 })
 
 router.post('/logout', isGuest, async (req, res) => {
-    
+
     try {
         req.user = null;
         const blacklistedToken = await userService.blacklistToken(accessToken);
@@ -51,7 +51,7 @@ router.post('/reset-password', isLoggedIn, async (req, res) => {
     const { email } = req.body;
 
     if (!email) {
-        return res.status(400).json({ message: 'You need to provide an email address in order to reset your password' });
+        return res.status(400).json({ message: 'Invalid credentials!' });
     }
 
     try {
@@ -61,6 +61,19 @@ router.post('/reset-password', isLoggedIn, async (req, res) => {
         console.log(err);
         return res.status(err.statusCode).json({ message: err.message })
     }
+})
+
+router.post('/update-password', isGuest, async (req, res) => {
+    const { password } = req.body;
+    const email = req.user.email;
+    
+    try {
+        const updatedPassword = userService.updatePassword(email, password);
+        return res.status(200).json({message: 'Password updated successfully!'})
+    } catch (err) {
+        return res.status(err.statusCode).json({message: err.message})
+    }
+
 })
 
 module.exports = router;
