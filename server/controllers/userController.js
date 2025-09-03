@@ -36,6 +36,7 @@ router.post('/login', isLoggedIn, async (req, res) => {
 })
 
 router.post('/logout', isGuest, async (req, res) => {
+    const accessToken = req.headers.accesstoken;
 
     try {
         req.user = null;
