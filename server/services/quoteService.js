@@ -65,7 +65,7 @@ const addQuote = async (author, text, category, ownerId) => {
 
     // if quote already exists throw error with status code 409
     if (isQuoteAdded.length > 0) {
-        const error = new Error('Quote already exists and it cannot be added twice!');
+        const error = new Error('Quote already exists and it cannot be duplicated!');
         error.statusCode = 409;
         throw error;
     }
@@ -106,7 +106,7 @@ const updateQuote = (id, author, text, category) => {
 const deleteQuote = (id) => {
     
     if (!id) {
-        throw new Error('Quote id is required in order for the quote to be deleted.')
+        throw new Error('Invalid request!')
     }
 
     return new Promise((resolve, reject) => {

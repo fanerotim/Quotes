@@ -32,7 +32,7 @@ const register = async (email, password) => {
 
     // throw error if user already registered (we get an array, so check item at index 0 to verify if user exists)
     if (user) {
-        const error = new Error('User is already registered!');
+        const error = new Error('Invalid credentials!');
         error.statusCode = 409;
         throw error;
     }
@@ -155,8 +155,10 @@ const resetUserPassword = async (email) => {
     const userSearchResult = await hasUser(email);
     const user = userSearchResult[0];
 
+    // check if user exists, not really needed as I have a route guard that checks if user is logged in and they cannot log in if user does not exist in db, but will keep this for now
+    // TODO: REMOVE THIS AT SOME POINT / THINK ABOUT IT AND TEST FIRST
     if (!user) {
-        const error = new Error('Incorrect email! User does not exist.')
+        const error = new Error('Invalid credentials!')
         error.statusCode = 404;
         throw error;
     }
@@ -189,10 +191,42 @@ const resetUserPassword = async (email) => {
     })
 }
 
+const updatePassword = async (email, password) => {
+
+    // check if user exists, not really needed as I have a route guard that checks if user is logged in and they cannot log in if user does not exist in db, but will keep this for now
+    // TODO: REMOVE THIS AT SOME POINT / THINK ABOUT IT AND TEST FIRST
+    const userSearchResult = await hasUser(email);
+    const user = userSearchResult[0];
+
+    if (!user) {
+        const error = new Error('Invalid credentials!');
+        error.statusCode = 400;
+        throw error;
+    }
+
+    // hash password
+    const newPassword = await bcrypt.hash(password, 10);
+
+    return new Promise((resolve, reject) => {
+        const sql = `
+            UPDATE users
+            SET password = ?
+            WHERE id = ? 
+        `
+        db.query(sql, [newPassword, user.id], (err, result) => {
+            if (err) {
+                return reject(err)
+            }
+            return resolve(result);
+        })
+    })
+}
+
 module.exports = {
     register,
     login,
     isTokenBlacklisted,
     blacklistToken,
-    resetUserPassword
+    resetUserPassword,
+    updatePassword
 }
