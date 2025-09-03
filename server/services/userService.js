@@ -57,7 +57,7 @@ const register = async (email, password) => {
 
             try {
                 // return the jwt token of the newly registered user
-                const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' })
+                const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' })
                 // Send a welcome email to user
                 // generate an html template that is used in the email message
                 const html = generateEmailTemplate({ type: 'WELCOME_EMAIL', email })
@@ -95,7 +95,7 @@ const login = async (email, password) => {
         id: user.id
     }
 
-    const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '24h' });
+    const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
 
     return {
         token,
@@ -104,6 +104,7 @@ const login = async (email, password) => {
     };
 }
 
+//  this fn / method is better to be extracted as util, as it's not related to user action
 const isTokenBlacklisted = async (accessToken) => {
 
     const isBlacklisted = await new Promise((resolve, reject) => {
@@ -126,6 +127,7 @@ const isTokenBlacklisted = async (accessToken) => {
     return false;
 }
 
+//  this fn / method is better to be extracted as util, as it's not related to user action
 const blacklistToken = async (accessToken) => {
 
     const isBlacklisted = await isTokenBlacklisted(accessToken);
