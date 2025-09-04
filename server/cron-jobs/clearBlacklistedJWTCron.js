@@ -1,5 +1,6 @@
 const cron = require('node-cron');
 const { clearBlacklistedJWTTask } = require('./clearBlacklistedJWTTask');
+const { logger } = require('../logger/logger');
 
 const clearBlacklistedJWTCron = () => {
     const options = {
@@ -13,9 +14,9 @@ const clearBlacklistedJWTCron = () => {
 
         try {
             const clearedJWTsResult = await clearBlacklistedJWTTask();
-            // logging this for now, will implement a logger
-            console.log('cleared all blacklisted tokens from blacklisted_tokens table at', currentTime, ' executed cron-job: ', options.name);
-        } catch(err) {
+            // log cron execution
+            logger('CRON_LOG', {type: 'cron execution', cron_name: options.name, time: currentTime, message: 'successfully cleared blacklisted_tokens table'})
+        } catch (err) {
             console.error(err);
         }
     }, options)

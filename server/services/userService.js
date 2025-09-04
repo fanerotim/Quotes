@@ -6,6 +6,7 @@ const { validateInputs } = require('../utils/validateInputs');
 const { sendEmail } = require('../mail/sendEmail');
 const { generateRandomPassword } = require('../utils/generateRandomPassword');
 const { generateEmailTemplate } = require('../mail/templates/generateEmailTemplate');
+const { logger } = require('../logger/logger');
 
 const hasUser = async (email) => {
 
@@ -94,6 +95,9 @@ const login = async (email, password) => {
         email,
         id: user.id
     }
+
+    // log user logins
+    logger('ACCESS_LOG', {type: 'login', email, time: new Date().toISOString()})
 
     const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
 
