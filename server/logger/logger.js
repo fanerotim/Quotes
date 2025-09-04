@@ -13,7 +13,6 @@ const logger = async (type, content) => {
 
     try {
         await fs.appendFile(PATH, `\n${data}`, 'utf8');
-        console.log('LOGIN SUCCESSFULLY LOGGED')
     } catch (err) {
         console.error(err);
     }

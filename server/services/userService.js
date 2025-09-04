@@ -96,8 +96,8 @@ const login = async (email, password) => {
         id: user.id
     }
 
-    // log user logins
-    logger('ACCESS_LOG', {type: 'login', email, time: new Date().toISOString()})
+    // log user logins into access log
+    logger('ACCESS_LOG', {type: 'login', email, time: `${new Date().toDateString()}, ${new Date().toTimeString()}`})
 
     const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
 
