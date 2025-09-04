@@ -13,5 +13,9 @@ test('should throw error', () => {
 })
 
 test('should return true', () => {
-    expect(() => validateInputs(["pom@abv.bg", "123"])).toBeTruthy();
+    expect(validateInputs(["pom@abv.bg", "123"])).toBe(true);
+})
+
+test('should return true', () => {
+    expect(validateInputs(["pom@abv.bg", "123"])).toBeTruthy();
 })

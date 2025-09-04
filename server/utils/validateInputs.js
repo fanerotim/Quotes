@@ -7,9 +7,6 @@ exports.validateInputs = (inputsArr) => {
             error.statusCode = 400;
             throw error;
         }
-        // By mistake have kept the return value inside the forEach call and this function was returning undefined
-        // Moving return outside of this scope - will remove comments and commented return later as I want to test further
-        // return true;
     });
     return true;
 }
