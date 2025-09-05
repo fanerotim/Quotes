@@ -229,6 +229,7 @@ const updatePassword = async (email, password) => {
 }
 
 module.exports = {
+    hasUser,
     register,
     login,
     isTokenBlacklisted,
