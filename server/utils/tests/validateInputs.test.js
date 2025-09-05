@@ -1,6 +1,10 @@
 const { validateInputs } = require('../validateInputs');
 
 test('should throw', () => {
+    expect(() => validateInputs(2, 3).toThrow(Error));
+})
+
+test('should throw', () => {
     expect(() => validateInputs(2, 3).toThrow());
 })
 
