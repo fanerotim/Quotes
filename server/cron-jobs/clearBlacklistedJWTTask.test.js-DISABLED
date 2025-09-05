@@ -1,0 +1,27 @@
+// const { clearBlacklistedJWTTask } = require('../cron-jobs/clearBlacklistedJWTTask');
+
+// test.skip('should return an object', async () => {
+//     expect.assertions(1);
+//     return clearBlacklistedJWTTask()
+//         .then(data => {
+//             expect(typeof data).toBe('object');
+//         }).catch(err => {
+//             expect(err).toBe(Error);
+//         })
+// })
+
+// test.skip('should return', () => {
+//     return clearBlacklistedJWTTask()
+//         .then(data => {
+//             expect(data).toBeTruthy();
+//         })
+// })
+
+// test.skip('should reject', () => {
+//     return clearBlacklistedJWTTask()
+//         .catch(err => {
+//             expect(err).toBe(Error);
+//         })
+// })
+
+
