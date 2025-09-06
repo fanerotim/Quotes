@@ -9,7 +9,7 @@ const { generateEmailTemplate } = require('../mail/templates/generateEmailTempla
 const { logger } = require('../logger/logger');
 
 const hasUser = async (email) => {
-
+ 
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM users WHERE email = ?';
 
