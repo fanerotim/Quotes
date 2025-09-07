@@ -41,7 +41,7 @@ const register = async (email, password) => {
     // if user DOES NOT exist, first hash their password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // and then ADD them to db
+    // and then INSERT user to db
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO users
                     (email, password)
