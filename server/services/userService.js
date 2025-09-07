@@ -9,7 +9,7 @@ const { generateEmailTemplate } = require('../mail/templates/generateEmailTempla
 const { logger } = require('../logger/logger');
 
 const hasUser = async (email) => {
- 
+
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM users WHERE email = ?';
 
@@ -31,7 +31,7 @@ const register = async (email, password) => {
     const userSearchResult = await hasUser(email);
     const user = userSearchResult[0];
 
-    // throw error if user already registered (we get an array, so check item at index 0 to verify if user exists)
+    // throw error if user already registered
     if (user) {
         const error = new Error('Invalid credentials!');
         error.statusCode = 409;
