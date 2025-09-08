@@ -1,17 +1,17 @@
-const { generateRandomPassword } = require('../generateRandomPassword')
+const generator = require('generate-password');
+const { generateRandomPassword } = require('../generateRandomPassword');
 
-test('returns a string / password', () => {
-    expect(generateRandomPassword()).toBeTruthy();
-})
+jest.mock('generate-password');
 
-test('does not return undefined', () => {
-    expect(generateRandomPassword()).not.toBeUndefined();
-})
+test('confirm generatePassword() has correct behavior', () => {
+    expect.assertions(5);
+    const password = 'Gx7@Lp!vD#9qRt*Ae4Wz%Kf2Uy&mC8'
+    generator.generate.mockReturnValue(password);
 
-test('to return a string with length of 30 chars', () => {
+    expect(generateRandomPassword()).toEqual(password);
     expect(generateRandomPassword()).toHaveLength(30);
+    expect(generateRandomPassword()).toBe(password);
+    expect(generator.generate).toHaveReturned();
+    expect(generator.generate).toHaveBeenCalledTimes(3);
 })
 
-test('to return a value of type string', () => {
-    expect(typeof generateRandomPassword()).toBe('string');
-})
