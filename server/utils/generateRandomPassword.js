@@ -2,6 +2,7 @@
 const generator = require('generate-password');
 
 const generateRandomPassword = () => {
+
     const password = generator.generate({
         length: 30,
         numbers: true,
@@ -9,7 +10,6 @@ const generateRandomPassword = () => {
         uppercase: true,
         lowercase: true
     })
-
     return password;
 }
 
