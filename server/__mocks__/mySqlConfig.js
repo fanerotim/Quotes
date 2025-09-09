@@ -5,8 +5,14 @@ const users = [
 const mysqlConfig = () => {
 
     const db = {
-        query: () => {
-            return [];
+        query: (email) => {
+            return new Promise((resolve, reject) => {
+                if (users[0].email === email) {
+                    return resolve(users);
+                } else {
+                    return reject([]);
+                }
+            })
         }
     }
     return db;
