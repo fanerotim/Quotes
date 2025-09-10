@@ -5,12 +5,9 @@ const users = [
 const mysqlConfig = () => {
     const db = {
         query: (sql, [email], callback) => {
-            if (users[0].email === email) {
-                callback(null, users);
-            } else if (users[0].email !== email) {
-                callback(null, []);
-            }
-        }      
+            callback(null, email);
+        } 
+        // query: jest.fn()
     }
     return db;
 }
