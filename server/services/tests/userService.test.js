@@ -1,22 +1,38 @@
-const userService = require('../userService');
-let mysqlConfig = require('../../mySqlConfig');
-const db = mysqlConfig();
+jest.mock('../../mySqlConfig');
 
-// close db connection after each request fixes error with jest (open async operation)
-afterEach(() => {
-    db.end();
-})
+const userService = require('../userService');
 
 // custom error
 const missingInputError = new Error('hello, hello - user input is required :)');
 
 // hasUser() tests
-test('throw error if user already registered', () => {
 
-    return userService.hasUser('b@abv.bg').then(data => {
-        expect(data).toEqual([]);
-    })
+const users = [
+    { id: 1, email: 'i@abv.bg', password: '123' }
+]
+
+test('throw error if user is already registered', () => {
+    expect.assertions(2);
+
+    return userService.hasUser(users[0].email)
+        .then(data => {
+            expect(data).toEqual(users);
+        })
 });
+
+// test('throw error if user is already registered', () => {
+//     expect.assertions(1);
+
+//     return userService.hasUser('asan@abv.bg')
+//         .then(data => {
+//             expect(data).toEqual([])
+//         })
+// });
+
+
+
+
+
 
 
 
