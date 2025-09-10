@@ -3,17 +3,14 @@ const users = [
 ]
 
 const mysqlConfig = () => {
-
     const db = {
-        query: (email) => {
-            return new Promise((resolve, reject) => {
-                if (users[0].email === email) {
-                    return resolve(users);
-                } else {
-                    return reject([]);
-                }
-            })
-        }
+        query: (sql, [email], callback) => {
+            if (users[0].email === email) {
+                callback(null, users);
+            } else if (users[0].email !== email) {
+                callback(null, []);
+            }
+        }      
     }
     return db;
 }
