@@ -1,4 +1,0 @@
-
-{"type":"cron execution","cron_name":"Clear blacklisted tokens","time":"16:25:00 ч.","message":"successfully cleared blacklisted_tokens table"}
-{"type":"cron execution","cron_name":"Clear blacklisted tokens","time":"16:26:00 ч.","message":"successfully cleared blacklisted_tokens table"}
-{"type":"cron execution","cron_name":"Clear blacklisted tokens","time":"20:06:00 ч.","date":"Thu Sep 04 2025","message":"successfully cleared blacklisted_tokens table"}
