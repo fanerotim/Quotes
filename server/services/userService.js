@@ -10,6 +10,12 @@ const { logger } = require('../logger/logger');
 
 const hasUser = async (email) => {
 
+    if (!email) {
+        const error = new Error('User email must be provided');
+        error.statusCode = 400;
+        throw error;
+    }
+
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM users WHERE email = ?';
 
@@ -23,7 +29,6 @@ const hasUser = async (email) => {
 }
 
 const register = async (email, password) => {
-
     //validate user input
     validateInputs([email, password])
 
@@ -77,6 +82,7 @@ const login = async (email, password) => {
     validateInputs([email, password])
 
     // check if user exists
+    console.log(hasUser(email));
     const userSearchResult = await hasUser(email);
     const user = userSearchResult[0];
 
@@ -97,7 +103,7 @@ const login = async (email, password) => {
     }
 
     // log user logins into access log
-    logger('ACCESS_LOG', {type: 'login', email, time: `${new Date().toDateString()}, ${new Date().toTimeString()}`})
+    logger('ACCESS_LOG', { type: 'login', email, time: `${new Date().toDateString()}, ${new Date().toTimeString()}` })
 
     const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
 
