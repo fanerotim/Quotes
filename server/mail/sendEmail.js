@@ -1,6 +1,7 @@
 const { setUpTransporter } = require('./transporter');
 
 const sendEmail = async (email, html) => {
+    
     const transporter = setUpTransporter();
 
     try {

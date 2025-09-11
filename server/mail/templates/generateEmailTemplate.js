@@ -1,6 +1,5 @@
 const generateEmailTemplate = ({type, email = 'user', password = 'default'}) => {
 
-    
     switch (type) {
         case 'WELCOME_EMAIL': {
 

@@ -74,6 +74,7 @@ describe('tests for userService`s hasUser() method', () => {
 
 const jwt = require('../../lib/jwt');
 let { generateEmailTemplate } = require('../../mail/templates/generateEmailTemplate');
+let { sendEmail } = require('../../mail/sendEmail');
 
 describe('tests for userService`s register() method', () => {
 
@@ -138,7 +139,7 @@ describe('tests for userService`s register() method', () => {
     })
 
     test('should return token', () => {
-        expect.assertions(2);
+        expect.assertions(3);
 
         const token = 'somerandomtokenthatwewilltestagainst';
         const hashedPassword = 'thiswillnotbeusedbutiamaddingitanyways-will-refactor'
@@ -147,6 +148,7 @@ describe('tests for userService`s register() method', () => {
             callback(null, [])
         })
 
+        //this mocks the resolve(result) output
         db.query.mockImplementationOnce((sql, [email, hashedPassword], callback) => {
             callback(null, [user])
         })
@@ -154,13 +156,16 @@ describe('tests for userService`s register() method', () => {
         // mock jwt.sign
         jwt.sign = jest.fn();
         jwt.sign.mockImplementationOnce((payload, secret, options) => {
-            return token;
+            return Promise.resolve(token);
         })
 
         // check if jwt returned expected token
         const SECRET = 'myverysecuresecret'
         const options = { expiresIn: '2h' }
-        expect(jwt.sign(({ email: user.email }, SECRET, options))).toEqual(token)
+        jwt.sign({ email: user.email }, SECRET, options)
+            .then(jwt => {
+                expect(jwt).toEqual(token);
+            })
 
         // mock generateEmailTemplate
         generateEmailTemplate = jest.fn();
@@ -171,6 +176,26 @@ describe('tests for userService`s register() method', () => {
 
         // check if the expected template is returned
         expect(generateEmailTemplate({ type: 'WELCOME_EMAIL', email: user.email })).toEqual(template);
+
+        //this mock is incorrect. I do not need to mock sendEmail, but the transporter logic inside of it.
+        // because this is not mocked properly i get the warning about the worker / jest async operation
+        // sendEmail = jest.fn();
+
+        // const emailData = {accepted: [user.email], messageId: 1};
+        
+        // sendEmail.mockImplementationOnce((email, html) => {
+        //     return Promise.resolve(emailData)
+        // })
+
+        // sendEmail(user.email, template)
+        //     .then(sentEmail => {
+        //         expect(sentEmail).toEqual(emailData);
+        //     })
+
+        return userService.register(user.email, user.password)
+            .then(result => {
+                expect(result).toEqual([user]);
+            })
     })
 })
 
