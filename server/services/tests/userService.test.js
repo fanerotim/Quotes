@@ -1,33 +1,60 @@
-jest.mock('../../mySqlConfig');
+// jest.mock('../../mySqlConfig');
 
+const mysqlConfig = require('../../mySqlConfig');
 const userService = require('../userService');
 
-// custom error
-const missingInputError = new Error('hello, hello - user input is required :)');
+let db = mysqlConfig();
+db.query = jest.fn();
 
-// hasUser() tests
+describe('tests for userService`s hasUser() method', () => {
 
-const users = [
-    { id: 1, email: 'i@abv.bg', password: '123' }
-]
+    test('return user data', () => {
+        expect.assertions(1);
 
-test('throw error if user is already registered', () => {
-    expect.assertions(2);
+        const result = [{ id: 1, email: 'test@abv.bg', password: '123' }]
 
-    return userService.hasUser(users[0].email)
-        .then(data => {
-            expect(data).toEqual(users);
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            callback(null, result)
         })
-});
 
-// test('throw error if user is already registered', () => {
-//     expect.assertions(1);
+        return userService.hasUser('pancho@abv.bg').then(data => {
+            expect(data).toBe(result)
+        })
+    });
 
-//     return userService.hasUser('asan@abv.bg')
-//         .then(data => {
-//             expect(data).toEqual([])
-//         })
-// });
+
+    test('return empty [] if user is not in db', () => {
+        expect.assertions(1);
+
+        db.query.mockImplementationOnce((sql, email, callback) => {
+            callback(null, []);
+        })
+
+        return userService.hasUser('asan@abv.bg')
+            .then(data => {
+                expect(data).toEqual([]);
+            })
+    });
+
+    test('return db error', () => {
+        expect.assertions(1);
+        
+        const error = new Error('DB connection error')
+
+        db.query.mockImplementation((sql, email, callback) => {
+            callback(error, null)
+        })
+
+        return userService.hasUser('test@abv.bg')
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+})
+
+
+
+
 
 
 
