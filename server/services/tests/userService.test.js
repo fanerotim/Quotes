@@ -1,14 +1,23 @@
+// for now i am commeting this out as i was stuck quite a long time on figuring out how to mock db.query by using the global mock of mySqlConfig in __mocks__
+// moving on for now with the below setup as I want to move to the frontend for now and will come back to review the global configuration when I can
 // jest.mock('../../mySqlConfig');
 
 const mysqlConfig = require('../../mySqlConfig');
 const userService = require('../userService');
 
 let db = mysqlConfig();
+
+// create a mock version of db.query, so I can then mock it in tests
 db.query = jest.fn();
+
+afterEach(() => {
+    db.query.mockReset();
+    db.query.mockClear();
+})
 
 describe('tests for userService`s hasUser() method', () => {
 
-    test('return user data', () => {
+    test('should return user data if user is found in db', () => {
         expect.assertions(1);
 
         const result = [{ id: 1, email: 'test@abv.bg', password: '123' }]
@@ -23,10 +32,10 @@ describe('tests for userService`s hasUser() method', () => {
     });
 
 
-    test('return empty [] if user is not in db', () => {
+    test('should return empty [] if user is not in db', () => {
         expect.assertions(1);
 
-        db.query.mockImplementationOnce((sql, email, callback) => {
+        db.query.mockImplementationOnce((sql, [email], callback) => {
             callback(null, []);
         })
 
@@ -38,10 +47,10 @@ describe('tests for userService`s hasUser() method', () => {
 
     test('return db error', () => {
         expect.assertions(1);
-        
+
         const error = new Error('DB connection error')
 
-        db.query.mockImplementation((sql, email, callback) => {
+        db.query.mockImplementation((sql, [email], callback) => {
             callback(error, null)
         })
 
@@ -49,6 +58,119 @@ describe('tests for userService`s hasUser() method', () => {
             .catch(err => {
                 expect(err).toEqual(error);
             })
+    })
+
+    test('should throw an error if email is not provided', () => {
+        expect.assertions(1);
+        const error = new Error('User email must be provided');
+        // error.statusCode = 400;
+
+        return userService.hasUser()
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+})
+
+const jwt = require('../../lib/jwt');
+let { generateEmailTemplate } = require('../../mail/templates/generateEmailTemplate');
+
+describe('tests for userService`s register() method', () => {
+
+    // dummy user used in the tests
+    const user = {
+        email: 'test@abv.bg',
+        password: '123'
+    }
+
+    test('should throw error if no username or password are provided', () => {
+        expect.assertions(1);
+
+        const error = new Error('All fields must be filled.');
+
+        return userService.register().catch(err => {
+            expect(err).toEqual(error);
+        })
+    })
+
+    test('should throw error if user is already registered', () => {
+        expect.assertions(1);
+
+        const users = [{
+            id: 1,
+            email: user.email,
+            password: user.password
+        }]
+
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            callback(null, users);
+        })
+
+        const error = new Error('Invalid credentials!')
+
+        return userService.register(user.email, user.password)
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+
+    test('should return db error', () => {
+        expect.assertions(1);
+        const error = new Error('Connection to DB failed');
+        // const hashedPassword = '#somehashedpass$' // not really needed, so I am commenting it out for now
+
+        // simulate call to hasUser, which makes call to db via db.query
+        db.query
+            .mockImplementationOnce((sql, [email], callback) => {
+                callback(null, []);
+            })
+
+        // and finally simulate call to db to inset user, which again calls db.query, so two calls to db.query are needed
+        db.query
+            .mockImplementationOnce((sql, [email, hashedPassword], callback) => {
+                callback(error, null);
+            })
+
+        return userService.register('nonexistent@abv.bg', user.password)
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+
+    test('should return token', () => {
+        expect.assertions(2);
+
+        const token = 'somerandomtokenthatwewilltestagainst';
+        const hashedPassword = 'thiswillnotbeusedbutiamaddingitanyways-will-refactor'
+        // simulate db call and return [] to confirm user is not found
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            callback(null, [])
+        })
+
+        db.query.mockImplementationOnce((sql, [email, hashedPassword], callback) => {
+            callback(null, [user])
+        })
+
+        // mock jwt.sign
+        jwt.sign = jest.fn();
+        jwt.sign.mockImplementationOnce((payload, secret, options) => {
+            return token;
+        })
+
+        // check if jwt returned expected token
+        const SECRET = 'myverysecuresecret'
+        const options = { expiresIn: '2h' }
+        expect(jwt.sign(({ email: user.email }, SECRET, options))).toEqual(token)
+
+        // mock generateEmailTemplate
+        generateEmailTemplate = jest.fn();
+        const template = `Hello on board, ${user.email}`
+        generateEmailTemplate.mockImplementationOnce(({ type, email }) => {
+            return template;
+        })
+
+        // check if the expected template is returned
+        expect(generateEmailTemplate({ type: 'WELCOME_EMAIL', email: user.email })).toEqual(template);
     })
 })
 
