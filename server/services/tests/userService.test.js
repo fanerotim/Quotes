@@ -210,6 +210,35 @@ describe('tests for userService`s register() method', () => {
     })
 })
 
+describe('tests for userService`s login() method', () => {
+
+    const user = {email: 'test@abv.bg', password: '123'};
+
+    test('throws error if invalid input is provided', () => {
+        expect.assertions(1);
+        const error = new Error('All fields must be filled.');
+        
+        return userService.login('', '123').catch(err => {
+            expect(err).toEqual(error);
+            expect(err).toBe(error);
+        })
+    })    
+
+    test.only('throws error if user is not registered', () => {
+        expect.assertions(1);
+        const error = new Error('Login details are incorrect. Please try again.');
+
+        //mock db.query and return empty []
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            return callback(null, [])
+        });
+
+        return userService.login(user.email, user.password)
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+})
 
 
 
