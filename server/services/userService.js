@@ -42,34 +42,31 @@ const register = async (email, password) => {
         error.statusCode = 409;
         throw error;
     }
-
     // if user DOES NOT exist, first hash their password
     const hashedPassword = await bcrypt.hash(password, 10);
-
+    
     // and then INSERT user to db
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO users
-                    (email, password)
-                    VALUES(?, ?)`;
-
+        (email, password)
+        VALUES(?, ?)`;
+        
         db.query(sql, [email, hashedPassword], async (err, result) => {
             if (err) {
                 return reject(err)
             }
-
+            
             const payload = {
                 email
             }
-
             try {
-                // return the jwt token of the newly registered user
-                const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' })
+                const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
                 // Send a welcome email to user
                 // generate an html template that is used in the email message
                 const html = generateEmailTemplate({ type: 'WELCOME_EMAIL', email })
                 // finally send the email
                 const sentEmail = await sendEmail(email, html);
-                return resolve(token);
+                return resolve(result);
             } catch (err) {
                 console.error(err);
             }
@@ -82,7 +79,6 @@ const login = async (email, password) => {
     validateInputs([email, password])
 
     // check if user exists
-    console.log(hasUser(email));
     const userSearchResult = await hasUser(email);
     const user = userSearchResult[0];
 
@@ -113,6 +109,16 @@ const login = async (email, password) => {
         id: user.id
     };
 }
+
+// const generateToken = async (payload) => {
+//     try {
+//         const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
+//         console.log(token);
+//         return token;
+//     } catch (err) {
+//         console.error(err);
+//     }
+// }
 
 //  this fn / method is better to be extracted as util, as it's not related to user action
 const isTokenBlacklisted = async (accessToken) => {

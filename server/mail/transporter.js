@@ -19,7 +19,7 @@ const setUpTransporter = () => {
     } catch (err) {
         console.error('Verification failed', err)
     }
-    
+
     return transporter;
 }
 

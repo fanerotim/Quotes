@@ -77,7 +77,6 @@ let { generateEmailTemplate } = require('../../mail/templates/generateEmailTempl
 let { sendEmail } = require('../../mail/sendEmail');
 const nodemailer = require('nodemailer');
 jest.mock('nodemailer');
-let { setUpTransporter } = require('../../mail/transporter');
 
 describe('tests for userService`s register() method', () => {
 

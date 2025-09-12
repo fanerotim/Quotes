@@ -3,7 +3,7 @@ const { setUpTransporter } = require('./transporter');
 const sendEmail = async (email, html) => {
     
     const transporter = setUpTransporter();
-
+ 
     try {
         const emailTransaction = await transporter.sendMail({
             from: "Quotes <info@quotes.fanerotim.dev>",
