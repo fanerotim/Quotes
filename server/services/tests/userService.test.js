@@ -75,6 +75,9 @@ describe('tests for userService`s hasUser() method', () => {
 const jwt = require('../../lib/jwt');
 let { generateEmailTemplate } = require('../../mail/templates/generateEmailTemplate');
 let { sendEmail } = require('../../mail/sendEmail');
+const nodemailer = require('nodemailer');
+jest.mock('nodemailer');
+let { setUpTransporter } = require('../../mail/transporter');
 
 describe('tests for userService`s register() method', () => {
 
@@ -139,7 +142,7 @@ describe('tests for userService`s register() method', () => {
     })
 
     test('should return token', () => {
-        expect.assertions(3);
+        expect.assertions(4);
 
         const token = 'somerandomtokenthatwewilltestagainst';
         const hashedPassword = 'thiswillnotbeusedbutiamaddingitanyways-will-refactor'
@@ -148,7 +151,7 @@ describe('tests for userService`s register() method', () => {
             callback(null, [])
         })
 
-        //this mocks the resolve(result) output
+        //this mocks the resolve(result) output, otherwise test timeout as we need to return result
         db.query.mockImplementationOnce((sql, [email, hashedPassword], callback) => {
             callback(null, [user])
         })
@@ -177,21 +180,30 @@ describe('tests for userService`s register() method', () => {
         // check if the expected template is returned
         expect(generateEmailTemplate({ type: 'WELCOME_EMAIL', email: user.email })).toEqual(template);
 
-        //this mock is incorrect. I do not need to mock sendEmail, but the transporter logic inside of it.
-        // because this is not mocked properly i get the warning about the worker / jest async operation
-        // sendEmail = jest.fn();
+        //dummy implementation of transporter
+        const transporter = {
+            sendMail: jest.fn(),
+            verify: jest.fn()
+        }
 
-        // const emailData = {accepted: [user.email], messageId: 1};
-        
-        // sendEmail.mockImplementationOnce((email, html) => {
-        //     return Promise.resolve(emailData)
-        // })
+        // mock nodemailer createTransporter function to avoid sending email and return transporter defined above
+        nodemailer.createTransport.mockReturnValue(transporter)
 
-        // sendEmail(user.email, template)
-        //     .then(sentEmail => {
-        //         expect(sentEmail).toEqual(emailData);
-        //     })
+        //mock sendEmail method
+        sendEmail = jest.fn();
+        const sentEmailDetails = { accepted: user.email, response: '250 Accepted', messageId: 1 };
 
+        sendEmail.mockImplementationOnce((email, html) => {
+            return Promise.resolve(sentEmailDetails);
+        })
+
+        //test sendEmail method
+        sendEmail(user.email, template)
+            .then(output => {
+                expect(output).toEqual(sentEmailDetails);
+            })
+
+        // test final output of register method
         return userService.register(user.email, user.password)
             .then(result => {
                 expect(result).toEqual([user]);
