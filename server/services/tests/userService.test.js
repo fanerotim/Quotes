@@ -212,20 +212,22 @@ describe('tests for userService`s register() method', () => {
 
 const bcrypt = require('bcrypt');
 jest.mock('bcrypt');
+let { logger } = require('../../logger/logger');
+const fs = require('node:fs/promises');
 
 describe('tests for userService`s login() method', () => {
 
-    const user = [{email: 'test@abv.bg', password: '123'}];
+    const user = [{ email: 'test@abv.bg', password: '123', id: 1 }];
 
     test('throws error if invalid input is provided', () => {
         expect.assertions(2);
         const error = new Error('All fields must be filled.');
-        
+
         return userService.login('', '123').catch(err => {
             expect(err).toEqual(error);
             expect(err).toStrictEqual(error);
         })
-    })    
+    })
 
     test('throws error if user is not registered', () => {
         expect.assertions(1);
@@ -251,7 +253,7 @@ describe('tests for userService`s login() method', () => {
         });
 
         bcrypt.compare.mockResolvedValue(false)
-        
+
         bcrypt.compare.mockImplementation((providedPassword, actualPassword) => {
             return false;
         })
@@ -259,6 +261,59 @@ describe('tests for userService`s login() method', () => {
         return userService.login(user[0].email, user[0].password)
             .catch(err => {
                 expect(err).toEqual(error);
+            })
+    });
+
+    test('returns user data to store in localStorage after successful login', () => {
+        expect.assertions(2);
+
+        // mock fs to avoid writing login data in access.log
+        jest.mock('fs');
+
+        // mock the implementation of db query to conitnue testing the login method
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            callback(null, user);
+        })
+
+        // mock bcrypt compare to continue testing next logical block of login method
+        bcrypt.compare.mockResolvedValue(true);
+
+        // create dummy login entry
+        const logEntry = 'user login details entered in log file'
+
+        // mock custom logger fn
+        logger = jest.fn()
+            .mockReturnValue(logEntry);
+
+        // mock fs.appendFile method to avoid writing data in access log
+        fs.appendFile = jest.fn();
+
+        fs.appendFile.mockImplementationOnce(() => {
+            return logEntry;
+        })
+
+        // test logger to make sure it returns expected value, but it never writes in actual access.log file
+        expect(logger()).toEqual(logEntry);
+
+        // mock jwt.sign and return dummy token
+        jwt.sign = jest.fn();
+
+        // create dummy token to be returned by jwt.sign
+        const token = 'somedummytoken'
+
+        // add implementation of jwt.sign's mocked fn
+        jwt.sign.mockResolvedValue(token)
+
+        // create dummy payload to test against
+        const payload = {
+            token,
+            email: user[0].email,
+            id: user[0].id
+        }
+
+        return userService.login(user[0].email, user[0].password)
+            .then(result => {
+                expect(result).toEqual(payload)
             })
     })
 })
