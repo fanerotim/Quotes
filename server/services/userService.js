@@ -44,18 +44,18 @@ const register = async (email, password) => {
     }
     // if user DOES NOT exist, first hash their password
     const hashedPassword = await bcrypt.hash(password, 10);
-    
+
     // and then INSERT user to db
     return new Promise((resolve, reject) => {
         const sql = `INSERT INTO users
         (email, password)
         VALUES(?, ?)`;
-        
+
         db.query(sql, [email, hashedPassword], async (err, result) => {
             if (err) {
                 return reject(err)
             }
-            
+
             const payload = {
                 email
             }
@@ -88,19 +88,19 @@ const login = async (email, password) => {
 
     // if it exists, check if password is correct
     const isPasswordCorrect = await bcrypt.compare(password, user.password)
-
+    
     if (!isPasswordCorrect) {
         throw new Error('Login details are incorrect. Please try again.')
     }
 
+    // log user logins into access log
+    logger('ACCESS_LOG', { type: 'login', email, time: `${new Date().toDateString()}, ${new Date().toTimeString()}` })
+    
     const payload = {
         email,
         id: user.id
     }
-
-    // log user logins into access log
-    logger('ACCESS_LOG', { type: 'login', email, time: `${new Date().toDateString()}, ${new Date().toTimeString()}` })
-
+    
     const token = await jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2h' });
 
     return {
@@ -122,6 +122,12 @@ const login = async (email, password) => {
 
 //  this fn / method is better to be extracted as util, as it's not related to user action
 const isTokenBlacklisted = async (accessToken) => {
+
+    if (!accessToken) {
+        const error = new Error('Access token must be provided');
+        error.statusCode = 400;
+        throw error;
+    }
 
     const isBlacklisted = await new Promise((resolve, reject) => {
         const sql = `SELECT *
