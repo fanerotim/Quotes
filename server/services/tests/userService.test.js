@@ -194,7 +194,7 @@ describe('tests for userService`s register() method', () => {
 
         sendEmail.mockImplementationOnce((email, html) => {
             return Promise.resolve(sentEmailDetails);
-        })
+        });
 
         //test sendEmail method
         sendEmail(user.email, template)
@@ -210,21 +210,24 @@ describe('tests for userService`s register() method', () => {
     })
 })
 
+const bcrypt = require('bcrypt');
+jest.mock('bcrypt');
+
 describe('tests for userService`s login() method', () => {
 
-    const user = {email: 'test@abv.bg', password: '123'};
+    const user = [{email: 'test@abv.bg', password: '123'}];
 
     test('throws error if invalid input is provided', () => {
-        expect.assertions(1);
+        expect.assertions(2);
         const error = new Error('All fields must be filled.');
         
         return userService.login('', '123').catch(err => {
             expect(err).toEqual(error);
-            expect(err).toBe(error);
+            expect(err).toStrictEqual(error);
         })
     })    
 
-    test.only('throws error if user is not registered', () => {
+    test('throws error if user is not registered', () => {
         expect.assertions(1);
         const error = new Error('Login details are incorrect. Please try again.');
 
@@ -233,7 +236,27 @@ describe('tests for userService`s login() method', () => {
             return callback(null, [])
         });
 
-        return userService.login(user.email, user.password)
+        return userService.login(user[0].email, user[0].password)
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+
+    test('throws error if password is incorrect', () => {
+        expect.assertions(1);
+        const error = new Error('Login details are incorrect. Please try again.')
+
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            callback(null, user)
+        });
+
+        bcrypt.compare.mockResolvedValue(false)
+        
+        bcrypt.compare.mockImplementation((providedPassword, actualPassword) => {
+            return false;
+        })
+
+        return userService.login(user[0].email, user[0].password)
             .catch(err => {
                 expect(err).toEqual(error);
             })
