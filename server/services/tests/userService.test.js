@@ -318,6 +318,67 @@ describe('tests for userService`s login() method', () => {
     })
 })
 
+describe('tests for userService`s isTokenBlacklisted()', () => {
+
+    const accessToken = 'someAlreadyBlacklistedToken';
+
+    test('throws error if accessToken is not provided', () => {
+        expect.assertions(1);
+
+        const error = new Error('Access token must be provided')
+
+        return userService.isTokenBlacklisted()
+            .catch(err => {
+                expect(err).toEqual(error)
+            })
+    })
+
+    test('returns true if token is blacklisted', () => {
+        expect.assertions(2);
+
+        // mock db.query call to avoid real db call
+        const sql = 'fakeSqlQuery'
+        db.query.mockImplementationOnce((sql, [accessToken], callback) => {
+            callback(null, [{ accessToken, id: 1 }])
+        })
+
+        return userService.isTokenBlacklisted(accessToken)
+            .then(result => {
+                expect(result).toBe(true);
+                expect(result).toBeTruthy();
+            })
+    })
+
+    test('returns false if token is not blacklisted', () => {
+        expect.assertions(2);
+
+        db.query.mockImplementationOnce((sql, [accessToken], callback) => {
+            callback(null, false)
+        })
+
+        return userService.isTokenBlacklisted(accessToken)
+            .then(result => {
+                expect(result).toBeFalsy();
+                expect(result).toBe(false);
+            })
+    })
+
+    test('returns db error', () => {
+        expect.assertions(1);
+
+        const error = new Error('connection to DB failed');
+
+        db.query.mockImplementationOnce((sql, [accessToken], callback) => {
+            callback(error, null)
+        })
+
+        userService.isTokenBlacklisted(accessToken)
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+})
+
 
 
 
