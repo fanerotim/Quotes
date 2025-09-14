@@ -400,13 +400,34 @@ describe('tests for userService`s blacklistToken method', () => {
 
         // mock db query to return true / token is blacklisted
         db.query.mockImplementationOnce((sql, [accessToken], callback) => {
-            callback(null, [{accessToken, id: 1}])
+            callback(null, [{ accessToken, id: 1 }])
         })
 
         return userService.blacklistToken(accessToken)
             .catch(err => {
-                console.log(err);
                 expect(err).toEqual(error)
+            })
+    })
+
+    test('returns an object when token is successfully blacklisted', () => {
+        expect.assertions(1);
+
+        //mock query used by 'isTokenBlacklisted' method; returns empty [], which = false
+        db.query.mockImplementationOnce((sql, [accessToken], callback) => {
+            callback(null, []);
+        })
+
+        // dummy object that we expect to be returned on success
+        const output = { insertId: 1, affectedRows: 1 }
+
+        // mock query to return success obj (output obj in this case)
+        db.query.mockImplementationOnce((sql, [accessToken], callback) => {
+            callback(null, output)
+        })
+
+        return userService.blacklistToken(accessToken)
+            .then(result => {
+                expect(result).toEqual(output)
             })
     })
 })
