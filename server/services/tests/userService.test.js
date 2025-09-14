@@ -542,6 +542,70 @@ describe('tests for userService`s resetUserPassword method', () => {
     })
 })
 
+describe('tests for userService`s updatePassword method', () => {
+    
+    const user = {email: 'test@abv.bg', password: '123', id: 1};
+    
+    test('throws error if email and/or password is not provided', () => {
+        expect.assertions(1);
+
+        const error = new Error('email and password must be provided')
+
+        return userService.updatePassword()
+            .catch(err => {
+                expect(err).toEqual(error);
+            }) 
+
+    })
+
+    test('throw error if user is not registered in db', () => {
+        expect.assertions(1);
+        // mock db.query to return empty [] = no such user in db
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            callback(null, []);
+        })
+
+        const error = new Error('Invalid credentials!');
+
+        return userService.updatePassword(user.email, user.password)
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+
+    test('test complete logic flow of updatePassword method', () => {
+        expect.assertions(2);
+
+        //mock db.query to return user data
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            return callback(null, [user]);
+        })
+
+        // mock bcrypt.hash to produce a hashed pass
+        bcrypt.hash = jest.fn();
+
+        // create dummy hashed password
+        const hashedPassword = `${user.password}.somedummyhashed.password`
+        bcrypt.hash.mockImplementationOnce((password, salt) => {
+            return hashedPassword;
+        })
+
+        expect(bcrypt.hash(user.password, 10)).toEqual(hashedPassword);
+
+        // create dummy success result
+        const successResult = {insertId: 56, message: 'successfully updated user password', affectedRows: 1};
+
+        db.query.mockImplementationOnce((sql, [password, userId], callback) => {
+            callback(null, successResult);
+        })
+
+        return userService.updatePassword(user.email, user.password)
+            .then(result => {
+                expect(result).toEqual(successResult);
+            })
+    })
+})
+
 
 
 
