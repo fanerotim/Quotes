@@ -318,7 +318,7 @@ describe('tests for userService`s login() method', () => {
     })
 })
 
-describe('tests for userService`s isTokenBlacklisted()', () => {
+describe('tests for userService`s isTokenBlacklisted method', () => {
 
     const accessToken = 'someAlreadyBlacklistedToken';
 
@@ -432,6 +432,115 @@ describe('tests for userService`s blacklistToken method', () => {
     })
 })
 
+const generator = require('generate-password');
+jest.mock('generate-password');
+
+describe('tests for userService`s resetUserPassword method', () => {
+
+    const user = [{ email: 'test@abv.bg', password: '123', id: 1 }]
+
+    test('throws error if email is not provided', () => {
+        expect.assertions(1);
+        const error = new Error('Email is required in order to reset password');
+
+        return userService.resetUserPassword()
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+
+    test('throws error if user is not found in db', () => {
+        expect.assertions(1);
+        const error = new Error('Invalid credentials!');
+
+        //mock db.query to return empty [] to simulate no user in db
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            callback(null, []);
+        })
+
+        return userService.resetUserPassword(user[0].email)
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
+
+    test('test the whole flow of resetUserPassword method and return successful value', () => {
+        expect.assertions(5);
+
+        // mock db.query to return user data (to confirm user exists)
+        db.query.mockImplementationOnce((sql, [email], callback) => {
+            callback(null, user);
+        })
+
+        // create a dummy password:
+        const password = 'Gx9#vR7!WpLm4z&TqYu@83NaKd$Xei';
+
+        //mock generator.generate method to avoid calling the real fn
+        generator.generate = jest.fn();
+        generator.generate.mockReturnValue(password);
+
+        expect(generator.generate()).toEqual(password);
+
+        // create dummy hashed password
+        const hashedPassword = `${password}.somerandomhash.com`
+
+        // mock bcrypt.hash fn to avoid calling the api
+        bcrypt.hash = jest.fn();
+        bcrypt.hash.mockImplementationOnce((password, salt) => {
+            return hashedPassword;
+        })
+
+        expect(bcrypt.hash(password, 10)).toEqual(hashedPassword);
+
+        // create dummy email template
+        const template = `Hello ${user[0].email} - this is your new password: ${password}`;
+
+        // mock html template
+        generateEmailTemplate = jest.fn()
+        generateEmailTemplate.mockImplementationOnce(({type, email}) => {
+            return template;
+        });
+        
+        expect(generateEmailTemplate({type: 'PASSWORD_RESET', email: user[0].email})).toEqual(template);
+
+        // create a dummy transporter
+        const transporter = {
+            verify: jest.fn(),
+            sendMail: jest.fn()
+        }
+                
+        // mock nodemailer's createTransport() fn to return the dummy transporter
+        nodemailer.createTransport.mockReturnValue(transporter);
+
+        // create dummy sentEmail output data
+        const sentEmailDetails = { accepted: user[0].email, response: '250 Accepted', messageId: 1 };
+
+        // mock sendMail fn to avoid sending real email
+        sendEmail = jest.fn();
+        
+        sendEmail.mockImplementationOnce((email, html) => {
+            return Promise.resolve(sentEmailDetails)
+        })
+
+        sendEmail((user[0].email, template))
+            .then(result => {
+                expect(result).toEqual(sentEmailDetails);
+            })
+
+        // craete dummy success result
+        const successResult = { insertId: 54, affectedRows: 1 };
+
+        // mock db query to return successful result
+        db.query.mockImplementationOnce((sql, [hashedPassword, email], callback) => {
+            callback(null, successResult);
+        })
+
+        return userService.resetUserPassword(user[0].email)
+            .then(result => {
+                expect(result).toEqual(successResult);
+            })
+    })
+})
 
 
 
