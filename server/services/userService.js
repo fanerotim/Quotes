@@ -152,6 +152,12 @@ const isTokenBlacklisted = async (accessToken) => {
 //  this fn / method is better to be extracted as util, as it's not related to user action
 const blacklistToken = async (accessToken) => {
 
+    if (!blacklistToken) {
+        const error = new Error('Access token must be provided');
+        error.statusCode = 400;
+        throw error;
+    }
+
     const isBlacklisted = await isTokenBlacklisted(accessToken);
 
     if (isBlacklisted) {
