@@ -182,6 +182,12 @@ const blacklistToken = async (accessToken) => {
 
 const resetUserPassword = async (email) => {
 
+    if (!email) {
+        const error = new Error('Email is required in order to reset password');
+        error.statusCode = 400;
+        throw error;
+    }
+
     const userSearchResult = await hasUser(email);
     const user = userSearchResult[0];
 
@@ -195,7 +201,6 @@ const resetUserPassword = async (email) => {
 
     // generate a new password and store it in a variable, so we can email the user with it
     const newPassword = generateRandomPassword();
-
     // hash the password 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
