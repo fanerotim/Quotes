@@ -379,6 +379,38 @@ describe('tests for userService`s isTokenBlacklisted()', () => {
     })
 })
 
+describe('tests for userService`s blacklistToken method', () => {
+    const accessToken = 'somedummyjwttoken';
+
+    test('throws error if no token is provided', () => {
+        expect.assertions(1);
+
+        const error = new Error('Access token must be provided');
+
+        return userService.blacklistToken()
+            .catch(err => {
+                expect(err).toEqual(error)
+            })
+    })
+
+    test('throws error if token is blacklisted already', () => {
+        expect.assertions(1);
+
+        const error = new Error('Authorization required for this request.');
+
+        // mock db query to return true / token is blacklisted
+        db.query.mockImplementationOnce((sql, [accessToken], callback) => {
+            callback(null, [{accessToken, id: 1}])
+        })
+
+        return userService.blacklistToken(accessToken)
+            .catch(err => {
+                console.log(err);
+                expect(err).toEqual(error)
+            })
+    })
+})
+
 
 
 
