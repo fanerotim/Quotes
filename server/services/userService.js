@@ -228,6 +228,12 @@ const resetUserPassword = async (email) => {
 
 const updatePassword = async (email, password) => {
 
+    if (!email || !password) {
+        const error = new Error('email and password must be provided');
+        error.statusCode = 400;
+        throw error;
+    }
+
     // check if user exists, not really needed as I have a route guard that checks if user is logged in and they cannot log in if user does not exist in db, but will keep this for now
     // TODO: REMOVE THIS AT SOME POINT / THINK ABOUT IT AND TEST FIRST
     const userSearchResult = await hasUser(email);
