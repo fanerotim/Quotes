@@ -101,4 +101,8 @@ describe('tests getQuote method', () => {
                 expect(result).toEqual([])
             });
     })
+
+    test('throw error if id is not provided', () => {
+        expect(() => quoteService.getQuote()).toThrow();
+    })
 })
