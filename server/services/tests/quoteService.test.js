@@ -167,4 +167,18 @@ describe('tests for getUserQuotes method', () => {
                 expect(result).toEqual([]);
             });
     })
+
+    test('throw DB error if connection fails', () => {
+        const error = new Error('Connection to DB failed');
+
+        // mock db query to throw error
+        db.query.mockImplementationOnce((sql, [userId], callback) => {
+            callback(error, null)
+        })
+
+        return quoteService.getUserQuotes(5)
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+    })
 })
