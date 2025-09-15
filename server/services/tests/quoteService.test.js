@@ -103,6 +103,68 @@ describe('tests getQuote method', () => {
     })
 
     test('throw error if id is not provided', () => {
-        expect(() => quoteService.getQuote()).toThrow();
+        expect.assertions(1);
+
+        const error = new Error('quoteId must be provided')
+
+        expect(() => {
+            quoteService.getQuote()
+        }).toThrow(error);
+    })
+})
+
+describe('tests for getUserQuotes method', () => {
+
+    const quotes = [{
+        author: 'F. Dostoyevsky',
+        text: 'Pain and suffering are always inevitable for a large intelligence and a deep heart. The really great men must, I think, have great sadness on earth.',
+        id: 1
+    },
+    {
+        author: 'F. Dostoyevsky',
+        text: `To go wrong in one's own way is better than to go right in someone else's.`,
+        id: 2
+    },
+    {
+        author: 'F. Dostoyevsky',
+        text: 'What is hell? I maintain that it is the suffering of being unable to love.',
+        id: 3
+    }]
+
+    test('throws error if userId is not provided', () => {
+        expect.assertions(1);
+        const error = new Error('userId must be provided');
+
+        expect(() => {
+            quoteService.getUserQuotes()
+        }).toThrow(error);
+    })
+
+    test('returns quotes added by a user', () => {
+        expect.assertions(1);
+
+        // mock db.query to return quotes added by user
+        db.query.mockImplementationOnce((sql, [userId], callback) => {
+            callback(null, quotes);
+        });
+
+        return quoteService.getUserQuotes(userId = 1)
+            .then(result => {
+                expect(result).toEqual(quotes);
+            })
+    })
+
+    test('returns empty [], if user has not added quotes yet', () => {
+        expect.assertions(1);
+
+        // mock db.query to return empty []
+        db.query.mockImplementationOnce((sql, [userId], callback) => {
+            callback(null, []);
+        })
+
+        return quoteService.getUserQuotes(userId = 4)
+            .then(result => {
+                expect(result).toEqual([]);
+            });
     })
 })
