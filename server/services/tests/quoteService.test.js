@@ -65,3 +65,40 @@ describe('tests getAll method', () => {
             })
     });
 })
+
+describe('tests getQuote method', () => {
+
+    const quote = [{
+        author: 'I.Welsh',
+        text: 'You can`t lie to your soul.',
+        id: 1
+    }]
+
+    test('returns quote details', () => {
+        expect.assertions(1);
+
+        // mock db.query to return details of single quote
+        db.query.mockImplementationOnce((sql, [id], callback) => {
+            callback(null, quote);
+        })
+
+        return quoteService.getQuote(1)
+            .then(result => {
+                expect(result).toEqual(quote);
+            })
+    })
+
+    test('returns empty [], if quote is not found (this can only happen thorugh postman request, as via UI users cannot access a quote without provided id)', () => {
+        expect.assertions(1);
+
+        //mock db.query to return empty []
+        db.query.mockImplementationOnce((sql, [id], callback) => {
+            callback(null, [])
+        })
+
+        return quoteService.getQuote(2)
+            .then(result => {
+                expect(result).toEqual([])
+            });
+    })
+})
