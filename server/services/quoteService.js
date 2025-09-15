@@ -17,6 +17,13 @@ const getAll = () => {
 }
 
 const getQuote = (id) => {
+    
+    if (!id) {
+        const error = new Error('quoteId must be provided');
+        error.statusCode = 400;
+        throw error;
+    }
+
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM quotes WHERE id = ?'
 
@@ -30,7 +37,13 @@ const getQuote = (id) => {
 }
 
 const getUserQuotes = (userId) => {
-    
+
+    if (!userId) {
+        const error = new Error('userId must be provided');
+        error.statusCode = 400;
+        throw error;
+    }
+
     return new Promise((resolve, reject) => {
         const sql = `SELECT * 
                     FROM quotes
@@ -104,7 +117,7 @@ const updateQuote = (id, author, text, category) => {
 }
 
 const deleteQuote = (id) => {
-    
+
     if (!id) {
         throw new Error('Invalid request!')
     }
