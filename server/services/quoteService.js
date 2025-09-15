@@ -9,7 +9,7 @@ const getAll = () => {
 
         db.query(sql, (err, result) => {
             if (err) {
-                return reject(err)
+                return reject(err);
             }
             return resolve(result);
         })
