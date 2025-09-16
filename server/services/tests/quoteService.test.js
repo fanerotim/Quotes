@@ -199,7 +199,6 @@ describe('tests for addQuote method', () => {
             .catch(err => {
                 expect(err).toEqual(error);
             })
-
     })
 
     test('throws error if user tries to add a quote that already exists in db', () => {
@@ -225,7 +224,7 @@ describe('tests for addQuote method', () => {
         db.query.mockImplementation((sql, [text], callback) => {
             callback(null, [])
         })
-        
+
         const isQuoteAdded = await quoteService.addQuote(quote.author, quote.text, quote.category, ownerId = 4);
 
         expect(isQuoteAdded).toEqual([]);
@@ -240,6 +239,52 @@ describe('tests for addQuote method', () => {
         return quoteService.addQuote(quote.author, quote.text, quote.category, ownerId = 5)
             .then(result => {
                 expect(result).toEqual(successMessage);
+            })
+    })
+})
+
+describe('tests for updateQuote method', () => {
+    const quote = {
+        id: 21,
+        author: 'F. Dostoyevsky',
+        text: 'Your worst sin is that you have destroyed and betrayed yourself for nothing.',
+        category: 'Fiction'
+    }
+
+    test('throws error if input is invalid', () => {
+        expect.assertions(1);
+        const error = new Error('All fields must be filled.');
+        expect(() => quoteService.updateQuote()).toThrow(error);
+    })
+
+    test('updates quote successfully and returns success message', () => {
+        expect.assertions(1);
+
+        const successMessage = { message: 'Quote successfully update', insertId: 151 };
+
+        //mock db query to return success message upon successful quote update
+        db.query.mockImplementationOnce((sql, [author, text, category, id], callback) => {
+            callback(null, successMessage);
+        })
+
+        return quoteService.updateQuote(quote.id, quote.author, quote.text, quote.category)
+            .then(result => {
+                expect(result).toEqual(successMessage);
+            })
+    })
+
+    test('returns db error if connection fails', () => {
+        expect.assertions(1);
+
+        const error = new Error('connection to DB failed');
+        //mock db.query to return error
+        db.query.mockImplementationOnce((sql, [author, text, category, id], callback) => {
+            callback(error, null)
+        })
+
+        return quoteService.updateQuote(quote.id, quote.author, quote.text, quote.category)
+            .catch(err => {
+                expect(err).toEqual(error);
             })
     })
 })
