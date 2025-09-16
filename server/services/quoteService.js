@@ -109,7 +109,7 @@ const updateQuote = (id, author, text, category) => {
 
         db.query(sql, [author, text, category, id], (err, result) => {
             if (err) {
-                return reject({ ...err })
+                return reject(err)
             }
             return resolve(result);
         })
