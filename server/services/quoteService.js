@@ -127,7 +127,7 @@ const deleteQuote = (id) => {
 
         db.query(sql, [id], (err, result) => {
             if (err) {
-                return reject({ ...err })
+                return reject(err)
             }
             return resolve(result);
         })
