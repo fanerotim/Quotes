@@ -288,3 +288,33 @@ describe('tests for updateQuote method', () => {
             })
     })
 })
+
+describe('tests for deleteQuote method', () => {
+    const quote = {
+        id: 43,
+        author: 'F. Dostoyevsky',
+        text: 'I can see the sun, but even if I cannot see the sun, I know that it exists. And to know that the sun is there - that is living.',
+        ownerId: 2
+    }
+
+    test('throws error if id is not provided', () => {
+        expect.assertions(1);
+        const error = new Error('Invalid request!');
+        expect(() => quoteService.deleteQuote()).toThrow(error);
+    })
+
+    test('returns successful message when quote is deleted', () => {
+        expect.assertions(1);
+
+        const successMessage = { message: 'Quote deleted successfully', insertId: 56 }
+        //mock db.query to return success message on delete
+        db.query.mockImplementationOnce((sql, [id], callback) => {
+            callback(null, successMessage);
+        })
+
+        return quoteService.deleteQuote(quote.id)
+            .then(result => {
+                expect(result).toEqual(successMessage);
+            })
+    })
+})
