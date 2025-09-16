@@ -182,3 +182,64 @@ describe('tests for getUserQuotes method', () => {
             })
     })
 })
+
+describe('tests for addQuote method', () => {
+
+    const quote = {
+        author: 'F Dostoevsky',
+        text: 'The mystery of human existence lies not in just staying alive, but in finding something to live for.',
+        category: 'Fiction'
+    }
+
+    test('throws error if user input is invalid', () => {
+        expect.assertions(1);
+        const error = new Error('All fields must be filled.');
+
+        return quoteService.addQuote()
+            .catch(err => {
+                expect(err).toEqual(error);
+            })
+
+    })
+
+    test('throws error if user tries to add a quote that already exists in db', () => {
+        expect.assertions(1);
+
+        //mock db.query to return quote (already added)
+        db.query.mockImplementationOnce((sql, [text], callback) => {
+            callback(null, [quote]);
+        })
+
+        const error = new Error('Quote already exists and it cannot be duplicated!')
+
+        return quoteService.addQuote(quote.author, quote.text, quote.category)
+            .catch(err => {
+                expect(err).toEqual(error)
+            })
+    })
+
+    test('test complete flow of addQuote method', async () => {
+        expect.assertions(2);
+
+        //mock db query to return empty [] / quote not found in db
+        db.query.mockImplementation((sql, [text], callback) => {
+            callback(null, [])
+        })
+        
+        const isQuoteAdded = await quoteService.addQuote(quote.author, quote.text, quote.category, ownerId = 4);
+
+        expect(isQuoteAdded).toEqual([]);
+
+        // mock final db.query to simulate successfully added quote
+        const successMessage = { message: 'successfully added a quote to db', id: 15 };
+
+        db.query.mockImplementation((sql, [author, text, onwerId, category], callback) => {
+            callback(null, successMessage);
+        })
+
+        return quoteService.addQuote(quote.author, quote.text, quote.category, ownerId = 5)
+            .then(result => {
+                expect(result).toEqual(successMessage);
+            })
+    })
+})
