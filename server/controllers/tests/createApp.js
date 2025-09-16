@@ -1,11 +1,10 @@
+const express = require('express');
+const expressConfig = require('../../expressConfig');
+const routes = require('../../router/routes');
+const app = express();
+
 const createApp = () => {
-    const express = require('express');
-    const expressConfig = require('../../expressConfig');
-
-    const app = express();
     expressConfig(app);
-
-    const routes = require('../../router/routes');
     app.use(routes);
 
     return app;
