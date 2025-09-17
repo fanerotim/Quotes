@@ -5,19 +5,6 @@ jest.mock('../../services/quoteService');
 const { createTestApp } = require('./createTestApp');
 const app = createTestApp();
 
-let { clearBlacklistedJWTCron } = require('../../cron-jobs/clearBlacklistedJWTCron');
-
-jest.mock('../../cron-jobs/clearBlacklistedJWTCron');
-
-clearBlacklistedJWTCron = jest
-    .fn()
-    .mockImplementationOnce(() => {
-        return {
-            clearJWTCron: jest.fn()
-        }
-    })
-
-
 const quotes = [
     {
         id: 1,
@@ -42,20 +29,52 @@ const quotes = [
     },
 ]
 
-describe('tests for quotes page', () => {
+describe('GET /quotes', () => {
 
     test('should return status 200 and an array with quotes', () => {
-        expect.assertions(3);
+        expect.assertions(4);
         quoteService.getAll.mockResolvedValue(quotes)
 
         return request(app)
             .get('/quotes')
             .expect(200)
             .then(response => {
-                expect(response.body).toHaveLength(3)
-                expect(response.body[0].ownerId).toBe(2)
-                expect(response.body[1].author).toBe('F. Dostoevsky')
+                expect(response.body).toHaveLength(3);
+                expect(response.body[0].ownerId).toBe(2);
+                expect(response.body[1].author).toBe('F. Dostoevsky');
+                expect(response.req.path).toEqual('/quotes');
+            })  
+    })
+
+    test('should return status 200 and empty [] / no quotes added', () => {
+        expect.assertions(4);
+        quoteService.getAll.mockResolvedValue([]);
+
+        return request(app)
+            .get('/quotes')
+            .expect(200)
+            .then(response => {
+                expect(response.body).toHaveLength(0);
+                expect(response.body).toEqual([]);
+                expect(response.ok).toBe(true);
+                expect(response.req.path).toEqual('/quotes');
             })
-        
+    })
+
+    test('should throw error', () => {
+        expect.assertions(4);
+
+        const error = new Error('Connection to DB failed')
+        quoteService.getAll.mockRejectedValue(error);
+
+        return request(app)
+            .get('/quotes')
+            .expect(500)
+            .then(response => {
+                expect(response.res.statusCode).toBe(500);
+                expect(response.res.statusMessage).toBe('Internal Server Error')
+                expect(response.body.message).toEqual('Connection to DB failed');
+                expect(response.ok).toBe(false);
+            })
     })
 })
