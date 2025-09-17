@@ -2,7 +2,6 @@ const mysqlConfig = require("../mySqlConfig")
 const db = mysqlConfig();
 const { validateInputs } = require('../utils/validateInputs');
 
-
 const getAll = () => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM quotes';
@@ -10,7 +9,7 @@ const getAll = () => {
         db.query(sql, (err, result) => {
             if (err) {
                 return reject(err);
-            }
+            } 
             return resolve(result);
         })
     })
