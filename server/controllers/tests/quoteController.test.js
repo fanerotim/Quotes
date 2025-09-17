@@ -61,9 +61,8 @@ describe('GET /quotes', () => {
             })
     })
 
-    test('should throw error', () => {
+    test('should return error', () => {
         expect.assertions(4);
-
         const error = new Error('Connection to DB failed')
         quoteService.getAll.mockRejectedValue(error);
 
@@ -75,6 +74,52 @@ describe('GET /quotes', () => {
                 expect(response.res.statusMessage).toBe('Internal Server Error')
                 expect(response.body.message).toEqual('Connection to DB failed');
                 expect(response.ok).toBe(false);
+            })
+    })
+})
+
+describe('GET /quotes/:id', () => {
+    
+    test('should return a single quote', () => {
+        expect.assertions(3);
+        quoteService.getQuote.mockResolvedValue(quotes[2])
+
+        return request(app)
+            .get('/quotes/:id')
+            .expect(200)
+            .then(response => {
+                expect(response.body.id).toBe(3);
+                expect(response.body.text).toBe('This is my last message to you: in sorrow, seek happiness.')
+                expect(response.ok).toBe(true);
+            })
+    })
+
+    test('should return empty [] if quote is not found', () => {
+        expect.assertions(3);
+        quoteService.getQuote.mockReturnValue([]);
+
+        return request(app)
+            .get('/quotes/:id')
+            .expect(200)
+            .then(response => {
+                expect(response.body).toHaveLength(0);
+                expect(response.ok).toBe(true);
+                expect(response.body).toEqual([]);
+            })
+    })
+
+    test('should return error', () => {
+        expect.assertions(3);
+        quoteService.getQuote.mockRejectedValue({message: 'Connection to DB failed'});
+
+        return request(app)
+            .get('/quotes/:id')
+            .expect(500)
+            .then(response => {
+                expect(response.body.message).toBe('Connection to DB failed');
+                expect(response.ok).toBe(false);
+                expect(response.error).toBeTruthy();
+                console.log(response);
             })
     })
 })
