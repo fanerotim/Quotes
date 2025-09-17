@@ -10,7 +10,7 @@ const UserProfile = () => {
     useEffect(() => {
         getUserQuotes()
             .then(quotes => setUserQuotes(quotes))
-            .catch(err => console.error(quotes));
+            .catch(err => console.error(err));
     }, [])
 
     return (
