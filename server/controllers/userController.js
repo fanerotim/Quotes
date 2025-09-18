@@ -59,7 +59,7 @@ router.post('/reset-password', isLoggedIn, async (req, res) => {
         await userService.resetUserPassword(email);
         return res.status(200).json({ message: 'Password updated successfully. Please check your email.' })
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         return res.status(err.statusCode).json({ message: err.message })
     }
 })
