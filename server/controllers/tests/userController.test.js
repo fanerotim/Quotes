@@ -151,3 +151,65 @@ describe('POST /user/login', () => {
             })
     })
 })
+
+describe('POST /user/logout', () => {
+
+    const token = 'somedummyJWTtoken.that.weUserfortesting'
+
+    test('returns 401 unauthorized', () => {
+        expect.assertions(3);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            return res.status(401).json({ message: 'You are not authorized to access this resource. Please log in!' })
+        })
+
+        return request(app)
+            .post('/user/logout')
+            .expect(401)
+            .then(response => {
+                expect(response.ok).toBe(false);
+                expect(response.error).toBeTruthy();
+                expect(response.body.message).toBe('You are not authorized to access this resource. Please log in!');
+            })
+    })
+
+    test('returns success message upon user logout', () => {
+        expect.assertions(2);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            next();
+        })
+    
+        return request(app)
+            .post('/user/logout')
+            .set('accesstoken', token)
+            .expect(200)
+            .then(response => {
+                expect(response.ok).toBe(true);
+                expect(response.body.message).toBe('Successfully logged out')
+            })
+    })
+
+    test('returns error if token is already blacklisted', () => {
+        expect.assertions(2);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            next();
+        })
+
+        const error = new Error('Authorization required for this request.')
+        error.statusCode = 409;
+
+        userService.blacklistToken.mockRejectedValue(error)
+
+        return request(app)
+            .post('/user/logout')
+            .set('accesstoken', token)
+            .expect(409)
+            .then(response => {
+                console.log(response);
+                expect(response.body.message).toBe('Authorization required for this request.');
+                expect(response.ok).toBe(false);
+            })
+    })
+})
