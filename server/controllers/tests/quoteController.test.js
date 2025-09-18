@@ -9,6 +9,7 @@ const app = createTestApp();
 let { isGuest } = require('../../route-guards/isGuest');
 jest.mock('../../route-guards/isGuest');
 
+// test quotes
 const quotes = [
     {
         id: 1,
@@ -32,6 +33,12 @@ const quotes = [
         ownerId: 1
     },
 ]
+
+// test user
+const user = {
+    email: 'test@abv.bg',
+    id: 2
+}
 
 describe('GET /quotes', () => {
 
@@ -129,15 +136,10 @@ describe('GET /quotes/:id', () => {
 
 describe('POST /quotes/user-quotes', () => {
 
-    const user = {
-        email: 'test@abv.bg',
-        id: 2
-    }
-
     test('returns user quotes', () => {
         expect.assertions(3);
         const userQuotes = quotes.filter(q => q.ownerId === 2);
-     
+
         quoteService.getUserQuotes.mockResolvedValue(userQuotes);
 
         // mock isGuest route guard to let us get to the route
@@ -182,7 +184,7 @@ describe('POST /quotes/user-quotes', () => {
         expect.assertions(3);
 
         isGuest.mockImplementationOnce((req, res, next) => {
-            return res.status(401).json({message: 'You are not authorized to access this resource. Please log in!'})
+            return res.status(401).json({ message: 'You are not authorized to access this resource. Please log in!' })
         })
 
         return request(app)
@@ -213,6 +215,81 @@ describe('POST /quotes/user-quotes', () => {
                 expect(response.ok).toBe(false);
                 expect(response.error).toBeTruthy();
                 expect(response.body.message).toBe('Connection to DB failed')
+            })
+    })
+})
+
+describe('POST /quotes/add-quote', () => {
+    const quote = {
+        insertId: 33,
+        ownerId: 2,
+        author: 'F. Dostoevsky',
+        text: 'You will burn and you will burn out; you will be healed and come back again.',
+        category: 'Fiction'
+    }
+
+    test('returns 401 Unauthorized error', () => {
+        expect.assertions(3);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            return res.status(401).json({ message: 'You are not authorized to access this resource. Please log in!' });
+        })
+
+        return request(app)
+            .post('/quotes/add-quote')
+            .expect(401)
+            .then(response => {
+                expect(response.ok).toBe(false);
+                expect(response.error).toBeTruthy();
+                expect(response.body.message).toBe('You are not authorized to access this resource. Please log in!')
+            })
+    })
+
+    test('returns newly added quote', () => {
+        expect.assertions(4);
+        
+        isGuest.mockImplementationOnce((req, res, next) => {
+            req.user = user;
+            req.body = quote;
+            next();
+        })
+
+        // add new quote
+        quoteService.addQuote.mockResolvedValue(quote);
+        // get newly added quote and return it to the client / returned quote needs to be in an arr due to how SQL works (mySQl in this case)
+        quoteService.getQuote.mockResolvedValue([quote]);
+
+        return request(app)
+            .post('/quotes/add-quote')
+            .expect(200)
+            .then(response => {
+                expect(response.ok).toBe(true);
+                expect(response.body).toBeTruthy();
+                expect(response.body.ownerId).toBe(2);
+                expect(response.body.insertId).toBe(33);
+            })
+    })
+
+    test('returns error if quote already exists', () => {
+        expect.assertions(4);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            req.user = user;
+            req.body = quote;
+            next();
+        })
+
+        const error = new Error('Quote already exists and it cannot be duplicated!')
+        quoteService.addQuote.mockRejectedValue(error);
+
+        return request(app)
+            .post('/quotes/add-quote')
+            .expect(500)
+            .then(response => {
+                expect(response.ok).toBe(false);
+                expect(response.error).toBeTruthy();
+                expect(response.body.message).toBe('Quote already exists and it cannot be duplicated!')
+                expect(response.error).toBeTruthy();
             })
     })
 })
