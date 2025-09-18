@@ -368,3 +368,54 @@ describe('PUT /quotes/edit-quote/:id', () => {
     })
 })
 
+describe('DELETE /quotes/delete-quote', () => {
+
+    const quote = {
+        id: 55,
+        ownerId: 1,
+        author: 'Leo Tolstoy',
+        text: 'It is amazing how complete is the delusion that beauty is goodness.',
+        category: 'Fiction'
+    }
+
+    test('returns 401 unauthorized', () => {
+        expect.assertions(3);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            return res.status(401).json({message: 'You are not authorized to access this resource. Please log in!'});
+        })
+
+        return request(app)
+            .delete('/quotes/delete-quote')
+            .send({id: user.id})
+            .expect(401)
+            .then(response => {
+                console.log(response);
+                expect(response.ok).toBe(false);
+                expect(response.error).toBeTruthy();
+                expect(response.body.message).toBe('You are not authorized to access this resource. Please log in!')
+            })
+    })
+
+    test('returns success message after deleting a quote', () => {
+        expect.assertions(3);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            req.user = user;
+            next();
+        })
+
+        quoteService.deleteQuote.mockResolvedValue({message: 'Quote DELETED successfully.'});
+
+        return request(app)
+            .delete('/quotes/delete-quote')
+            .send({id: quote.id})
+            .expect(200)
+            .then(response => {
+                console.log(response);
+                expect(response.ok).toBe(true);
+                expect(response.body.message).toBe('Quote DELETED successfully.');
+                expect(response.error).toBe(false);
+            })
+    })
+})
