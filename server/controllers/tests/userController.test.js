@@ -179,7 +179,7 @@ describe('POST /user/logout', () => {
         isGuest.mockImplementationOnce((req, res, next) => {
             next();
         })
-    
+
         return request(app)
             .post('/user/logout')
             .set('accesstoken', token)
@@ -207,9 +207,90 @@ describe('POST /user/logout', () => {
             .set('accesstoken', token)
             .expect(409)
             .then(response => {
-                console.log(response);
                 expect(response.body.message).toBe('Authorization required for this request.');
                 expect(response.ok).toBe(false);
+            })
+    })
+})
+
+describe('POST /user/reset-password', () => {
+
+    const email = 'test@abv.bg'
+
+    test('returns 403 forbidden', () => {
+        expect.assertions(2);
+        
+        isLoggedIn.mockImplementationOnce((req, res, next) => {
+            return res.status(403).json({ message: 'You are already logged in. Resource Forbidden!' });
+        });
+
+        return request(app)
+            .post('/user/reset-password')
+            .send(email)
+            .expect(403)
+            .then(response => {
+                expect(response.body.message).toBe('You are already logged in. Resource Forbidden!');
+                expect(response.ok).toBe(false);
+            })
+    })
+    
+    test('returns 400 error if `email` is not provided in req.body', () => {
+        expect.assertions(2);
+
+        isLoggedIn.mockImplementationOnce((req, res, next) => {
+            next();
+        })
+
+        return request(app)
+            .post('/user/reset-password')
+            .send({password: 123})
+            .expect(400)
+            .then(response => {
+                expect(response.body.message).toBe('Invalid credentials!')
+                expect(response.ok).toBe(false);
+            })
+    })
+
+    test('returns successful message upon password reset', () => {
+        expect.assertions(3);
+
+        isLoggedIn.mockImplementationOnce((req, res, next) => {
+            next();
+        })
+
+        userService.resetUserPassword.mockResolvedValue('Password updated successfully. Please check your email.');
+
+        return request(app)
+            .post('/user/reset-password')
+            .send({email: 'test@abv.bg'})
+            .expect(200)
+            .then(response => {
+                expect(response.ok).toBe(true);
+                expect(response.body.message).toBe('Password updated successfully. Please check your email.');
+                expect(response.error).toBe(false);
+            })
+    })
+
+    test('returns 400 bad request if user does not exist (this is only possible if req is sent via postman / UI does not allow such req)', () => {
+        expect.assertions(3);
+
+        isLoggedIn.mockImplementationOnce((req, res, next) => {
+            next();
+        })
+
+        const error = new Error('Invalid credentials!');
+        error.statusCode = 400;
+
+        userService.resetUserPassword.mockRejectedValue(error);
+
+        return request(app)
+            .post('/user/reset-password')
+            .send({email: 'no-such-email@abv.bg'})
+            .expect(400)
+            .then(response => {
+                expect(response.ok).toBe(false);
+                expect(response.body.message).toBe('Invalid credentials!');
+                expect(response.error).toBeTruthy();
             })
     })
 })
