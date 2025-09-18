@@ -250,7 +250,6 @@ describe('POST /quotes/add-quote', () => {
         
         isGuest.mockImplementationOnce((req, res, next) => {
             req.user = user;
-            req.body = quote;
             next();
         })
 
@@ -261,6 +260,7 @@ describe('POST /quotes/add-quote', () => {
 
         return request(app)
             .post('/quotes/add-quote')
+            .send(user)
             .expect(200)
             .then(response => {
                 expect(response.ok).toBe(true);
@@ -275,7 +275,6 @@ describe('POST /quotes/add-quote', () => {
 
         isGuest.mockImplementationOnce((req, res, next) => {
             req.user = user;
-            req.body = quote;
             next();
         })
 
@@ -284,6 +283,7 @@ describe('POST /quotes/add-quote', () => {
 
         return request(app)
             .post('/quotes/add-quote')
+            .send(user)
             .expect(500)
             .then(response => {
                 expect(response.ok).toBe(false);
