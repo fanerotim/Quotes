@@ -359,7 +359,6 @@ describe('PUT /quotes/edit-quote/:id', () => {
             .send(quote)
             .expect(500)
             .then(response => {
-                console.log(response);
                 expect(response.ok).toBe(false);
                 expect(response.error).toBeTruthy();
                 expect(response.body.message).toBe('Connection to DB failed');
@@ -390,7 +389,6 @@ describe('DELETE /quotes/delete-quote', () => {
             .send({id: user.id})
             .expect(401)
             .then(response => {
-                console.log(response);
                 expect(response.ok).toBe(false);
                 expect(response.error).toBeTruthy();
                 expect(response.body.message).toBe('You are not authorized to access this resource. Please log in!')
@@ -412,7 +410,6 @@ describe('DELETE /quotes/delete-quote', () => {
             .send({id: quote.id})
             .expect(200)
             .then(response => {
-                console.log(response);
                 expect(response.ok).toBe(true);
                 expect(response.body.message).toBe('Quote DELETED successfully.');
                 expect(response.error).toBe(false);
