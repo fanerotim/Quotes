@@ -195,7 +195,7 @@ const resetUserPassword = async (email) => {
     // TODO: REMOVE THIS AT SOME POINT / THINK ABOUT IT AND TEST FIRST
     if (!user) {
         const error = new Error('Invalid credentials!')
-        error.statusCode = 404;
+        error.statusCode = 400;
         throw error;
     }
 
