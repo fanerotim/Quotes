@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-
+    
     try {
         const quote = await quoteService.getQuote(id);
         return res.status(200).json(quote);
@@ -60,7 +60,7 @@ router.put('/edit-quote/:id', isGuest, async (req, res) => {
         //update quote
         const quote = await quoteService.updateQuote(id, author, text, category);
         //return updated quote
-        const updatedQuote = await quoteService.getQuote(id)
+        const updatedQuote = await quoteService.getQuote(id);
         return res.status(200).json(updatedQuote)
     } catch (err) {
         const status = err.statusCode || 500;
