@@ -294,3 +294,78 @@ describe('POST /user/reset-password', () => {
             })
     })
 })
+
+describe('POST /user/update-password', () => {
+    
+    const user = {
+        id: 1,
+        email: 'test@abv.bg',
+        password: 123
+    }
+    
+    test('returns 401 unauthorized', () => {
+        expect.assertions(3);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            return res.status(401).json({message: 'You are not authorized to access this resource. Please log in!'})
+        })
+
+        return request(app)
+            .post('/user/update-password')
+            .send({password: user.password})
+            .expect(401)
+            .then(response => {
+                expect(response.ok).toBe(false);
+                expect(response.body.message).toBe('You are not authorized to access this resource. Please log in!');
+                expect(response.error).toBeTruthy()
+            })
+    })
+
+    test('returns success message after password update', () => {
+        expect.assertions(3);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            req.user = user;
+            next();
+        })
+
+        const newPassword = 'newPass123';
+        userService.updatePassword.mockResolvedValue(newPassword);
+
+        return request(app)
+            .post('/user/update-password')
+            .send({password: user.password})
+            .expect(200)
+            .then(response => {
+                expect(response.ok).toBe(true);
+                expect(response.error).toBe(false);
+                expect(response.body.message).toBe('Password updated successfully!');
+            })
+    })
+
+    test('returns DB connection error', () => {
+        expect.assertions(3);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            req.user = user;
+            next();
+        })
+
+        const error = new Error('Connection to DB failed');
+        error.statusCode = 500;
+
+        userService.updatePassword.mockImplementationOnce(() => {
+            throw error;
+        });
+
+        return request(app)
+            .post('/user/update-password')
+            .send({password: user.password})
+            .expect(500)
+            .then(response => {
+                expect(response.ok).toBe(false);
+                expect(response.body.message).toBe('Connection to DB failed');
+                expect(response.error).toBeTruthy();
+            })
+    })
+})
