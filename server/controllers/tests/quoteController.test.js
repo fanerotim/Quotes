@@ -293,3 +293,78 @@ describe('POST /quotes/add-quote', () => {
             })
     })
 })
+
+describe('PUT /quotes/edit-quote/:id', () => {
+    
+    const quote = {
+        id: 23,
+        author: 'F. Dostoevsky',
+        text: 'And what`s strange, what would be marvelous, is not that God should really exist; the marvel is that such an idea, the idea of the necessity of God, could enter the head of such a savage, vicious beast as man.',
+        category: 'Fiction',
+        ownerId: 1
+    }
+
+    test('returns 401 unauthorized', () => {
+        expect.assertions(1);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            return res.status(401).json({message: 'You are not authorized to access this resource. Please log in!'})
+        })
+
+        return request(app)
+            .put('/quotes/edit-quote/:id')
+            .expect(401)
+            .then(response => {
+                expect(response.ok).toBe(false);
+            })
+    })
+
+    test('returns updated quote', () => {
+        expect.assertions(5);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            req.user = user;
+            next();
+        })
+
+        quoteService.updateQuote.mockResolvedValue(quote);
+        quoteService.getQuote.mockResolvedValue(quote);
+
+        return request(app)
+            .put('/quotes/edit-quote/:id')
+            .send(quote)
+            .expect(200)
+            .then(response => {
+                expect(response.ok).toBe(true);
+                expect(response.body).toBeTruthy();
+                expect(response.body.id).toBe(23);
+                expect(response.body.ownerId).toBe(1);
+                expect(response.error).toBeFalsy();
+            });
+    })
+
+    test('returns 500 internal server error', () => {
+        expect.assertions(4);
+
+        isGuest.mockImplementationOnce((req, res, next) => {
+            req.user = user;
+            next();
+        })
+
+        const error = new Error('Connection to DB failed')
+        quoteService.updateQuote.mockRejectedValue(error);
+
+        return request(app)
+            .put('/quotes/edit-quote/:id')
+            .send(quote)
+            .expect(500)
+            .then(response => {
+                console.log(response);
+                expect(response.ok).toBe(false);
+                expect(response.error).toBeTruthy();
+                expect(response.body.message).toBe('Connection to DB failed');
+                expect(response.body).toBeTruthy();
+            })
+    })
+})
+
