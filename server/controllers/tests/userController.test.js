@@ -77,3 +77,77 @@ describe('POST /user/register', () => {
             })
     })
 })
+
+describe('POST /user/login', () => {
+    const token = 'some.radodom.dummyJWTtoken';
+
+    const user = {
+        email: 'test@abv.bg',
+        password: '123'
+    }
+
+    test('returns 403 forbidden error', () => {
+        expect.assertions(3);
+
+        isLoggedIn.mockImplementationOnce((req, res, next) => {
+            return res.status(403).json({ message: 'You are already logged in. Resource Forbidden!' })
+        })
+
+        return request(app)
+            .post('/user/login')
+            .send(user)
+            .expect(403)
+            .then(response => {
+                expect(response.ok).toBe(false);
+                expect(response.body.message).toBe('You are already logged in. Resource Forbidden!')
+                expect(response.error).toBeTruthy();
+            })
+    })
+
+    test('returns user data after successful login', () => {
+        expect.assertions(4);
+
+        isLoggedIn.mockImplementationOnce((req, res, next) => {
+            next();
+        })
+
+        userService.login.mockResolvedValue(Object.assign(user, { token, id: 1 }));
+
+        return request(app)
+            .post('/user/login')
+            .send(user)
+            .expect(200)
+            .then(response => {
+                expect(response.ok).toBe(true)
+                expect(response.error).toBe(false);
+                expect(response.body.auth).toBe(token);
+                expect(response.body.email).toBe(user.email);
+            })
+    })
+
+    test('returns error if login details are incorrect or user does not exist', () => {
+        expect.assertions(3);
+
+        isLoggedIn.mockImplementationOnce((req, res, next) => {
+            next();
+        })
+
+        const error = new Error('Login details are incorrect. Please try again.');
+        error.statusCode = 400;
+
+        // userService.login.mockRejectedValue(error);
+        userService.login.mockImplementationOnce(() => {
+            throw error;
+        });
+
+        return request(app)
+            .post('/user/login')
+            .send(user)
+            .expect(400)
+            .then(response => {
+                expect(response.ok).toBe(false);
+                expect(response.error).toBeTruthy();
+                expect(response.body.message).toBe('Login details are incorrect. Please try again.')
+            })
+    })
+})
