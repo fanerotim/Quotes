@@ -30,7 +30,7 @@ const Quotes = () => {
             <h1>Welcome to my Quotes!</h1>
             {/* TODO: if no quotes, we get an empty array, so h1 tag below does not render: FIX THIS */}
             {quotes ? (
-                <ul>
+                <ul className='quotes_wrapper'>
                     {quotes.map(quote => (
                         <QuoteCard 
                             quote={quote}
