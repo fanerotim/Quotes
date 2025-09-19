@@ -2,7 +2,6 @@ const jwt = require('../lib/jwt');
 const userService = require('../services/userService');
 
 exports.auth = async (req, res, next) => {
-
     const accessToken = req.headers.accesstoken;
 
     if (!accessToken) {
@@ -18,10 +17,9 @@ exports.auth = async (req, res, next) => {
             error.statusCode = 401;
             throw error;
         }
-
+        
         const decodedToken = await jwt.verify(accessToken, process.env.JWT_SECRET);
         req.user = decodedToken;
-
         next();
     } catch (err) {
         req.user = null;
