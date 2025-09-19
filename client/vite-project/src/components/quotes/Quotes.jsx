@@ -2,6 +2,7 @@ import './Quotes.scss'
 import { useEffect, useState } from 'react';
 import useQuotes from '../../hooks/useQuotes';
 import { useNavigate } from 'react-router-dom';
+import QuoteCard from '../quote-card/QuoteCard'
 
 const Quotes = () => {
     const [quotes, setQuotes] = useState([]);
@@ -31,13 +32,9 @@ const Quotes = () => {
             {quotes ? (
                 <ul>
                     {quotes.map(quote => (
-                        <div key={quote.id}>
-                            <li>{quote.text}{quote.id}</li>
-                            <button
-                                onClick={() => clickHandler(quote.id)}>
-                                Show details
-                            </button>
-                        </div>
+                        <QuoteCard 
+                            quote={quote}
+                            clickHandler={clickHandler}/>
                     ))}
                 </ul>)
                 : <h1>Currently we do not have quotes to display</h1>}
