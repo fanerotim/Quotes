@@ -11,7 +11,7 @@ const Navigation = () => {
         <nav>
             {auth && (<span className='greeting'>Hello, {auth.email}</span>)}
             <NavLink to='/'>Home</NavLink>
-            <NavLink to='/quotes'>Quotes</NavLink>
+            <NavLink to='/quotes' end>Quotes</NavLink>
             {auth && (<NavLink to='/quotes/add-quote'>Add quote</NavLink>)}
             {!auth && (<NavLink to='/users/register'>Register</NavLink>)}
             {!auth && (<NavLink to='/users/login'>Login</NavLink>)}
