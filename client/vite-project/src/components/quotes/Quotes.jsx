@@ -32,7 +32,8 @@ const Quotes = () => {
             {quotes ? (
                 <ul className='quotes_wrapper'>
                     {quotes.map(quote => (
-                        <QuoteCard 
+                        <QuoteCard
+                            key={quote.id} 
                             quote={quote}
                             clickHandler={clickHandler}/>
                     ))}
