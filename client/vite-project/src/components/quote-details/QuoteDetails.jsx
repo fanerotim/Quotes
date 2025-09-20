@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import EditButton from "../buttons/edit-btn/EditButton";
 import DeleteButton from "../buttons/delete-btn/DeleteButton";
 import { useAuthContext } from '../../hooks/useAuthContext';
+import BackButton from './back-button/BackButton';
 
 const QuoteDetails = () => {
 
@@ -23,6 +24,7 @@ const QuoteDetails = () => {
 
     return (
         <section className="quote-details__container">
+            <BackButton/>
             <h1>Welcome to quote details page</h1>
             <h2>{quote?.text}</h2>
             <h3>{quote?.author}</h3>
