@@ -1,11 +1,26 @@
 import './Navigation.scss'
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Logout from '../logout/logout';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import { useEffect } from 'react';
+import { useHistoryContext } from '../../hooks/useHistoryContext';
+import BackButton from '../back-button/BackButton';
 
 const Navigation = () => {
 
     const { auth } = useAuthContext();
+
+    // listen for route changes and dispatch an action to update history context
+    const location = useLocation();
+    const currentLocation = location.pathname;
+    const { dispatch } = useHistoryContext();
+
+    useEffect(() => {
+        dispatch({
+            type: 'UPDATE-HISTORY',
+            payload: currentLocation
+        })
+    }, [location])
 
     return (
         <nav>
