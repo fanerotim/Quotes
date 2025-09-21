@@ -9,7 +9,7 @@ const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('accessToken'));
-
+  
         if (token) {
             dispatch({
                 type: 'LOGIN',
