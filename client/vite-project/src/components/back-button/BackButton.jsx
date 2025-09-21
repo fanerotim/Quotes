@@ -10,6 +10,7 @@ const BackButton = () => {
     let locationRef = useRef(1);
 
     const handleClick = () => {
+        // I know I can also use navigate(-1), but wanted to try and build my own BackButton functionality
         navigate({
             pathname: location[locationRef.current]
         });
