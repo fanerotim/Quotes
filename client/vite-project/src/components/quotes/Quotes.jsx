@@ -8,11 +8,14 @@ const Quotes = () => {
     const [quotes, setQuotes] = useState([]);
     const { getAllQuotes } = useQuotes();
     const navigate = useNavigate();
-    console.log(quotes);
+
     // THIS HANDLE IS HERE DURING DEV
     // BUTTON AND EVENT HANDLER NEED TO BE ABSTRACTED
     const clickHandler = (id) => {
-        navigate(`/quotes/${id}`)
+        navigate({
+            pathname: `/quotes/${id}}`,
+            state: { some: 'test' }
+        })
     }
 
     // TODO: TOO MANY RERENDERS; FIX THIS;
@@ -33,9 +36,9 @@ const Quotes = () => {
                 <ul className='quotes_wrapper'>
                     {quotes.map(quote => (
                         <QuoteCard
-                            key={quote.id} 
+                            key={quote.id}
                             quote={quote}
-                            clickHandler={clickHandler}/>
+                            clickHandler={clickHandler} />
                     ))}
                 </ul>)
                 : <h1>Currently we do not have quotes to display</h1>}

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import EditButton from "../buttons/edit-btn/EditButton";
 import DeleteButton from "../buttons/delete-btn/DeleteButton";
 import { useAuthContext } from '../../hooks/useAuthContext';
-import BackButton from './back-button/BackButton';
+import BackButton from '../back-button/BackButton';
 
 const QuoteDetails = () => {
 
@@ -15,7 +15,7 @@ const QuoteDetails = () => {
 
     // for dev purposes, for now I am only checking if the user is logged in, but eventually i would like to check if user is owner of the quote. other users cannot edit / delete
     const { auth } = useAuthContext();
-
+    
     useEffect(() => {
         getQuote(quoteId)
             .then(data => setQuote(data))

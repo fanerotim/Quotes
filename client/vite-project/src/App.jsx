@@ -14,8 +14,8 @@ import SessionExpired from './components/session-expired/SessionExpires';
 import { useAuthContext } from './hooks/useAuthContext';
 import UserProfile from './components/user-profile/UserProfile';
 
-function App() {
 
+function App() {
   const { sessionExpired } = useAuthContext();
 
   return (
@@ -41,7 +41,7 @@ function App() {
 
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
-      
+
       <Footer />
     </div>
   )
