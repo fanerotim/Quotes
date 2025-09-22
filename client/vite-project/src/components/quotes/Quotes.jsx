@@ -1,20 +1,31 @@
 import './Quotes.scss'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useQuotes from '../../hooks/useQuotes';
 import { useNavigate } from 'react-router-dom';
 import QuoteCard from '../quote-card/QuoteCard'
+
+// give it default value;
+let selectedQuoteId = 0;
 
 const Quotes = () => {
     const [quotes, setQuotes] = useState([]);
     const { getAllQuotes } = useQuotes();
     const navigate = useNavigate();
 
+    const quoteCardRefs = useRef(null);
+
+    if (!quoteCardRefs.current) {
+        quoteCardRefs.current = new Map();
+    }
+
     // THIS HANDLE IS HERE DURING DEV
     // BUTTON AND EVENT HANDLER NEED TO BE ABSTRACTED
     const clickHandler = (id) => {
+
+        selectedQuoteId = id;
+
         navigate({
-            pathname: `/quotes/${id}}`,
-            state: { some: 'test' }
+            pathname: `/quotes/${id}}`
         })
     }
 
@@ -24,6 +35,11 @@ const Quotes = () => {
         (async () => {
             const result = await getAllQuotes();
             setQuotes(result);
+
+            quoteCardRefs.current.get(selectedQuoteId)?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
         })();
 
     }, [])
@@ -36,6 +52,7 @@ const Quotes = () => {
                 <ul className='quotes_wrapper'>
                     {quotes.map(quote => (
                         <QuoteCard
+                            quoteCardRefs={quoteCardRefs.current}
                             key={quote.id}
                             quote={quote}
                             clickHandler={clickHandler} />
