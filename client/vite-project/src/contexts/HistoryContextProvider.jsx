@@ -5,7 +5,7 @@ export const HistoryContext = createContext(null);
 
 const HistoryContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(historyReducer, {location: []} )
-
+    
     return (
         <HistoryContext.Provider
             value={{ ...state, dispatch }}>
