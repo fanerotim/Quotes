@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useEditQuote from '../../hooks/useEditQuote';
 import useGetQuote from '../../hooks/useGetQuote';
 import { CATEGORIES } from '../../utils/genres';
+import BackButton from '../back-button/BackButton';
 
 const EditQuote = () => {
 
@@ -42,6 +43,7 @@ const EditQuote = () => {
 
     return (
         <section className='edit-quote__container'>
+            <BackButton/>
             <h1>Edit quote</h1>
 
             <form
