@@ -1,15 +1,18 @@
 export const historyReducer = (state, action) => {
 
     switch (action.type) {
-        case 'UPDATE-HISTORY': {
+        case 'ADD-ROUTE': {
 
-            const newState = { location: state.location.slice(0) }
             // we do not want to have two identical routes one after another
-            if (state.location[0] !== action.payload) {
-                newState.location.unshift(action.payload);
-            }
+            const isAdded = state.routes.includes(action.payload)
 
-            return newState
+            if (state.routes[state.routes.length - 1] !== action.payload && !isAdded) {
+                return { routes: [...state.routes, action.payload] }
+            }
+            return state;
+        }
+        case 'REMOVE-ROUTE': {
+            return { routes: state.routes.splice(0, state.routes.length - 1) }
         }
         default:
             return state
