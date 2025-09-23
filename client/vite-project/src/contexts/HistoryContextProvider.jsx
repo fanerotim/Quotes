@@ -4,8 +4,9 @@ import { historyReducer } from "../components/reducers/historyReducer";
 export const HistoryContext = createContext(null);
 
 const HistoryContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(historyReducer, {location: []} )
-    
+    // the '/' route is a fallback / default value if location [] is empty
+    const [state, dispatch] = useReducer(historyReducer, { routes: ['/'] })
+
     return (
         <HistoryContext.Provider
             value={{ ...state, dispatch }}>
