@@ -11,8 +11,11 @@ const BackButton = () => {
 
     const handleClick = () => {
         // I know I can also use navigate(-1), but wanted to try and build my own BackButton functionality
-        navigate({
-            pathname: location[locationRef.current]
+        // pass isBack in the state, so we can scroll to the item only if we are going back (and not opening quotes as a normal route in the nav)
+        navigate(location[locationRef.current], {
+            state: {
+                isBack: true
+            }
         });
 
         // here i use locationRef.current as index that i mapped to array item, which is the path to which I want to go back
