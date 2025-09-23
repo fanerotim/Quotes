@@ -4,7 +4,6 @@ import Logout from '../logout/logout';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useEffect } from 'react';
 import { useHistoryContext } from '../../hooks/useHistoryContext';
-import BackButton from '../back-button/BackButton';
 
 const Navigation = () => {
 
@@ -13,13 +12,25 @@ const Navigation = () => {
     // listen for route changes and dispatch an action to update history context
     const location = useLocation();
     const currentLocation = location.pathname;
+    // check if isBack flag is provided as we dispatch different action if that's the case
+    const isBack = location.state?.isBack;
     const { dispatch } = useHistoryContext();
 
     useEffect(() => {
+
+        // if back is present, when I will be removing the last item in the arr of routes
+        if (isBack) {
+            dispatch({
+                type: 'REMOVE-ROUTE',
+                payload: currentLocation
+            })
+        }
+
         dispatch({
-            type: 'UPDATE-HISTORY',
+            type: 'ADD-ROUTE',
             payload: currentLocation
         })
+
     }, [location])
 
     return (
