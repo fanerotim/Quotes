@@ -1,16 +1,25 @@
 import './Quotes.scss'
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useQuotes from '../../hooks/useQuotes';
-
 import QuoteCard from '../quote-card/QuoteCard';
 import useScroll from '../../hooks/useScroll';
+import useScrollContext from '../../hooks/useScrollContext';
 
 const Quotes = () => {
     const [quotes, setQuotes] = useState([]);
     const { getAllQuotes } = useQuotes();
-    
+
     const { createMap, scrollToItem } = useScroll();
     const mapRefs = createMap();
+    const { itemId, updateItemId } = useScrollContext();
+
+    const navigate = useNavigate();
+
+    const clickHandler = (id) => {
+        updateItemId(id)
+        navigate(`/quotes/${id}}`)
+    }
 
     // TODO: TOO MANY RERENDERS; FIX THIS;
     useEffect(() => {
@@ -18,7 +27,7 @@ const Quotes = () => {
         (async () => {
             const result = await getAllQuotes();
             setQuotes(result);
-            scrollToItem() 
+            scrollToItem(itemId);
         })();
 
     }, [])
@@ -33,7 +42,8 @@ const Quotes = () => {
                         <QuoteCard
                             mapRefs={mapRefs}
                             key={quote.id}
-                            quote={quote}/>
+                            quote={quote}
+                            onCardClick={clickHandler} />
                     ))}
                 </ul>)
                 : <h1>Currently we do not have quotes to display</h1>}
