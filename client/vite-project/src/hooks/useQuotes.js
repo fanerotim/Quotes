@@ -3,7 +3,7 @@ import { useAuthContext } from "./useAuthContext";
 
 const useQuotes = () => {
 
-    const {dispatch} = useAuthContext();
+    const { dispatch } = useAuthContext();
 
     const getAllQuotes = async () => {
 
