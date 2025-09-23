@@ -1,18 +1,6 @@
 import './QuoteCard.scss';
-import { useNavigate } from 'react-router-dom';
-import useScroll from '../../hooks/useScroll';
 
-const QuoteCard = ({ quote, mapRefs }) => {
-
-    const navigate = useNavigate();
-    const { setQuoteId } = useScroll();
-
-    const clickHandler = (id) => {
-        setQuoteId(id);
-        navigate({
-            pathname: `/quotes/${id}}`
-        })
-    }
+const QuoteCard = ({ quote, mapRefs, onCardClick }) => {
 
     return (
         <article
@@ -21,7 +9,7 @@ const QuoteCard = ({ quote, mapRefs }) => {
             }}>
             <li>{quote.text}</li>
             <h2>{quote.author}</h2>
-            <button onClick={() => clickHandler(quote.id)}>
+            <button onClick={() => onCardClick(quote.id)}>
                 Show details
             </button>
         </article>
