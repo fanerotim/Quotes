@@ -12,6 +12,7 @@ const useScroll = () => {
     }
 
     const scrollToItem = (id) => {
+        
         quoteCardRefs.current.get(id)?.scrollIntoView({
             behavior: 'smooth',
             block: 'center'

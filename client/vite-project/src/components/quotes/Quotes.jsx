@@ -23,7 +23,7 @@ const Quotes = () => {
     const clickHandler = (id) => {
         // update scroll context's itemId upon route change (so we know where to go back to afterwards)
         updateItemId(id)
-        navigate(`/quotes/${id}}`)
+        navigate(`/quotes/${id}`)
     }
 
     // TODO: TOO MANY RERENDERS; FIX THIS;
