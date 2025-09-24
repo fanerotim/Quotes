@@ -1,15 +1,20 @@
 import useDelete from "../../../hooks/useDelete";
+import DeleteModal from "../../delete-modal/DeleteModal";
 
 const DeleteButton = ({ quoteId }) => {
 
     const { deleteOne } = useDelete();
 
     const clickHandler = async () => {
-        const deletedItem = await deleteOne('delete-quote', {"id": quoteId})
+        console.log('delete')
+        // const deletedItem = await deleteOne('delete-quote', {"id": quoteId})
     }
 
     return (
-        <button onClick={clickHandler}>Delete</button>
+        <>
+            <DeleteModal />
+            <button onClick={clickHandler}>Delete</button>
+        </>
     )
 }
 
