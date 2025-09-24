@@ -1,19 +1,25 @@
-import useDelete from "../../../hooks/useDelete";
 import DeleteModal from "../../delete-modal/DeleteModal";
+import useDeleteModal from '../../../hooks/useDeleteModal'
 
-const DeleteButton = ({ quoteId }) => {
+const DeleteButton = () => {
 
-    const { deleteOne } = useDelete();
+    const { 
+        isOpen,
+        toggleIsOpen, 
+        onDelete,
+    } = useDeleteModal();
 
-    const clickHandler = async () => {
-        console.log('delete')
-        // const deletedItem = await deleteOne('delete-quote', {"id": quoteId})
-    }
 
     return (
         <>
-            <DeleteModal />
-            <button onClick={clickHandler}>Delete</button>
+            <DeleteModal
+                isOpen={isOpen}
+                onDelete={onDelete}
+                toggleIsOpen={toggleIsOpen} />
+            <button
+                onClick={() => toggleIsOpen((prevIsOpen) => !prevIsOpen)}>
+                Delete
+            </button>
         </>
     )
 }
