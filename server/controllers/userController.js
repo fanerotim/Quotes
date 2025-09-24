@@ -74,7 +74,6 @@ router.post('/update-password', isGuest, async (req, res) => {
     } catch (err) {
         return res.status(err.statusCode).json({message: err.message})
     }
-
 })
 
 module.exports = router;
