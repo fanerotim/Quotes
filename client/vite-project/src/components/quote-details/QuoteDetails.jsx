@@ -15,7 +15,7 @@ const QuoteDetails = () => {
 
     // for dev purposes, for now I am only checking if the user is logged in, but eventually i would like to check if user is owner of the quote. other users cannot edit / delete
     const { auth } = useAuthContext();
-    
+
     useEffect(() => {
         getQuote(quoteId)
             .then(data => setQuote(data))
@@ -24,7 +24,7 @@ const QuoteDetails = () => {
 
     return (
         <section className="quote-details__container">
-            <BackButton/>
+            <BackButton />
             <h1>Welcome to quote details page</h1>
             <h2>{quote?.text}</h2>
             <h3>{quote?.author}</h3>
