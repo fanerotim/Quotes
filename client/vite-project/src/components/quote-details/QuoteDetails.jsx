@@ -28,7 +28,7 @@ const QuoteDetails = () => {
             <h1>Welcome to quote details page</h1>
             <h2>{quote?.text}</h2>
             <h3>{quote?.author}</h3>
-            {auth && <DeleteButton quoteId={quote?.id} />}
+            {auth && <DeleteButton />}
             <br />
             {auth && <EditButton id={quote?.id} />}
         </section>
