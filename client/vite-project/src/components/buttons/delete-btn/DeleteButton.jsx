@@ -3,12 +3,11 @@ import useDeleteModal from '../../../hooks/useDeleteModal'
 
 const DeleteButton = () => {
 
-    const { 
+    const {
         isOpen,
-        toggleIsOpen, 
+        toggleIsOpen,
         onDelete,
     } = useDeleteModal();
-
 
     return (
         <>
