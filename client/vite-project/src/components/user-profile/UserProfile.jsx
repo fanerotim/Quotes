@@ -20,7 +20,7 @@ const UserProfile = () => {
         <section className='page__wrapper'>
             {/* TODO; give auth default values as if it's not optionally chained app breaks */}
             <p>Welcome, {auth?.email}!</p>
-            <UpdatePassword/>
+            <UpdatePassword />
             <h1>Please find the quotes you have added below:</h1>
             {/* TODO: fix this. It would be better if we can not use conditional chaining */}
             {userQuotes?.map((quote) => (
