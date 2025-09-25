@@ -190,7 +190,7 @@ const resetUserPassword = async (email) => {
 
     const userSearchResult = await hasUser(email);
     const user = userSearchResult[0];
-
+    
     // check if user exists, not really needed as I have a route guard that checks if user is logged in and they cannot log in if user does not exist in db, but will keep this for now
     // TODO: REMOVE THIS AT SOME POINT / THINK ABOUT IT AND TEST FIRST
     if (!user) {
