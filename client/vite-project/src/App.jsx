@@ -13,7 +13,7 @@ import Login from './components/login/Login';
 import SessionExpired from './components/session-expired/SessionExpires';
 import { useAuthContext } from './hooks/useAuthContext';
 import UserProfile from './components/user-profile/UserProfile';
-
+import ResetPassword from './components/reset-password/ResetPassword';
 
 function App() {
   const { sessionExpired } = useAuthContext();
@@ -30,6 +30,7 @@ function App() {
           <Route path='register' element={<Register />}></Route>
           <Route path='login' element={<Login />}></Route>
           <Route path='user-profile' element={<UserProfile />}></Route>
+          <Route path='reset-password' element={<ResetPassword/>}></Route>
         </Route>
 
         <Route path='quotes'>

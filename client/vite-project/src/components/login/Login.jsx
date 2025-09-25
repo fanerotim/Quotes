@@ -2,6 +2,7 @@ import './Login.scss'
 import useForm from '../../hooks/useForm';
 import useLogin from '../../hooks/useLogin';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const initialValues = {
     email: '',
@@ -50,6 +51,9 @@ const Login = () => {
                         placeholder='Password' />
                 </div>
                 {error && <p className='errorMessage'>{error}</p>}
+                <Link to='/users/reset-password'>Reset password</Link>
+                {/* I am still focused on functionality, so writing a <br/> for now as styling will be implemented at last stage */}
+                <br/> 
                 <button disabled={isLoading}>Submit</button>
             </form>
         </section>
