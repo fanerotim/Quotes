@@ -21,6 +21,7 @@ const useUpdatePassword = () => {
         setIsOpen((isOpen) => !isOpen)
     }
 
+    // TODO: implement this in a useEffect, so that we can clear the timeout if the user navigates away from this page (component unmounts, but keeping it like so for now)
     const handleSuccessfulUpdate = () => {
         // show success message if we got to this fn
         setIsSubmitted(true);
@@ -29,14 +30,12 @@ const useUpdatePassword = () => {
         setIsOpen(false);
         
         // set timeout, so user can have some time to read the message and then proceed with logic
-        const timeout = setTimeout(() => {
+        setTimeout(() => {
             // logout user as they changed their password
             dispatch({
                 type: 'LOGOUT'
             })
 
-            // clear timeout
-            clearTimeout(timeout);
             // navigate user to login page again, so they can login
             navigate('/users/login');
         }, 5000)
