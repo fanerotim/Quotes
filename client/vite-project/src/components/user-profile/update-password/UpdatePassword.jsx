@@ -13,12 +13,13 @@ const UpdatePassword = () => {
         isOpen,
         toggleIsOpen,
         handleSubmit,
-        isSubmitted } = useUpdatePassword();
+        isSubmitted,
+        error,
+        isLoading } = useUpdatePassword();
 
     return (
         <>
-            <button onClick={toggleIsOpen}>{isOpen ? 'Close form' : 'Click here to update your password'}</button>
-
+            {!isSubmitted && <button onClick={toggleIsOpen}>{isOpen ? 'Close form' : 'Click here to update your password'}</button>}
             {isOpen && <form
                 onSubmit={(e) => handleSubmit(e, values)}
             >
@@ -33,9 +34,10 @@ const UpdatePassword = () => {
                 />
                 {/* temporary <br/> - have not started styling yet */}
                 <br />
-                <button>Submit</button>
+                <button disabled={isLoading}>Submit</button>
+                {error && <p>{error}</p>}
             </form>}
-            {isSubmitted && <h1>Successfully updated your password</h1>}
+            {isSubmitted && <p>Password successfully updated. Please log in again with the new password.</p>}
         </>
     )
 }
