@@ -16,7 +16,8 @@ const useLoadMoreQuotes = () => {
         try {
             const nextQuotes = await requestQuotes(offset, limit);
 
-            if (nextQuotes.length < 1) {
+            // think about and improve this logic - think about isLoading state. should i use reducer?
+            if (nextQuotes.length < limit) {
                 setHasMore(false);
             }
             updateQuotes(nextQuotes);
