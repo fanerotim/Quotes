@@ -15,6 +15,27 @@ const getAll = () => {
     })
 }
 
+const getQuotes = (offset, limit) => {
+
+    // TODO; write proper validation. keeping it like this for now as if any of those value are 0 (which is valid), !offset or !limit will be false and it breaks app
+    if (offset === undefined || limit === undefined) {
+        const error = new Error('Something went wrong. Please try again.');
+        error.statusCode = 400;
+        throw error;
+    }
+
+    return new Promise((resolve, reject) => {
+        const sql = `SELECT * FROM quotes LIMIT ?, ?`
+
+        db.query(sql, [offset, limit], (err, result) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(result);
+        })
+    })
+}
+
 const getQuote = (id) => {
     
     if (!id) {
@@ -135,6 +156,7 @@ const deleteQuote = (id) => {
 
 module.exports = {
     getAll,
+    getQuotes,
     getQuote,
     getUserQuotes,
     addQuote,
