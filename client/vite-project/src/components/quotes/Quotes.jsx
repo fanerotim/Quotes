@@ -5,17 +5,16 @@ import useQuotes from '../../hooks/useQuotes';
 
 const Quotes = () => {
 
-    const { 
-        quotes, 
-        mapRefs, 
-        clickHandler 
+    const {
+        quotes,
+        mapRefs,
+        clickHandler,
     } = useQuotes();
 
     return (
         <section className='quotes-container'>
             <h1>Welcome to my Quotes!</h1>
-            {/* TODO: if no quotes, we get an empty array, so h1 tag below does not render: FIX THIS */}
-            {quotes ? (
+            {quotes.length > 0 ? (
                 <ul className='quotes_wrapper'>
                     {quotes.map(quote => (
                         <QuoteCard
