@@ -14,12 +14,25 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-    
+
     try {
         const quote = await quoteService.getQuote(id);
         return res.status(200).json(quote);
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ message: err.message });
+    }
+})
+
+router.post('/get-quotes', async (req, res) => {
+    const { offset, limit } = req.body;
+
+    try {
+        const quotes = await quoteService.getQuotes(offset, limit);
+        return res.status(200).json(quotes);
+    } catch(err) {
+        const status = res.statusCode || 500;
+        return res.status(status).json({message: err.message});
     }
 })
 
