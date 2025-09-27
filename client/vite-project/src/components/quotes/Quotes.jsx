@@ -14,7 +14,7 @@ const Quotes = () => {
     return (
         <section className='quotes-container'>
             <h1>Welcome to my Quotes!</h1>
-            {quotes.length > 0 ? (
+            {quotes?.length > 0 ? (
                 <ul className='quotes_wrapper'>
                     {quotes.map(quote => (
                         <QuoteCard
