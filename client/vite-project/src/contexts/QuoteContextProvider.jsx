@@ -3,14 +3,13 @@ import { useEffect } from "react";
 import useInitialQuotes from "../hooks/useInitialQuotes";
 
 const { getInitialQuotes } = useInitialQuotes();
-const initialQuotes = getInitialQuotes();
 
 export const QuoteContext = createContext();
 
 export const QuoteContextProvider = ({ children }) => {
 
     // everything works now apart from setting initial quotes. it was overriding setting new quotes;
-    const [quotes, setQuotes] = useState(initialQuotes);
+    const [quotes, setQuotes] = useState([]);
 
     const updateQuotes = (newQuotes) => {
         setQuotes(newQuotes);
@@ -18,6 +17,11 @@ export const QuoteContextProvider = ({ children }) => {
 
     useEffect(() => {
         const quotesInLocalStorage = JSON.parse(localStorage.getItem('quotes'));
+
+        if (!quotesInLocalStorage) {
+            getInitialQuotes();
+        }
+
         setQuotes(quotesInLocalStorage);
     }, [])
 
