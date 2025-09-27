@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import { useEffect } from "react";
 import useInitialQuotes from "../hooks/useInitialQuotes";
 
-const { getInitialQuotes } = useInitialQuotes();
+const { setInitialQuotes } = useInitialQuotes();
 
 export const QuoteContext = createContext();
 
@@ -19,10 +19,11 @@ export const QuoteContextProvider = ({ children }) => {
         const quotesInLocalStorage = JSON.parse(localStorage.getItem('quotes'));
 
         if (!quotesInLocalStorage) {
-            getInitialQuotes();
+            setInitialQuotes();
         }
-
+        
         setQuotes(quotesInLocalStorage);
+        
     }, [])
 
     return (
