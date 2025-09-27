@@ -5,8 +5,8 @@ const LoadMoreQuotes = () => {
 
     const {
         hasMore,
-        clickHandler }
-        = useLoadMoreQuotes();
+        clickHandler
+    } = useLoadMoreQuotes();
 
     return (
         <button

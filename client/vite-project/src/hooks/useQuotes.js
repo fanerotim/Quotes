@@ -24,7 +24,6 @@ const useQuotes = () => {
     }
 
     useEffect(() => {
-
         if (isBack) {
             scrollToItem(itemId);
         }
