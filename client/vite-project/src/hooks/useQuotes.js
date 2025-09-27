@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useScroll from "./useScroll";
 import useScrollContext from "./useScrollContext";
 import { useLocation } from "react-router-dom";
-import useRequestMoreQuotes from "./useRequestMoreQuotes";
+import useQuoteContext from "./useQuoteContext";
 
 const useQuotes = () => {
-    const [quotes, setQuotes] = useState([]);
-    const { requestQuotes } = useRequestMoreQuotes();
-    const offset = 0;
-    const limit = 10;
+    const { quotes } = useQuoteContext();
 
     const { createMap, scrollToItem } = useScroll();
     const mapRefs = createMap();
@@ -26,19 +23,11 @@ const useQuotes = () => {
         navigate(`/quotes/${id}`)
     }
 
-    // TODO: TOO MANY RERENDERS; FIX THIS;
     useEffect(() => {
 
-        (async () => {
-            const result = await requestQuotes(offset, limit);
-            setQuotes(result);
-
-            // scroll to quote that was accessed before if user is clicking back button
-            if (isBack) {
-                scrollToItem(itemId);
-            }
-        })();
-
+        if (isBack) {
+            scrollToItem(itemId);
+        }
     }, [])
 
     return {
