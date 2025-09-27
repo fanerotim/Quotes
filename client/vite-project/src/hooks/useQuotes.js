@@ -4,9 +4,11 @@ import useScroll from "./useScroll";
 import useScrollContext from "./useScrollContext";
 import { useLocation } from "react-router-dom";
 import useQuoteContext from "./useQuoteContext";
+import useInitialQuotes from './useInitialQuotes';
 
 const useQuotes = () => {
-    const { quotes } = useQuoteContext();
+    const { quotes, updateQuotes } = useQuoteContext();
+    const { getQuotesFromLocalStorage } = useInitialQuotes();
 
     const { createMap, scrollToItem } = useScroll();
     const mapRefs = createMap();
@@ -24,6 +26,12 @@ const useQuotes = () => {
     }
 
     useEffect(() => {
+
+        // check what quotes we have in localStorage (current cache) and update context state
+        const currentQuotes = getQuotesFromLocalStorage();
+        updateQuotes(currentQuotes);
+
+        // check if user is navigating back and scroll to the quote the last opened
         if (isBack) {
             scrollToItem(itemId);
         }
