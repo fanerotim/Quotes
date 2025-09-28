@@ -1,6 +1,6 @@
 import useRequestMoreQuotes from "./useRequestMoreQuotes";
 
-const useInitialQuotes = () => {
+const useLocalStorageQuotes = () => {
 
     // make api calls with this method - maybe rename it to be clear
     const { requestQuotes } = useRequestMoreQuotes();
@@ -9,12 +9,11 @@ const useInitialQuotes = () => {
     const offset = 0;
     const limit = 10;
 
-    const setInitialQuotes = async () => {
+    const setInitialQuotesInLocalStorage = async () => {
 
         try {
             const initialQuotes = await requestQuotes(offset, limit);
             localStorage.setItem('quotes', JSON.stringify(initialQuotes));
-            // setInitialQuotesinLocalStorage(initialQuotes)
         } catch (err) {
             console.error(err);
             throw err.message
@@ -26,22 +25,22 @@ const useInitialQuotes = () => {
         return localStorageQuotes;
     }
 
-    const setQuotesinLocalStorage = (newQuotes) => {
-        // get existing quotes in local storage
-        const existingQuotes = JSON.parse(localStorage.getItem('quotes'));
-        // update local storage by adding new quotes
-        const newQuoqtes = [...existingQuotes, ...newQuotes];
-        localStorage.setItem('quotes', JSON.stringify(newQuoqtes));
-        const updatedLocalStorageQuotes = JSON.parse(localStorage.getItem('quotes'));
-        // return updated quotes, so context can be updated
+    const updateLocalStorageQuotes = (nextQuotes) => {
+        // get current quotes in local storage
+        const currentQuotesInLocalStorage = getQuotesFromLocalStorage();
+        // update quotes in local storage
+        localStorage.setItem('quotes', JSON.stringify([...currentQuotesInLocalStorage, ...nextQuotes]));
+        // get updated local storage quotes
+        const updatedLocalStorageQuotes = getQuotesFromLocalStorage();
+        // return updated quotes, so quote context can be updated
         return updatedLocalStorageQuotes;
     }
 
     return {
-        setInitialQuotes,
-        setQuotesinLocalStorage,
+        setInitialQuotesInLocalStorage,
+        updateLocalStorageQuotes,
         getQuotesFromLocalStorage
     }
 }
 
-export default useInitialQuotes;
+export default useLocalStorageQuotes;
