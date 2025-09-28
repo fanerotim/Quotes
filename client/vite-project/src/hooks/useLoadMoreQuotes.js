@@ -1,15 +1,16 @@
 import useRequestMoreQuotes from "./useRequestMoreQuotes";
 import useQuoteContext from '../hooks/useQuoteContext';
 import { useState } from "react";
-import useInitialQuotes from '../hooks/useInitialQuotes';
+import useLocalStorageQuotes from './useLocalStorageQuotes';
 
 const useLoadMoreQuotes = () => {
 
     const { requestQuotes } = useRequestMoreQuotes();
     const { quotes, updateQuotes } = useQuoteContext();
     const [hasMore, setHasMore] = useState(true);
-    const { setQuotesinLocalStorage } = useInitialQuotes();
+    const { updateLocalStorageQuotes } = useLocalStorageQuotes();
 
+    // conditional chaining kept in case someone decide to delete localStorage manually
     const offset = quotes?.length;
     const limit = 10;
 
@@ -17,8 +18,9 @@ const useLoadMoreQuotes = () => {
 
         try {
             const nextQuotes = await requestQuotes(offset, limit);
-            const updatedLocalStorageQuotes = setQuotesinLocalStorage(nextQuotes);
+            const updatedLocalStorageQuotes = updateLocalStorageQuotes(nextQuotes);
             updateQuotes(updatedLocalStorageQuotes);
+
             // think about and improve this logic - think about isLoading state. should i use reducer?
             if (nextQuotes.length < limit) {
                 setHasMore(false);

@@ -1,8 +1,11 @@
 import { createContext, useState } from "react";
 import { useEffect } from "react";
-import useInitialQuotes from "../hooks/useInitialQuotes";
+import useLocalStorageQuotes from "../hooks/useLocalStorageQuotes";
 
-const { setInitialQuotes } = useInitialQuotes();
+const { 
+    setInitialQuotesInLocalStorage,
+    getQuotesFromLocalStorage } 
+    = useLocalStorageQuotes();
 
 export const QuoteContext = createContext();
 
@@ -16,13 +19,13 @@ export const QuoteContextProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        const quotesInLocalStorage = JSON.parse(localStorage.getItem('quotes'));
+        const currentQuotesInLocalStorage = getQuotesFromLocalStorage();
 
-        if (!quotesInLocalStorage) {
-            setInitialQuotes();
+        if (!currentQuotesInLocalStorage) {
+            setInitialQuotesInLocalStorage();
         }
         
-        setQuotes(quotesInLocalStorage);
+        setQuotes(currentQuotesInLocalStorage);
         
     }, [])
 

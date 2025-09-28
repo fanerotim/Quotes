@@ -4,11 +4,11 @@ import useScroll from "./useScroll";
 import useScrollContext from "./useScrollContext";
 import { useLocation } from "react-router-dom";
 import useQuoteContext from "./useQuoteContext";
-import useInitialQuotes from './useInitialQuotes';
+import useLocalStorageQuotes from './useLocalStorageQuotes';
 
 const useQuotes = () => {
     const { quotes, updateQuotes } = useQuoteContext();
-    const { getQuotesFromLocalStorage } = useInitialQuotes();
+    const { getQuotesFromLocalStorage } = useLocalStorageQuotes();
 
     const { createMap, scrollToItem } = useScroll();
     const mapRefs = createMap();
