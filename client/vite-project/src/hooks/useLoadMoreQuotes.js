@@ -19,6 +19,7 @@ const useLoadMoreQuotes = () => {
         try {
             const nextQuotes = await requestQuotes(offset, limit);
             const updatedLocalStorageQuotes = updateLocalStorageQuotes(nextQuotes);
+            // update quotes context state
             updateQuotes(updatedLocalStorageQuotes);
 
             // think about and improve this logic - think about isLoading state. should i use reducer?

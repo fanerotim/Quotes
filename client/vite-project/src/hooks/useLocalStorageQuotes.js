@@ -5,7 +5,7 @@ const useLocalStorageQuotes = () => {
     // make api calls with this method - maybe rename it to be clear
     const { requestQuotes } = useRequestMoreQuotes();
 
-    // hardcoded values as those are the initial values, we control them from here
+    // hardcoded values as those are the initial quotes; for now we control them from here
     const offset = 0;
     const limit = 10;
 
