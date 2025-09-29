@@ -1,17 +1,17 @@
 const useHasMoreQuotes = () => {
 
-    const hasMoreQuotesInDb = () => {
-        const hasMore = JSON.parse(localStorage.getItem('hasMore')) ? true : false;
-        return hasMore;
+    const setHasMoreStatus = (status) => {
+        localStorage.setItem('hasMore', JSON.stringify(status));
     }
 
-    const setInitialStatusOfHasMoreQuotesInDb = (hasMore) => {
-        localStorage.setItem('hasMore', JSON.stringify({hasMore}))
+    const getHasMoreStatus = () => {
+        const hasMore = JSON.parse(localStorage.getItem('hasMore')) ? true : false;
+        return hasMore ? true : false;
     }
 
     return {
-        hasMoreQuotesInDb,
-        setInitialStatusOfHasMoreQuotesInDb
+        setHasMoreStatus,
+        getHasMoreStatus,
     }
 }
 
