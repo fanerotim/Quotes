@@ -1,14 +1,18 @@
 import useRequestMoreQuotes from "./useRequestMoreQuotes";
 import useQuoteContext from '../hooks/useQuoteContext';
-import { useState } from "react";
 import useLocalStorageQuotes from './useLocalStorageQuotes';
+import useHasMoreQuotes from './useHasMoreQuotes';
 
 const useLoadMoreQuotes = () => {
 
     const { requestQuotes } = useRequestMoreQuotes();
     const { quotes, updateQuotes } = useQuoteContext();
-    const [hasMore, setHasMore] = useState(true);
     const { updateLocalStorageQuotes } = useLocalStorageQuotes();
+    const {
+        getHasMoreStatus,
+        setHasMoreStatus
+    }
+        = useHasMoreQuotes();
 
     // conditional chaining kept in case someone decide to delete localStorage manually
     const offset = quotes?.length;
@@ -22,9 +26,9 @@ const useLoadMoreQuotes = () => {
             // update quotes context state
             updateQuotes(updatedLocalStorageQuotes);
 
-            // think about and improve this logic - think about isLoading state. should i use reducer?
+            // if returned quotes are less than limit, then there are no more quotes in db atm and thus we want to disable 'load more' btn
             if (nextQuotes.length < limit) {
-                setHasMore(false);
+                setHasMoreStatus(false);
             }
 
         } catch (err) {
@@ -33,8 +37,7 @@ const useLoadMoreQuotes = () => {
     }
 
     return {
-        clickHandler,
-        hasMore
+        clickHandler
     }
 }
 
