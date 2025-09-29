@@ -1,9 +1,13 @@
 import useRequestMoreQuotes from "./useRequestMoreQuotes";
+import useHasMoreQuotes from "./useHasMoreQuotes";
 
 const useLocalStorageQuotes = () => {
 
     // make api calls with this method - maybe rename it to be clear
     const { requestQuotes } = useRequestMoreQuotes();
+
+    // set initial status of hasMore flag in localStorage
+    const { setHasMoreStatus } = useHasMoreQuotes();
 
     // hardcoded values as those are the initial quotes; for now we control them from here
     const offset = 0;
@@ -14,6 +18,12 @@ const useLocalStorageQuotes = () => {
         try {
             const initialQuotes = await requestQuotes(offset, limit);
             localStorage.setItem('quotes', JSON.stringify(initialQuotes));
+
+            // set initial status of hasMore (controls load more quotes button
+            initialQuotes.length < limit
+                ? setHasMoreStatus(false)
+                : setHasMoreStatus(true);
+
         } catch (err) {
             console.error(err);
             throw err.message
@@ -39,7 +49,7 @@ const useLocalStorageQuotes = () => {
     return {
         setInitialQuotesInLocalStorage,
         updateLocalStorageQuotes,
-        getQuotesFromLocalStorage
+        getQuotesFromLocalStorage,
     }
 }
 
