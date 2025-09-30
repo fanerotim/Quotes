@@ -2,15 +2,16 @@ const router = require('express').Router();
 const quoteService = require('../services/quoteService');
 const { isGuest } = require('../route-guards/isGuest');
 
-router.get('/', async (req, res) => {
+// this is no longer being used, but keeping in for now;
+// router.get('/', async (req, res) => {
 
-    try {
-        const quotes = await quoteService.getAll();
-        return res.status(200).json(quotes);
-    } catch (err) {
-        return res.status(500).json({ message: err.message });
-    }
-})
+//     try {
+//         const quotes = await quoteService.getAll();
+//         return res.status(200).json(quotes);
+//     } catch (err) {
+//         return res.status(500).json({ message: err.message });
+//     }
+// })
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
@@ -30,8 +31,20 @@ router.post('/get-quotes', async (req, res) => {
     try {
         const quotes = await quoteService.getQuotes(offset, limit);
         return res.status(200).json(quotes);
-    } catch(err) {
+    } catch (err) {
         const status = res.statusCode || 500;
+        return res.status(status).json({ message: err.message });
+    }
+})
+
+router.post('/search-quotes', async (req, res) => {
+    const { searchText } = req.body;
+    
+    try {
+        const searchResult = await quoteService.getSearchedQuotes(searchText);
+        return res.status(200).json(searchResult);
+    } catch (err) {
+        const status = err.statuscode || 500;
         return res.status(status).json({message: err.message});
     }
 })
