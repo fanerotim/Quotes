@@ -9,7 +9,7 @@ const initialValues = {
 const Search = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { handleSubmit } = useSearch();
+    const { handleSubmit, error } = useSearch();
 
     return (
         <div>
@@ -25,6 +25,7 @@ const Search = () => {
                     type="text" />
                 <button>Search</button>
             </form>
+            {error && <p>{error}</p>}
         </div>
     )
 }
