@@ -1,6 +1,7 @@
 import './Quotes.scss'
 import QuoteCard from '../quote-card/QuoteCard';
 import LoadMoreQuotes from '../load-more-quotes/LoadMoreQuotes';
+import Search from '../search/Search';
 import useQuotes from '../../hooks/useQuotes';
 
 const Quotes = () => {
@@ -13,6 +14,7 @@ const Quotes = () => {
 
     return (
         <section className='quotes-container'>
+            <Search/>
             <h1>Welcome to my Quotes!</h1>
             {quotes?.length > 0 ? (
                 <ul className='quotes_wrapper'>
