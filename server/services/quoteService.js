@@ -77,6 +77,24 @@ const getUserQuotes = (userId) => {
     })
 }
 
+const getSearchedQuotes = async (searchText) => {
+    return new Promise((resolve, reject) => {
+        // this query does not work for now. debug it and fix it;
+        // LIKE does not work with ? (parameter placeholder out of the box);
+        const sql = `
+            SELECT * 
+            FROM quotes
+            WHERE LOWER(author) LIKE LOWER(?)`
+
+        db.query(sql, [searchText], (err, result) => {
+            if (err) {
+                return reject({err})
+            }
+            return resolve(result);
+        })
+    })
+}
+
 const addQuote = async (author, text, category, ownerId) => {
     // validate input / do not accept empty fields
     validateInputs([author, text, category])
@@ -159,6 +177,7 @@ module.exports = {
     getQuotes,
     getQuote,
     getUserQuotes,
+    getSearchedQuotes,
     addQuote,
     updateQuote,
     deleteQuote,
