@@ -79,12 +79,10 @@ const getUserQuotes = (userId) => {
 
 const getSearchedQuotes = async (searchText) => {
     return new Promise((resolve, reject) => {
-        // this query does not work for now. debug it and fix it;
-        // LIKE does not work with ? (parameter placeholder out of the box);
         const sql = `
             SELECT * 
             FROM quotes
-            WHERE LOWER(author) LIKE LOWER(?)`
+            WHERE LOWER(author) LIKE CONCAT('%', LOWER(?), '%')`
 
         db.query(sql, [searchText], (err, result) => {
             if (err) {
