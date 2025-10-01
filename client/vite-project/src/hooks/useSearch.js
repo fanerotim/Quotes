@@ -1,11 +1,13 @@
 import { useState } from "react";
 import validateInputs from '../utils/validateInputs';
 import useRequestSearch from "./useRequestSearch";
+import useQuoteContext from "./useQuoteContext";
 
 const useSearch = () => {
 
     const [error, setError] = useState(null);
     const { requestSearch } = useRequestSearch();
+    const { updateQuotes } = useQuoteContext();
 
     const handleSubmit = async (e, values) => {
         e.preventDefault();
@@ -17,7 +19,8 @@ const useSearch = () => {
 
             //make api request
             const searchedQuotes = await requestSearch(values);
-            console.log(searchedQuotes);
+            // update quotes state in Quote context, but think if it will be better to update local storage as if I open details of a quote and then come back to quotes page my serach result disappears
+            updateQuotes(searchedQuotes);
             // return result
             return searchedQuotes;
         } catch (err) {
