@@ -1,6 +1,7 @@
 import './Search.scss'
 import useForm from '../../hooks/useForm';
 import useSearch from '../../hooks/useSearch';
+import Toaster from '../../components/toaster/Toaster'
 
 const initialValues = {
     searchText: ''
@@ -12,7 +13,7 @@ const Search = () => {
     const { handleSubmit, error } = useSearch();
 
     return (
-        <div>
+        <div className='wrapper'>
             <form
                 onSubmit={(e) => handleSubmit(e, values)}>
                 <label>
@@ -25,7 +26,7 @@ const Search = () => {
                     type="text" />
                 <button>Search</button>
             </form>
-            {error && <p>{error}</p>}
+            {error && <Toaster className='toaster' message={error}/>}
         </div>
     )
 }
