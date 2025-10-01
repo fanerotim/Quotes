@@ -2,11 +2,13 @@ const express = require('express');
 const mysqlConfig = require('./mySqlConfig');
 const expressConfig = require('./expressConfig');
 const cors = require('cors');
+const handlebarsConfig = require('./handlebarsConfig');
 
 const app = express();
 const db = mysqlConfig(); // create MySQL connection
 
 expressConfig(app); // attach middlewares
+handlebarsConfig(app);
 
 // check why this middleware was not executed in expressConfig
 app.use(cors({
