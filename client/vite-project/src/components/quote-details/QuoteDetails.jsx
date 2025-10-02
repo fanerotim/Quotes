@@ -16,6 +16,7 @@ const QuoteDetails = () => {
 
     // for dev purposes, for now I am only checking if the user is logged in, but eventually i would like to check if user is owner of the quote. other users cannot edit / delete
     const { auth } = useAuthContext();
+    const isOwner = auth && quote && auth.id === quote.ownerId ? true : false;
 
     useEffect(() => {
         getQuote(quoteId)
@@ -29,9 +30,9 @@ const QuoteDetails = () => {
             <h1>Welcome to quote details page</h1>
             <h2>{quote?.text}</h2>
             <h3>{quote?.author}</h3>
-            {auth && <DeleteButton />}
+            {isOwner && <DeleteButton />}
             <br />
-            {auth && <EditButton id={quote?.id} />}
+            {isOwner && <EditButton id={quote?.id} />}
             <SocialSharingButtons/>
         </section>
     )
