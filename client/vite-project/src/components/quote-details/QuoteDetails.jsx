@@ -7,6 +7,7 @@ import DeleteButton from "../buttons/delete-btn/DeleteButton";
 import { useAuthContext } from '../../hooks/useAuthContext';
 import BackButton from '../back-button/BackButton';
 import SocialSharingButtons from '../social-sharing-buttons/SocialSharingButtons';
+import LikeButton from '../like-button/LikeButton';
 
 const QuoteDetails = () => {
 
@@ -17,6 +18,7 @@ const QuoteDetails = () => {
     // for dev purposes, for now I am only checking if the user is logged in, but eventually i would like to check if user is owner of the quote. other users cannot edit / delete
     const { auth } = useAuthContext();
     const isOwner = auth && quote && auth.id === quote.ownerId ? true : false;
+    const canLike = auth && !isOwner;
 
     useEffect(() => {
         getQuote(quoteId)
@@ -33,7 +35,8 @@ const QuoteDetails = () => {
             {isOwner && <DeleteButton />}
             <br />
             {isOwner && <EditButton id={quote?.id} />}
-            <SocialSharingButtons/>
+            {canLike && <LikeButton />}
+            <SocialSharingButtons />
         </section>
     )
 }
