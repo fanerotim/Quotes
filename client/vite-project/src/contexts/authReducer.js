@@ -10,7 +10,7 @@ export const authReducer = (state, action) => {
             return { auth: null, sessionExpired: false };
         }
         case 'SESSION-EXPIRED': {
-            // shows modal and nullufies state
+            // shows modal and nullifies state
             return { auth: null, sessionExpired: true };
         }
         default:

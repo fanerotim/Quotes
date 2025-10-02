@@ -10,13 +10,13 @@ import Footer from './components/footer/Footer';
 import Register from './components/register/Register';
 import NotFound from './components/not-found/NotFound';
 import Login from './components/login/Login';
-import SessionExpired from './components/session-expired/SessionExpires';
+import SessionExpired from './components/session-expired/SessionExpired';
 import { useAuthContext } from './hooks/useAuthContext';
 import UserProfile from './components/user-profile/UserProfile';
 import ResetPassword from './components/reset-password/ResetPassword';
 
 function App() {
-  const { sessionExpired } = useAuthContext();
+  const { sessionExpired, auth } = useAuthContext();
 
   return (
     <div className='app-container'>
