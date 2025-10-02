@@ -6,6 +6,7 @@ import EditButton from "../buttons/edit-btn/EditButton";
 import DeleteButton from "../buttons/delete-btn/DeleteButton";
 import { useAuthContext } from '../../hooks/useAuthContext';
 import BackButton from '../back-button/BackButton';
+import SocialSharingButtons from '../social-sharing-buttons/SocialSharingButtons';
 
 const QuoteDetails = () => {
 
@@ -31,6 +32,7 @@ const QuoteDetails = () => {
             {auth && <DeleteButton />}
             <br />
             {auth && <EditButton id={quote?.id} />}
+            <SocialSharingButtons/>
         </section>
     )
 }
