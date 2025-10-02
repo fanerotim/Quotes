@@ -13,6 +13,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.6.3",
+    "react-share": "^5.2.2",
     "sass": "^1.89.1"
   },
   "devDependencies": {
