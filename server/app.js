@@ -1,8 +1,8 @@
 const express = require('express');
 const mysqlConfig = require('./mySqlConfig');
 const expressConfig = require('./expressConfig');
-const cors = require('cors');
 const handlebarsConfig = require('./handlebarsConfig');
+const cors = require('cors');
 
 const app = express();
 const db = mysqlConfig(); // create MySQL connection
