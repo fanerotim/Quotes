@@ -7,19 +7,19 @@ const useLike = () => {
 
     const [hasLiked, setHasLiked] = useState(false);
     const { quoteId } = useParams();
-   
+
     const {
         addLike,
-        checkIfAlreadyLiked
+        checkIfAlreadyLiked,
     } = useLikeRequests();
 
     const { logoutOn401 } = useLogoutOn401Error();
 
     useEffect(() => {
         checkIfAlreadyLiked(quoteId)
-            .then(result => {
+            .then(data => {
                 // set hasLiked to true if the quote was already liked to disable 'Like' button
-                result.length > 0 ? setHasLiked(true) : setHasLiked(false);
+                data.length > 0 ? setHasLiked(true) : setHasLiked(false);
             })
             .catch(err => {
                 console.error(err)
