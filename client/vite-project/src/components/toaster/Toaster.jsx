@@ -7,7 +7,7 @@ const Toaster = ({ message }) => {
 
     setTimeout(() => {
         setShow(true)
-    }, 1000)
+    }, 500)
 
     return (
         <>
