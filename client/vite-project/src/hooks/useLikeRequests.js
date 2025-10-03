@@ -12,7 +12,6 @@ const useLikeRequests = () => {
     }
 
     const checkIfAlreadyLiked = async (quoteId) => {
-
         try {
             const result = await http.post(`${import.meta.env.VITE_BASE_URL}/has-liked-quote`, { quoteId });
             return result;
@@ -22,7 +21,6 @@ const useLikeRequests = () => {
     }
 
     const getLikesCount = async (quoteId) => {
-        
         try {
             const likesCount = await http.post(`${import.meta.env.VITE_BASE_URL}/get-likes-count`, { quoteId });
             return likesCount;
