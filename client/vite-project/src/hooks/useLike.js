@@ -1,26 +1,54 @@
-import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import useLikeRequests from "./useLikeRequests";
+import useLogoutOn401Error from './useLogoutOn401Error';
 
 const useLike = () => {
 
-    //TODO: write functionality that checks if user has already liked a button
-    //this has to happen on initial render, so useEffect will be needed
     const [hasLiked, setHasLiked] = useState(false);
+    const [likesCount, setLikesCount] = useState(0);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const context = useAuthContext();
-    // get user id
-    const { id } = context.auth;
     const { quoteId } = useParams();
+    const { addLike, checkIfAlreadyLiked } = useLikeRequests();
+    const { logoutOn401 } = useLogoutOn401Error();
 
-    const handleLike = (e) => {
-        console.log('userId and quoteId:', id, quoteId);
+    useEffect(() => {
+        checkIfAlreadyLiked(quoteId)
+            .then(result => {
+                // set hasLiked to true if the quote was already liked
+                result.length > 0 ? setHasLiked(true) : setHasLiked(false);
+            })
+            .catch(err => {
+                setError(err.message)
+            })
+    }, [])
+
+
+    const handleLike = async (e) => {
         e.preventDefault();
+        setError(false);
+
+        try {
+            // setLoading(true);
+            const likeResult = await addLike(quoteId);
+            // update hasLiked to true to disable button
+            setHasLiked(true);
+        } catch (err) {
+            console.error(err.message);
+            setError(err.message);
+            logoutOn401(err);
+        } finally {
+            // setLoading(false);
+        }
     }
 
     return {
         handleLike,
-        hasLiked
+        hasLiked,
+        error,
+        loading
     }
 }
 
