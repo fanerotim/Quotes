@@ -39,13 +39,13 @@ router.post('/get-quotes', async (req, res) => {
 
 router.post('/search-quotes', async (req, res) => {
     const { searchText } = req.body;
-    
+
     try {
         const searchResult = await quoteService.getSearchedQuotes(searchText);
         return res.status(200).json(searchResult);
     } catch (err) {
         const status = err.statuscode || 500;
-        return res.status(status).json({message: err.message});
+        return res.status(status).json({ message: err.message });
     }
 })
 
@@ -74,6 +74,32 @@ router.post('/add-quote', isGuest, async (req, res) => {
         return res.status(200).json(newQuote[0]);
     } catch (err) {
         const status = err.statusCode || 500;
+        return res.status(status).json({ message: err.message });
+    }
+})
+
+router.post('/add-like', isGuest, async (req, res) => {
+    const userId = req.user.id;
+    const { quoteId } = req.body;
+
+    try {
+        const likeResult = await quoteService.likeQuote(userId, quoteId);
+        return res.status(200).json({ message: 'You have successfully liked the quote.' });
+    } catch (err) {
+        const status = err.statusCode || 400;
+        return res.status(status).json({ message: err.message });
+    }
+})
+
+router.post('/has-liked-quote', async (req, res) => {
+    const userId = req.user.id;
+    const { quoteId } = req.body;
+ 
+    try {
+        const hasUserLikedQuote = await quoteService.hasLikedQuote(userId, quoteId);
+        return res.status(200).json(hasUserLikedQuote);
+    } catch (err) {
+        const status = err.statusCode || 400;
         return res.status(status).json({ message: err.message });
     }
 })
