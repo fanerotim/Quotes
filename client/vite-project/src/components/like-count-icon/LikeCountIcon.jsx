@@ -1,7 +1,15 @@
-const LikeCountIcon = ({likesCount}) => {
+import './LikeCountIcon.scss'
+import { CiHeart } from 'react-icons/ci';
+
+const LikeCountIcon = ({ likesCount }) => {
 
     return (
-        <h3>Likes count: {likesCount}</h3>
+        <div className='icon-wrapper'>
+            <CiHeart 
+                className='icon'    
+            />
+            <div>{likesCount}</div>
+        </div>
     )
 }
 
