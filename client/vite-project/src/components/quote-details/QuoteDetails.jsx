@@ -1,29 +1,21 @@
 import './QuoteDetails.scss';
-import { useParams } from "react-router-dom";
-import useGetQuote from "../../hooks/useGetQuote";
-import { useEffect, useState } from "react";
 import EditButton from "../buttons/edit-btn/EditButton";
 import DeleteButton from "../buttons/delete-btn/DeleteButton";
-import { useAuthContext } from '../../hooks/useAuthContext';
 import BackButton from '../back-button/BackButton';
 import SocialSharingButtons from '../social-sharing-buttons/SocialSharingButtons';
 import LikeButton from '../like-button/LikeButton';
+import LikeCountIcon from '../like-count-icon/LikeCountIcon';
+import useQuoteDetails from '../../hooks/useQuoteDetails';
 
 const QuoteDetails = () => {
-
-    const { quoteId } = useParams();
-    const { getQuote } = useGetQuote();
-    const [quote, setQuote] = useState(null)
-
-    const { auth } = useAuthContext();
-    const isOwner = auth && quote && auth.id === quote.ownerId ? true : false;
-    const canLike = auth && !isOwner;
-
-    useEffect(() => {
-        getQuote(quoteId)
-            .then(data => setQuote(data))
-            .catch(err => console.error(err));
-    }, [])
+    
+    const {
+        quote,
+        likesCount,
+        isOwner,
+        canLike,
+        updateLikeCount
+    } = useQuoteDetails();
 
     return (
         <section className="quote-details__container">
@@ -31,10 +23,11 @@ const QuoteDetails = () => {
             <h1>Welcome to quote details page</h1>
             <h2>{quote?.text}</h2>
             <h3>{quote?.author}</h3>
+            <LikeCountIcon likesCount={likesCount}/>
             {isOwner && <DeleteButton />}
             <br />
             {isOwner && <EditButton id={quote?.id} />}
-            {canLike && <LikeButton />}
+            {canLike && <LikeButton updateLikeCount={updateLikeCount}/>}
             <SocialSharingButtons />
         </section>
     )
