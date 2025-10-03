@@ -170,6 +170,64 @@ const deleteQuote = (id) => {
     })
 }
 
+const likeQuote = async (userId, quoteId) => {
+    
+    // check if user has already liked the quote;
+    const hasLikedResult = await hasLikedQuote(userId, quoteId);
+    const userHasLikedQuote = hasLikedResult[0];
+
+    if (userHasLikedQuote) {
+        const error = new Error('You have already liked this quote!');
+        error.statusCode = 400;
+        throw error;
+    }
+
+    return new Promise((resolve, reject) => {
+        const sql = `
+            INSERT INTO likes (
+            user_id, 
+            quote_id)
+            VALUES(?, ?)`
+
+        db.query(sql, [userId, quoteId], (err, result) => {
+            if (err) {
+                return reject(err)
+            }
+            return resolve(result);
+        })
+    })
+}
+
+const hasLikedQuote = async (userId, quoteId) => {
+    return new Promise((resolve, reject) => {
+        const sql = `
+            SELECT * FROM likes
+            WHERE user_id = ? AND quote_id = ?`
+        
+            db.query(sql, [userId, quoteId], (err, result) => {
+                if (err) {
+                    return reject(err)
+                }
+                return resolve(result);
+            })
+    })
+}
+
+const getLikesCount = async (quoteId) => {
+    return new Promise((resolve, reject) => {
+        const sql = `
+            SELECT * FROM likes
+            WHERE quote_id = ?`
+
+            db.query(sql, [quoteId], (err, result) => {
+                if (err) {
+                    return reject(err)
+                }
+                return resolve(result);
+            })
+    })
+}
+
 module.exports = {
     getAll,
     getQuotes,
@@ -179,4 +237,7 @@ module.exports = {
     addQuote,
     updateQuote,
     deleteQuote,
+    likeQuote,
+    hasLikedQuote,
+    getLikesCount
 }
