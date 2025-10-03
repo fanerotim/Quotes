@@ -3,6 +3,7 @@ import useGetUserQuotes from '../../hooks/useGetUserQuotes';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import UpdatePassword from './update-password/UpdatePassword';
+import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
 
@@ -28,6 +29,7 @@ const UserProfile = () => {
                     <h1>{quote.author}</h1>
                     <p className='quote__container__quote__text'>{quote.text}</p>
                     <h4 className='quote__container__category'>{quote.category}</h4>
+                    <Link to={`/quotes/${quote.id}`}>More</Link>
                 </div>
             ))}
         </section>
