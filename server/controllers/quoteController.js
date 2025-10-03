@@ -94,13 +94,24 @@ router.post('/add-like', isGuest, async (req, res) => {
 router.post('/has-liked-quote', async (req, res) => {
     const userId = req.user.id;
     const { quoteId } = req.body;
- 
+
     try {
         const hasUserLikedQuote = await quoteService.hasLikedQuote(userId, quoteId);
         return res.status(200).json(hasUserLikedQuote);
     } catch (err) {
         const status = err.statusCode || 400;
         return res.status(status).json({ message: err.message });
+    }
+})
+
+router.post('/get-likes-count', async (req, res) => {
+    const { quoteId } = req.body;
+
+    try {
+        const likesCount = await quoteService.getLikesCount(quoteId);
+        return res.status(200).json(likesCount);
+    } catch(err) {
+        return res.status(400).json({message: err.message})
     }
 })
 
