@@ -46,10 +46,17 @@ const useLocalStorageQuotes = () => {
         return updatedLocalStorageQuotes;
     }
 
+    const filterLocalStorageQuotesAfterDelete = (id) => {
+        const currentQuotesInLocalStorage = getQuotesFromLocalStorage();
+        const filteredQuotesAfterDelete = currentQuotesInLocalStorage.filter((q) => q.id !== Number(id));
+        localStorage.setItem('quotes', JSON.stringify(filteredQuotesAfterDelete));
+    }
+
     return {
         setInitialQuotesInLocalStorage,
         updateLocalStorageQuotes,
         getQuotesFromLocalStorage,
+        filterLocalStorageQuotesAfterDelete
     }
 }
 
