@@ -52,11 +52,19 @@ const useLocalStorageQuotes = () => {
         localStorage.setItem('quotes', JSON.stringify(filteredQuotesAfterDelete));
     }
 
+    const updateLocalStorageQuotesAfterEdit = (values) => {
+        const currentQuotesInLocalStorage = getQuotesFromLocalStorage();
+        const updatedLocalStorageQuotesAfterEdit = currentQuotesInLocalStorage
+        .map((q) => q.id == values.id ? values : q);
+        localStorage.setItem('quotes', JSON.stringify(updatedLocalStorageQuotesAfterEdit));
+    }
+
     return {
         setInitialQuotesInLocalStorage,
         updateLocalStorageQuotes,
         getQuotesFromLocalStorage,
-        filterLocalStorageQuotesAfterDelete
+        filterLocalStorageQuotesAfterDelete,
+        updateLocalStorageQuotesAfterEdit
     }
 }
 
