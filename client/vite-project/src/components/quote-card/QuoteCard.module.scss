@@ -1,0 +1,35 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between ;
+    width: 12rem;
+    height: 14rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: .5rem;
+    padding: 1.2rem 1.7rem;
+    transition: background-color .2s;
+    // outline: 1px solid skyblue;
+
+    &:hover {
+        cursor: pointer;
+        // background-color: rgb(255, 255, 255);
+        background-color: rgb(252, 252, 252);
+    }
+
+    &__text {
+        color: rgb(27, 27, 27);
+        text-align: end;
+    }
+
+    &__author {
+        font-size: .8rem;
+        align-self: end;
+    }
+
+    &__more__btn {
+        all: unset;
+        font-weight: bold;
+        font-size: .9rem;
+        margin-left: .2rem;
+    }
+}
