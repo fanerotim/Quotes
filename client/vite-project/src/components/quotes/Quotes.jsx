@@ -1,4 +1,4 @@
-import './Quotes.scss'
+import styles from './Quotes.module.scss'
 import QuoteCard from '../quote-card/QuoteCard';
 import LoadMoreQuotes from '../load-more-quotes/LoadMoreQuotes';
 import Search from '../search/Search';
@@ -13,11 +13,11 @@ const Quotes = () => {
     } = useQuotes();
 
     return (
-        <section className='quotes-container'>
-            <Search/>
+        <section className={styles.quotes__container}>
             <h1>Welcome to my Quotes!</h1>
+            <Search/>
             {quotes?.length > 0 ? (
-                <ul className='quotes_wrapper'>
+                <ul className={styles.quotes__list__wrapper}>
                     {quotes.map(quote => (
                         <QuoteCard
                             mapRefs={mapRefs}
