@@ -1,12 +1,13 @@
-.quotes-container {
+.quotes__container {
     padding: 1rem;
+    background-color: rgba(227, 232, 235, 0.4);
 
     li {
         list-style-type: none;
     }
 }
 
-.quotes_wrapper {
+.quotes__list__wrapper {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
