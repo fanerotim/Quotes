@@ -1,4 +1,4 @@
-import './App.scss'
+import styles from './App.module.scss'
 import Home from './components/home/Home';
 import Quotes from './components/quotes/Quotes';
 import AddQuote from './components/add-quote/addQuote';
@@ -19,7 +19,7 @@ function App() {
   const { sessionExpired, auth } = useAuthContext();
 
   return (
-    <div className='app-container'>
+    <div className={styles.app__container}>
       <Navigation />
       {sessionExpired && <SessionExpired />}
 

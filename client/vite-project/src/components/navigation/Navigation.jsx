@@ -1,4 +1,4 @@
-import './Navigation.scss'
+import styles from './Navigation.module.scss'
 import { NavLink, useLocation } from "react-router-dom";
 import Logout from '../logout/logout';
 import { useAuthContext } from '../../hooks/useAuthContext';
@@ -34,7 +34,7 @@ const Navigation = () => {
     }, [location])
 
     return (
-        <nav>
+        <nav className={styles.navigation__wrapper}>
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/quotes' end>Quotes</NavLink>
             {auth && (<NavLink to='/quotes/add-quote'>Add quote</NavLink>)}
