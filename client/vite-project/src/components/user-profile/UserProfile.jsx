@@ -29,7 +29,7 @@ const UserProfile = () => {
                     <h1>{quote.author}</h1>
                     <p className='quote__container__quote__text'>{quote.text}</p>
                     <h4 className='quote__container__category'>{quote.category}</h4>
-                    <Link to={`/quotes/${quote.id}`}>More</Link>
+                    <Link to={`/quotes/${quote.id}`}>Modify or Delete</Link>
                 </div>
             ))}
         </section>
