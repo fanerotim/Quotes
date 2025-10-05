@@ -1,49 +1,30 @@
-import { useEffect, useState } from 'react';
 import useForm from '../../hooks/useForm';
-import './EditQuote.scss'
-import { useNavigate, useParams } from 'react-router-dom';
 import useEditQuote from '../../hooks/useEditQuote';
-import useGetQuote from '../../hooks/useGetQuote';
+import './EditQuote.scss'
 import { CATEGORIES } from '../../utils/genres';
 import BackButton from '../back-button/BackButton';
+import useEdit from '../../hooks/useEdit';
+
+const initialValues = {
+    author: '',
+    text: '',
+    category: ''
+}
 
 const EditQuote = () => {
 
-    const [quote, setQuote] = useState({
-        author: '',
-        text: '',
-        category: ''
-    })
-
-    const { quoteId } = useParams();
-    const { values, handleChange } = useForm(quote);
-    const { edit, error, isLoading } = useEditQuote();
-    const { getQuote } = useGetQuote();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        // this piece of code makes sure edit form is prepopulated with accurate data on initial load
-        const newQuote =
-            getQuote(quoteId)
-                .then(result => setQuote(result))
-                .catch(err => console.error(err))
-    }, []);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        try {
-            await edit(values, quoteId);
-            navigate(`/quotes/${quoteId}`)
-        } catch (err) {
-            // logging error for now, but could be used to show a toast;
-            console.error(err);
-        }
-    }
+    const { values, handleChange } = useForm(initialValues);
+    
+    const {
+        handleSubmit,
+        quote,
+        error,
+        isLoading
+    } = useEdit();
 
     return (
         <section className='edit-quote__container'>
-            <BackButton/>
+            <BackButton />
             <h1>Edit quote</h1>
 
             <form
