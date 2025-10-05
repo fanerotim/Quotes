@@ -1,4 +1,4 @@
-import './Logout.scss'
+import styles from './Logout.module.scss'
 import { useNavigate } from "react-router-dom";
 import useLogout from '../../hooks/useLogout';
 
@@ -20,7 +20,7 @@ export const Logout = () => {
     return (
         <button
             onClick={handleLogout}
-            className="logout">
+            className={styles.logout__btn}>
             Logout
         </button>
     )
