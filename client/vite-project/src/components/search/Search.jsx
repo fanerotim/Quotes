@@ -10,7 +10,7 @@ const initialValues = {
 
 const Search = () => {
 
-    const { values, handleChange } = useForm(initialValues);
+    const { values, handleChange, handleClear } = useForm(initialValues);
     const { handleSubmit, error } = useSearch();
 
     return (
@@ -27,9 +27,10 @@ const Search = () => {
                         className={styles.search__input}
                         name='searchText'
                         type="text" />
-                        <MdClose 
-                            className={styles.clear__icon}
-                        />
+                    <MdClose
+                        onClick={handleClear}
+                        className={styles.clear__icon}
+                    />
                 </div>
                 <button>Search</button>
             </form>
