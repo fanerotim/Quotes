@@ -4,15 +4,13 @@
     justify-content: space-between ;
     width: 12rem;
     height: 14rem;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(210, 232, 236, .85);
     border-radius: .5rem;
     padding: 1.2rem 1.7rem;
-    transition: background-color .2s;
-    // outline: 1px solid skyblue;
+    transition: background-color .5s;
 
     &:hover {
         cursor: pointer;
-        // background-color: rgb(255, 255, 255);
         background-color: rgb(252, 252, 252);
     }
 
