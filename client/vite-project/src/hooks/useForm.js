@@ -17,9 +17,15 @@ const useForm = (initialValues) => {
         })
     }
 
+    const handleClear = () => {
+        setValues(initialValues);
+        
+    }
+
     return {
         values,
-        handleChange
+        handleChange,
+        handleClear
     }
 }
 
