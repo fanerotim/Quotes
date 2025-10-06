@@ -1,5 +1,4 @@
 import useForm from '../../hooks/useForm';
-import useRequestEditQuote from '../../hooks/useRequestEditQuote';
 import './EditQuote.scss'
 import { CATEGORIES } from '../../utils/genres';
 import BackButton from '../back-button/BackButton';

@@ -1,0 +1,19 @@
+.input__wrapper {
+    display: flex; 
+    justify-content: end;  
+    // align-items: center;
+}
+
+.search__input {
+    // display: block;
+    // border: 1px solid blue;
+    padding: .2rem 1.5rem .2rem .2rem;
+}
+
+.clear__icon {
+    all: unset;
+    display: block;
+    position: absolute;
+    align-self: center;
+    padding-right: .3rem;
+}

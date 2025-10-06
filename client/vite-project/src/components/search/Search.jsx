@@ -1,7 +1,8 @@
-import './Search.scss'
+import styles from './Search.module.scss'
 import useForm from '../../hooks/useForm';
 import useSearch from '../../hooks/useSearch';
 import Toaster from '../../components/toaster/Toaster'
+import { MdClose } from 'react-icons/md';
 
 const initialValues = {
     searchText: ''
@@ -13,20 +14,26 @@ const Search = () => {
     const { handleSubmit, error } = useSearch();
 
     return (
-        <div className='wrapper'>
+        <div>
             <form
                 onSubmit={(e) => handleSubmit(e, values)}>
                 <label>
                     Search by author
                 </label>
-                <input
-                    name='searchText'
-                    value={values.searchText}
-                    onChange={handleChange}
-                    type="text" />
+                <div className={styles.input__wrapper}>
+                    <input
+                        value={values.searchText}
+                        onChange={handleChange}
+                        className={styles.search__input}
+                        name='searchText'
+                        type="text" />
+                        <MdClose 
+                            className={styles.clear__icon}
+                        />
+                </div>
                 <button>Search</button>
             </form>
-            {error && <Toaster className='toaster' message={error}/>}
+            {error && <Toaster className='toaster' message={error} />}
         </div>
     )
 }
