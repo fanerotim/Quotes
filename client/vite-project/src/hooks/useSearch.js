@@ -15,7 +15,7 @@ const useSearch = () => {
 
         try {
             validateInputs(values)
-            //set loading state to true
+            //set loading state to true - NOT YET IMPLEMENTED
 
             //make api request
             const searchedQuotes = await requestSearch(values);
@@ -24,10 +24,9 @@ const useSearch = () => {
             // return result
             return searchedQuotes;
         } catch (err) {
-            console.error(err);
             setError(err.message);
         } finally {
-            // set loading state to false
+            // set loading state to false - NOT YET IMPLEMENTED
         }
     }
 

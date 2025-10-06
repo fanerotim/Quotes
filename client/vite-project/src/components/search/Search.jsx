@@ -16,8 +16,11 @@ const Search = () => {
     return (
         <div>
             <form
+                className={styles.search__form}
                 onSubmit={(e) => handleSubmit(e, values)}>
-                <label>
+                <label
+                    className={styles.search__label}
+                >
                     Search by author
                 </label>
                 <div className={styles.input__wrapper}>
@@ -26,13 +29,14 @@ const Search = () => {
                         onChange={handleChange}
                         className={styles.search__input}
                         name='searchText'
-                        type="text" />
+                        type="text" 
+                        placeholder='e.g. Dostoevsky, Irvine Welsh'/>
                     <MdClose
                         onClick={handleClear}
                         className={styles.clear__icon}
                     />
                 </div>
-                <button>Search</button>
+                <button className={styles.search__button}>Search</button>
             </form>
             {error && <Toaster className='toaster' message={error} />}
         </div>
