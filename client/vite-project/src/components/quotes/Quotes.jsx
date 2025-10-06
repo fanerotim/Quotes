@@ -14,7 +14,16 @@ const Quotes = () => {
 
     return (
         <section className={styles.quotes__container}>
-            <h1>Welcome to my Quotes!</h1>
+            <div className={styles.quotes__heading__wrapper}>
+                <h1 
+                    className={styles.quotes__heading__wrapper__main}>
+                        Quotes
+                </h1>
+                <h2
+                    className={styles.quotes__heading__wrapper__secondary}>
+                    Browse through a catalog of amazing quotes
+                </h2>
+            </div>
             <Search/>
             {quotes?.length > 0 ? (
                 <ul className={styles.quotes__list__wrapper}>
@@ -27,7 +36,8 @@ const Quotes = () => {
                     ))}
                 </ul>)
                 : <h1>Currently we do not have quotes to display</h1>}
-            <LoadMoreQuotes />
+            <LoadMoreQuotes
+                className={styles.load__more__button} />
         </section>
     )
 }
