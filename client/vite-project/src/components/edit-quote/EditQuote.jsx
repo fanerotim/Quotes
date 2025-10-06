@@ -1,26 +1,21 @@
 import useForm from '../../hooks/useForm';
-import useEditQuote from '../../hooks/useEditQuote';
+import useRequestEditQuote from '../../hooks/useRequestEditQuote';
 import './EditQuote.scss'
 import { CATEGORIES } from '../../utils/genres';
 import BackButton from '../back-button/BackButton';
-import useEdit from '../../hooks/useEdit';
+import useEditQuote from '../../hooks/useEditQuote';
 
-const initialValues = {
-    author: '',
-    text: '',
-    category: ''
-}
 
 const EditQuote = () => {
 
-    const { values, handleChange } = useForm(initialValues);
-    
     const {
         handleSubmit,
         quote,
         error,
         isLoading
-    } = useEdit();
+    } = useEditQuote();
+    
+    const { values, handleChange } = useForm(quote);
 
     return (
         <section className='edit-quote__container'>
@@ -28,12 +23,12 @@ const EditQuote = () => {
             <h1>Edit quote</h1>
 
             <form
-                onSubmit={handleSubmit}>
+                onSubmit={(e) => handleSubmit(e, values)}>
                 <section>
                     <label>Author</label>
                     <input
                         onChange={handleChange}
-                        value={values.author}
+                        value={values?.author}
                         name='author'
                     />
                 </section>
@@ -42,7 +37,7 @@ const EditQuote = () => {
                     <label>Text</label>
                     <textarea
                         onChange={handleChange}
-                        value={values.text}
+                        value={values?.text}
                         name="text">
                     </textarea>
                 </section>
@@ -54,7 +49,7 @@ const EditQuote = () => {
                         name="category"
                         // TODO: Fix this - find a better way to implement it
                         // Using toLowerCase() as values in genres.js are written in lower case, so if I do not lowercase it, it does not get detected and updated in the UI.
-                        value={values.category.toLowerCase()}>
+                        value={values?.category.toLowerCase()}>
                         {CATEGORIES.map(category => (
                             <option
                                 key={category.value}
