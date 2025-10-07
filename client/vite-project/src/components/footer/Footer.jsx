@@ -1,8 +1,9 @@
-import './Footer.scss'
+import styles from './Footer.module.scss'
 
 const Footer = () => {
     return (
-        <footer>
+        <footer 
+            className={styles.footer}>
             Petar Cholakov, 2025. All rights reserved.
         </footer>
     )
