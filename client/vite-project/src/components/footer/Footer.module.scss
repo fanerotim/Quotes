@@ -4,5 +4,6 @@
     text-align: center;
     padding: 3rem 0;
     font-size: .8rem;
-    margin-top: 3rem;
+    // this margin aligns with the margin given on .quotes__list__wrapper in Quotes.module.scss to space elements out evenly
+    margin-top: 4rem;
 }

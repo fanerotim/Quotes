@@ -6,13 +6,13 @@
 }
 
 .quotes__heading__wrapper {
-    margin-bottom: 2rem;
     padding: 1rem;
+    margin-top: 4rem;
 
     &__main {
         font-size: 4rem;
         font-weight: bold;
-        margin-bottom: .5rem;
+        padding-bottom: 1rem;
     }
 
     &__secondary {
@@ -23,7 +23,9 @@
 .quotes__list__wrapper {
     display: flex;
     justify-content: center;
+    max-width: 1000px;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 4rem;
+    padding: 1rem 0;
+    margin-bottom: 4rem;
 }

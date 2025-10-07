@@ -1,6 +1,7 @@
 .search__form {
     display: flex;
     flex-direction: column;
+    margin: 4rem 0;
 }
 
 .input__wrapper {
@@ -9,10 +10,12 @@
 }
 
 .search__label {
+    color: rgb(22, 22, 22);
     font-size: .8rem;
-    font-weight: 400;
+    font-weight: 350;
     align-self: end;
     padding-right: .3rem;
+    padding-bottom: .3rem;
 }
 
 .search__input {
@@ -25,13 +28,18 @@
         font-size: .9rem;
         color: rgb(167, 167, 167);
     }
+
+    &:focus {
+        border: 1px solid rgb(12, 161, 62);
+    }
 }
 
 .search__button {
     border: none;
     background-color: rgb(218, 238, 255);
+    color: rgb(20, 20, 20);
     border-radius: .5rem;
-    padding: .5rem 1.5rem;
+    padding: .5rem 2rem;
     font-weight: 500;
     font-size: .8rem;
     cursor: pointer;
