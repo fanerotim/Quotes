@@ -1,4 +1,4 @@
-import './LoadMoreQuotes.scss'
+import styles from './LoadMoreQuotes.module.scss'
 import useLoadMoreQuotes from '../../hooks/useLoadMoreQuotes';
 import useHasMoreQuotes from '../../hooks/useHasMoreQuotes';
 
@@ -11,12 +11,13 @@ const LoadMoreQuotes = () => {
     const { getHasMoreStatus } = useHasMoreQuotes();
 
     return (
-        <button
+        <>
+        {getHasMoreStatus() && <button
             onClick={clickHandler}
-            disabled={!getHasMoreStatus()}
-            className='load-more-btn'>
-            Load More Quotes
-        </button>
+            className={styles.load__more__btn}>
+            Load More
+        </button>}
+        </>
     )
 }
 

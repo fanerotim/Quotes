@@ -20,10 +20,6 @@ const QuoteCard = ({ quote, mapRefs, onCardClick }) => {
                 {quoteText.length > textLength && <Link className={styles.card__more__btn}>More</Link>}
             </li>
 
-            {/* <button onClick={() => onCardClick(quote.id)}>
-                 Show more
-            </button> */}
-
             <h2
                 className={styles.card__author}>
                 {quote.author}
