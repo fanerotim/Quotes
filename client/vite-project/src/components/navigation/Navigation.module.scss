@@ -1,9 +1,7 @@
 .navigation__wrapper {
-    // background-color: rgb(250, 250, 250);
-    width: 100vw;
-    padding: 1rem;
     display: flex;
     justify-content: center;
+    padding: 1rem;
     gap: .5rem;
     transition: active 5s;
 
@@ -17,5 +15,19 @@
             color: rgb(95, 109, 114);
         }
     }
+}
+
+@media (max-width: 1000px) {
+    .navigation__wrapper a,
+    .navigation__wrapper button {
+        font-size: 1rem;
+    }    
+}
+
+@media (max-width: 500px) {
+    .navigation__wrapper a,
+    .navigation__wrapper button {
+        font-size: .7rem;
+    }    
 }
 
