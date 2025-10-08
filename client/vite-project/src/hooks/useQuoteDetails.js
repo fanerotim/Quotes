@@ -21,6 +21,9 @@ const useQuoteDetails = () => {
     }
 
     useEffect(() => {
+        // make sure page is scrolled to top when it loads
+        window.scrollTo(0, 0)
+
         getQuote(quoteId)
             .then(data => setQuote(data))
             .catch(err => console.error(err));
