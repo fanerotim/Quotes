@@ -19,32 +19,35 @@ function App() {
   const { sessionExpired, auth } = useAuthContext();
 
   return (
-    <div className={styles.app__container}>
-      <Navigation />
-      {sessionExpired && <SessionExpired />}
+    <>
+      <div className={styles.app__container}>
+        <Navigation />
+        {sessionExpired && <SessionExpired />}
 
-      <Routes>
-        <Route index element={<Home />}></Route>
+        <Routes>
+          <Route index element={<Home />}></Route>
 
-        <Route path='users'>
-          <Route path='register' element={<Register />}></Route>
-          <Route path='login' element={<Login />}></Route>
-          <Route path='user-profile' element={<UserProfile />}></Route>
-          <Route path='reset-password' element={<ResetPassword/>}></Route>
-        </Route>
+          <Route path='users'>
+            <Route path='register' element={<Register />}></Route>
+            <Route path='login' element={<Login />}></Route>
+            <Route path='user-profile' element={<UserProfile />}></Route>
+            <Route path='reset-password' element={<ResetPassword />}></Route>
+          </Route>
 
-        <Route path='quotes'>
-          <Route index element={<Quotes />}></Route>
-          <Route path=':quoteId' element={<QuoteDetails />}></Route>
-          <Route path='add-quote' element={<AddQuote />}></Route>
-          <Route path='edit-quote/:quoteId' element={<EditQuote />}></Route>
-        </Route>
+          <Route path='quotes'>
+            <Route index element={<Quotes />}></Route>
+            <Route path=':quoteId' element={<QuoteDetails />}></Route>
+            <Route path='add-quote' element={<AddQuote />}></Route>
+            <Route path='edit-quote/:quoteId' element={<EditQuote />}></Route>
+          </Route>
 
-        <Route path='*' element={<NotFound />}></Route>
-      </Routes>
+          <Route path='*' element={<NotFound />}></Route>
+        </Routes>
 
+      </div>
+      {/* took the footer out as scrollbar was causing shift of content on apges that have a scrollbar*/}
       <Footer />
-    </div>
+    </>
   )
 }
 
