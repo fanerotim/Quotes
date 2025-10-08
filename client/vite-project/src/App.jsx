@@ -45,8 +45,8 @@ function App() {
         </Routes>
 
       </div>
-      {/* took the footer out as scrollbar was causing shift of content on apges that have a scrollbar*/}
       <Footer />
+      {/* took the footer out as scrollbar was causing shift of content on apges that have a scrollbar*/}
     </>
   )
 }
