@@ -1,9 +1,14 @@
-* {
+*
+html,
+body {
   box-sizing: border-box;
+  height: 100%;
   margin: 0;
-  padding: 0;
   font-family: "Roboto", sans-serif;
-  scrollbar-gutter: stable;
+  scrollbar-color: black;
+  scrollbar-arrow-color: black;
+  scrollbar-track-color: white;
+  scrollbar-width: thin;
 }
 
 :global(.active) {
@@ -17,6 +22,7 @@
   grid-template-rows: auto 1fr auto;
 }
 
-button {
-  width: fit-content;
+ol,
+ul {
+  list-style: none;
 }
