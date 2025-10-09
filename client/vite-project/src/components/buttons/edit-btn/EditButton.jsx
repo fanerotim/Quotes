@@ -1,3 +1,4 @@
+import styles from './EditButton.module.scss';
 import { useNavigate } from "react-router-dom";
 
 const EditButton = ({ id }) => {
@@ -9,7 +10,10 @@ const EditButton = ({ id }) => {
     }
 
     return (
-        <button onClick={clickHandler}>Edit</button>
+        <button className={styles.edit__button}
+            onClick={clickHandler}>
+            Edit
+        </button>
     )
 }
 

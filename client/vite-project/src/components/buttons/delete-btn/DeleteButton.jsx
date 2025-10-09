@@ -1,3 +1,4 @@
+import styles from './DeleteButton.module.scss';
 import DeleteModal from "../../delete-modal/DeleteModal";
 import useDeleteModal from '../../../hooks/useDeleteModal'
 
@@ -16,7 +17,8 @@ const DeleteButton = () => {
                 onDelete={onDelete}
                 toggleIsOpen={toggleIsOpen} />
             <button
-                onClick={() => toggleIsOpen((prevIsOpen) => !prevIsOpen)}>
+                onClick={() => toggleIsOpen((prevIsOpen) => !prevIsOpen)}
+                className={styles.delete__button}>
                 Delete
             </button>
         </>

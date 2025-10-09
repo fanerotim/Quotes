@@ -1,0 +1,12 @@
+.delete__button {
+    all: unset;
+    color: rgb(207, 55, 55);
+    padding: .5rem 1.8rem;
+    cursor: pointer;
+    margin-right: 2rem;
+    transition: color .3s;
+
+    &:hover {
+        color: rgb(56, 17, 17);
+    }
+}
