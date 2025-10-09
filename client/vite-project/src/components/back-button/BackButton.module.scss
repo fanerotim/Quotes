@@ -1,6 +1,11 @@
 .back__btn {
     all: unset;
+    color: rgb(31, 29, 29);
     cursor: pointer;
+
+    &:hover {
+        color: grey;
+    }
 
     &__icon {
         font-size: 3rem;
