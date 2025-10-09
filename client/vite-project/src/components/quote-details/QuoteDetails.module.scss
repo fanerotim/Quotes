@@ -1,0 +1,41 @@
+.quote__details__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr, 1fr, 3fr, 1fr, 1fr, 2fr;
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.heading__container {
+    grid-row: 1 / 2;
+    grid-column: 1 / -1;
+}
+
+.back__button {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+    justify-self: start;
+    padding: 2rem;
+}
+
+.likes__details {
+    grid-row: 2 / 3;
+    grid-column: 3 / 4;
+    justify-self: end;
+    padding: 2rem;
+}
+
+.quote__details {
+    grid-row: 3 / 4;
+    grid-column: 1 / -1;
+}
+
+.action__buttons {
+    grid-row: 4 / 5;
+    grid-column: 2 / 3;
+}
+
+.social__sharing {
+    grid-row: 5 / 6;
+    grid-column: 1 / 2;
+}

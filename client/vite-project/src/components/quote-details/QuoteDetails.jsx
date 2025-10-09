@@ -1,4 +1,4 @@
-import './QuoteDetails.scss';
+import styles from './QuoteDetails.module.scss';
 import EditButton from "../buttons/edit-btn/EditButton";
 import DeleteButton from "../buttons/delete-btn/DeleteButton";
 import BackButton from '../back-button/BackButton';
@@ -8,7 +8,7 @@ import LikeCountIcon from '../like-count-icon/LikeCountIcon';
 import useQuoteDetails from '../../hooks/useQuoteDetails';
 
 const QuoteDetails = () => {
-    
+
     const {
         quote,
         likesCount,
@@ -18,17 +18,34 @@ const QuoteDetails = () => {
     } = useQuoteDetails();
 
     return (
-        <section className="quote-details__container">
-            <BackButton />
-            <h1>Welcome to quote details page</h1>
-            <h2>{quote?.text}</h2>
-            <h3>{quote?.author}</h3>
-            <LikeCountIcon likesCount={likesCount}/>
-            {isOwner && <DeleteButton />}
-            <br />
-            {isOwner && <EditButton id={quote?.id} />}
-            {canLike && <LikeButton updateLikeCount={updateLikeCount}/>}
-            <SocialSharingButtons />
+        <section className={styles.quote__details__container}>
+
+            <div className={styles.back__button}>
+                <BackButton />
+            </div>
+
+            <div className={styles.likes__details}>
+                <LikeCountIcon likesCount={likesCount} />
+            </div>
+
+            <div className={styles.heading__container}>
+                <h1>Welcome to quote details page</h1>
+            </div>
+
+            <div className={styles.quote__details}>
+                <h2>{quote?.text}</h2>
+                <h3>{quote?.author}</h3>
+            </div>
+
+            <div className={styles.action__buttons}>
+                {isOwner && <DeleteButton />}
+                {isOwner && <EditButton id={quote?.id} />}
+                {canLike && <LikeButton updateLikeCount={updateLikeCount} />}
+            </div>
+
+            <div className={styles.social__sharing}>
+                <SocialSharingButtons />
+            </div>
         </section>
     )
 }
