@@ -1,0 +1,18 @@
+.social__media__buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+}
+
+.social__media__text {
+    font-size: .9rem;
+    font-weight: 300;
+
+    &::after {
+        content: '.';
+        color: red;
+        font-size: 3rem;
+        line-height: 0;
+    }
+}

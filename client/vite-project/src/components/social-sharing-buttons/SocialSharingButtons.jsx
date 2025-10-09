@@ -1,3 +1,4 @@
+import styles from './SocialSharingButtons.module.scss';
 import { FacebookShareButton, FacebookIcon } from 'react-share';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
@@ -8,7 +9,7 @@ const SocialSharingButtons = () => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div className='social__media__buttons'>
+        <div className={styles.social__media__buttons}>
             <FacebookShareButton
                 url={`${import.meta.env.VITE_BASE_URL}${location.pathname}`}
                 resetButtonStyle={true}
@@ -21,6 +22,7 @@ const SocialSharingButtons = () => {
                     iconFillColor={isHovered ? 'rgb(26, 26, 26)' : 'white'}
                 />
             </FacebookShareButton>
+            <p className={styles.social__media__text}>Share it with friends</p>
         </div>
     )
 }
