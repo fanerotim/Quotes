@@ -29,12 +29,12 @@ const QuoteDetails = () => {
             </div>
 
             <div className={styles.heading__container}>
-                <h1>Welcome to quote details page</h1>
+                <h1>Excerpts...</h1>
             </div>
 
             <div className={styles.quote__details}>
-                <h2>{quote?.text}</h2>
-                <h3>{quote?.author}</h3>
+                <h2 className={styles.quote__details__text}>{quote?.text}</h2>
+                <h3 className={styles.quote__details__author}>{quote?.author}</h3>
             </div>
 
             <div className={styles.action__buttons}>
