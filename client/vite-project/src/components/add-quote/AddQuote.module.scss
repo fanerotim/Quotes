@@ -7,7 +7,8 @@
 .add__form__container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: .5fr 1fr;
+    // TODO; red about min max, as it may be useful for heading in regards to responsiveness
+    grid-template-rows: 250px 1fr;
 }
 
 .add__form__text {
@@ -79,7 +80,8 @@
     }
 
     &__textarea {
-        min-height: 6rem; 
+        min-height: 6rem;
+        resize: vertical; 
     }
 
     &__button {
