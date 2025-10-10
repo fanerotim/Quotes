@@ -26,8 +26,9 @@ const Quotes = () => {
             </div>
 
             <div className={styles.quotes__search}>
-                <Search/>
+                <Search />
             </div>
+
             {quotes?.length > 0 ? (
                 <ul className={styles.quotes__list__wrapper}>
                     {quotes.map(quote => (
@@ -39,8 +40,12 @@ const Quotes = () => {
                     ))}
                 </ul>)
                 : <h1>No quotes found</h1>}
-            {quotes?.length > 0 && <LoadMoreQuotes
-                className={styles.load__more__button} />}
+
+            <div className={styles.load__more__button__wrapper}>
+                {quotes?.length > 0 && <LoadMoreQuotes
+                    className={styles.load__more__button} />}
+            </div>
+
         </section>
     )
 }
