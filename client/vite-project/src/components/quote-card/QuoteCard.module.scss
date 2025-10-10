@@ -32,3 +32,17 @@
         margin-left: .2rem;
     }
 }
+
+@media (max-width: 590px) {
+    .card {
+        width: 18rem;
+        height: 10rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .card {
+        width: 12rem;
+        height: 10rem;
+    }
+}
