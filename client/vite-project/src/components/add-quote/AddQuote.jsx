@@ -15,35 +15,69 @@ const AddQuote = () => {
     const { handleSubmit } = useAddQuote();
 
     return (
-        <div className='add-form__container'>
-            <form
-                onSubmit={(e) => handleSubmit(e, values)}> 
+        <div className={styles.add__form__container}>
 
-                <section>
-                    <label>Author</label>
+            <div className={styles.add__form__text}>
+                <h1 className={styles.add__form__text__heading}>Contribute</h1>
+                <p className={styles.add__form__text__subheading}>Add a quote</p>
+            </div>
+
+            <form
+                onSubmit={(e) => handleSubmit(e, values)}
+                className={styles.add__form}>
+
+                <section
+                    className={styles.add__form__form__data}
+                >
+                    <label
+                        className={styles.add__form__label}
+                    >
+                        Author
+                    </label>
                     <input
                         onChange={handleChange}
                         value={values.author}
-                        placeholder='Enter author here'
+                        className={styles.add__form__input}
+                        placeholder='Minimum 8 characters'
                         name='author'
-                        type="text" />
+                        type="text"
+                        required
+                        minLength={8} />
                 </section>
 
-                <section>
-                    <label>Text</label>
+                <section
+                    className={styles.add__form__form__data}
+                >
+                    <label
+                        className={styles.add__form__label}
+                    >
+                        Text
+                    </label>
                     <textarea
                         onChange={handleChange}
                         value={values.text}
-                        placeholder='Enter text here'
+                        className={styles.add__form__textarea}
+                        placeholder='Minimum 15 characters'
                         name='text'
-                        type="text" />
+                        type="text"
+                        required
+                        minLength={15} />
                 </section>
 
-                <section>
-                    <label>Category</label>
+                <section
+                    className={styles.add__form__form__data}
+                >
+                    <label
+                        className={styles.add__form__label}
+                    >
+                        Category
+                    </label>
                     <select
                         onChange={handleChange}
-                        name="category">
+                        className={styles.add__form__select}
+                        name="category"
+                        required
+                    >
                         {CATEGORIES.map(category => (
                             <option
                                 key={category.value}
@@ -53,8 +87,12 @@ const AddQuote = () => {
                         ))}
                     </select>
                 </section>
-                
-                <button>Submit</button>
+
+                <button 
+                    className={styles.add__form__button}
+                >
+                    Submit
+                </button>
             </form>
         </div>
     )

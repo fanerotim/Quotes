@@ -1,40 +1,100 @@
-.add-form__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+:root {
+    --error: rgb(204, 64, 64);
+    --success: rgb(109, 255, 109);
+    --warning: rgb(255, 205, 112);
 }
 
-form {
-    width: fit-content;
-    padding: 5rem;
+.add__form__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: .5fr 1fr;
 }
 
-form label {
-    display: block;
-    text-align: left;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: .2rem;
+.add__form__text {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    justify-items: center;
+
+    &__heading {
+        font-size: 3.5rem;
+        font-weight: 200;
+        margin-bottom: 0;
+    }
+
+    &__heading::first-letter {
+        color: rgb(250, 87, 87);
+        font-size: 5rem;
+        font-weight: bold;
+    }
+
+    &__subheading {
+        font-size: 1.2rem;
+        font-weight: 300;
+        bottom: 0;
+    }
 }
 
-form input {
-    // margin-bottom: 1rem;
-    font-size: 1.5rem;
+.add__form {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+
+    &__form__data {
+        display: grid;
+        gap: .2rem;
+    }
+
+    &__label {
+        font-size: 1rem;
+        color: rgb(78, 78, 78);    
+        text-align: left; 
+        padding-top: .5rem;
+    }
+
+    &__input,
+    &__textarea,
+    &__select {
+        padding: .5rem;
+        border-radius: .7rem;
+        outline: none;
+        border: none;
+        background-color: rgb(248, 248, 248);
+    }
+
+    &__input:user-invalid,
+    &__textarea:user-invalid,
+    &__select:user-invalid {
+        outline: 2px solid var(--error); 
+    }
+
+    &__input:user-valid,
+    &__textarea:user-valid,
+    &__select:user-valid {
+        outline: 2px solid var(--success); 
+    }
+
+    &__input:focus,
+    &__textarea:focus,
+    &__select:focus {
+        outline: 2px solid var(--warning);
+    }
+
+    &__textarea {
+        min-height: 6rem; 
+    }
+
+    &__button {
+        all: unset;
+        padding: .5rem 1.5rem;
+        margin-top: .5rem;
+        background-color: rgb(140, 255, 169);
+        border-radius: .5rem;
+        transition: background-color .3s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(62, 212, 99);
+        }
+    }
 }
 
-form select {
-    font-size: 1.5rem;
-    width: 100%;
-}
 
-button {
-    margin-top: 1rem;
-}
-
-.choose-category {
-    color: grey;
-}
-
-.errorMessage {
-    color: red;
-}
