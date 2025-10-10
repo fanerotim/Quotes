@@ -14,7 +14,6 @@ const useBackButton = () => {
     const prevRouteIndex = currentRouteIndex - 1;
 
     const handleClick = () => {
-
         navigate(routes[prevRouteIndex], {
             state: {
                 isBack: true
