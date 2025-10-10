@@ -1,39 +1,38 @@
-import { useState } from "react";
-import http from "../requester/http";
 import validateInputs from "../utils/validateInputs";
 import useLogoutOn401Error from "./useLogoutOn401Error";
 import useHasMoreQuotes from "./useHasMoreQuotes";
+import useSubmitQuote from './useSubmitQuote';
+import { useNavigate } from 'react-router-dom';
 
 const useAddQuote = () => {
-    const [error, setError] = useState(null);
-    const [isLoading, setLoading] = useState(false);
+
     const { logoutOn401 } = useLogoutOn401Error();
     const { setHasMoreStatus } = useHasMoreQuotes();
+    const { addQuote } = useSubmitQuote();
+    const navigate = useNavigate();
 
-    const addQuote = async (values) => {
-        setError(null);
+    const handleSubmit = async (e, values) => {
+        e.preventDefault();
 
         try {
             validateInputs(values);
-            setLoading(true);
-            const newQuote = await http.post(`${import.meta.env.VITE_BASE_URL}/add-quote`, values);
+            await addQuote(values);
             // update local storage status of hasMore to true to make sure load more button is enabled again
             setHasMoreStatus(true);
-            return newQuote;
+            // redirect to quotes page after success
+            navigate('/quotes');
         } catch (err) {
             // check if error is 401 to logout the user
             logoutOn401(err);
-            setError(err.message);
-            throw error;
+            throw err;
         } finally {
-            setLoading(false);
+            // not yet handling loading / error
+            // setLoading(false);
         }
     }
 
     return {
-        addQuote,
-        error,
-        isLoading
+        handleSubmit
     }
 }
 
