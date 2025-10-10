@@ -1,7 +1,6 @@
-import './AddQuote.scss'
+import styles from './AddQuote.module.scss'
 import useForm from '../../hooks/useForm';
 import useAddQuote from '../../hooks/useAddQuote';
-import { useNavigate } from 'react-router-dom';
 import { CATEGORIES } from '../../utils/genres';
 
 const initialValues = {
@@ -13,24 +12,13 @@ const initialValues = {
 const AddQuote = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { addQuote, error, isLoading } = useAddQuote();
-    const navigate = useNavigate();
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const newQuote = await addQuote(values);
-            navigate('/quotes')
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    const { handleSubmit } = useAddQuote();
 
     return (
         <div className='add-form__container'>
             <form
-                onSubmit={(e) => handleSubmit(e)}>    
+                onSubmit={(e) => handleSubmit(e, values)}> 
+
                 <section>
                     <label>Author</label>
                     <input
@@ -40,6 +28,7 @@ const AddQuote = () => {
                         name='author'
                         type="text" />
                 </section>
+
                 <section>
                     <label>Text</label>
                     <textarea
@@ -49,6 +38,7 @@ const AddQuote = () => {
                         name='text'
                         type="text" />
                 </section>
+
                 <section>
                     <label>Category</label>
                     <select
@@ -63,8 +53,8 @@ const AddQuote = () => {
                         ))}
                     </select>
                 </section>
-                {error && <p className='errorMessage'>{error}</p>}
-                <button disabled={isLoading}>Submit</button>
+                
+                <button>Submit</button>
             </form>
         </div>
     )
