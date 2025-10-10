@@ -17,12 +17,15 @@ const Search = () => {
         <div>
             <form
                 className={styles.search__form}
-                onSubmit={(e) => handleSubmit(e, values)}>
+                onSubmit={(e) => handleSubmit(e, values)}
+            >
+                    
                 <label
                     className={styles.search__label}
                 >
                     Search by author
                 </label>
+
                 <div className={styles.input__wrapper}>
                     <input
                         value={values.searchText}
@@ -36,6 +39,7 @@ const Search = () => {
                         className={styles.clear__icon}
                     />
                 </div>
+
                 <button className={styles.search__button}>Search</button>
             </form>
             {error && <Toaster className='toaster' message={error} />}

@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <div className={styles.app__container}>
-        <Navigation />
+      <Navigation />
         {sessionExpired && <SessionExpired />}
 
         <Routes>
