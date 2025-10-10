@@ -81,7 +81,8 @@ const AddQuote = () => {
                         {CATEGORIES.map(category => (
                             <option
                                 key={category.value}
-                                value={category.value}>
+                                value={category.value}
+                            >
                                 {category.name}
                             </option>
                         ))}

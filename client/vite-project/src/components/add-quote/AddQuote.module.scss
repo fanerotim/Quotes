@@ -1,6 +1,6 @@
 :root {
     --error: rgb(204, 64, 64);
-    --success: rgb(109, 255, 109);
+    --success: rgb(44, 167, 44);
     --warning: rgb(255, 205, 112);
 }
 
@@ -45,10 +45,10 @@
     }
 
     &__label {
-        font-size: 1rem;
-        color: rgb(78, 78, 78);    
-        text-align: left; 
-        padding-top: .5rem;
+        font-size: .9rem;
+        color: rgb(78, 78, 78);
+        text-align: left;
+        padding: .3rem 0;
     }
 
     &__input,
@@ -61,27 +61,27 @@
         background-color: rgb(248, 248, 248);
     }
 
+    &__textarea {
+        min-height: 6rem;
+        resize: vertical;
+    }
+
     &__input:user-invalid,
     &__textarea:user-invalid,
     &__select:user-invalid {
-        outline: 2px solid var(--error); 
+        outline: 2px solid var(--error);
     }
 
     &__input:user-valid,
     &__textarea:user-valid,
     &__select:user-valid {
-        outline: 2px solid var(--success); 
+        outline: 2px solid var(--success);
     }
 
     &__input:focus,
     &__textarea:focus,
     &__select:focus {
         outline: 2px solid var(--warning);
-    }
-
-    &__textarea {
-        min-height: 6rem;
-        resize: vertical; 
     }
 
     &__button {
@@ -98,5 +98,3 @@
         }
     }
 }
-
-
