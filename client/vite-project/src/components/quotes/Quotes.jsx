@@ -24,7 +24,10 @@ const Quotes = () => {
                     Browse through a catalog of amazing quotes
                 </h2>
             </div>
-            <Search />
+
+            <div className={styles.quotes__search}>
+                <Search/>
+            </div>
             {quotes?.length > 0 ? (
                 <ul className={styles.quotes__list__wrapper}>
                     {quotes.map(quote => (
