@@ -1,41 +1,33 @@
-import { useState } from 'react';
-import http from '../requester/http';
 import { useAuthContext } from './useAuthContext';
 import validateInputs from '../utils/validateInputs';
+import { useNavigate } from 'react-router-dom';
+import useLoginRequest from './useLoginRequest';
 
 const useLogin = () => {
-
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext();
+    const navigate = useNavigate();
+    const { login } = useLoginRequest();
 
-    const login = async (values) => {
-        setError(null);
-        
+    const submitHandler = async (e, values) => {
+        e.preventDefault();
+
         try {
             validateInputs(values);
-            setIsLoading(true);
-            const token = await http.post(`${import.meta.env.VITE_USER_URL}/login`, values);
+            const token = await login(values);
 
             dispatch({
                 type: 'LOGIN',
                 payload: token,
             })
 
-            return token;
-
+            navigate('/')
         } catch (err) {
-            setError(err.message);
-            throw error;
-        } finally {
-            setIsLoading(false);
+            throw err;
         }
     }
 
     return {
-        login,
-        error,
-        isLoading
+        submitHandler
     }
 }
 
