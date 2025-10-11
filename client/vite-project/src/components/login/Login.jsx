@@ -1,4 +1,4 @@
-import './Login.scss'
+import styles from './Login.module.scss'
 import useForm from '../../hooks/useForm';
 import useLogin from '../../hooks/useLogin';
 
@@ -15,31 +15,78 @@ const Login = () => {
     const { submitHandler } = useLogin();
 
     return (
-        <section>
-            <h1>Please log in</h1>
-            <form onSubmit={(e) => submitHandler(e, values)}>
-                <div>
-                    <label>Email</label>
+        <section
+            className={styles.login__form__container}
+        >
+
+            <div
+                className={styles.login__form__text__container}
+            >
+                <h1
+                    className={styles.login__form__main__heading}
+                >
+                    Log in
+                </h1>
+            </div>
+
+            <form
+                onSubmit={(e) => submitHandler(e, values)}
+                className={styles.login__form}
+            >
+                <div
+                    className={styles.form__data}
+                >
+                    <label
+                        className={styles.login__form__label}
+                    >
+                        Email
+                    </label>
                     <input
                         onChange={(e) => handleChange(e)}
+                        className={styles.login__form__input}
                         value={values.email}
-                        type="text"
+                        type="email"
                         name="email"
-                        placeholder="Enter email" />
+                        placeholder="Enter email"
+                        required />
                 </div>
 
-                <div>
-                    <label>Password</label>
+                <div
+                    className={styles.form__data}
+                >
+                    <label
+                        className={styles.login__form__label}
+                    >
+                        Password
+                    </label>
                     <input
                         onChange={(e) => handleChange(e)}
+                        className={styles.login__form__input}
                         value={values.password}
                         type="password"
                         name="password"
                         autoComplete='off'
-                        placeholder='Password' />
+                        placeholder='Minimum 3 characters'
+                        required
+                        minLength={3} />
                 </div>
-                <Link to='/users/reset-password'>Reset password</Link>
-                <button>Submit</button>
+
+                <div className={styles.reset__password__container}>
+                    <Link
+                        to='/users/reset-password'
+                        className={styles.reset__password__link}
+                    >
+                        Reset password
+                    </Link>
+                </div>
+
+                <div className={styles.login__form__submit__button__container}>
+                    <button
+                        className={styles.login__form__submit__button}
+                    >
+                        Submit
+                    </button>
+                </div>
             </form>
         </section>
     )

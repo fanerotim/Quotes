@@ -1,0 +1,99 @@
+:root {
+    --error: rgb(204, 64, 64);
+    --success: rgb(2, 99, 2);
+    --warning: rgb(255, 205, 112);
+}
+
+.login__form__container {
+    display: grid;
+    grid-template-rows: 200px 1fr;
+    grid-template-columns: 20em;
+    justify-content: center;
+    height: 500px;
+}
+
+.login__form__text__container {
+    grid-row: 1 / 2;
+    text-align: center;
+}
+
+.login__form__main__heading {
+    font-size: 4rem;
+
+    &::after {
+        content: '.';
+        color: red;
+    }
+}
+
+.form__data {
+    display: grid;
+    gap: .2rem;
+}
+
+.login__form {
+    grid-row: 2 / 3;
+    height: fit-content;
+
+    &__label {
+        font-size: .8rem;
+        color: rgb(34, 34, 34);
+        text-align: left;
+        padding: .3rem 0;
+    }
+
+    &__input {
+        padding: .7rem;
+        border-radius: .7rem;
+        outline: none;
+        border: none;
+        background-color: rgb(248, 248, 248);
+    }
+
+    &__input:user-invalid {
+        outline: 2px solid var(--error);
+    }
+
+    &__input:user-valid {
+        outline: 2px solid var(--success);
+    }
+
+    &__input:focus {
+        outline: 2px solid var(--warning);
+    }
+
+    &__submit__button {
+        all: unset;
+        font-size: .8rem;
+        padding: .5rem 1.5rem;
+        margin-top: .5rem;
+        background-color: rgb(48, 48, 48);
+        color: rgb(231, 231, 231);
+        border-radius: .5rem;
+        transition: background-color .3s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(245, 245, 245);
+            color: black;
+        }
+    }
+}
+
+.reset__password__container {
+    align-self: end;
+    justify-self: end;
+    padding-top: .5rem;
+}
+
+.reset__password__link {
+    all: unset;
+    font-size: .8rem;
+    font-weight: 400;
+    color: rgb(24, 24, 24);
+    cursor: pointer;
+
+    &:hover {
+        color: rgb(59, 59, 59);
+    }
+}
