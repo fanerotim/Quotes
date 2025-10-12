@@ -86,15 +86,18 @@
 
     &__button {
         all: unset;
+        font-size: .8rem;
         padding: .5rem 1.5rem;
         margin-top: .5rem;
-        background-color: rgb(140, 255, 169);
+        background-color: rgb(48, 48, 48);
+        color: rgb(231, 231, 231);
         border-radius: .5rem;
         transition: background-color .3s;
         cursor: pointer;
 
         &:hover {
-            background-color: rgb(62, 212, 99);
+            background-color: rgb(245, 245, 245);
+            color: black;
         }
     }
 }
