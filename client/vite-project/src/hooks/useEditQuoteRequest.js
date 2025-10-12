@@ -1,6 +1,6 @@
 import http from "../requester/http";
 
-const useEditQuote = () => {
+const useEditQuoteRequest = () => {
     
     const edit = async (values, quoteId) => {
         
@@ -17,4 +17,4 @@ const useEditQuote = () => {
     }
 }
 
-export default useEditQuote;
+export default useEditQuoteRequest;
