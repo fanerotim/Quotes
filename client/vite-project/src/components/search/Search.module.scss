@@ -7,8 +7,8 @@
 }
 
 .input__wrapper {
-    display: flex; 
-    justify-content: end;  
+    display: flex;
+    justify-content: end;
 }
 
 .search__label {
@@ -38,18 +38,20 @@
 }
 
 .search__button {
-    border: none;
-    background-color: rgb(218, 238, 255);
-    color: rgb(20, 20, 20);
-    border-radius: .5rem;
-    padding: .5rem 2rem;
-    font-weight: 500;
+    all: unset;
     font-size: .8rem;
+    padding: .5rem 1.5rem;
+    margin-top: .5rem;
+    background-color: rgb(48, 48, 48);
+    color: rgb(231, 231, 231);
+    border-radius: .5rem;
+    transition: background-color .3s;
     cursor: pointer;
-    align-self: center;
+    align-self: start;
 
     &:hover {
-        background-color: rgb(153, 207, 252);
+        background-color: rgb(245, 245, 245);
+        color: black;
     }
 }
 
@@ -62,6 +64,7 @@
 }
 
 @media (max-width: 350px) {
+
     // TODO: debug this. It's better to make input responsive and reduce width of parent
     .search__input {
         width: 200px;
