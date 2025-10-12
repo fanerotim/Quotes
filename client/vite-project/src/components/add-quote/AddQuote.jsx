@@ -18,7 +18,7 @@ const AddQuote = () => {
         <div className={styles.add__form__container}>
 
             <div className={styles.add__form__text}>
-                <h1 className={styles.add__form__text__heading}>Contribute</h1>
+                <h1 className={styles.add__form__text__heading}>Add</h1>
                 <p className={styles.add__form__text__subheading}>Add a quote</p>
             </div>
 

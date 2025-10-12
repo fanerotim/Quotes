@@ -27,14 +27,19 @@
     justify-self: center;
 
     &__heading {
-        font-size: 3.5rem;
-        font-weight: 200;
+        font-size: 4rem;
+        font-weight: 400;
         margin: 0;
+
+        &::after {
+            content: '.';
+            color: red;
+            font-weight: bold;
+        }
 
     }
 
     &__heading::first-letter {
-        color: rgb(250, 87, 87);
         font-size: 5rem;
         font-weight: bold;
     }

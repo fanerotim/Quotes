@@ -21,10 +21,17 @@
 
 .login__form__main__heading {
     font-size: 4rem;
+    font-weight: 400;
 
     &::after {
         content: '.';
         color: red;
+        font-weight: bold;
+    }
+
+    &::first-letter {
+        font-size: 5rem;
+        font-weight: bold;
     }
 }
 

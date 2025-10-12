@@ -31,7 +31,7 @@ const EditQuote = () => {
                 <h1
                     className={styles.edit__form__text__container__heading}
                 >
-                    Edit quote
+                    Edit
                 </h1>
             </div>
 
