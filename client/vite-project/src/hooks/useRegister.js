@@ -1,13 +1,14 @@
-import http from "../requester/http";
-import { useState } from "react";
 import validateInputs from "../utils/validateInputs";
+import useRegisterRequest from "./useRegisterRequest";
+import { useNavigate } from "react-router-dom";
 
 const useRegister = () => {
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
 
-    const register = async (values) => {
-        setError(null);
+    const { register } = useRegisterRequest();
+    const navigate = useNavigate();
+
+    const submitHandler = async (e, values) => {
+        e.preventDefault();
 
         // additional check to make sure passwords match / this logic no yet added to my validateInputs function
         if (values.password !== values.rePassword) {
@@ -17,21 +18,16 @@ const useRegister = () => {
 
         try {
             validateInputs(values)
-            setIsLoading(true)
-            const token = await http.post('http://localhost:3000/user/register', { email: values.email, password: values.password });
+            const token = await register(values);
+            navigate('/users/login')
             return token;
         } catch (err) {
-            setError(err.message);
-            throw error;
-        } finally {
-            setIsLoading(false);
+            throw err;
         }
     }
 
     return {
-        register,
-        error,
-        isLoading
+        submitHandler
     }
 }
 
