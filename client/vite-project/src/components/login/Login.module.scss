@@ -9,7 +9,9 @@
     grid-template-rows: 200px 1fr;
     grid-template-columns: 20em;
     justify-content: center;
-    height: 500px;
+    align-items: center;
+    max-height: 65%;
+    padding-top: 3rem;
 }
 
 .login__form__text__container {
@@ -33,7 +35,7 @@
 
 .login__form {
     grid-row: 2 / 3;
-    height: fit-content;
+    align-self: start;
 
     &__label {
         font-size: .8rem;

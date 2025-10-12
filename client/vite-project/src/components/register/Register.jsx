@@ -15,51 +15,91 @@ const Register = () => {
 
 
     return (
-        <section className='register-form__container'>
+        <section
+            className={styles.register__form__container}
+        >
 
-            <h1>Welcome to Register page</h1>
+            <div 
+                className={styles.register__form__text__container}
+            >
+                <h1
+                    className={styles.register__form__main__heading}
+                >
+                    Register
+                </h1>
+            </div>
+
             <form
                 onSubmit={(e) => submitHandler(e, values)}
+                className={styles.register__form}
             >
-                <div>
-                    <label>
+
+                <div
+                    className={styles.form__data}
+                >
+                    <label
+                        className={styles.register__form__label}
+                    >
                         Email
                     </label>
+
                     <input
-                        value={values.email}
                         onChange={(e) => handleChange(e)}
+                        className={styles.register__form__input}
+                        value={values.email}
                         type="email"
                         name='email'
                         autoComplete='off'
+                        placeholder='Enter email'
+                        required
                     />
                 </div>
 
-                <div>
-                    <label>
+                <div
+                    className={styles.form__data}
+                >
+                    <label
+                        className={styles.register__form__label}
+                    >
                         Password
                     </label>
+
                     <input
-                        value={values.password}
                         onChange={(e) => handleChange(e)}
+                        className={styles.register__form__input}
+                        value={values.password}
                         type="password"
                         name='password'
                         autoComplete='off'
+                        placeholder='Enter password'
+                        required
                     />
                 </div>
 
-                <div>
-                    <label>
+                <div
+                    className={styles.form__data}
+                >
+                    <label
+                        className={styles.register__form__label}
+                    >
                         Repeat password
                     </label>
                     <input
-                        value={values.rePassword}
                         onChange={(e) => handleChange(e)}
+                        className={styles.register__form__input}
+                        value={values.rePassword}
                         type="password"
                         name='rePassword'
                         autoComplete='off'
+                        placeholder='Confirm your password'
+                        required
                     />
                 </div>
-                <button>Submit</button>
+                <button
+                    className={styles.register__form__submit__button}
+                >
+                    Submit
+                </button>
             </form>
 
         </section>
