@@ -1,14 +1,14 @@
 import validateInputs from "../utils/validateInputs";
 import useLogoutOn401Error from "./useLogoutOn401Error";
 import useHasMoreQuotes from "./useHasMoreQuotes";
-import useSubmitQuote from './useSubmitQuote';
+import useAddQuoteRequest from './useAddQuoteRequest';
 import { useNavigate } from 'react-router-dom';
 
 const useAddQuote = () => {
 
     const { logoutOn401 } = useLogoutOn401Error();
     const { setHasMoreStatus } = useHasMoreQuotes();
-    const { addQuote } = useSubmitQuote();
+    const { addQuote } = useAddQuoteRequest();
     const navigate = useNavigate();
 
     const handleSubmit = async (e, values) => {

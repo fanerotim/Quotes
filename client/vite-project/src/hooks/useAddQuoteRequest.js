@@ -1,6 +1,6 @@
 import http from "../requester/http";
 
-const useSubmitQuote = () => {
+const useAddQuoteRequest = () => {
 
     const addQuote = async (values) => {
         try {
@@ -16,4 +16,4 @@ const useSubmitQuote = () => {
     };
 }
 
-export default useSubmitQuote;
+export default useAddQuoteRequest;
