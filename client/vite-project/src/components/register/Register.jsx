@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
+import styles from './Register.module.scss'
 import useForm from '../../hooks/useForm';
 import useRegister from '../../hooks/useRegister';
-import './Register.scss'
 
 const initialValues = {
     email: '',
@@ -12,26 +11,15 @@ const initialValues = {
 const Register = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { register, error, isLoading } = useRegister();
-    const navigate = useNavigate();
+    const { submitHandler } = useRegister();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const newUser = await register(values);
-            navigate('/users/login');
-        } catch (err) { 
-            console.error(err);
-        }
-    }
 
     return (
         <section className='register-form__container'>
 
             <h1>Welcome to Register page</h1>
             <form
-                onSubmit={(e) => handleSubmit(e)}
+                onSubmit={(e) => submitHandler(e, values)}
             >
                 <div>
                     <label>
@@ -71,8 +59,7 @@ const Register = () => {
                         autoComplete='off'
                     />
                 </div>
-                {error && <p className='errorMessage'>{error}</p>}
-                <button disabled={isLoading}>Submit</button>
+                <button>Submit</button>
             </form>
 
         </section>
