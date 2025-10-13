@@ -1,0 +1,23 @@
+.like__button__container {
+    text-align: end;
+}
+
+.like__button {
+    all: unset;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: rgb(34, 34, 36);
+
+    &:hover {
+        color: rgb(102, 102, 102);
+    }
+
+    &:disabled {
+        color: rgb(184, 184, 184);
+    }
+}
+
+.user__has__liked__message {
+    font-size: .9rem;
+    color: rgb(41, 41, 41);
+}
