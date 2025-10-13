@@ -3,22 +3,23 @@ import { useReducer } from "react"
 const reducer = (state, action) => {
 
     switch (action.type) {
-        case 'LOADING': {
+        case 'SET_LOADING': {
             return {
                 ...state,
                 isLoading: !state.isLoading
             }
         }
-        case 'ERROR': {
+        case 'SET_ERROR': {
             return {
                 ...state,
+                success: false,
                 error: action.payload
             }
         }
-        case 'SUCCESS': {
+        case 'SET_SUCCESS': {
             return {
                 ...state,
-                success: !state.success
+                success: true
             }
         }
     }
@@ -40,9 +41,7 @@ const useFormStates = () => {
     }
 
     return {
-        error: state.error.message,
-        isLoadnig: state.isLoading,
-        success: state.success,
+        ...state,
         updateState
     }
 }

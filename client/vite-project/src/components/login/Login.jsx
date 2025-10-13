@@ -12,7 +12,7 @@ const initialValues = {
 const Login = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { submitHandler, error, isLoading, success } = useLogin();
+    const { submitHandler, isLoading, error, success } = useLogin();
 
     return (
         <section
@@ -88,7 +88,10 @@ const Login = () => {
                     </button>
                 </div>
             </form>
-            {error ? error : 'no error'}
+            {error ? error.message : ''}
+            <br/>
+            {isLoading ? 'Loading...' : ''}
+            {success ? 'Success' : 'Unsuccess'}
         </section>
     )
 }
