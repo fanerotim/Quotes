@@ -44,9 +44,14 @@ const QuoteDetails = () => {
             <div className={styles.action__buttons}>
                 {isOwner && <EditButton id={quote?.id} />}
                 {isOwner && <DeleteButton />}
-                {canLike && <LikeButton updateLikeCount={updateLikeCount} />}
             </div>
 
+            <div
+                className={styles.like__component}
+            >
+                {canLike && <LikeButton updateLikeCount={updateLikeCount} />}
+            </div>
+            
             <div className={styles.social__sharing}>
                 <SocialSharingButtons />
             </div>
