@@ -29,7 +29,11 @@ const QuoteDetails = () => {
             </div>
 
             <div className={styles.heading__container}>
-                <h1>Excerpts...</h1>
+                <h1
+                className={styles.heading__container__main__text}
+                >
+                    Excerpts...
+                </h1>
             </div>
 
             <div className={styles.quote__details}>
@@ -38,8 +42,8 @@ const QuoteDetails = () => {
             </div>
 
             <div className={styles.action__buttons}>
-                {isOwner && <DeleteButton />}
                 {isOwner && <EditButton id={quote?.id} />}
+                {isOwner && <DeleteButton />}
                 {canLike && <LikeButton updateLikeCount={updateLikeCount} />}
             </div>
 
