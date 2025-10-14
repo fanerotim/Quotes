@@ -1,21 +1,21 @@
-import './Toaster.scss';
-import { useState } from 'react';
+import styles from './Toaster.module.scss';
 
 const Toaster = ({ message }) => {
 
-    const [show, setShow] = useState(null)
-
-    setTimeout(() => {
-        setShow(true)
-    }, 500)
-
     return (
-        <>
-            {show && <article className='toaster-container'>
-                <p>{message}</p>
-            </article>}
-        </>
+        <article
+            className={
+                `${message ? styles.show : styles.toaster__container}`
+            }
+        >
+            <p
+                className={styles.error__message}
+            >
+                {message}
+            </p>
+        </article>
     )
 }
+
 
 export default Toaster;
