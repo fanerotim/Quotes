@@ -12,13 +12,19 @@ const useLogin = () => {
 
     const submitHandler = async (e, values) => {
         e.preventDefault();
+        // set error to null as we'd be making a new api call
         updateState('SET_ERROR');
 
         try {
+            // set loading to true while we wait for response from api
             updateState('SET_LOADING');
-
             validateInputs(values);
             const token = await login(values);
+
+            // if token then update success to true / isLoading and error are set to false by the reducer
+            if (token) {
+                updateState('SET_SUCCESS');
+            }
 
             dispatch({
                 type: 'LOGIN',
@@ -28,10 +34,9 @@ const useLogin = () => {
             navigate('/')
 
         } catch (err) {
+            // if error then set error to true and update error message
             updateState('SET_ERROR', err);
             throw err;
-        } finally {
-            updateState('SET_LOADING');
         }
     }
 

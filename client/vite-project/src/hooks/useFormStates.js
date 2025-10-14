@@ -6,19 +6,20 @@ const reducer = (state, action) => {
         case 'SET_LOADING': {
             return {
                 ...state,
-                isLoading: !state.isLoading
+                isLoading: true
             }
         }
         case 'SET_ERROR': {
             return {
-                ...state,
+                isLoading: false,
                 success: false,
                 error: action.payload
             }
         }
         case 'SET_SUCCESS': {
             return {
-                ...state,
+                isLoading: false,
+                error: { message: false },
                 success: true
             }
         }
