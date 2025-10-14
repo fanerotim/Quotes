@@ -6,6 +6,7 @@ import SocialSharingButtons from '../social-sharing-buttons/SocialSharingButtons
 import LikeButton from '../like-button/LikeButton';
 import LikeCountIcon from '../like-count-icon/LikeCountIcon';
 import useQuoteDetails from '../../hooks/useQuoteDetails';
+import Loader from '../loader/Loader';
 
 const QuoteDetails = () => {
 
@@ -14,47 +15,58 @@ const QuoteDetails = () => {
         likesCount,
         isOwner,
         canLike,
-        updateLikeCount
+        updateLikeCount,
+        isLoading
     } = useQuoteDetails();
 
     return (
         <section className={styles.quote__details__container}>
 
-            <div className={styles.back__button}>
-                <BackButton />
-            </div>
-
-            <div className={styles.likes__details}>
-                <LikeCountIcon likesCount={likesCount} />
-            </div>
-
-            <div className={styles.heading__container}>
-                <h1
-                className={styles.heading__container__main__text}
+            {isLoading
+                ?
+                <div
+                    className={styles.quote__details__loader__container}
                 >
-                    {/* Excerpts... */}
-                </h1>
-            </div>
+                    <Loader />
+                </div>
+                :
+                <>
+                    <div className={styles.back__button}>
+                        <BackButton />
+                    </div>
 
-            <div className={styles.quote__details}>
-                <h2 className={styles.quote__details__text}>{quote?.text}</h2>
-                <h3 className={styles.quote__details__author}>{quote?.author}</h3>
-            </div>
+                    <div className={styles.likes__details}>
+                        <LikeCountIcon likesCount={likesCount} />
+                    </div>
 
-            <div className={styles.action__buttons}>
-                {isOwner && <EditButton id={quote?.id} />}
-                {isOwner && <DeleteButton />}
-            </div>
+                    <div className={styles.heading__container}>
+                        <h1
+                            className={styles.heading__container__main__text}
+                        >
+                            {/* Excerpts... */}
+                        </h1>
+                    </div>
 
-            <div
-                className={styles.like__component}
-            >
-                {canLike && <LikeButton updateLikeCount={updateLikeCount} />}
-            </div>
-            
-            <div className={styles.social__sharing}>
-                <SocialSharingButtons />
-            </div>
+                    <div className={styles.quote__details}>
+                        <h2 className={styles.quote__details__text}>{quote?.text}</h2>
+                        <h3 className={styles.quote__details__author}>{quote?.author}</h3>
+                    </div>
+
+                    <div className={styles.action__buttons}>
+                        {isOwner && <EditButton id={quote?.id} />}
+                        {isOwner && <DeleteButton />}
+                    </div>
+
+                    <div
+                        className={styles.like__component}
+                    >
+                        {canLike && <LikeButton updateLikeCount={updateLikeCount} />}
+                    </div>
+
+                    <div className={styles.social__sharing}>
+                        <SocialSharingButtons />
+                    </div>
+                </>}
         </section>
     )
 }
