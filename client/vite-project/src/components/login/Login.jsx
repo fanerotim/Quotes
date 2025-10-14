@@ -1,8 +1,8 @@
 import styles from './Login.module.scss'
 import useForm from '../../hooks/useForm';
 import useLogin from '../../hooks/useLogin';
-
 import { Link } from 'react-router-dom';
+import Toaster from '../toaster/Toaster';
 
 const initialValues = {
     email: '',
@@ -88,10 +88,10 @@ const Login = () => {
                     </button>
                 </div>
             </form>
-            {error ? error.message : ''}
+            {error ? <Toaster message={error.message}/> : ''}
             <br/>
             {isLoading ? 'Loading...' : ''}
-            {success ? 'Success' : 'Unsuccess'}
+            {success ? 'Success' : ''}
         </section>
     )
 }
