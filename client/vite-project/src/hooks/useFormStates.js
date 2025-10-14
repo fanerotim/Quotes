@@ -36,7 +36,7 @@ const useFormStates = () => {
     })
 
     const updateState = (actionType, err) => {
-
+        
         dispatch({
             type: actionType,
             payload: err
