@@ -19,10 +19,12 @@ const reducer = (state, action) => {
         case 'SET_SUCCESS': {
             return {
                 isLoading: false,
-                error: { message: false },
+                error: { message: null },
                 success: true
             }
         }
+        default: 
+            return state;
     }
 }
 

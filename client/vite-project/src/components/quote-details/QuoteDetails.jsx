@@ -32,7 +32,7 @@ const QuoteDetails = () => {
                 <h1
                 className={styles.heading__container__main__text}
                 >
-                    Excerpts...
+                    {/* Excerpts... */}
                 </h1>
             </div>
 
