@@ -110,3 +110,9 @@
 .login__form__toaster__container {
     grid-row: 3 / 4;
 }
+
+.login__form__loader__container {
+    grid-row: 2 / 3;
+    align-self: center;
+    justify-self: center;
+}
