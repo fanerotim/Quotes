@@ -6,12 +6,13 @@
 
 .register__form__container {
     display: grid;
-    grid-template-rows: 200px 1fr;
+    grid-template-rows: 200px max-content, 300px;
     grid-template-columns: 20em;
     justify-content: center;
     align-items: center;
     max-height: 65%;
     padding-top: 3rem;
+    gap: 2rem;
 }
 
 .register__form__text__container {
@@ -87,4 +88,14 @@
             color: black;
         }
     }
+}
+
+.register__form__toaster__wrapper {
+    grid-row: 3 / 4;
+}
+
+.register__form__loader__container {
+    grid-row: 2 / 3;
+    align-self: center;
+    justify-self: center;
 }

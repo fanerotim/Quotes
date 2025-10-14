@@ -1,6 +1,8 @@
 import styles from './Register.module.scss'
 import useForm from '../../hooks/useForm';
 import useRegister from '../../hooks/useRegister';
+import Toaster from '../toaster/Toaster';
+import Loader from '../loader/Loader';
 
 const initialValues = {
     email: '',
@@ -11,7 +13,7 @@ const initialValues = {
 const Register = () => {
 
     const { values, handleChange } = useForm(initialValues);
-    const { submitHandler } = useRegister();
+    const { submitHandler, error, isLoading, success } = useRegister();
 
 
     return (
@@ -29,7 +31,13 @@ const Register = () => {
                 </h1>
             </div>
 
-            <form
+            {isLoading ?
+            <div
+                className={styles.register__form__loader__container}
+            >
+                <Loader/>
+            </div>    
+            : <form
                 onSubmit={(e) => submitHandler(e, values)}
                 className={styles.register__form}
             >
@@ -100,8 +108,13 @@ const Register = () => {
                 >
                     Submit
                 </button>
-            </form>
+            </form>}
 
+            <div
+                className={styles.register__form__toaster__wrapper}
+            >
+                <Toaster message={error?.message}/>
+            </div>
         </section>
     )
 }
