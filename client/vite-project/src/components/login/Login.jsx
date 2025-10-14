@@ -88,7 +88,6 @@ const Login = () => {
                     </button>
                 </div>
             </form>
-            {/* {error ? <Toaster message={error.message}/> : ''} */}
             <Toaster message={error?.message}/>
             <br/>
             {isLoading ? 'Loading...' : ''}
