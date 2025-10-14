@@ -88,8 +88,13 @@ const Login = () => {
                     </button>
                 </div>
             </form>
-            <Toaster message={error?.message}/>
-            <br/>
+
+            <div
+                className={styles.login__form__toaster__container}
+            >
+                <Toaster message={error?.message} />
+            </div>
+            <br />
             {isLoading ? 'Loading...' : ''}
             {success ? 'Success' : ''}
         </section>

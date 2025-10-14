@@ -6,7 +6,7 @@
 
 .login__form__container {
     display: grid;
-    grid-template-rows: 200px 1fr;
+    grid-template-rows: 200px max-content 200px;
     grid-template-columns: 20em;
     justify-content: center;
     align-items: center;
@@ -105,4 +105,8 @@
     &:hover {
         color: rgb(59, 59, 59);
     }
+}
+
+.login__form__toaster__container {
+    grid-row: 3 / 4;
 }
