@@ -5,7 +5,7 @@ const Toaster = ({ message }) => {
     return (
         <article
             className={
-                `${message ? styles.show : styles.toaster__container}`
+                `${message ? styles.show : ''} ${styles.toaster__container}`
             }
         >
             <p
