@@ -1,7 +1,18 @@
 import styles from './SuccessModal.module.scss';
 import { GoCheckCircleFill } from "react-icons/go";
+import useSuccessModal from '../../hooks/useSuccessModal';
 
 const SuccessModal = () => {
+
+    const { seconds, startTimer, endTimer } = useSuccessModal();
+    
+    if (seconds === 5) {
+        startTimer();
+    }
+
+    if (seconds === 0) {
+        endTimer();
+    }
 
     return (
         <article
@@ -13,7 +24,7 @@ const SuccessModal = () => {
                 <div
                     className={styles.success__modal__icon__container}
                 >
-                    <GoCheckCircleFill 
+                    <GoCheckCircleFill
                         className={styles.success__modal__icon}
                     />
                 </div>
@@ -26,7 +37,7 @@ const SuccessModal = () => {
                 <p
                     className={styles.success__modal__subheading}
                 >
-                    Your request was successful. We'll redirect you in 3 seconds.
+                    Your request was successful. We'll redirect you in {seconds} seconds.
                 </p>
             </div>
         </article>
