@@ -1,0 +1,26 @@
+.success__modal__container {
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: .1rem .1rem 1rem rgb(61, 61, 61);  
+}
+
+
+.success__modal__icon__container {
+    display: flex;
+    justify-content: center;
+}
+
+.success__modal__heading {
+    text-align: center;
+    font-weight: 300;
+}
+
+.success__modal__subheading {
+    text-align: center;
+    font-weight: 300;
+}
+
+.success__modal__icon {
+    color: rgb(115, 211, 115);
+    font-size: 3rem;
+}
