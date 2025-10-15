@@ -6,24 +6,24 @@ const reducer = (state, action) => {
         case 'SET_LOADING': {
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
             }
         }
         case 'SET_ERROR': {
             return {
                 isLoading: false,
                 success: false,
-                error: action.payload
+                error: action.payload,
             }
         }
         case 'SET_SUCCESS': {
             return {
                 isLoading: false,
+                success: true,
                 error: { message: null },
-                success: true
             }
         }
-        default: 
+        default:
             return state;
     }
 }
@@ -31,12 +31,12 @@ const reducer = (state, action) => {
 const useFormStates = () => {
     const [state, dispatch] = useReducer(reducer, {
         isLoading: false,
+        success: false,
         error: { message: null },
-        success: false
     })
 
     const updateState = (actionType, err) => {
-        
+
         dispatch({
             type: actionType,
             payload: err
