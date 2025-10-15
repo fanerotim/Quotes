@@ -8,7 +8,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     // TODO; red about min max, as it may be useful for heading in regards to responsiveness
-    grid-template-rows: 250px 1fr;
+    grid-template-rows: 250px max-content 200px;
 }
 
 .add__form__text {
@@ -105,4 +105,15 @@
             color: black;
         }
     }
+}
+
+.add__form__loader__container {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+
+.add__form__toaster__container {
+    grid-row: 3 / 4;
+    grid-column: 2 / 3;
+    align-self: center;
 }
