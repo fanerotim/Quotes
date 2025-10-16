@@ -3,6 +3,8 @@ import useForm from '../../hooks/useForm';
 import useRegister from '../../hooks/useRegister';
 import Toaster from '../toaster/Toaster';
 import Loader from '../loader/Loader';
+import SucessModal from '../success-modal/SuccessModal';
+import SuccessModal from '../success-modal/SuccessModal';
 
 const initialValues = {
     email: '',
@@ -32,11 +34,21 @@ const Register = () => {
             </div>
 
             {isLoading ?
+
             <div
                 className={styles.register__form__loader__container}
             >
                 <Loader/>
-            </div>    
+            </div>  
+            
+            : success ?
+
+            <div
+                className={styles.register__form__success__modal__container}
+            >
+                <SuccessModal/>
+            </div>
+            
             : <form
                 onSubmit={(e) => submitHandler(e, values)}
                 className={styles.register__form}
