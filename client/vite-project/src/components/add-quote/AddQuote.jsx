@@ -4,6 +4,7 @@ import useAddQuote from '../../hooks/useAddQuote';
 import { CATEGORIES } from '../../utils/genres';
 import Loader from '../loader/Loader';
 import Toaster from '../toaster/Toaster';
+import SuccessModal from '../success-modal/SuccessModal';
 
 const initialValues = {
     author: '',
@@ -16,7 +17,8 @@ const AddQuote = () => {
     const { values, handleChange } = useForm(initialValues);
     const { handleSubmit,
         isLoading,
-        error
+        error,
+        success
     } = useAddQuote();
 
     return (
@@ -34,86 +36,96 @@ const AddQuote = () => {
                 >
                     <Loader />
                 </div>
-                :
-                <form
-                    onSubmit={(e) => handleSubmit(e, values)}
-                    className={styles.add__form}>
 
-                    <section
-                        className={styles.add__form__form__data}
-                    >
-                        <label
-                            className={styles.add__form__label}
-                        >
-                            Author
-                        </label>
-                        <input
-                            onChange={handleChange}
-                            value={values.author}
-                            className={styles.add__form__input}
-                            placeholder='Minimum 8 characters'
-                            name='author'
-                            type="text"
-                            required
-                            minLength={8} />
-                    </section>
+                : success ?
 
-                    <section
-                        className={styles.add__form__form__data}
+                    <div
+                        className={styles.add__form__success__modal__container}
                     >
-                        <label
-                            className={styles.add__form__label}
-                        >
-                            Text
-                        </label>
-                        <textarea
-                            onChange={handleChange}
-                            value={values.text}
-                            className={styles.add__form__textarea}
-                            placeholder='Minimum 15 characters'
-                            name='text'
-                            type="text"
-                            required
-                            minLength={15} />
-                    </section>
+                        <SuccessModal />
+                    </div>
 
-                    <section
-                        className={styles.add__form__form__data}
-                    >
-                        <label
-                            className={styles.add__form__label}
-                        >
-                            Category
-                        </label>
-                        <select
-                            onChange={handleChange}
-                            className={styles.add__form__select}
-                            name="category"
-                            required
-                        >
-                            {CATEGORIES.map(category => (
-                                <option
-                                    key={category.value}
-                                    value={category.value}
-                                >
-                                    {category.name}
-                                </option>
-                            ))}
-                        </select>
-                    </section>
+                    :
+                    
+                    <form
+                        onSubmit={(e) => handleSubmit(e, values)}
+                        className={styles.add__form}>
 
-                    <button
-                        className={styles.add__form__button}
-                    >
-                        Submit
-                    </button>
-                </form>
+                        <section
+                            className={styles.add__form__form__data}
+                        >
+                            <label
+                                className={styles.add__form__label}
+                            >
+                                Author
+                            </label>
+                            <input
+                                onChange={handleChange}
+                                value={values.author}
+                                className={styles.add__form__input}
+                                placeholder='Minimum 8 characters'
+                                name='author'
+                                type="text"
+                                required
+                                minLength={8} />
+                        </section>
+
+                        <section
+                            className={styles.add__form__form__data}
+                        >
+                            <label
+                                className={styles.add__form__label}
+                            >
+                                Text
+                            </label>
+                            <textarea
+                                onChange={handleChange}
+                                value={values.text}
+                                className={styles.add__form__textarea}
+                                placeholder='Minimum 15 characters'
+                                name='text'
+                                type="text"
+                                required
+                                minLength={15} />
+                        </section>
+
+                        <section
+                            className={styles.add__form__form__data}
+                        >
+                            <label
+                                className={styles.add__form__label}
+                            >
+                                Category
+                            </label>
+                            <select
+                                onChange={handleChange}
+                                className={styles.add__form__select}
+                                name="category"
+                                required
+                            >
+                                {CATEGORIES.map(category => (
+                                    <option
+                                        key={category.value}
+                                        value={category.value}
+                                    >
+                                        {category.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </section>
+
+                        <button
+                            className={styles.add__form__button}
+                        >
+                            Submit
+                        </button>
+                    </form>
             }
 
             <div
                 className={styles.add__form__toaster__container}
             >
-                <Toaster message={error?.message}/>
+                <Toaster message={error?.message} />
             </div>
         </div>
     )
