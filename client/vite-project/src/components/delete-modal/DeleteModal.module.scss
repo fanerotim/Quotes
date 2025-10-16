@@ -1,0 +1,60 @@
+.delete__modal__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 20, 20, 0.9);
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+
+.delete__modal__content__wrapper {
+    background-color: rgb(243, 243, 243);
+    border-radius: .5rem;
+    padding: 2rem;
+}
+
+.delete__modal__heading {
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 1rem;
+}
+
+.delete__modal__buttons__wrapper {
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
+}
+
+.delete__modal__approve__btn,
+.delete__modal__reject__btn {
+    all: unset;
+    font-size: .8rem;
+    cursor: pointer;
+    padding: .4rem 2rem;
+    border-radius: .7rem;
+    transition: background-color .3s;
+    color: white;
+}
+
+.delete__modal__approve__btn {
+    background-color: rgb(255, 80, 80);
+    color: black;
+    font-weight: bold;
+    
+    &:hover {
+        background-color: rgb(172, 0, 0);
+        color: rgb(92, 0, 0);
+    }
+}
+
+.delete__modal__reject__btn {
+    background-color: green;
+
+    &:hover {
+        background-color: rgb(3, 85, 0);
+    }
+}
