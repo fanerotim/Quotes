@@ -28,13 +28,12 @@ const useLogin = () => {
             updateState('SET_SUCCESS');
 
             // setting timeout for now here, as i want to show a success dialog that runs for x seconds and then redirects user
-            const timeoutId = setTimeout(() => {
+            setTimeout(() => {
                     dispatch({
                         type: 'LOGIN',
                         payload: token,
                     })
             
-                    clearTimeout(timeoutId);
                     navigate('/')
             }, delayMs)
             
