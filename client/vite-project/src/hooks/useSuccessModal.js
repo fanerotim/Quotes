@@ -22,6 +22,7 @@ const useSuccessModal = () => {
         startTimer,
         endTimer,
         seconds,
+        delayMs: seconds * 1000
     }
 }
 
