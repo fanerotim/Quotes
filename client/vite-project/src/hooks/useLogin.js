@@ -3,12 +3,15 @@ import validateInputs from '../utils/validateInputs';
 import { useNavigate } from 'react-router-dom';
 import useLoginRequest from './useLoginRequest';
 import useFormStates from './useFormStates';
+import useSuccessModal from './useSuccessModal';
 
 const useLogin = () => {
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
     const { login } = useLoginRequest();
     const { isLoading, error, success, updateState } = useFormStates();
+    const { delayMs } = useSuccessModal();
+
 
     const submitHandler = async (e, values) => {
         e.preventDefault();
@@ -21,18 +24,20 @@ const useLogin = () => {
             validateInputs(values);
             const token = await login(values);
 
-            // if token then update success to true / isLoading and error are set to false by the reducer
-            if (token) {
-                updateState('SET_SUCCESS');
-            }
+            //if we get a token, show success modal
+            updateState('SET_SUCCESS');
 
-            dispatch({
-                type: 'LOGIN',
-                payload: token,
-            })
-
-            navigate('/')
-
+            // setting timeout for now here, as i want to show a success dialog that runs for x seconds and then redirects user
+            const timeoutId = setTimeout(() => {
+                    dispatch({
+                        type: 'LOGIN',
+                        payload: token,
+                    })
+            
+                    clearTimeout(timeoutId);
+                    navigate('/')
+            }, delayMs)
+            
         } catch (err) {
             // if error then set error to true and update error message
             updateState('SET_ERROR', err);
