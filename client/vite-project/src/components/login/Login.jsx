@@ -4,6 +4,7 @@ import useLogin from '../../hooks/useLogin';
 import { Link } from 'react-router-dom';
 import Toaster from '../toaster/Toaster';
 import Loader from '../loader/Loader';
+import SuccessModal from '../success-modal/SuccessModal';
 
 const initialValues = {
     email: '',
@@ -31,72 +32,82 @@ const Login = () => {
             </div>
 
             {isLoading
-                ? 
+                ?
                 <div
                     className={styles.login__form__loader__container}
                 >
                     <Loader />
                 </div>
-                :
-                <form
-                    onSubmit={(e) => submitHandler(e, values)}
-                    className={styles.login__form}
-                >
-                    <div
-                        className={styles.form__data}
-                    >
-                        <label
-                            className={styles.login__form__label}
-                        >
-                            Email
-                        </label>
-                        <input
-                            onChange={(e) => handleChange(e)}
-                            className={styles.login__form__input}
-                            value={values.email}
-                            type="email"
-                            name="email"
-                            placeholder="Enter email"
-                            required />
-                    </div>
+
+                : success ?
 
                     <div
-                        className={styles.form__data}
+                        className={styles.login__form__success__modal__container}
                     >
-                        <label
-                            className={styles.login__form__label}
-                        >
-                            Password
-                        </label>
-                        <input
-                            onChange={(e) => handleChange(e)}
-                            className={styles.login__form__input}
-                            value={values.password}
-                            type="password"
-                            name="password"
-                            autoComplete='off'
-                            placeholder='Minimum 3 characters'
-                            required
-                            minLength={3} />
+                        <SuccessModal />
                     </div>
 
-                    <div className={styles.reset__password__container}>
-                        <Link
-                            to='/users/reset-password'
-                            className={styles.reset__password__link}
-                        >
-                            Reset password
-                        </Link>
-                    </div>
+                    :
 
-                    <div className={styles.login__form__submit__button__container}>
-                        <button
-                            className={styles.login__form__submit__button}
+                    <form
+                        onSubmit={(e) => submitHandler(e, values)}
+                        className={styles.login__form}
+                    >
+                        <div
+                            className={styles.form__data}
                         >
-                            Submit
-                        </button>
-                    </div>
-                </form>
+                            <label
+                                className={styles.login__form__label}
+                            >
+                                Email
+                            </label>
+                            <input
+                                onChange={(e) => handleChange(e)}
+                                className={styles.login__form__input}
+                                value={values.email}
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                required />
+                        </div>
+
+                        <div
+                            className={styles.form__data}
+                        >
+                            <label
+                                className={styles.login__form__label}
+                            >
+                                Password
+                            </label>
+                            <input
+                                onChange={(e) => handleChange(e)}
+                                className={styles.login__form__input}
+                                value={values.password}
+                                type="password"
+                                name="password"
+                                autoComplete='off'
+                                placeholder='Minimum 3 characters'
+                                required
+                                minLength={3} />
+                        </div>
+
+                        <div className={styles.reset__password__container}>
+                            <Link
+                                to='/users/reset-password'
+                                className={styles.reset__password__link}
+                            >
+                                Reset password
+                            </Link>
+                        </div>
+
+                        <div className={styles.login__form__submit__button__container}>
+                            <button
+                                className={styles.login__form__submit__button}
+                            >
+                                Submit
+                            </button>
+                        </div>
+                    </form>
             }
 
             <div
