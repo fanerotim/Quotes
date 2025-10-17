@@ -24,7 +24,7 @@ const useLogin = () => {
             validateInputs(values);
             const token = await login(values);
 
-            //if we get a token, show success modal
+            // by this point we know we have token, so update success to true
             updateState('SET_SUCCESS');
 
             // setting timeout for now here, as i want to show a success dialog that runs for x seconds and then redirects user
