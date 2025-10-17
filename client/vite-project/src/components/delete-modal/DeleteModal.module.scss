@@ -64,3 +64,10 @@
     border-radius: .5rem;
     padding: 2rem;
 }
+
+.delete__modal__success_modal__wrapper {
+    background-color: white;
+    // TODO: this padding is bad, it just covers an issue - remove it, make sure to show success modal and you'd see the border radius issue
+    // FIX IT
+    border-radius: .8rem;
+}
