@@ -44,7 +44,7 @@
     background-color: rgb(255, 80, 80);
     color: black;
     font-weight: bold;
-    
+
     &:hover {
         background-color: rgb(172, 0, 0);
         color: rgb(92, 0, 0);
@@ -57,4 +57,10 @@
     &:hover {
         background-color: rgb(3, 85, 0);
     }
+}
+
+.loader__container {
+    background-color: rgb(243, 243, 243);
+    border-radius: .5rem;
+    padding: 2rem;
 }
