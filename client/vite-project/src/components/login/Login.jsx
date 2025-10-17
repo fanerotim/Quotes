@@ -106,6 +106,7 @@ const Login = () => {
                             >
                                 Submit
                             </button>
+
                         </div>
                     </form>
             }
@@ -115,7 +116,6 @@ const Login = () => {
             >
                 <Toaster message={error?.message} />
             </div>
-
         </section>
     )
 }
