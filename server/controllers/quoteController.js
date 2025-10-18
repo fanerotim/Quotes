@@ -13,6 +13,17 @@ const { isGuest } = require('../route-guards/isGuest');
 //     }
 // })
 
+router.get('/last-three-quotes', async (req, res) => {
+    
+    try {
+        const mostRecentQuotes = await quoteService.getMostRecentlyAddedQuotes();
+        res.status(200).json(mostRecentQuotes)
+    } catch(err) {
+        const statusCode = err.status || 500;
+        res.status(statusCode).json({message: err.message});
+    }
+})
+
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
 
