@@ -228,6 +228,24 @@ const getLikesCount = async (quoteId) => {
     })
 }
 
+const getMostRecentlyAddedQuotes = async () => {
+    return new Promise((resolve, reject) => {
+        const sql = `
+            SELECT * 
+            FROM quotes
+            ORDER BY date_created DESC
+            LIMIT 3
+        `;
+
+        db.query(sql, (err, result) => {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(result);
+        })
+    })
+}
+
 module.exports = {
     getAll,
     getQuotes,
@@ -239,5 +257,6 @@ module.exports = {
     deleteQuote,
     likeQuote,
     hasLikedQuote,
-    getLikesCount
+    getLikesCount,
+    getMostRecentlyAddedQuotes
 }
