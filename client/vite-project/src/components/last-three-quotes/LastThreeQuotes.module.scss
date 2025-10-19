@@ -1,0 +1,35 @@
+.last__three__quotes__container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.last__three__quote__wrapper {
+    background-color: rgb(241, 241, 241);  
+    padding: 2rem;
+    border-radius: .5rem;  
+}
+
+.last__three__quote__text {
+    font-size: 1rem;
+    font-weight: 400;
+    // text-align: center;
+}
+
+.last__three__quote__author {
+    font-size: .7rem;
+    font-weight: 600;
+    text-align: end;
+}
+
+.last__three__quote__author__and__likes__wrapper {
+    display: flex;
+    justify-content: space-between;
+    font-size: .5rem;
+}
+
+.last__three__quote__likes__icon {
+    width: 20px;
+    height: 20px;
+}

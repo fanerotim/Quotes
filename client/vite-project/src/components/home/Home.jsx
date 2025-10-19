@@ -11,7 +11,6 @@ const Home = () => {
         >
             <h1 className='home-heading'>Welcome to My Quotes App</h1>
             <LastThreeQuotes />
-            <h1 className='info'>Viewport with is: {width}</h1>
         </div>
     )
 }
