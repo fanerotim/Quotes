@@ -1,15 +1,28 @@
-import './Home.module.scss'
+import styles from './Home.module.scss'
 import LastThreeQuotes from '../last-three-quotes/LastThreeQuotes';
 
 
 const Home = () => {
-    
 
     return (
         <div
-            className='home-container'
+            className={styles.home__container}
         >
-            <h1 className='home-heading'>Welcome to My Quotes App</h1>
+            <div
+                className={styles.home__text__container}
+            >
+                <h1
+                    className={styles.home__heading}
+                >
+                    Welcome to My Quotes App
+                </h1>
+                <p
+                    className={styles.home__subheading}
+                >
+                    I hope you enjoy the quotes we have collected
+                </p>
+            </div>
+
             <LastThreeQuotes />
         </div>
     )

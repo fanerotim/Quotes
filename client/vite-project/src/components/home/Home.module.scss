@@ -1,5 +1,34 @@
-.home-heading {
-    justify-self: center;
-    align-self: center;
-    font-size: 3rem;
+.home__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home__text__container {
+    margin-bottom: 3rem;
+}
+
+.home__heading {
+    font-size: 4rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 0;
+
+    &::after {
+        content: '.';
+        color: red;
+        font-weight: bold;
+    }
+
+    &::first-letter {
+        font-size: 5rem;
+        font-weight: bold;
+    }
+}
+
+.home__subheading {
+    text-align: center;
+    font-weight: 300;
+    font-size: 1.2rem;
 }

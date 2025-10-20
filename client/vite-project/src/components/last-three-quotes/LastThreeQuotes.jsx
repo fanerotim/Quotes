@@ -10,6 +10,11 @@ const LastThreeQuotes = () => {
         <article
             className={styles.last__three__quotes__container}
         >
+            <h1
+                className={styles.last__three__quotes__main__heading}
+            >
+                Most recent quotes
+            </h1>
             {lastThreeQuotes.map((quote) => (
                 <div
                     key={quote.id}
@@ -25,9 +30,9 @@ const LastThreeQuotes = () => {
                     <div
                         className={styles.last__three__quote__author__and__likes__wrapper}
                     >
-                        <LikeCountIcon
+                        {/* <LikeCountIcon
                             className={styles.last__three__quote__likes__icon}
-                        />
+                        /> */}
                         <p
                             className={styles.last__three__quote__author}
                         >
