@@ -19,19 +19,30 @@
         position: absolute;
         right: 0;
         bottom: 0;
-        color: rgb(71, 2, 2);
+        color: rgb(202, 0, 0);
     }
 }
 
 .last__three__quote__wrapper {
-    background-color: rgb(255, 252, 252);  
+    
+    color: white;
+    background-color: rgb(17, 13, 13);
     padding: 2rem;
     border-radius: .5rem;  
-    box-shadow: .5rem .7rem 1rem rgb(22, 22, 22);
+    // box-shadow: .5rem .7rem 1rem rgb(22, 22, 22);
+    transition: background-color .5s;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: none;
+        background-color: rgb(255, 252, 252);  
+        color: rgb(17, 15, 15);
+        transition: background-color .5s;
+    }
 }
 
 .last__three__quote__text {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 300;
     // text-align: center;
 }
@@ -44,7 +55,7 @@
 
 .last__three__quote__author {
     font-size: .7rem;
-    font-weight: 600;
+    font-weight: 300;
     text-align: end;
 }
 
