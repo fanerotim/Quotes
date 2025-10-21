@@ -9,7 +9,7 @@ const getAll = () => {
         db.query(sql, (err, result) => {
             if (err) {
                 return reject(err);
-            } 
+            }
             return resolve(result);
         })
     })
@@ -37,7 +37,7 @@ const getQuotes = (offset, limit) => {
 }
 
 const getQuote = (id) => {
-    
+
     if (!id) {
         const error = new Error('quoteId must be provided');
         error.statusCode = 400;
@@ -86,7 +86,7 @@ const getSearchedQuotes = async (searchText) => {
 
         db.query(sql, [searchText], (err, result) => {
             if (err) {
-                return reject({err})
+                return reject({ err })
             }
             return resolve(result);
         })
@@ -171,7 +171,7 @@ const deleteQuote = (id) => {
 }
 
 const likeQuote = async (userId, quoteId) => {
-    
+
     // check if user has already liked the quote;
     const hasLikedResult = await hasLikedQuote(userId, quoteId);
     const userHasLikedQuote = hasLikedResult[0];
@@ -203,13 +203,13 @@ const hasLikedQuote = async (userId, quoteId) => {
         const sql = `
             SELECT * FROM likes
             WHERE user_id = ? AND quote_id = ?`
-        
-            db.query(sql, [userId, quoteId], (err, result) => {
-                if (err) {
-                    return reject(err)
-                }
-                return resolve(result);
-            })
+
+        db.query(sql, [userId, quoteId], (err, result) => {
+            if (err) {
+                return reject(err)
+            }
+            return resolve(result);
+        })
     })
 }
 
@@ -219,23 +219,25 @@ const getLikesCount = async (quoteId) => {
             SELECT * FROM likes
             WHERE quote_id = ?`
 
-            db.query(sql, [quoteId], (err, result) => {
-                if (err) {
-                    return reject(err)
-                }
-                return resolve(result);
-            })
+        db.query(sql, [quoteId], (err, result) => {
+            if (err) {
+                return reject(err)
+            }
+            return resolve(result);
+        })
     })
 }
 
 const getMostRecentlyAddedQuotes = async () => {
     return new Promise((resolve, reject) => {
         const sql = `
-            SELECT * 
-            FROM quotes
-            ORDER BY date_created DESC
-            LIMIT 3
-        `;
+            SELECT *,
+                (SELECT COUNT(quote_id)
+                    FROM likes
+                    WHERE q.id = quote_id) AS likes_count
+                FROM quotes AS q
+                ORDER BY date_created DESC
+                LIMIT 3`;
 
         db.query(sql, (err, result) => {
             if (err) {
