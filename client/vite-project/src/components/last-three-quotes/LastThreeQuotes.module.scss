@@ -49,17 +49,26 @@
 
 .last__three__quote__author__and__likes__wrapper {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     font-size: .5rem;
 }
 
 .last__three__quote__author {
     font-size: .7rem;
     font-weight: 300;
-    text-align: end;
+    align-self: end;
+    margin: 0;
 }
 
-.last__three__quote__likes__icon {
-    width: 20px;
-    height: 20px;
+.likes__icon__and__likes__count__container {
+    display: flex;
+    align-self: end;
+    margin: 0;
 }
+
+.last__three__quote__likes__count {
+    font-size: .8rem;
+    align-self: end;
+    margin: 0;
+}
+

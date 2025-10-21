@@ -1,10 +1,12 @@
 import styles from './LastThreeQuotes.module.scss';
 import useGetLastThreeQuotes from '../../hooks/useGetLastThreeQuotes';
 import LikeCountIcon from '../like-count-icon/LikeCountIcon';
+import useLikeRequests from '../../hooks/useLikeRequests';
 
 const LastThreeQuotes = () => {
 
     const { lastThreeQuotes } = useGetLastThreeQuotes();
+    const { getLikesCount } = useLikeRequests();
 
     return (
         <article
@@ -30,9 +32,19 @@ const LastThreeQuotes = () => {
                     <div
                         className={styles.last__three__quote__author__and__likes__wrapper}
                     >
-                        {/* <LikeCountIcon
-                            className={styles.last__three__quote__likes__icon}
-                        /> */}
+                        <div
+                            className={styles.likes__icon__and__likes__count__container}
+                        >
+                            <LikeCountIcon
+                                className={styles.last__three__quote__likes__icon}
+                            />
+                            <p
+                                className={styles.last__three__quote__likes__count}
+                            >
+                                {quote.likes_count}
+                            </p>
+                        </div>
+
                         <p
                             className={styles.last__three__quote__author}
                         >
