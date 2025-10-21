@@ -3,7 +3,11 @@
     color: red;
 }
 
-.likes__count {
-    font-size: .8rem;
-    text-align: center;
+.likes__count__container {
+    display: flex;
+    align-items: end;
+}
+
+.likes__count__number {
+    font-size: .9rem;
 }
