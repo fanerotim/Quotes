@@ -17,6 +17,13 @@
     }
 }
 
+// TODO: debug why when this class is added styles do not take effect
+.sticky {
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
 @media (max-width: 1000px) {
     .navigation__wrapper a,
     .navigation__wrapper button {

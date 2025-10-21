@@ -4,6 +4,7 @@ import Logout from '../logout/logout';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useEffect } from 'react';
 import { useHistoryContext } from '../../hooks/useHistoryContext';
+import useStickyHeader from '../../hooks/useStickyHeader';
 
 const Navigation = () => {
 
@@ -15,9 +16,9 @@ const Navigation = () => {
     // check if isBack flag is provided as we dispatch different action if that's the case
     const isBack = location.state?.isBack;
     const { dispatch } = useHistoryContext();
+    const { shouldStick } = useStickyHeader();
 
     useEffect(() => {
-
         // if back is present, when I will be removing the last item in the arr of routes
         if (isBack) {
             dispatch({
@@ -34,7 +35,7 @@ const Navigation = () => {
     }, [location])
 
     return (
-        <nav className={styles.navigation__wrapper}>
+        <nav className={`${styles.navigation__wrapper} ${shouldStick ? styles.sticky : ''}`}>
             <NavLink to='/'>Home</NavLink>
             <NavLink to='/quotes' end>Quotes</NavLink>
             {auth && (<NavLink to='/quotes/add-quote'>Add quote</NavLink>)}
