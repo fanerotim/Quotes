@@ -1,23 +1,21 @@
-import http from "../requester/http";
-import useLogoutOn401Error from '../hooks/useLogoutOn401Error';
+import useGetUserQuotesRequest from './useGetUserQuotesRequest';
+import { useEffect, useState } from 'react';
+import { useAuthContext } from './useAuthContext';
 
 const useGetUserQuotes = () => {
+    const { getUserQuotes } = useGetUserQuotesRequest();
+    const [userQuotes, setUserQuotes] = useState([]);
+    const { auth } = useAuthContext();
 
-    const { logoutOn401 } = useLogoutOn401Error();
-
-    const getUserQuotes = async () => {
-
-        try {
-            const userQuotes = await http.post(`${import.meta.env.VITE_BASE_URL}/user-quotes`);
-            return userQuotes;
-        } catch (err) {
-            logoutOn401(err);
-            console.error(err);
-        }
-    }
+    useEffect(() => {
+        getUserQuotes()
+            .then(quotes => setUserQuotes(quotes))
+            .catch(err => console.error(err));
+    }, [])
 
     return {
-        getUserQuotes
+        email: auth?.email,
+        userQuotes
     }
 }
 

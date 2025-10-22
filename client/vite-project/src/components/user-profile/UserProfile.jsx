@@ -1,26 +1,16 @@
 import './UserProfile.scss'
-import useGetUserQuotes from '../../hooks/useGetUserQuotes';
-import { useEffect, useState } from 'react';
-import { useAuthContext } from '../../hooks/useAuthContext';
 import UpdatePassword from './update-password/UpdatePassword';
 import { Link } from 'react-router-dom';
+import useGetUserQuotes from '../../hooks/useGetUserQuotes';
 
 const UserProfile = () => {
 
-    const { getUserQuotes } = useGetUserQuotes();
-    const [userQuotes, setUserQuotes] = useState([]);
-    const { auth } = useAuthContext();
-
-    useEffect(() => {
-        getUserQuotes()
-            .then(quotes => setUserQuotes(quotes))
-            .catch(err => console.error(err));
-    }, [])
+    const { email, userQuotes } = useGetUserQuotes();
 
     return (
         <section className='page__wrapper'>
             {/* TODO; give auth default values as if it's not optionally chained app breaks */}
-            <p>Welcome, {auth?.email}!</p>
+            {email && <p>Welcome, {email}!</p>}
             <UpdatePassword />
             <h1>Please find the quotes you have added below:</h1>
             {/* TODO: fix this. It would be better if we can not use conditional chaining */}
