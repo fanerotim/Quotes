@@ -1,0 +1,42 @@
+.page__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile__page__welcome__message {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: end;
+}
+
+.profile__page__heading {
+    font-size: 4rem;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.1;
+
+    &::after {
+        content: '.';
+        color: red;
+        font-weight: bold;
+    }
+
+    &::first-letter {
+        font-size: 5rem;
+        font-weight: bold;
+    }
+}
+
+.quote__container {
+    width: 60%;
+
+    &__quote__text {
+        color: rgb(59, 54, 54);
+    }
+
+    &__category {
+        text-align: right;
+        color: rgb(66, 60, 60);
+    }
+}

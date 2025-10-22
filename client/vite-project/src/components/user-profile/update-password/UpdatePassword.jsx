@@ -1,4 +1,4 @@
-import './UpdatePassword.scss';
+import styles from './UpdatePassword.module.scss';
 import useForm from '../../../hooks/useForm';
 import useUpdatePassword from '../../../hooks/useUpdatePassword';
 
