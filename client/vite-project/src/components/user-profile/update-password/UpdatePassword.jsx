@@ -19,7 +19,7 @@ const UpdatePassword = () => {
         <>
             <button
                 onClick={toggleIsOpen}
-                className={styles.reset__password__f}
+                className={styles.reset__password__form__button__toggler}
             >
                 {isOpen ? 'Close form' : 'Click here to update your password'}
             </button>
@@ -28,19 +28,24 @@ const UpdatePassword = () => {
 
                 <form
                     onSubmit={(e) => handleSubmit(e, values)}
+                    className={styles.update__password__form}
                 >
-                    <label>
-                        Enter your new password
+                    <label
+                        className={styles.update__password__form__label}
+                    >
+                        New password
                     </label>
                     <input
                         value={values.password}
-                        name="password"
                         onChange={handleChange}
+                        className={styles.update__password__form__input}
+                        placeholder='Enter your new password'
+                        name="password"
                         type="text"
                     />
    
                     <button
-                    
+                        className={styles.update__password__form__submit__button}
                     >
                         Submit
                     </button>
