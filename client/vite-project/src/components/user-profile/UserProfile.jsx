@@ -50,35 +50,47 @@ const UserProfile = () => {
             </h1>
 
             <div
-                className={styles.quotes__container} 
+                className={styles.quotes__container}
             >
-                {userQuotes?.map((quote) => (
-                    <div
-                        className={styles.quote__wrapper} 
-                        key={quote.id}
-                    >
-                        <h1
-                            className={styles.quote__wrapper__quote__author}
+                {
+                    userQuotes.length == 0
+                        ?
+                        <div
+                            className={styles.loader__container}
                         >
-                            {quote.author}
-                        </h1>
-                        <p
-                            className={styles.quote__wrapper__quote__text}
-                        >
-                            {quote.text}
-                        </p>
-                        <h4
-                            className={styles.quote__wrapper__category}
-                        >
-                            {quote.category}
-                        </h4>
-                        <Link 
-                            to={`/quotes/${quote.id}`}
-                        >
-                            Review
-                        </Link>
-                    </div>
-                ))}
+                            <Loader />
+                        </div>
+                        :
+                        <>
+                            {userQuotes.map((quote) => (
+                                <div
+                                    className={styles.quote__wrapper}
+                                    key={quote.id}
+                                >
+                                    <h1
+                                        className={styles.quote__wrapper__quote__author}
+                                    >
+                                        {quote.author}
+                                    </h1>
+                                    <p
+                                        className={styles.quote__wrapper__quote__text}
+                                    >
+                                        {quote.text}
+                                    </p>
+                                    <h4
+                                        className={styles.quote__wrapper__category}
+                                    >
+                                        {quote.category}
+                                    </h4>
+                                    <Link
+                                        to={`/quotes/${quote.id}`}
+                                    >
+                                        Review
+                                    </Link>
+                                </div>
+                            ))}
+                        </>
+                }
             </div>
         </section>
     )
