@@ -1,6 +1,8 @@
 import styles from './UpdatePassword.module.scss';
 import useForm from '../../../hooks/useForm';
 import useUpdatePassword from '../../../hooks/useUpdatePassword';
+import SuccessModal from '../../success-modal/SuccessModal';
+import Loader from '../../loader/Loader';
 
 const initialValues = {
     password: ''
@@ -11,6 +13,8 @@ const UpdatePassword = () => {
     const { values, handleChange } = useForm(initialValues);
     const {
         isOpen,
+        isLoading,
+        success,
         toggleIsOpen,
         handleSubmit
     } = useUpdatePassword();
@@ -24,33 +28,41 @@ const UpdatePassword = () => {
                 {isOpen ? 'Close form' : 'Click here to update your password'}
             </button>
 
-            {isOpen &&
+            {isOpen ?
+                isLoading
+                    ?
+                    <Loader />
+                    :
+                    success
+                        ?
+                        <SuccessModal />
+                        :
+                        <form
+                            onSubmit={(e) => handleSubmit(e, values)}
+                            className={`${styles.update__password__form} ${isOpen ? styles.open : styles.closed}`}
+                        >
+                            <label
+                                className={styles.update__password__form__label}
+                            >
+                                New password
+                            </label>
+                            <input
+                                value={values.password}
+                                onChange={handleChange}
+                                className={styles.update__password__form__input}
+                                placeholder='Enter your new password'
+                                name="password"
+                                type="text"
+                            />
 
-                <form
-                    onSubmit={(e) => handleSubmit(e, values)}
-                    className={styles.update__password__form}
-                >
-                    <label
-                        className={styles.update__password__form__label}
-                    >
-                        New password
-                    </label>
-                    <input
-                        value={values.password}
-                        onChange={handleChange}
-                        className={styles.update__password__form__input}
-                        placeholder='Enter your new password'
-                        name="password"
-                        type="text"
-                    />
-   
-                    <button
-                        className={styles.update__password__form__submit__button}
-                    >
-                        Submit
-                    </button>
-
-                </form>}
+                            <button
+                                className={styles.update__password__form__submit__button}
+                            >
+                                Submit
+                            </button>
+                        </form>
+                : ''
+            }
         </>
     )
 }
