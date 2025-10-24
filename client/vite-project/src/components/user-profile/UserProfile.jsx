@@ -7,6 +7,7 @@ import Loader from '../loader/Loader';
 const UserProfile = () => {
 
     const { email, userQuotes } = useGetUserQuotes();
+    const quoteTextLength = 250;
 
     return (
         <section
@@ -64,29 +65,34 @@ const UserProfile = () => {
                         <>
                             {userQuotes.map((quote) => (
                                 <div
-                                    className={styles.quote__wrapper}
+                                    className={styles.quote__card__wrapper}
                                     key={quote.id}
                                 >
-                                    <h1
-                                        className={styles.quote__wrapper__quote__author}
-                                    >
-                                        {quote.author}
-                                    </h1>
+
                                     <p
-                                        className={styles.quote__wrapper__quote__text}
+                                        className={styles.quote__card__wrapper__quote__text}
                                     >
-                                        {quote.text}
+                                        {quote.text.length > quoteTextLength ? quote.text.substring(0, quoteTextLength) + '...' : quote.text}
                                     </p>
-                                    <h4
-                                        className={styles.quote__wrapper__category}
+
+                                    <div
+                                        className={styles.quote__card__author__and__nav__button__container}
                                     >
-                                        {quote.category}
-                                    </h4>
-                                    <Link
-                                        to={`/quotes/${quote.id}`}
-                                    >
-                                        Review
-                                    </Link>
+
+                                        <Link
+                                            to={`/quotes/${quote.id}`}
+                                            className={styles.quote__card__wrapper__navigation__button}
+                                        >
+                                            Review
+                                        </Link>
+
+                                        <p
+                                            className={styles.quote__card__wrapper__quote__author}
+                                        >
+                                            {quote.author}
+                                        </p>
+
+                                    </div>
                                 </div>
                             ))}
                         </>
