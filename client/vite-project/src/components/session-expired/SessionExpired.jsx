@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext'
-import './SessionExpired.scss'
+import styles from './SessionExpired.module.scss'
 
 const SessionExpired = () => {
 
@@ -16,9 +16,29 @@ const SessionExpired = () => {
     }
 
     return (
-        <div className='session-expired__container'>
-            <h1>Session Expired! Please login again</h1>
-            <button onClick={handleClick}>Login again</button>
+        <div className={styles.session__expired__container}>
+
+            <div
+                className={styles.session__expired__content__container}
+            >
+                <h1
+                    className={styles.session__expired__main__text}
+                >
+                    Session expired
+                </h1>
+                <p
+                    className={styles.session__expired__secondary__text}
+                >
+                    Please login again
+                </p>
+                <button
+                    onClick={handleClick}
+                    className={styles.session__expired__button}
+                >
+                    Login again
+                </button>
+            </div>
+
         </div>
     )
 }
