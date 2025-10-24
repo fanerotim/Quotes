@@ -7,7 +7,9 @@ import Loader from '../loader/Loader';
 const UserProfile = () => {
 
     const { email, userQuotes } = useGetUserQuotes();
+    // this variable controls the length of the quote that will be visible before a card is opened - helps avoid having huge cards 
     const quoteTextLength = 250;
+    console.log('this is user quotes', userQuotes);
 
     return (
         <section
@@ -54,7 +56,7 @@ const UserProfile = () => {
                 className={styles.quotes__container}
             >
                 {
-                    userQuotes.length == 0
+                    userQuotes?.length == 0
                         ?
                         <div
                             className={styles.loader__container}
@@ -63,7 +65,7 @@ const UserProfile = () => {
                         </div>
                         :
                         <>
-                            {userQuotes.map((quote) => (
+                            {userQuotes?.map((quote) => (
                                 <div
                                     className={styles.quote__card__wrapper}
                                     key={quote.id}
