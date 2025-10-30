@@ -79,7 +79,7 @@ const EditQuote = () => {
                                 <input
                                     onChange={handleChange}
                                     className={styles.edit__form__input}
-                                    value={values && values.author}
+                                    value={values ? values.author : ''}
                                     name='author'
                                 />
                             </section>
