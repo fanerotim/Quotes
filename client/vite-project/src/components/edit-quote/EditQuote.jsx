@@ -6,6 +6,7 @@ import useEditQuote from '../../hooks/useEditQuote';
 import Loader from '../loader/Loader';
 import Toaster from '../toaster/Toaster';
 import SuccessModal from '../success-modal/SuccessModal';
+import Select from '../select/Select';
 
 const EditQuote = () => {
 
@@ -129,6 +130,10 @@ const EditQuote = () => {
                                 Submit
                             </button>
                         </form>
+                        {/* placing custom select here, so I can start work on its implementation*/}
+                        <div className={styles.custom__select__wrapper}>
+                            <Select />
+                        </div>
                     </>}
 
             <div
@@ -136,6 +141,7 @@ const EditQuote = () => {
             >
                 <Toaster message={error?.message} />
             </div>
+
         </section>
     )
 }
