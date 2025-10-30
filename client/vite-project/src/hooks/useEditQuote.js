@@ -34,7 +34,6 @@ const useEditQuote = () => {
                 setQuote(data)
             })
             .catch(err => console.error(err))
-            .finally()
     }, []);
 
     const handleSubmit = async (e, values) => {
