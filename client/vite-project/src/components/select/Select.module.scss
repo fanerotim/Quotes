@@ -1,0 +1,40 @@
+.custom__select__container {
+    background-color: black;
+    padding: .1rem 1rem;
+    text-align: center;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+// TODO: align text in center and up / down arrow at the end of the container. at the moment they do not react to flex props: justify-self;
+
+.custom__select__choice__text {
+    padding: 0;
+    color: white;
+    font-size: .8rem;
+
+    &__up__arrow {
+        border-top: 10px solid white;
+        border-right: 10px solid transparent;
+        border-left: 10px solid transparent;
+    }   
+
+
+    &__down__arrow {
+        display: none;
+    }
+}
+
+// options wrapper (dropdown menu) and individual / separate option styles
+
+.custom__select__options__list__wrapper {
+    background-color: rgb(240, 174, 240);
+    height: 200px;
+    overflow-y: scroll;
+}

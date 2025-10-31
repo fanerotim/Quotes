@@ -136,9 +136,11 @@
 
 // temporary styles - just placing custom select in a acceptable place just so I can see it (working on its implementation at the moment)
 .custom__select__wrapper {
-    grid-row: 3 / 4;
+    grid-row: 2 / 3;
     grid-column: 1 / 2;
     justify-self: center;
     align-self: center;
-    width: 100%
+    // width: 100%;
+    padding: 2rem 4rem;
+    background-color: rgb(122, 122, 122, .5);
 }

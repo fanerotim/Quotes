@@ -1,10 +1,40 @@
 import styles from './Select.module.scss';
+import { CATEGORIES } from '../../utils/genres';
+import useCustomSelect from '../../hooks/useCustomSelect';
 
 const Select = () => {
-    
+
+    const { dropDownMenuClickHandler } = useCustomSelect();
+
     return (
         <>
-            This would be my custom select
+            <div
+                onClick={dropDownMenuClickHandler}
+                className={styles.custom__select__container}
+            >
+                <p
+                    className={styles.custom__select__choice__text}
+                >
+                    Choose category
+                </p>
+
+                <span
+                    className={styles.custom__select__choice__text__up__arrow}
+                >
+                </span>
+
+                <span
+                    className={styles.custom__select__choice__text__down__arrow}
+                >
+                </span>
+            </div>
+
+            <div
+                className={styles.custom__select__options__list__wrapper}
+            >
+                {CATEGORIES.map(c => <p>{c.name}</p>)}
+
+            </div>
         </>
     )
 }
