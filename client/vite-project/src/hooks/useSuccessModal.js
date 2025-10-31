@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const useSuccessModal = () => {
 
-    const [seconds, setSeconds] = useState(5);
+    const [seconds, setSeconds] = useState(2);
     const [intervalId, setIntervalId] = useState(null);
 
     const startTimer = () => {
