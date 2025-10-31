@@ -1,11 +1,16 @@
+import { useState } from "react";
+
 const useCustomSelect = () => {
+
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
    
-    const dropDownMenuClickHandler = () => {
-        console.log('click');
+    const dropdownToggleHandler = () => {
+        setIsDropdownOpen((prev) => !prev);
     }
 
     return {
-        dropDownMenuClickHandler,
+        dropdownToggleHandler,
+        isDropdownOpen
     }
 }
 

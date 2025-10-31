@@ -4,12 +4,12 @@ import useCustomSelect from '../../hooks/useCustomSelect';
 
 const Select = () => {
 
-    const { dropDownMenuClickHandler } = useCustomSelect();
+    const { dropdownToggleHandler, isDropdownOpen} = useCustomSelect();
 
     return (
         <>
             <div
-                onClick={dropDownMenuClickHandler}
+                onClick={dropdownToggleHandler}
                 className={styles.custom__select__container}
             >
                 <p
@@ -30,9 +30,12 @@ const Select = () => {
             </div>
 
             <div
-                className={styles.custom__select__options__list__wrapper}
+                className={
+                    `${styles.custom__select__options__list__wrapper} 
+                    ${isDropdownOpen ? styles.open : ''}`
+                }
             >
-                {CATEGORIES.map(c => <p>{c.name}</p>)}
+                {CATEGORIES.map(c => <p key={c.value}>{c.name}</p>)}
 
             </div>
         </>

@@ -32,9 +32,18 @@
 }
 
 // options wrapper (dropdown menu) and individual / separate option styles
+// for now, i will use the approach with toggling visibility / opacity, but consider the other oproach of toggling height and opacity as it may be better
 
 .custom__select__options__list__wrapper {
     background-color: rgb(240, 174, 240);
     height: 200px;
     overflow-y: scroll;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s, visibility .3s;
+}
+
+.open {
+    opacity: 1;
+    visibility: visible;
 }
