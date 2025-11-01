@@ -18,7 +18,8 @@
 // TODO: align text in center and up / down arrow at the end of the container. at the moment they do not react to flex props: justify-self;
 
 .custom__select__choice__text {
-    padding: 0;
+    padding: .6rem 0;
+    margin: 0;
     color: white;
     font-size: .8rem;
 
@@ -41,11 +42,11 @@
 
 .custom__select__options__list__wrapper {
     background-color: rgb(248, 248, 248);
-    height: 200px;
+    height: 0;
     overflow-y: scroll;
     opacity: 0;
     visibility: hidden;
-    transition: opacity .2s, visibility .3s;
+    transition: opacity .2s, visibility .3s, height .2s;
 }
 
 .custom__select__option__container {
@@ -81,6 +82,23 @@
 
 .open {
     opacity: 1;
+    height: 150px;
     visibility: visible;
-    transition: opacity .2s, visibility .3s;
+    transition: opacity .2s, visibility .3s, height .2s;
+}
+
+.custom__select__options__list__wrapper::-webkit-scrollbar {
+    width:10px;
+}
+
+.custom__select__options__list__wrapper::-webkit-scrollbar-track {
+    background-color: black;
+}
+
+.custom__select__options__list__wrapper::-webkit-scrollbar-thumb {
+    background-color: rgb(148, 148, 148);
+
+    &:hover {
+        background-color: rgb(184, 184, 184);
+    }
 }
