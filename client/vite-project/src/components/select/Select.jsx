@@ -46,19 +46,18 @@ const Select = () => {
             >
                 {CATEGORIES.map(c =>
                     <div
+                        key={c.value}
                         className={styles.custom__select__option__container}
                     >
                         <p
-                            key={c.value}
                             className={styles.custom__select__option}
                         >
                             {c.name}
                         </p>
-                        
+
                         {choice === c.name
                             ?
                             <span
-                                key={c.value}
                                 className={styles.custom__select__react__icon__container}
                             >
                                 <FaCheckSquare
@@ -70,8 +69,6 @@ const Select = () => {
                     </div>
                 )
                 }
-
-
 
             </div>
         </>
