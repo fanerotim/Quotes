@@ -127,8 +127,8 @@ const EditQuote = () => {
 
                                     className={
                                         `${styles.custom__select__wrapper }
-                                ${styles.edit__form__select}`
-                                }>
+                                        ${styles.edit__form__select}`}
+                                >
                                 <Select />
                             </div>
                         </section>

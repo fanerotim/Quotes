@@ -5,6 +5,7 @@ import { CATEGORIES } from '../../utils/genres';
 import Loader from '../loader/Loader';
 import Toaster from '../toaster/Toaster';
 import SuccessModal from '../success-modal/SuccessModal';
+import Select from '../select/Select';
 
 const initialValues = {
     author: '',
@@ -97,7 +98,7 @@ const AddQuote = () => {
                             >
                                 Category
                             </label>
-                            <select
+                            {/* <select
                                 onChange={handleChange}
                                 className={styles.add__form__select}
                                 name="category"
@@ -111,7 +112,8 @@ const AddQuote = () => {
                                         {category.name}
                                     </option>
                                 ))}
-                            </select>
+                            </select> */}
+                            <Select className={styles.add__form__select}/>
                         </section>
 
                         <button
