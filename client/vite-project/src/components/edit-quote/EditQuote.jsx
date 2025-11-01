@@ -108,7 +108,7 @@ const EditQuote = () => {
                                 >
                                     Category
                                 </label>
-                                <select
+                                {/* <select
                                     onChange={handleChange}
                                     className={styles.edit__form__select}
                                     name="category"
@@ -122,28 +122,37 @@ const EditQuote = () => {
                                             {category.name}
                                         </option>
                                     ))}
-                                </select>
-                            </section>
-                            <button
-                                className={styles.edit__form__submit__button}
-                            >
-                                Submit
-                            </button>
-                        </form>
-                        {/* placing custom select here, so I can start work on its implementation*/}
-                                    
-                        <div className={styles.custom__select__wrapper}>
-                            <Select />
-                        </div>
-                    </>}
+                                </select> */}
+                                <div
 
-            <div
-                className={styles.edit__form__toaster__container}
-            >
-                <Toaster message={error?.message} />
-            </div>
+                                    className={
+                                        `${styles.custom__select__wrapper }
+                                ${styles.edit__form__select}`
+                                }>
+                                <Select />
+                            </div>
+                        </section>
+                        <button
+                            className={styles.edit__form__submit__button}
+                        >
+                            Submit
+                        </button>
+                    </form>
+            {/* placing custom select here, so I can start work on its implementation*/}
 
-        </section>
+                                {/* temporarily commenting it out */}
+            {/* <div className={styles.custom__select__wrapper}>
+                <Select />
+            </div> */}
+        </>}
+
+<div
+    className={styles.edit__form__toaster__container}
+>
+    <Toaster message={error?.message} />
+</div>
+
+        </section >
     )
 }
 

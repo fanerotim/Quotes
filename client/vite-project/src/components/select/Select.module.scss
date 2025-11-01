@@ -2,13 +2,13 @@
     background-color: black;
     padding: .1rem 1rem;
     text-align: center;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    // border-top-left-radius: 1rem;
+    // border-top-right-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     // for testing / implementation purposes hardcoding width
-    width: 300px;
+    height: fit-content;
 
     &:hover {
         cursor: pointer;
@@ -52,10 +52,11 @@
     display: flex;
     justify-content: space-between;
     padding: 0 .3rem;
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(255, 255, 255);
 
     &:hover {
-        background-color: rgb(223, 223, 223);
+        font-weight: bold;
+        background-color: rgb(245, 245, 245);
         cursor: pointer;
     }
 }
@@ -65,10 +66,6 @@
     font-size: .8rem;
     padding: .5rem .5rem;
     cursor: pointer;
-
-    &:hover {
-        font-weight: bold;
-    }
 }
 
 .custom__select__react__icon__container {

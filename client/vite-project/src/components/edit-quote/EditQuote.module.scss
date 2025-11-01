@@ -138,9 +138,6 @@
 .custom__select__wrapper {
     grid-row: 2 / 3;
     grid-column: 1 / 2;
-    justify-self: center;
-    align-self: center;
-    // width: 100%;
-    padding: 2rem 4rem;
-    background-color: rgb(122, 122, 122, .5);
+    padding: 0;
+    height: 50px
 }
