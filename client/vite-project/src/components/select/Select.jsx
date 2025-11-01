@@ -1,14 +1,15 @@
 import styles from './Select.module.scss';
 import { CATEGORIES } from '../../utils/genres';
 import useCustomSelect from '../../hooks/useCustomSelect';
+import { FaCheckSquare } from "react-icons/fa";
 
 const Select = () => {
 
-    const { 
-        dropdownToggleHandler, 
+    const {
+        dropdownToggleHandler,
         isDropdownOpen,
         choice,
-        updateChoice 
+        updateChoice
     } = useCustomSelect();
 
     return (
@@ -44,13 +45,33 @@ const Select = () => {
                 onClick={(e) => updateChoice(e)}
             >
                 {CATEGORIES.map(c =>
-                    <p
-                        key={c.value}
-                        className={styles.custom__select__option}
+                    <div
+                        className={styles.custom__select__option__container}
                     >
-                        {c.name}
-                    </p>)
+                        <p
+                            key={c.value}
+                            className={styles.custom__select__option}
+                        >
+                            {c.name}
+                        </p>
+                        
+                        {choice === c.name
+                            ?
+                            <span
+                                key={c.value}
+                                className={styles.custom__select__react__icon__container}
+                            >
+                                <FaCheckSquare
+                                    className={styles.custom__select__react__icon}
+                                />
+                            </span>
+                            : ''}
+
+                    </div>
+                )
                 }
+
+
 
             </div>
         </>
