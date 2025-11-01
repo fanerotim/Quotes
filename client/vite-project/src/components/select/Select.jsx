@@ -4,7 +4,12 @@ import useCustomSelect from '../../hooks/useCustomSelect';
 
 const Select = () => {
 
-    const { dropdownToggleHandler, isDropdownOpen } = useCustomSelect();
+    const { 
+        dropdownToggleHandler, 
+        isDropdownOpen,
+        choice,
+        updateChoice 
+    } = useCustomSelect();
 
     return (
         <>
@@ -15,18 +20,18 @@ const Select = () => {
                 <p
                     className={styles.custom__select__choice__text}
                 >
-                    Choose category
+                    {choice}
                 </p>
 
                 {isDropdownOpen
                     ?
                     <span
-                        className={styles.custom__select__choice__text__up__arrow}
+                        className={styles.custom__select__choice__text__down__arrow}
                     >
                     </span>
                     :
                     <span
-                        className={styles.custom__select__choice__text__down__arrow}
+                        className={styles.custom__select__choice__text__up__arrow}
                     >
                     </span>}
             </div>
@@ -36,8 +41,16 @@ const Select = () => {
                     `${styles.custom__select__options__list__wrapper} 
                     ${isDropdownOpen ? styles.open : ''}`
                 }
+                onClick={(e) => updateChoice(e)}
             >
-                {CATEGORIES.map(c => <p key={c.value}>{c.name}</p>)}
+                {CATEGORIES.map(c =>
+                    <p
+                        key={c.value}
+                        className={styles.custom__select__option}
+                    >
+                        {c.name}
+                    </p>)
+                }
 
             </div>
         </>
