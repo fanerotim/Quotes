@@ -8,6 +8,20 @@ const useForm = (initialValues) => {
     }, [initialValues])
 
     const handleChange = (e) => {
+        
+        // this conditional check solves the problem of updating the values state when custom select
+        // TODO: optimize the solution
+        if (e.target.nodeName === 'DIV' || e.target.nodeName === 'P') {
+            
+           setValues((oldValues) => {
+                return {
+                    ...oldValues,
+                    'category': e.target.textContent
+                }
+            })
+            return;
+        }
+ 
         setValues((oldValues) => {
             // TODO; add support for checkbox - this does not work for checkboxes;
             return {
@@ -19,7 +33,6 @@ const useForm = (initialValues) => {
 
     const handleClear = () => {
         setValues(initialValues);
-        
     }
 
     return {
