@@ -8,7 +8,11 @@ const useForm = (initialValues) => {
     }, [initialValues])
 
     const handleChange = (e) => {
-        
+
+        // TODO: Improve the logic of this flow. having so many conditional checks is bad
+        if (e.target.nodeName === 'SPAN') {
+            return
+        }
         // this conditional check solves the problem of updating the values state when custom select
         // TODO: optimize the solution
         if (e.target.nodeName === 'DIV' || e.target.nodeName === 'P') {
