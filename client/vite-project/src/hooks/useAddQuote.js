@@ -16,6 +16,7 @@ const useAddQuote = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e, values) => {
+
         e.preventDefault();
         // reset error state > set it to null
         updateState('SET_ERROR');

@@ -47,7 +47,7 @@ const AddQuote = () => {
                     </div>
 
                     :
-                    
+
                     <form
                         onSubmit={(e) => handleSubmit(e, values)}
                         className={styles.add__form}>
@@ -113,7 +113,14 @@ const AddQuote = () => {
                                     </option>
                                 ))}
                             </select> */}
-                            <Select className={styles.add__form__select}/>
+                            <div
+                                onClick={handleChange}
+                                className={styles.custom__select__wrapper}
+                            >
+                                <Select
+                                    className={styles.add__form__select}
+                                />
+                            </div>
                         </section>
 
                         <button

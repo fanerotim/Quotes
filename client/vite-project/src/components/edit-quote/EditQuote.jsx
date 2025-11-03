@@ -124,33 +124,33 @@ const EditQuote = () => {
                                     ))}
                                 </select> */}
                                 <div
-
+                                    onClick={handleChange}
                                     className={
-                                        `${styles.custom__select__wrapper }
+                                        `${styles.custom__select__wrapper}
                                         ${styles.edit__form__select}`}
                                 >
-                                <Select />
-                            </div>
-                        </section>
-                        <button
-                            className={styles.edit__form__submit__button}
-                        >
-                            Submit
-                        </button>
-                    </form>
-            {/* placing custom select here, so I can start work on its implementation*/}
+                                    <Select />
+                                </div>
+                            </section>
+                            <button
+                                className={styles.edit__form__submit__button}
+                            >
+                                Submit
+                            </button>
+                        </form>
+                        {/* placing custom select here, so I can start work on its implementation*/}
 
-                                {/* temporarily commenting it out */}
-            {/* <div className={styles.custom__select__wrapper}>
+                        {/* temporarily commenting it out */}
+                        {/* <div className={styles.custom__select__wrapper}>
                 <Select />
             </div> */}
-        </>}
+                    </>}
 
-<div
-    className={styles.edit__form__toaster__container}
->
-    <Toaster message={error?.message} />
-</div>
+            <div
+                className={styles.edit__form__toaster__container}
+            >
+                <Toaster message={error?.message} />
+            </div>
 
         </section >
     )
