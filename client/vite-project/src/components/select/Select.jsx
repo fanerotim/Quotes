@@ -3,7 +3,7 @@ import { CATEGORIES } from '../../utils/genres';
 import useCustomSelect from '../../hooks/useCustomSelect';
 import { FaCheckSquare } from "react-icons/fa";
 
-const Select = () => {
+const Select = ({ category }) => {
 
     const {
         dropdownToggleHandler,
@@ -20,8 +20,9 @@ const Select = () => {
             >
                 <p
                     className={styles.custom__select__choice__text}
-                >
-                    {choice}
+                >   
+                    {/* on EditQuote page we need to preload the category, so I am passing category from that page, else we use choice */}
+                    {category ? category : choice}
                 </p>
 
                 {isDropdownOpen

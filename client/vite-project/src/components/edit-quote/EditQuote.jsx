@@ -129,7 +129,7 @@ const EditQuote = () => {
                                         `${styles.custom__select__wrapper}
                                         ${styles.edit__form__select}`}
                                 >
-                                    <Select />
+                                    <Select category={values?.category}/>
                                 </div>
                             </section>
                             <button
