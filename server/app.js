@@ -12,7 +12,9 @@ handlebarsConfig(app);
 
 // check why this middleware was not executed in expressConfig
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://fanerotim-quotes.netlify.app/',
+    // localhost / dev origin
+    // origin: 'http://localhost:5173',
     credentials: true
 }))
 
