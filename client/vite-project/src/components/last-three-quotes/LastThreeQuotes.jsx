@@ -1,12 +1,12 @@
 import styles from './LastThreeQuotes.module.scss';
 import useGetLastThreeQuotes from '../../hooks/useGetLastThreeQuotes';
 import LikeCountIcon from '../like-count-icon/LikeCountIcon';
-import useLikeRequests from '../../hooks/useLikeRequests';
+import { useNavigate } from 'react-router-dom'
 
 const LastThreeQuotes = () => {
 
     const { lastThreeQuotes } = useGetLastThreeQuotes();
-    const { getLikesCount } = useLikeRequests();
+    const navigate = useNavigate();
 
     return (
         <article
@@ -19,6 +19,7 @@ const LastThreeQuotes = () => {
             </h1>
             {lastThreeQuotes.map((quote) => (
                 <div
+                    onClick={() => navigate(`/quotes/${quote.id}`)}
                     key={quote.id}
                     className={styles.last__three__quote__wrapper}
                 >
