@@ -108,21 +108,6 @@ const EditQuote = () => {
                                 >
                                     Category
                                 </label>
-                                {/* <select
-                                    onChange={handleChange}
-                                    className={styles.edit__form__select}
-                                    name="category"
-                                    // TODO: Fix this - find a better way to implement it
-                                    // Using toLowerCase() as values in genres.js are written in lower case, so if I do not lowercase it, it does not get detected and updated in the UI.
-                                    value={values?.category.toLowerCase()}>
-                                    {CATEGORIES.map(category => (
-                                        <option
-                                            key={category.value}
-                                            value={category.value}>
-                                            {category.name}
-                                        </option>
-                                    ))}
-                                </select> */}
                                 <div
                                     onClick={handleChange}
                                     className={
@@ -138,12 +123,6 @@ const EditQuote = () => {
                                 Submit
                             </button>
                         </form>
-                        {/* placing custom select here, so I can start work on its implementation*/}
-
-                        {/* temporarily commenting it out */}
-                        {/* <div className={styles.custom__select__wrapper}>
-                <Select />
-            </div> */}
                     </>}
 
             <div

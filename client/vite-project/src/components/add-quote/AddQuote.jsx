@@ -98,21 +98,7 @@ const AddQuote = () => {
                             >
                                 Category
                             </label>
-                            {/* <select
-                                onChange={handleChange}
-                                className={styles.add__form__select}
-                                name="category"
-                                required
-                            >
-                                {CATEGORIES.map(category => (
-                                    <option
-                                        key={category.value}
-                                        value={category.value}
-                                    >
-                                        {category.name}
-                                    </option>
-                                ))}
-                            </select> */}
+
                             <div
                                 onClick={handleChange}
                                 className={styles.custom__select__wrapper}
