@@ -17,7 +17,7 @@ const Quotes = () => {
             <div className={styles.quotes__heading__wrapper}>
                 <h1
                     className={styles.quotes__heading__wrapper__main}>
-                    Quotes
+                    Catalog
                 </h1>
                 <h2
                     className={styles.quotes__heading__wrapper__secondary}>

@@ -1,7 +1,7 @@
 .card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between ;
+    justify-content: space-between;
     width: 12rem;
     height: 14rem;
     background-color: rgb(36, 35, 35);
@@ -39,7 +39,13 @@
     .card {
         width: 18rem;
         height: 10rem;
+
+        &__text {
+            font-size: .9rem;
+        }
     }
+
+
 }
 
 @media (max-width: 350px) {

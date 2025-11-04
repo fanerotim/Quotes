@@ -14,7 +14,7 @@ const Home = () => {
                 <h1
                     className={styles.home__heading}
                 >
-                    Welcome to My Quotes App
+                    Quotes
                 </h1>
                 <p
                     className={styles.home__subheading}
