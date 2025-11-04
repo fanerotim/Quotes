@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 const dotenv = require('dotenv');
 dotenv.config();
-const CA = require('./utils/ca_bundle');
 
 let db = null;
 
