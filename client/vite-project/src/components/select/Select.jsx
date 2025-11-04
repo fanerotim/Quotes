@@ -21,7 +21,7 @@ const Select = ({ category }) => {
                 <p
                     className={styles.custom__select__choice__text}
                 >   
-                    {/* on EditQuote page we need to preload the category, so I am passing category from that page, else we use choice */}
+                    {/* on EditQuote page we need to preload the category depending on data store in db, so I am passing category from that component. if no category is passed we display choice state */}
                     {category ? category : choice}
                 </p>
 
