@@ -14,7 +14,7 @@ const expressConfig = (app) => {
     // app.use(express.static('server/static'))
     app.use(express.json());
     app.use(cors({
-        origin: 'https://fanerotim-quotes.netlify.app/',
+        origin: 'https://fanerotim-quotes.netlify.app',
         // localhost / dev
         // origin: 'http://localhost:5173',
         credentials: true
