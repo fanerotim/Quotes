@@ -9,12 +9,14 @@ const useForm = (initialValues) => {
 
     const handleChange = (e) => {
 
-        // TODO: Improve the logic of this flow. having so many conditional checks is bad
+        // SPAN is the dropdown icon (up/down icon) of the custom select. it does not have textContent, so we just return if we click on it
+        // keeping this for now as it works and will optimize in the future
         if (e.target.nodeName === 'SPAN') {
             return
         }
-        // this conditional check solves the problem of updating the values state when custom select
-        // TODO: optimize the solution
+
+        // custom select is built with a div and a paragraph. they do not have value prop, so to update values we use their textContent
+        // that's why we have this conditional logic here. keeping it for now as it works and will be optimized in the future
         if (e.target.nodeName === 'DIV' || e.target.nodeName === 'P') {
             
            setValues((oldValues) => {
