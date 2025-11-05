@@ -13,12 +13,14 @@ const expressConfig = (app) => {
     // not needed for now, but once I am ready to add images to og metadata it will be required
     // app.use(express.static('server/static'))
     app.use(express.json());
+
+    const originURL = process.env.NODE_ENV === 'production' ? 'https://fanerotim-quotes.netlify.app' : 'http://localhost:5173';
+
     app.use(cors({
-        origin: 'https://fanerotim-quotes.netlify.app',
-        // localhost / dev
-        // origin: 'http://localhost:5173',
+        origin: originURL,
         credentials: true
     }))
+    
     app.use(auth);
     // initialize cron responsible for clearing blacklisted tokens
     clearJWTCron.start();

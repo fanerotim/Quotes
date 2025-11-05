@@ -10,11 +10,11 @@ const db = mysqlConfig(); // create MySQL connection
 expressConfig(app); // attach middlewares
 handlebarsConfig(app);
 
+const originURL = process.env.NODE_ENV === 'production' ? 'https://fanerotim-quotes.netlify.app' : 'http://localhost:5173';
+
 // check why this middleware was not executed in expressConfig
 app.use(cors({
-    origin: 'https://fanerotim-quotes.netlify.app',
-    // localhost / dev origin
-    // origin: 'http://localhost:5173',
+    origin: originURL,
     credentials: true
 }))
 
