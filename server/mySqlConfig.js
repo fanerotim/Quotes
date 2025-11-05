@@ -7,7 +7,7 @@ let db = null;
 const mysqlConfig = () => {
 
     const environmentType = process.env.NODE_ENV;
-
+    
     const dbConfig = {
         'development': {
             host: process.env.DEV_HOST,
