@@ -1,7 +1,6 @@
 import styles from './Home.module.scss'
 import LastThreeQuotes from '../last-three-quotes/LastThreeQuotes';
 
-
 const Home = () => {
 
     return (

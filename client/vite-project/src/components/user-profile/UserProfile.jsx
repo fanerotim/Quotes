@@ -9,7 +9,6 @@ const UserProfile = () => {
     const { email, userQuotes } = useGetUserQuotes();
     // this variable controls the length of the quote that will be visible before a card is opened - helps avoid having huge cards 
     const quoteTextLength = 250;
-    console.log('this is user quotes', userQuotes);
 
     return (
         <section

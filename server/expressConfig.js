@@ -20,7 +20,7 @@ const expressConfig = (app) => {
         origin: originURL,
         credentials: true
     }))
-    
+
     app.use(auth);
     // initialize cron responsible for clearing blacklisted tokens
     clearJWTCron.start();
@@ -28,7 +28,7 @@ const expressConfig = (app) => {
     // listen for requests made from facebookexternalhit bot and route them differently, so i can render meta tags
     app.use((req, res, next) => {
         const userAgent = req.headers['user-agent'];
-
+        
         // consider replacing this check with a regext and .test() function
         userAgent.includes('facebook')
             ? botRoutes(req, res, next)
