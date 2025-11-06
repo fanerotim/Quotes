@@ -8,7 +8,7 @@ const UserProfile = () => {
 
     const { email, userQuotes } = useGetUserQuotes();
     // this variable controls the length of the quote that will be visible before a card is opened - helps avoid having huge cards 
-    const quoteTextLength = 250;
+    const quoteTextLength = 150;
 
     return (
         <section
@@ -23,7 +23,7 @@ const UserProfile = () => {
                     <p
                         className={styles.profile__page__welcome__message}
                     >
-                        Welcome,
+                        Hey,
                     </p>
 
                     <span
@@ -48,7 +48,7 @@ const UserProfile = () => {
             <h1
                 className={styles.profile__page__heading}
             >
-                Your quotes in one place
+                Quotes you added
             </h1>
 
             <div
