@@ -123,3 +123,17 @@
     grid-row: 2 / 3;
     grid-column: 2 / 3;
 }
+
+// styles for small screens / responsiveness
+@media (max-width: 500px) {
+    .add__form {
+        grid-column: 1 / 4;
+        justify-self: center;
+        width: 60%;
+
+        &__button {
+            margin-top: 1rem;
+            padding: .4rem 1.2rem;
+        }
+    }
+}
