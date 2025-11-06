@@ -25,7 +25,7 @@ const UpdatePassword = () => {
                 onClick={toggleIsOpen}
                 className={styles.reset__password__form__button__toggler}
             >
-                {isOpen ? 'Close form' : 'Click here to update your password'}
+                {isOpen ? 'Close' : 'Click here to update your password'}
             </button>
 
             {isOpen ?
