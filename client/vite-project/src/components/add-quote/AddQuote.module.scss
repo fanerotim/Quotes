@@ -60,7 +60,7 @@
     &__textarea,
     &__select {
         padding: .5rem;
-        border-radius: .7rem;
+        border-radius: .1rem;
         outline: none;
         border: none;
         background-color: rgb(248, 248, 248);
@@ -124,16 +124,42 @@
     grid-column: 2 / 3;
 }
 
-// styles for small screens / responsiveness
+// styles for smaller screens / responsiveness
 @media (max-width: 500px) {
+    .add__form__container {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
     .add__form {
         grid-column: 1 / 4;
-        justify-self: center;
-        width: 60%;
+
+        &__input,
+        &__textarea {
+            font-size: .8rem;
+            background-color: rgb(24, 23, 23);
+            color: white;
+
+            &:focus {
+                background-color: rgb(243, 243, 243);
+                color: black;
+            }
+        }
+
+        &__textarea {
+            min-height: 250px;
+        }
+
+        &__label {
+            font-size: .7rem;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
 
         &__button {
-            margin-top: 1rem;
-            padding: .4rem 1.2rem;
+            width: fit-content;
+            font-size: .7rem;
+            padding: .4rem .9rem;
         }
     }
 }
