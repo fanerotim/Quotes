@@ -35,7 +35,8 @@ const EditQuote = () => {
                 </div>
 
                 :
-                success ?
+                success 
+                    ?
 
                     <div
                         className={styles.edit__form__success__modal__container}
