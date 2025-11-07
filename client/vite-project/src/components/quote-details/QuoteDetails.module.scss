@@ -90,3 +90,20 @@
     grid-column: 2 / 3;
     justify-self: center;
 }
+
+@media (max-width: 500px) {
+
+    .back__button, 
+    .likes__details {
+        align-self: center;
+    }
+
+    .quote__details__text {
+        font-size: 1.2rem;
+        width: 100%;
+    }
+
+    .action__buttons {
+        flex-direction: row;
+    }
+}
