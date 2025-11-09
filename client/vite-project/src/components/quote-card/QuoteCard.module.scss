@@ -4,7 +4,7 @@
     justify-content: space-between;
     width: 12rem;
     height: 14rem;
-    background-color: rgb(36, 35, 35);
+    background-color: rgb(12, 12, 12);
     color: rgb(238, 238, 238);
     border-radius: .5rem;
     padding: 1.2rem 1.7rem;
@@ -18,8 +18,8 @@
     }
 
     &__text {
-        // color: rgb(27, 27, 27);
         text-align: end;
+        font-size: .9rem;
     }
 
     &__author {
