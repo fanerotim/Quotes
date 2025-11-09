@@ -4,7 +4,7 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: rgba(20, 20, 20, 0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     position: absolute;
     top: 0;
     left: 0;
@@ -13,13 +13,13 @@
 
 .delete__modal__content__wrapper {
     background-color: rgb(243, 243, 243);
-    border-radius: .5rem;
+    border-radius: .1rem;
     padding: 2rem;
 }
 
 .delete__modal__heading {
-    font-size: 1.2rem;
-    font-weight: 400;
+    font-size: 1.25rem;
+    font-weight: 300;
     padding: 1rem;
 }
 
@@ -33,29 +33,29 @@
 .delete__modal__reject__btn {
     all: unset;
     font-size: .8rem;
+    font-weight: 400;
     cursor: pointer;
     padding: .4rem 2rem;
-    border-radius: .7rem;
+    border-radius: .1rem;
     transition: background-color .3s;
     color: white;
 }
 
 .delete__modal__approve__btn {
-    background-color: rgb(255, 80, 80);
-    color: black;
-    font-weight: bold;
+    background-color: rgb(162, 20, 20);
+    color: rgb(239, 239, 239);
 
     &:hover {
         background-color: rgb(172, 0, 0);
-        color: rgb(92, 0, 0);
+        color: rgb(208, 208, 208);
     }
 }
 
 .delete__modal__reject__btn {
-    background-color: green;
+    background-color: rgb(8, 67, 8);
 
     &:hover {
-        background-color: rgb(3, 85, 0);
+        background-color: rgb(14, 98, 11);
     }
 }
 

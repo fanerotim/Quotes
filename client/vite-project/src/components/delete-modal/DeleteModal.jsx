@@ -4,6 +4,12 @@ import SuccessModal from '../success-modal/SuccessModal';
 
 const DeleteModal = ({ isOpen, onDelete, toggleIsOpen, isLoading, success }) => {
 
+    if (isOpen) {
+        document.body.style.overflowY = 'hidden';
+    } else {
+        document.body.style.overflowY = 'scroll';
+    }
+
     if (success) {
         return (
             <section
