@@ -7,6 +7,7 @@ const LastThreeQuotes = () => {
 
     const { lastThreeQuotes } = useGetLastThreeQuotes();
     const navigate = useNavigate();
+    const quoteTextLength = 200;
 
     return (
         <article
@@ -27,7 +28,7 @@ const LastThreeQuotes = () => {
                     <h1
                         className={styles.last__three__quote__text}
                     >
-                        {quote.text}
+                        {quote.text.length > quoteTextLength ? quote.text.substring(0, quoteTextLength) + '...' : quote.text}
                     </h1>
 
                     <div
