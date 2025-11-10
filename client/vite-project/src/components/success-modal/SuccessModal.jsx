@@ -37,7 +37,7 @@ const SuccessModal = () => {
                 <p
                     className={styles.success__modal__subheading}
                 >
-                    Your request was successful. We'll redirect you in {seconds} seconds.
+                    Your request was successful. Redirecting...
                 </p>
             </div>
         </article>
