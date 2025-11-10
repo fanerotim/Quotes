@@ -4,9 +4,9 @@ import useSuccessModal from '../../hooks/useSuccessModal';
 
 const SuccessModal = () => {
 
-    const { seconds, startTimer, endTimer } = useSuccessModal();
+    const { seconds, startTimer, endTimer, delayMs } = useSuccessModal();
 
-    if (seconds === 5) {
+    if (seconds === delayMs / 1000) {
         startTimer();
     }
 
@@ -37,7 +37,7 @@ const SuccessModal = () => {
                 <p
                     className={styles.success__modal__subheading}
                 >
-                    Your request was successful. Redirecting...
+                    Your request was successful. Redirecting {seconds}...
                 </p>
             </div>
         </article>
