@@ -6,7 +6,7 @@ import Loader from '../loader/Loader';
 
 const UserProfile = () => {
 
-    const { email, userQuotes } = useGetUserQuotes();
+    const { email, userQuotes, isFetched } = useGetUserQuotes();
     // this variable controls the length of the quote that will be visible before a card is opened - helps avoid having huge cards 
     const quoteTextLength = 150;
 
@@ -57,6 +57,14 @@ const UserProfile = () => {
                 {
                     userQuotes?.length == 0
                         ?
+                        isFetched
+                        ?
+                        <h1
+                            className={styles.no__quotes__added__message}
+                        >
+                            You have not added a quote yet
+                        </h1> 
+                        :
                         <div
                             className={styles.loader__container}
                         >

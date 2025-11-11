@@ -132,6 +132,19 @@
     }
 }
 
+.no__quotes__added__message {
+    font-size: 1.8rem;
+    font-weight: 200;
+    justify-self: center;
+    align-self: center;
+
+    &::after {
+        content: '.';
+        font-weight: bold;
+        color: red;
+    }
+}
+
 .quote__card__author__and__nav__button__container {
     display: flex;
     justify-content: space-between;
@@ -166,6 +179,10 @@
         grid-template-rows: 17rem 10rem 1fr;
     }
 
+    // Not perfect at all. Needs better responsive styles - especially for quotes__container element
+    .quotes__container {
+        min-height: 300px;
+    }
 
     .profile__page__welcome__message__container {
         grid-row: 1 / 2;
