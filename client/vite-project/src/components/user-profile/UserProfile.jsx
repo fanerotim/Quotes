@@ -23,19 +23,19 @@ const UserProfile = () => {
                     <p
                         className={styles.profile__page__welcome__message}
                     >
-                        Hey,
+                        Oi,
                     </p>
 
                     <span
                         className={styles.profile__page__welcome__message__email}
                     >
-                        {email}
+                        {email} - welcome to your profile page
                     </span>
 
                     <p
                         className={styles.profile__page__welcome__message__info}
                     >
-                        Here you can review and edit your quotes, the quotes you liked and update your password.
+                        Here you can review and edit your quotes, the quotes you liked and update your password
                     </p>
                 </div>}
 
