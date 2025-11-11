@@ -39,7 +39,11 @@ const Quotes = () => {
                             onCardClick={() => clickHandler(quote.id)} />
                     ))}
                 </ul>)
-                : <h1>No quotes found</h1>}
+                : <h1 
+                    className={styles.quotes__noQuotesFound__message}    
+                    >
+                        No quotes found
+                </h1>}
 
             <div className={styles.load__more__button__wrapper}>
                 {quotes?.length > 0 && <LoadMoreQuotes
