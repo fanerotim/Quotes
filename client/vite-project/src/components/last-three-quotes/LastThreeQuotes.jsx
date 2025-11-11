@@ -28,7 +28,7 @@ const LastThreeQuotes = () => {
                     <h1
                         className={styles.last__three__quote__text}
                     >
-                        {quote.text.length > quoteTextLength ? quote.text.substring(0, quoteTextLength) + '...' : quote.text}
+                        {quote.text.length > quoteTextLength ? quote.text.substring(0, quoteTextLength) + '... More' : quote.text}
                     </h1>
 
                     <div

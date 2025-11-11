@@ -20,32 +20,36 @@
     padding-bottom: .3rem;
 }
 
+// TODO: think about making the styles for the input global, so the transition of border applies to app inputs
 .search__input {
-    border-radius: 1rem;
-    padding: .3rem 1.7rem .3rem .6rem;
-    outline: none;
+    min-width: 15rem;
+    font-size: .75rem;
+    padding: .45rem 1.7rem .45rem .6rem;
+    border-radius: .1rem;
     border: 1px solid rgb(26, 26, 26);
-    font-size: 1rem;
+    outline: none;
+    transition: border .2s;
 
     &::placeholder {
-        font-size: .9rem;
+        font-size: .7rem;
         color: rgb(167, 167, 167);
     }
 
     &:focus {
-        // border: 1px solid rgb(12, 161, 62);
         background-color: rgb(236, 236, 236);
+        border: 1px solid rgb(193, 193, 193);
+        transition: border .2s;
     }
 }
 
 .search__button {
     all: unset;
-    font-size: .7rem;
+    font-size: .65rem;
     padding: .35rem 1.35rem;
     margin-top: .5rem;
     background-color: rgb(48, 48, 48);
     color: rgb(231, 231, 231);
-    border-radius: .5rem;
+    border-radius: .1rem;
     transition: background-color .3s;
     cursor: pointer;
     align-self: start;
@@ -62,12 +66,19 @@
     align-self: center;
     padding-right: .5rem;
     cursor: pointer;
+    transition: transform .2s;
+
+    &:hover {
+        transform: scale(1.2);
+        transition: transform .2s;
+    }
 }
 
 @media (max-width: 350px) {
 
     // TODO: debug this. It's better to make input responsive and reduce width of parent
-    .search__input {
-        width: 200px;
-    }
+    // Solution 1: commented this out for now as setting min-width solves the issue. But still keeping it commented out for now as eventually the goal is to make the size of search input responsive (takes different percentage of screen width) depending on screen width
+    // .search__input {
+    //     width: 200px;
+    // }
 }
