@@ -1,7 +1,7 @@
 .search__form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
     margin: 4rem 0;
     gap: .5rem;
 }
@@ -12,34 +12,11 @@
 }
 
 .search__label {
-    color: rgb(22, 22, 22);
-    font-size: .8rem;
-    font-weight: 350;
     align-self: end;
-    padding-right: .3rem;
-    padding-bottom: .3rem;
 }
 
 .search__input {
     min-width: 15rem;
-}
-
-.search__button {
-    all: unset;
-    font-size: .65rem;
-    padding: .35rem 1.35rem;
-    margin-top: .5rem;
-    background-color: rgb(48, 48, 48);
-    color: rgb(231, 231, 231);
-    border-radius: .1rem;
-    transition: background-color .3s;
-    cursor: pointer;
-    align-self: start;
-
-    &:hover {
-        background-color: rgb(245, 245, 245);
-        color: black;
-    }
 }
 
 .clear__icon {

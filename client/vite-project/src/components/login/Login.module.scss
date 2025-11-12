@@ -1,9 +1,3 @@
-:root {
-    --error: rgb(204, 64, 64);
-    --success: rgb(2, 99, 2);
-    // --warning: rgb(255, 205, 112);
-}
-
 .login__form__container {
     display: grid;
     grid-template-rows: 200px max-content 200px;
@@ -43,30 +37,6 @@
 .login__form {
     grid-row: 2 / 3;
     align-self: start;
-
-    &__label {
-        font-size: .6rem;
-        color: rgb(34, 34, 34);
-        text-align: left;
-        padding-top: .7rem;
-    }
-
-    &__submit__button {
-        all: unset;
-        font-size: .8rem;
-        padding: .4rem 1.2rem;
-        margin-top: .5rem;
-        background-color: rgb(48, 48, 48);
-        color: rgb(231, 231, 231);
-        border-radius: .1rem;
-        transition: background-color .3s;
-        cursor: pointer;
-
-        &:hover {
-            background-color: rgb(245, 245, 245);
-            color: black;
-        }
-    }
 }
 
 .reset__password__container {

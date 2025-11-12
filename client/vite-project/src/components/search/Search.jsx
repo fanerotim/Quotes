@@ -1,7 +1,8 @@
-import styles from './Search.module.scss'
+import styles from './Search.module.scss';
+import globalStyles from '../../App.module.scss'
 import useForm from '../../hooks/useForm';
 import useSearch from '../../hooks/useSearch';
-import Toaster from '../../components/toaster/Toaster'
+import Toaster from '../../components/toaster/Toaster';
 import { MdClose } from 'react-icons/md';
 
 const initialValues = {
@@ -40,7 +41,7 @@ const Search = () => {
                     />
                 </div>
 
-                <button className={styles.search__button}>Search</button>
+                <button className={globalStyles.submit__button}>Search</button>
             </form>
             {error && <Toaster className='toaster' message={error} />}
         </div>

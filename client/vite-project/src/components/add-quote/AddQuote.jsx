@@ -1,7 +1,7 @@
 import styles from './AddQuote.module.scss'
 import useForm from '../../hooks/useForm';
 import useAddQuote from '../../hooks/useAddQuote';
-import { CATEGORIES } from '../../utils/genres';
+import globalStyles from '../../App.module.scss'
 import Loader from '../loader/Loader';
 import Toaster from '../toaster/Toaster';
 import SuccessModal from '../success-modal/SuccessModal';
@@ -110,9 +110,9 @@ const AddQuote = () => {
                         </section>
 
                         <button
-                            className={styles.add__form__button}
+                            className={globalStyles.submit__button}
                         >
-                            Submit
+                            Add
                         </button>
                     </form>
             }

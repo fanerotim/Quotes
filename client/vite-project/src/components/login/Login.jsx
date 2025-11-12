@@ -1,4 +1,5 @@
-import styles from './Login.module.scss'
+import styles from './Login.module.scss';
+import globalStyles from '../../App.module.scss'
 import useForm from '../../hooks/useForm';
 import useLogin from '../../hooks/useLogin';
 import { Link } from 'react-router-dom';
@@ -102,9 +103,9 @@ const Login = () => {
 
                         <div className={styles.login__form__submit__button__container}>
                             <button
-                                className={styles.login__form__submit__button}
+                                className={globalStyles.submit__button}
                             >
-                                Submit
+                                Log in
                             </button>
 
                         </div>

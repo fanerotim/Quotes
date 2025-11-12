@@ -1,9 +1,9 @@
-import styles from './Register.module.scss'
+import styles from './Register.module.scss';
+import globalStyles from '../../App.module.scss';
 import useForm from '../../hooks/useForm';
 import useRegister from '../../hooks/useRegister';
 import Toaster from '../toaster/Toaster';
 import Loader from '../loader/Loader';
-import SucessModal from '../success-modal/SuccessModal';
 import SuccessModal from '../success-modal/SuccessModal';
 
 const initialValues = {
@@ -116,9 +116,9 @@ const Register = () => {
                     />
                 </div>
                 <button
-                    className={styles.register__form__submit__button}
+                    className={globalStyles.submit__button}
                 >
-                    Submit
+                    Register
                 </button>
             </form>}
 

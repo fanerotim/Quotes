@@ -1,6 +1,6 @@
 import useForm from '../../hooks/useForm';
 import styles from './EditQuote.module.scss'
-import { CATEGORIES } from '../../utils/genres';
+import globalStyles from '../../App.module.scss'
 import BackButton from '../back-button/BackButton';
 import useEditQuote from '../../hooks/useEditQuote';
 import Loader from '../loader/Loader';
@@ -121,9 +121,9 @@ const EditQuote = () => {
                                 </div>
                             </section>
                             <button
-                                className={styles.edit__form__submit__button}
+                                className={globalStyles.submit__button}
                             >
-                                Submit
+                                Edit
                             </button>
                         </form>
                     </>}

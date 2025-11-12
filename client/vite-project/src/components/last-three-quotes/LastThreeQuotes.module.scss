@@ -6,30 +6,28 @@
 }
 
 .last__three__quotes__main__heading {
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: .75rem;
+    font-weight: 300;
     text-align: end;
     position: relative;
-    color: rgb(49, 49, 49);
 
-    &::after {
-        content: '_______';
-        width: 100%;
-        height: .7rem;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        color: rgb(202, 0, 0);
-    }
+    // these styles add a nice red underscore under the last word of 'most recent quotes', decided to remove it for now, but keeping it as i may change my mind
+    // &::after {
+    //     content: '_______';
+    //     width: 100%;
+    //     height: .7rem;
+    //     position: absolute;
+    //     right: 0;
+    //     bottom: 0;
+    //     color: rgb(202, 0, 0);
+    // }
 }
 
 .last__three__quote__wrapper {
-    
+    padding: 2rem;
     color: white;
     background-color: rgb(17, 13, 13);
-    padding: 2rem;
     border-radius: .1rem;  
-    // box-shadow: .5rem .7rem 1rem rgb(22, 22, 22);
     transition: background-color .5s;
 
     &:hover {
@@ -43,15 +41,14 @@
 
 .last__three__quote__text {
     font-size: .8rem;
-    line-height: 1.2;
     font-weight: 300;
-    // text-align: center;
+    line-height: 1.2;
 }
 
 .last__three__quote__author__and__likes__wrapper {
+    font-size: .5rem;
     display: flex;
     justify-content: space-between;
-    font-size: .5rem;
 }
 
 .last__three__quote__author {
@@ -62,15 +59,15 @@
 }
 
 .likes__icon__and__likes__count__container {
+    margin: 0;
     display: flex;
     align-self: end;
-    margin: 0;
 }
 
 .last__three__quote__likes__count {
     font-size: .8rem;
-    align-self: end;
     margin: 0;
+    align-self: end;
 }
 
 // 

@@ -1,4 +1,5 @@
 import styles from './UpdatePassword.module.scss';
+import globalStyles from '../../../App.module.scss'
 import useForm from '../../../hooks/useForm';
 import useUpdatePassword from '../../../hooks/useUpdatePassword';
 import SuccessModal from '../../success-modal/SuccessModal';
@@ -23,7 +24,8 @@ const UpdatePassword = () => {
         <>
             <button
                 onClick={toggleIsOpen}
-                className={styles.reset__password__form__button__toggler}
+                // className={styles.reset__password__form__button__toggler}
+                className={globalStyles.submit__button}
             >
                 {isOpen ? 'Close' : 'Click here to update your password'}
             </button>
@@ -58,7 +60,7 @@ const UpdatePassword = () => {
                             />
 
                             <button
-                                className={styles.update__password__form__submit__button}
+                                className={globalStyles.submit__button}
                             >
                                 Submit
                             </button>

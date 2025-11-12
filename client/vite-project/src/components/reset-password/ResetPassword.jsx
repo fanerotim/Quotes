@@ -1,4 +1,5 @@
 import styles from './ResetPassword.module.scss';
+import globalStyles from '../../App.module.scss';
 import useResetPassword from '../../hooks/useResetPassword';
 import useForm from '../../hooks/useForm';
 
@@ -64,7 +65,7 @@ const ResetPassword = () => {
                     </div>
 
                     <button
-                        className={styles.reset__password__form__submit__button}
+                        className={globalStyles.submit__button}
                         disabled={isLoading}
                     >
                         Submit

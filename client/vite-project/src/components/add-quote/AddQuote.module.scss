@@ -1,9 +1,3 @@
-:root {
-    --error: rgb(204, 64, 64);
-    --success: rgb(44, 167, 44);
-    --warning: rgb(255, 205, 112);
-}
-
 .add__form__container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -49,34 +43,11 @@
         gap: .2rem;
     }
 
-    &__label {
-        font-size: .9rem;
-        color: rgb(78, 78, 78);
-        text-align: left;
-        padding: .3rem 0;
-    }
-
     &__textarea {
         min-height: 6rem;
         resize: vertical;
     }
 
-    &__button {
-        all: unset;
-        font-size: .8rem;
-        padding: .5rem 1.5rem;
-        margin-top: .5rem;
-        background-color: rgb(48, 48, 48);
-        color: rgb(231, 231, 231);
-        border-radius: .1rem;
-        transition: background-color .3s;
-        cursor: pointer;
-
-        &:hover {
-            background-color: rgb(245, 245, 245);
-            color: black;
-        }
-    }
 }
 
 .add__form__loader__container {
@@ -105,33 +76,5 @@
 
     .add__form {
         grid-column: 1 / 4;
-
-        &__input,
-        &__textarea {
-            font-size: .8rem;
-            background-color: rgb(24, 23, 23);
-            color: white;
-
-            &:focus {
-                background-color: rgb(243, 243, 243);
-                color: black;
-            }
-        }
-
-        &__textarea {
-            min-height: 250px;
-        }
-
-        &__label {
-            font-size: .7rem;
-            font-weight: 500;
-            margin-top: 1rem;
-        }
-
-        &__button {
-            width: fit-content;
-            font-size: .7rem;
-            padding: .4rem .9rem;
-        }
     }
 }
