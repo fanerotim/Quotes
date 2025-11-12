@@ -56,37 +56,9 @@
         padding: .3rem 0;
     }
 
-    &__input,
-    &__textarea,
-    &__select {
-        padding: .5rem;
-        border-radius: .1rem;
-        outline: none;
-        border: none;
-        background-color: rgb(248, 248, 248);
-    }
-
     &__textarea {
         min-height: 6rem;
         resize: vertical;
-    }
-
-    &__input:user-invalid,
-    &__textarea:user-invalid,
-    &__select:user-invalid {
-        outline: 2px solid var(--error);
-    }
-
-    &__input:user-valid,
-    &__textarea:user-valid,
-    &__select:user-valid {
-        outline: 2px solid var(--success);
-    }
-
-    &__input:focus,
-    &__textarea:focus,
-    &__select:focus {
-        outline: 2px solid var(--warning);
     }
 
     &__button {

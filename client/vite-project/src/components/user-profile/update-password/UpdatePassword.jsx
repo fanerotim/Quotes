@@ -53,6 +53,8 @@ const UpdatePassword = () => {
                                 placeholder='Enter your new password'
                                 name="password"
                                 type="text"
+                                required
+                                minLength={3}
                             />
 
                             <button

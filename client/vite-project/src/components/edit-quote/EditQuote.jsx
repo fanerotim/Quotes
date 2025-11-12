@@ -82,6 +82,8 @@ const EditQuote = () => {
                                     className={styles.edit__form__input}
                                     value={values ? values.author : ''}
                                     name='author'
+                                    required
+                                    minLength={8}
                                 />
                             </section>
 
