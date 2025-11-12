@@ -96,7 +96,7 @@ const Login = () => {
                                 to='/users/reset-password'
                                 className={styles.reset__password__link}
                             >
-                                Reset password
+                                Forgotten password?
                             </Link>
                         </div>
 
