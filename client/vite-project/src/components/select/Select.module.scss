@@ -1,5 +1,6 @@
 .custom__select__container {
-    background-color: black;
+    // background-color: black;
+    border: 1px solid black;
     padding: .1rem 1rem;
     text-align: center;
     // border-top-left-radius: 1rem;
@@ -20,18 +21,18 @@
 .custom__select__choice__text {
     padding: .6rem 0;
     margin: 0;
-    color: white;
+    // color: white;
     font-size: .8rem;
 
     &__up__arrow {
-        border-top: 10px solid white;
+        border-top: 10px solid black;
         border-right: 10px solid transparent;
         border-left: 10px solid transparent;
     }   
 
 
     &__down__arrow {
-        border-bottom: 10px solid white;
+        border-bottom: 10px solid black;
         border-right: 10px solid transparent;
         border-left: 10px solid transparent;
     }
