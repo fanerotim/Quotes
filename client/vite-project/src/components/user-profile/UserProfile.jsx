@@ -1,4 +1,4 @@
-import styles from './UserProfile.module.scss'
+import styles from './UserProfile.module.scss';
 import UpdatePassword from './update-password/UpdatePassword';
 import { Link } from 'react-router-dom';
 import useGetUserQuotes from '../../hooks/useGetUserQuotes';
