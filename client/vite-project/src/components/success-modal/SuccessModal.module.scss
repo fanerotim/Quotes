@@ -1,7 +1,7 @@
 .success__modal__container {
-    border-radius: 1rem;
+    border-radius: .1rem;
     padding: 1rem;
-    box-shadow: .1rem .1rem 1rem rgb(61, 61, 61);  
+    box-shadow: .1rem .1rem .2rem .1rem rgb(61, 61, 61);  
 }
 
 .success__modal__icon__container {
@@ -11,7 +11,7 @@
 
 .success__modal__heading {
     text-align: center;
-    font-weight: 300;
+    font-weight: 200;
 }
 
 .success__modal__subheading {
@@ -20,7 +20,7 @@
 }
 
 .success__modal__icon {
-    color: rgb(115, 211, 115);
+    color: rgb(13, 128, 13);
     font-size: 3rem;
 }
 
