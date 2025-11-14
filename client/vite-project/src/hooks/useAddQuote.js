@@ -34,7 +34,7 @@ const useAddQuote = () => {
             // for now i am writing a timeout here, as i want the modal to be visible for x amount of settings before redirecting the user
             setTimeout(() => {
                 navigate('/quotes');
-            }, delayMs)
+            }, delayMs);
         } catch (err) {
             // if err > update error state with err.message
             updateState('SET_ERROR', err);

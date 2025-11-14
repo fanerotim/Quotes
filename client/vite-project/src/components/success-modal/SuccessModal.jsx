@@ -5,7 +5,7 @@ import useSuccessModal from '../../hooks/useSuccessModal';
 const SuccessModal = () => {
 
     const { seconds, startTimer, endTimer, delayMs } = useSuccessModal();
-
+    
     if (seconds === delayMs / 1000) {
         startTimer();
     }
