@@ -1,7 +1,7 @@
 import styles from './LastThreeQuotes.module.scss';
 import useGetLastThreeQuotes from '../../hooks/useGetLastThreeQuotes';
-import LikeCountIcon from '../like-count-icon/LikeCountIcon';
 import { useNavigate } from 'react-router-dom'
+import { CiHeart } from 'react-icons/ci';
 
 const LastThreeQuotes = () => {
 
@@ -36,10 +36,13 @@ const LastThreeQuotes = () => {
                     >
                         <div
                             className={styles.likes__icon__and__likes__count__container}
-                        >
-                            <LikeCountIcon
+                        >   
+                            <CiHeart 
                                 className={styles.last__three__quote__likes__icon}
                             />
+                            {/* <LikeCountIcon
+                                className={styles.last__three__quote__likes__icon}
+                            /> */}
                             <p
                                 className={styles.last__three__quote__likes__count}
                             >
