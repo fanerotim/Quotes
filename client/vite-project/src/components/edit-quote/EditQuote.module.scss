@@ -10,7 +10,7 @@
 }
 
 .back__button__container {
-    align-self: center;
+    align-self: start;
     justify-self: center;
 }
 
@@ -97,7 +97,7 @@
 }
 
 // styles for smaller screens / responsiveness
-@media (max-width: 500px) {
+@media (max-width: 1000px) {
 
     .edit__form__container {
         max-width: 80%;
