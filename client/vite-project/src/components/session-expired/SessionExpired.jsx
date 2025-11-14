@@ -2,15 +2,24 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext'
 import styles from './SessionExpired.module.scss'
 import globalStyles from '../../App.module.scss';
+import { useEffect } from 'react';
 
 const SessionExpired = () => {
 
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
 
-    // make sure page cannot be scrolled when modal pops up
-    const bodyElement = document.querySelector('body');
-    bodyElement.style.overflowY = 'hidden';
+    // TODO: think if the useEffect is needed, i can potentially update overflowY of body on click in the below clickHandler
+    useEffect(() => {
+        // make sure page cannot be scrolled when modal pops up
+        const bodyElement = document.querySelector('body');
+        bodyElement.style.overflowY = 'hidden';
+
+        //on unmount make sure body can be scrolled again
+        return () => {
+            bodyElement.style.overflowY = 'scroll';
+        }
+    }, [])
 
     const handleClick = () => {
         // dispatch LOGOUT event;
