@@ -34,7 +34,7 @@ const ResetPassword = () => {
                 <h2
                     className={styles.reset__password__text__subheading}
                 >
-                    Fill in the form and we'll email you a new one
+                    Fill in the form and we'll email you a new password
                 </h2>
             </div>
 
