@@ -107,4 +107,10 @@
     .edit__form {
         grid-column: 1 / 4; 
     }
+
+    .back__button__container {
+        align-self: start;
+        justify-self: start;
+        margin-top: 1.5rem;
+    }
 }
