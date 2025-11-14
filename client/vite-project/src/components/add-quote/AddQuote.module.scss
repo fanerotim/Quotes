@@ -68,7 +68,7 @@
 }
 
 // styles for smaller screens / responsiveness
-@media (max-width: 500px) {
+@media (max-width: 800px) {
     .add__form__container {
         max-width: 80%;
         margin: 0 auto;
@@ -79,6 +79,10 @@
     }
 
     .add__form__toaster__container {
+        grid-column: 1/4;
+    }
+
+    .add__form__success__modal__container {
         grid-column: 1/4;
     }
 }
