@@ -42,3 +42,23 @@
     margin-top: .5rem;
 }
 
+@media (max-width: 600px) {
+    .session__expired__content__container {
+        width: 70vw;
+        padding: 1.5rem 1rem;
+    }
+
+    .session__expired__content__container button {
+        font-size: .6rem;
+        padding: .4rem .9rem;
+    }
+
+    .session__expired__main__text {
+        font-size: 1.5rem;
+    }
+
+    .session__expired__secondary__text {
+        font-size: .6rem;
+    }
+}
+
