@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // TODO; temporary fix. i need to add pageOffsetY value instead of hardcoding random pixels. keeping the hacky fix for now.
-    height: calc(100% + 80px);
+    // TODO; modal does not cover the full heigh of the page if the page has been scrolled.
+    height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.9);
     position: absolute;
@@ -13,13 +13,15 @@
 }
 
 .delete__modal__content__wrapper {
+    width: 70vw;
+    max-width: 400px;
     background-color: rgb(243, 243, 243);
     border-radius: .1rem;
     padding: 2rem;
 }
 
 .delete__modal__heading {
-    font-size: 1.25rem;
+    font-size: .95rem;
     font-weight: 300;
     padding: 1rem;
 }
@@ -33,10 +35,10 @@
 .delete__modal__approve__btn,
 .delete__modal__reject__btn {
     all: unset;
-    font-size: .8rem;
+    font-size: .6rem;
     font-weight: 400;
     cursor: pointer;
-    padding: .4rem 2rem;
+    padding: .3rem 1.3rem;
     border-radius: .1rem;
     transition: background-color .3s;
     color: white;
