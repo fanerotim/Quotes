@@ -2,12 +2,14 @@ import { useState } from "react";
 import usePasswordResetRequest from "./usePasswordResetRequest";
 import { useNavigate } from 'react-router-dom';
 import validateInputs from '../utils/validateInputs';
+import useSuccessModal from "./useSuccessModal";
 
 const useResetPassword = () => {
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const { delayMs } = useSuccessModal();
 
     const { resetPassword } = usePasswordResetRequest();
     const navigate = useNavigate();
@@ -22,7 +24,7 @@ const useResetPassword = () => {
             // redirect user to /login page, so they can log in again
             navigate('/users/login')
 
-        }, 5000)
+        }, delayMs)
     }
 
     // TODO: reset password flow is not the best. anyone can reset a user's email as long as they know their email address. 
