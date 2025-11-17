@@ -27,7 +27,7 @@ const UpdatePassword = () => {
                 // className={styles.reset__password__form__button__toggler}
                 className={globalStyles.submit__button}
             >
-                {isOpen ? 'Close' : 'Click here to update your password'}
+                {isOpen ? 'Close' : 'Update your password'}
             </button>
 
             {isOpen ?
