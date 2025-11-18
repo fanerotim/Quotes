@@ -4,9 +4,10 @@ import useSuccessModal from '../../hooks/useSuccessModal';
 
 const SuccessModal = () => {
 
-    const { seconds, startTimer, endTimer, delayMs } = useSuccessModal();
+    const { seconds, startTimer, endTimer, intervalId } = useSuccessModal();
     
-    if (seconds === delayMs / 1000) {
+    // we only start the timer once and only if there is no intervalId
+    if (!intervalId) {
         startTimer();
     }
 
@@ -15,32 +16,32 @@ const SuccessModal = () => {
     }
 
     return (
-        <article
-            className={styles.success__modal__container}
-        >
-            <div
-                className={styles.success__modal__text__wrapper}
+            <article
+                className={styles.success__modal__container}
             >
                 <div
-                    className={styles.success__modal__icon__container}
+                    className={styles.success__modal__text__wrapper}
                 >
-                    <GoCheckCircleFill
-                        className={styles.success__modal__icon}
-                    />
-                </div>
+                    <div
+                        className={styles.success__modal__icon__container}
+                    >
+                        <GoCheckCircleFill
+                            className={styles.success__modal__icon}
+                        />
+                    </div>
 
-                <h1
-                    className={styles.success__modal__heading}
-                >
-                    Awesome!
-                </h1>
-                <p
-                    className={styles.success__modal__subheading}
-                >
-                    Your request was successful. Redirecting {seconds}...
-                </p>
-            </div>
-        </article>
+                    <h1
+                        className={styles.success__modal__heading}
+                    >
+                        Awesome!
+                    </h1>
+                    <p
+                        className={styles.success__modal__subheading}
+                    >
+                        Your request was successful. Redirecting {seconds}...
+                    </p>
+                </div>
+            </article>
     )
 }
 
