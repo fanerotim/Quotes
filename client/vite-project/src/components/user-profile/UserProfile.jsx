@@ -15,7 +15,24 @@ const UserProfile = () => {
             className={styles.page__wrapper}
         >
 
-            {email &&
+            <div
+                className={styles.profile__page__main__text__container}
+            >
+                <h1
+                    className={styles.profile__page__main__text__container__heading}
+                >
+                    Profile
+                </h1>
+
+                <p
+                    className={styles.profile__page__main__text__container__subheading}
+                >
+                    On this page you can manage your profile - browse through quotes you have added or liked, update password and more
+                </p>
+            </div>
+
+
+            {/* {email &&
                 <div
                     className={styles.profile__page__welcome__message__container}
                 >
@@ -31,13 +48,7 @@ const UserProfile = () => {
                     >
                         {email} - welcome to your profile page
                     </span>
-
-                    <p
-                        className={styles.profile__page__welcome__message__info}
-                    >
-                        Here you can review and edit your quotes, the quotes you liked and update your password
-                    </p>
-                </div>}
+                </div>} */}
 
             <div
                 className={styles.profile__page__update__password__container}
@@ -46,30 +57,30 @@ const UserProfile = () => {
             </div>
 
             <h1
-                className={styles.profile__page__heading}
+                className={styles.profile__page__quote__card__container__heading}
             >
                 Quotes you added
             </h1>
 
             <div
-                className={styles.quotes__container}
+                className={styles.quote__card__container}
             >
                 {
                     userQuotes?.length == 0
                         ?
                         isFetched
-                        ?
-                        <h1
-                            className={styles.no__quotes__added__message}
-                        >
-                            You have not added a quote yet
-                        </h1> 
-                        :
-                        <div
-                            className={styles.loader__container}
-                        >
-                            <Loader />
-                        </div>
+                            ?
+                            <h1
+                                className={styles.no__quotes__added__message}
+                            >
+                                You have not added a quote yet
+                            </h1>
+                            :
+                            <div
+                                className={styles.loader__container}
+                            >
+                                <Loader />
+                            </div>
                         :
                         <>
                             {userQuotes?.map((quote) => (
