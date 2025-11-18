@@ -78,14 +78,16 @@
 .quotes__container {
     grid-column: 1 / 3;
     grid-row: 4/5;
-    height: 600px;
-    overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    // the below margin is not the best solution, but on small screens quotes container overlaps the heading. leaving it as is for now as it fixes the issue, but it is far from ideal and needs changing / optimizing
-    margin-top: 5rem;
+    height: 600px;
+    overflow-y: scroll;
+    max-width: 80%;
+    margin: 0 auto;
+
+    padding: 3rem 0;
 }
 
 .quote__card__wrapper {
@@ -157,15 +159,15 @@
 // styles for quotes container scrollbar
 
 .quotes__container::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
 }
 
-.quotes__container::-webkit-scrollbar-track {
-    background-color: black;
-}
+// .quotes__container::-webkit-scrollbar-track {
+//     background-color: black;
+// }
 
 .quotes__container::-webkit-scrollbar-thumb {
-    background-color: rgb(148, 148, 148);
+    background-color: rgb(236, 20, 20);
 }
 
 // styles for small sizes
@@ -180,6 +182,10 @@
     // Not perfect at all. Needs better responsive styles - especially for quotes__container element
     .quotes__container {
         min-height: 300px;
+    }
+
+    .profile__page__heading {
+        padding-bottom: 2rem;
     }
 
     .profile__page__welcome__message__container {

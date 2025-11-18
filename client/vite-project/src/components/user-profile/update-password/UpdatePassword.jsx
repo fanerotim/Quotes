@@ -24,7 +24,6 @@ const UpdatePassword = () => {
         <>
             <button
                 onClick={toggleIsOpen}
-                // className={styles.reset__password__form__button__toggler}
                 className={globalStyles.submit__button}
             >
                 {isOpen ? 'Close' : 'Update your password'}
@@ -37,7 +36,7 @@ const UpdatePassword = () => {
                     :
                     success
                         ?
-                        <SuccessModal />
+                        <SuccessModal/>
                         :
                         <form
                             onSubmit={(e) => handleSubmit(e, values)}
