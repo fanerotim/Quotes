@@ -14,6 +14,7 @@ import SessionExpired from './components/session-expired/SessionExpired';
 import { useAuthContext } from './hooks/useAuthContext';
 import UserProfile from './components/user-profile/UserProfile';
 import ResetPassword from './components/reset-password/ResetPassword';
+import UpdatePassword from './components/user-profile/update-password/UpdatePassword';
 
 function App() {
   const { sessionExpired, auth } = useAuthContext();
@@ -32,6 +33,7 @@ function App() {
             <Route path='login' element={<Login />}></Route>
             <Route path='user-profile' element={<UserProfile />}></Route>
             <Route path='reset-password' element={<ResetPassword />}></Route>
+            <Route path='update-password' element={<UpdatePassword/>}></Route>
           </Route>
 
           <Route path='quotes'>
