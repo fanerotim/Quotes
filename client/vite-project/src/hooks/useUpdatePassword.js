@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useUpdatePasswordRequest from "./useUpdatePasswordRequest";
 import validateInputs from "../utils/validateInputs";
 import { useAuthContext } from "./useAuthContext";
@@ -7,7 +6,6 @@ import useFormStates from "./useFormStates";
 import useSuccessModal from "./useSuccessModal";
 
 const useUpdatePassword = () => {
-    const [isOpen, setIsOpen] = useState(false);
 
     const { updatePassword } = useUpdatePasswordRequest();
     // these are the current form states that I am using - have not implemented error logic for this form yet, but keeping the state for now as it will be implemented
@@ -16,10 +14,6 @@ const useUpdatePassword = () => {
     const { delayMs } = useSuccessModal();
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
-
-    const toggleIsOpen = () => {
-        setIsOpen((isOpen) => !isOpen)
-    }
 
     // TODO: implement this in a useEffect, so that we can clear the timeout if the user navigates away from this page (component unmounts, but keeping it like so for now)
     const handleSuccessfulUpdate = () => {
@@ -58,8 +52,6 @@ const useUpdatePassword = () => {
 
     return {
         handleSubmit,
-        toggleIsOpen,
-        isOpen,
         isLoading,
         success
     }
