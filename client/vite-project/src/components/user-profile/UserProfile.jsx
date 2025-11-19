@@ -1,8 +1,8 @@
 import styles from './UserProfile.module.scss';
-import UpdatePassword from './update-password/UpdatePassword';
-import { Link } from 'react-router-dom';
 import useGetUserQuotes from '../../hooks/useGetUserQuotes';
 import Loader from '../loader/Loader';
+import { Link } from 'react-router-dom';
+import { RxUpdate } from 'react-icons/rx';
 
 const UserProfile = () => {
 
@@ -32,11 +32,53 @@ const UserProfile = () => {
             </div>
 
             <div
-                className={styles.profile__page__update__password__container}
+                className={styles.profile__page__user__info}
             >
-                <Link to={'/users/update-password'}>
-                    Update password
-                </Link>
+                <div
+                    className={styles.profile__page__user__info__email__container}
+                >
+                    <p
+                        className={styles.profile__page__user__info__email__container__label}
+                    >
+                        Email
+                    </p>
+                    <p
+                        className={styles.profile__page__user__info__email__container__email}
+                    >{email}
+                    </p>
+                </div>
+
+                <div
+                    className={styles.profile__page__user__info__number__of__added__quotes__container}
+                >
+                    <p
+                        className={styles.profile__page__user__info__number__of__added__quotes__container__label}
+                    >
+                        Number of quotes
+                    </p>
+
+                    <p
+                        className={styles.profile__page__user__info__number__of__added__quotes__container__count}
+                    >{userQuotes.length}
+                    </p>
+                </div>
+
+                <div
+                    className={styles.profile__page__user__info__update__password__button__container}
+                >
+                    <p
+                        className={styles.profile__page__user__info__update__password__button__container__label}
+                    >
+                        Update password
+                    </p>
+                    <Link
+                        to={'/users/update-password'}
+                        className={styles.profile__page__user__info__update__password__button__container__button}
+                    >
+                        <RxUpdate />
+                    </Link>
+                </div>
+
             </div>
 
             <h1
