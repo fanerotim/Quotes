@@ -15,7 +15,6 @@ const UpdatePassword = () => {
     const {
         isLoading,
         success,
-        toggleIsOpen,
         handleSubmit
     } = useUpdatePassword();
 
@@ -42,11 +41,19 @@ const UpdatePassword = () => {
 
             {isLoading
                 ?
-                <Loader />
+                <div
+                    className={styles.update__password__page__loader__container}
+                >
+                    <Loader />
+                </div>
                 :
                 success
                     ?
-                    <SuccessModal />
+                    <div
+                        className={styles.update__password__page__success__modal__container}
+                    >
+                        <SuccessModal />
+                    </div>
                     :
                     <form
                         onSubmit={(e) => handleSubmit(e, values)}
