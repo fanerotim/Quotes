@@ -138,28 +138,53 @@
 }
 
 // styles for user info section
-
-.profile__page__user__info {
+.user__details__section__wrapper {
     grid-row: 2 / 3;
     grid-column: 1 / 3;
     max-width: 800px;
     width: 80%;
+    margin: 0 auto;
+
+    &__heading {
+        text-align: center;
+        font-weight: 100;
+        font-size: 3.4rem;
+        position: relative;
+        margin-bottom: 1.3rem;
+
+        &::first-letter {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        &::after {
+            content: '';
+            background-color: rgb(212, 1, 1);
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 1px;
+            width: 70px;
+        }
+    }
+
+    &__subheading {
+        text-align: center;
+        font-size: .9rem;
+        font-weight: 300;
+        margin: 0;
+    }
+}
+
+.profile__page__user__info {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin: 0 auto;
     padding: 2.5rem 0;
     height: 3.5rem;
 
     &__email__container {
-        // background-color: rgb(243, 243, 243);
-        // padding: .3rem 1rem;
-
-        &__label {
-            font-size: .7rem;
-            text-align: center;
-            margin: 0;
-        }
 
         &__email {
             font-size: .8rem;
@@ -169,12 +194,6 @@
     }
 
     &__update__password__button__container {
-        
-        &__label {
-            font-size: .7rem;
-            text-align: center;
-            margin: 0;
-        }
 
         &__button {
             display: block;
@@ -192,12 +211,6 @@
     }
 
     &__number__of__added__quotes__container {
-        
-        &__label {
-            font-size: .7rem;
-            text-align: center;
-            margin: 0;
-        }
 
         &__count {
             font-size: .8rem;
@@ -213,6 +226,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    &__label {
+        font-size: .7rem;
+        text-align: center;
+        margin: 0;
+    }
 }
 
 // styles for small screns / mobile devices

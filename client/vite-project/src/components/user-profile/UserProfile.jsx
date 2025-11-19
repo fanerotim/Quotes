@@ -32,53 +32,67 @@ const UserProfile = () => {
             </div>
 
             <div
-                className={styles.profile__page__user__info}
+                className={styles.user__details__section__wrapper}
             >
-                <div
-                    className={styles.profile__page__user__info__email__container}
+                <h1
+                    className={styles.user__details__section__wrapper__heading}
                 >
-                    <p
-                        className={styles.profile__page__user__info__email__container__label}
-                    >
-                        Email
-                    </p>
-                    <p
-                        className={styles.profile__page__user__info__email__container__email}
-                    >{email}
-                    </p>
-                </div>
+                    Details
+                </h1>
 
-                <div
-                    className={styles.profile__page__user__info__number__of__added__quotes__container}
+                <p
+                    className={styles.user__details__section__wrapper__subheading}
                 >
-                    <p
-                        className={styles.profile__page__user__info__number__of__added__quotes__container__label}
-                    >
-                        Number of quotes
-                    </p>
-
-                    <p
-                        className={styles.profile__page__user__info__number__of__added__quotes__container__count}
-                    >{userQuotes.length}
-                    </p>
-                </div>
-
+                    Below you can see number of quotes you added as well as reset your password
+                </p>
                 <div
-                    className={styles.profile__page__user__info__update__password__button__container}
+                    className={styles.profile__page__user__info}
                 >
-                    <p
-                        className={styles.profile__page__user__info__update__password__button__container__label}
+                    <div
+                        className={styles.profile__page__user__info__email__container}
                     >
-                        Update password
-                    </p>
-                    <Link
-                        to={'/users/update-password'}
-                        className={styles.profile__page__user__info__update__password__button__container__button}
-                    >
-                        <RxUpdate />
-                    </Link>
-                </div>
+                        <p
+                            className={styles.profile__page__user__info__email__container__label}
+                        >
+                            Email
+                        </p>
+                        <p
+                            className={styles.profile__page__user__info__email__container__email}
+                        >{email}
+                        </p>
+                    </div>
 
+                    <div
+                        className={styles.profile__page__user__info__number__of__added__quotes__container}
+                    >
+                        <p
+                            className={styles.profile__page__user__info__number__of__added__quotes__container__label}
+                        >
+                            Number of quotes you added
+                        </p>
+
+                        <p
+                            className={styles.profile__page__user__info__number__of__added__quotes__container__count}
+                        >{userQuotes.length}
+                        </p>
+                    </div>
+
+                    <div
+                        className={styles.profile__page__user__info__update__password__button__container}
+                    >
+                        <p
+                            className={styles.profile__page__user__info__update__password__button__container__label}
+                        >
+                            Update password
+                        </p>
+                        <Link
+                            to={'/users/update-password'}
+                            className={styles.profile__page__user__info__update__password__button__container__button}
+                        >
+                            <RxUpdate />
+                        </Link>
+                    </div>
+                </div>
             </div>
 
             <h1
