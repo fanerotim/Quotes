@@ -31,29 +31,12 @@ const UserProfile = () => {
                 </p>
             </div>
 
-
-            {/* {email &&
-                <div
-                    className={styles.profile__page__welcome__message__container}
-                >
-
-                    <p
-                        className={styles.profile__page__welcome__message}
-                    >
-                        Oi,
-                    </p>
-
-                    <span
-                        className={styles.profile__page__welcome__message__email}
-                    >
-                        {email} - welcome to your profile page
-                    </span>
-                </div>} */}
-
             <div
                 className={styles.profile__page__update__password__container}
             >
-                <UpdatePassword />
+                <Link to={'/users/update-password'}>
+                    Update password
+                </Link>
             </div>
 
             <h1
