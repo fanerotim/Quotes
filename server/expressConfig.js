@@ -30,7 +30,7 @@ const expressConfig = (app) => {
         const userAgent = req.headers['user-agent'];
         console.log('request made from this user-agent', userAgent)
         // consider replacing this check with a regext and .test() function
-        userAgent.includes('facebook' || 'FB_IAB' || 'FBAV')
+        userAgent.includes('facebook')
             ? botRoutes(req, res, next)
             : next();
     })
