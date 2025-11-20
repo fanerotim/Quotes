@@ -31,16 +31,16 @@ function App() {
           <Route path='users'>
             <Route path='register' element={<Register />}></Route>
             <Route path='login' element={<Login />}></Route>
-            <Route path='user-profile' element={<UserProfile />}></Route>
+            {auth && <Route path='user-profile' element={<UserProfile />}></Route>}
             <Route path='reset-password' element={<ResetPassword />}></Route>
-            <Route path='update-password' element={<UpdatePassword/>}></Route>
+            {auth && <Route path='update-password' element={<UpdatePassword/>}></Route>}
           </Route>
 
           <Route path='quotes'>
             <Route index element={<Quotes />}></Route>
             <Route path=':quoteId' element={<QuoteDetails />}></Route>
             <Route path='add-quote' element={<AddQuote />}></Route>
-            <Route path='edit-quote/:quoteId' element={<EditQuote />}></Route>
+            {auth && <Route path='edit-quote/:quoteId' element={<EditQuote />}></Route>}
           </Route>
 
           <Route path='*' element={<NotFound />}></Route>
