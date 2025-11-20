@@ -73,7 +73,7 @@ const UserProfile = () => {
 
                         <p
                             className={styles.profile__page__user__info__number__of__added__quotes__container__count}
-                        >{userQuotes.length}
+                        >{userQuotes?.length}
                         </p>
                     </div>
 
