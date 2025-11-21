@@ -3,7 +3,8 @@ const quoteService = require('../services/quoteService');
 
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
-
+    // logging for debugging purposes. trying to fix social media sharing preview issues
+    console.log(req.headers, 'logged from botController')
     try {
         const result = await quoteService.getQuote(id);
         const quoteDetails = result[0];

@@ -14,7 +14,8 @@ const { isGuest } = require('../route-guards/isGuest');
 // })
 
 router.get('/last-three-quotes', async (req, res) => {
-    
+    //logging headers as I am debugging an issue with social media sharing and meta tags more specifically
+    console.log(req.headers, 'logged from /last-three-quotes route')
     try {
         const mostRecentQuotes = await quoteService.getMostRecentlyAddedQuotes();
         res.status(200).json(mostRecentQuotes)
