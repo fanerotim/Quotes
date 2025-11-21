@@ -1,0 +1,23 @@
+.not__found__page__wrapper {
+    height: calc(100% + 63px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.not__found__page__text {
+    font-size: 4rem;
+    font-weight: 400;
+
+    &::after {
+        content: '.';
+        color: red;
+        font-weight: bold;
+    }
+
+    &::first-letter {
+        font-size: 5rem;
+        font-weight: bold;
+    }
+}
