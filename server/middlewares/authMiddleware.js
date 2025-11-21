@@ -3,7 +3,7 @@ const userService = require('../services/userService');
 
 exports.auth = async (req, res, next) => {
     const accessToken = req.headers.accesstoken;
-    console.log(req.headers) // logging for debugging purposes. working on issues with social media (facebook) sharing previews
+
     if (!accessToken) {
         return next();
     }
