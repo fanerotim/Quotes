@@ -28,7 +28,7 @@ const expressConfig = (app) => {
     // listen for requests made from facebookexternalhit bot and route them differently, so i can render meta tags
     app.use((req, res, next) => {
         const userAgent = req.headers['user-agent'];
-        console.log(req.headers, 'logged from express config file')
+        
         // consider replacing this check with a regext and .test() function
         userAgent.includes('facebook')
             ? botRoutes(req, res, next)
