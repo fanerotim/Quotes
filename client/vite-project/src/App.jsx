@@ -1,7 +1,7 @@
 import styles from './App.module.scss'
 import Home from './components/home/Home';
 import Quotes from './components/quotes/Quotes';
-import AddQuote from './components/add-quote/addQuote';
+import AddQuote from './components/add-quote/AddQuote';
 import EditQuote from './components/edit-quote/EditQuote';
 import { Routes, Route } from 'react-router-dom'
 import QuoteDetails from './components/quote-details/QuoteDetails';
