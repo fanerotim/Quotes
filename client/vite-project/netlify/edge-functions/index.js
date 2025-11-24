@@ -1,5 +1,5 @@
-export default async () => {
-    console.log('I, the edge fn, was invoked!')
+export default async (req) => {
+    console.log(req.headers)
     new Response('Testing my first edge function')
 };
 
