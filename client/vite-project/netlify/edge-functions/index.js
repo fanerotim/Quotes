@@ -1,5 +1,5 @@
 export default async (req) => {
-    console.log(req.headers.host['user-agent']);
+    console.log(req.headers.host);
     new Response('Testing my first edge function')
 };
 
