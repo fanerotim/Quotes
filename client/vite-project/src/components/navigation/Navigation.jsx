@@ -1,6 +1,6 @@
 import styles from './Navigation.module.scss'
 import { NavLink, useLocation } from "react-router-dom";
-import Logout from '../logout/logout';
+import Logout from '../logout/Logout';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useEffect } from 'react';
 import { useHistoryContext } from '../../hooks/useHistoryContext';
