@@ -6,7 +6,7 @@ export default async (req) => {
 
 export const config = {
     path: '/',
-    headers: {
+    header: {
         'user-agent': '(facebookexternalhit)'
     }
 }
