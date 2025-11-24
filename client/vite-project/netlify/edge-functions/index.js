@@ -1,5 +1,5 @@
 export default async (req) => {
-    console.log(req.headers.priority);
+    console.log(req.headers);
 
     new Response('Testing my first edge function')
 };
