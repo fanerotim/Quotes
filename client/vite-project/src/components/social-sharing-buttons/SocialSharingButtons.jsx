@@ -11,7 +11,7 @@ const SocialSharingButtons = () => {
     return (
         <div className={styles.social__media__buttons}>
             <FacebookShareButton
-                url={`${import.meta.env.VITE_BASE_URL}${location.pathname}`}
+                url={`${import.meta.env.VITE_FE_BASE_URL}${location.pathname}`}
                 resetButtonStyle={true}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
