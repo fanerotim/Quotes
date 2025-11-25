@@ -5,7 +5,8 @@ export default async (req) => {
 };
 
 export const config = {
-    path: '/',
+    path: '/*',
+    // this solutions works. it detects the facebookbot, so we can redirect based on this condition
     header: {
         'user-agent': '(facebookexternalhit)'
     }
