@@ -4,7 +4,7 @@ export default async (req, context) => {
     console.log('Context provides access to the pathname ', context.url.pathname)
     console.log('this pointed to Window obj, but it was empty, so lets print it now to double check: ', window)
 
-    const url = new URL(`${context.url.pathname}`, `${import.meta.env.VITE_BASE_URL}`);
+    const url = new URL(`${context.url.pathname}`, 'https://quotes-117d.onrender.com/quotes');
     console.log('CONSTRUCTED URL: ', url);
 
     new Response('Testing my first edge function')
