@@ -7,7 +7,6 @@ const SocialSharingButtons = () => {
 
     const location = useLocation();
     const [isHovered, setIsHovered] = useState(false);
-    console.log(location.pathname)
 
     return (
         <div className={styles.social__media__buttons}>
