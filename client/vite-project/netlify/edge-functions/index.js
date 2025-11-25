@@ -1,7 +1,8 @@
-export default async (req) => {
+export default async (req, context) => {
     console.log('THOSE ARE THE HEADERS AND FIRST LOG - SERVES AS GENERAL INFORMATION.', req.headers);
-    console.log('req.url appears to be a string, but I am checking it. And... it is a: ', typeof(req.url))
-    console.log('I am trying to log only the pathname of the requested url...', window.location)
+    console.log('THIS IS THE REQUEST - SERVES AS GENERAL INFORMATION.', req);
+    console.log('let`s check the context object: ', context)
+    console.log('I am trying to log only the pathname of the requested url...', window)
     new Response('Testing my first edge function')
 };
 
