@@ -1,5 +1,6 @@
 export default async (req) => {
     console.log(req.headers);
+    console.log('and this is the complete request', req, ' and here is requested url', req.url)
 
     new Response('Testing my first edge function')
 };
