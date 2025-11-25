@@ -1,6 +1,7 @@
 export default async (req, context) => {
 
-    return new URL(`${context.url.pathname}`, 'https://quotes-117d.onrender.com/quotes');
+    const url = new URL(`${context.url.pathname}`, 'https://quotes-117d.onrender.com/quotes');
+    return Response.redirect(url);
 };
 
 export const config = {
