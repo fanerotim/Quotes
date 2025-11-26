@@ -1,7 +1,7 @@
 export default async (req, context) => {
 
     console.log(req, 'THIS IS THE ORIGINAL REQUEST')
-    console.log(url, 'AND THIS IS THE CONTEXT')
+    console.log(context, 'AND THIS IS THE CONTEXT')
 
     // keeping the url hardcoded for now as initially this file was not able to read the env variables
     const url = new URL(`${context.url.pathname}`, 'https://quotes-117d.onrender.com/quotes');
