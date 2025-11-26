@@ -1,9 +1,7 @@
 export default async (req, context) => {
 
-    if (context.pathname.includes('robots')) {
-        context.next();
-    }
-    
+    console.log(context.pathname)
+
     // keeping the url hardcoded for now as initially this file was not able to read the env variables
     const url = new URL(`${context.url.pathname}`, 'https://quotes-117d.onrender.com/quotes');
     console.log(url)
