@@ -248,6 +248,26 @@ const getMostRecentlyAddedQuotes = async () => {
     })
 }
 
+const getOgImageMetaTag = async (quoteId) => {
+
+    // not a critical coditional check, but let's keep it for now
+    if (!quoteId) {
+        const error = new Error('quote id must be provided!');
+        const statusCode = 400;
+        error.status = statusCode;
+        throw error;
+    }
+
+    try {
+        const quoteData = await getQuote(quoteId);
+        const quoteDetails = quoteData[0];
+        // TODO: Prepare details before returning them
+        return quoteDetails;
+    } catch(err) {
+        throw err;
+    }
+}
+
 module.exports = {
     getAll,
     getQuotes,
@@ -260,5 +280,6 @@ module.exports = {
     likeQuote,
     hasLikedQuote,
     getLikesCount,
-    getMostRecentlyAddedQuotes
+    getMostRecentlyAddedQuotes,
+    getOgImageMetaTag
 }

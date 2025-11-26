@@ -13,11 +13,14 @@ const { isGuest } = require('../route-guards/isGuest');
 //     }
 // })
 
-router.get('/ogImage/:quoteId', (req, res) => {
+router.get('/ogImage/:quoteId', async (req, res) => {
     const { quoteId } = req.params;
 
     try {
-        res.status(200).json({ message: 'successful request!' })
+        const quoteDetails = await quoteService.getOgImageMetaTag(quoteId);
+        res.status(200).json({message: 'Successful req / response cycle'});
+        // render dynamic svg
+        // res.render('ogImage')
     } catch (err) {
         const statusCode = err.status | 500;
         res.status(statusCode).json({ message: err.message })
