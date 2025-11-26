@@ -3,12 +3,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="og:url"
-        content="http://localhost:3000/quotes/{{quoteDetails.id}}" />
-    <meta name="og:type" content="post" />
-    <meta name="og:author" content="{{quoteDetails.author}}" />
-    <meta name="og:description" content="{{quoteDetails.text}}" />
-
-    {{!-- <link rel="stylesheet" href="./static/styles/styles.css" /> --}}
+    <meta property="og:url" content="http://localhost:3000/quotes/{{quoteDetails.id}}" />
+    <meta property="og:author" content="{{quoteDetails.author}}" />
+    <meta property="og:description" content="{{quoteDetails.text}}" />
+    <meta property="og:image" content="https://quotes-117d.onrender.com/quotes/ogImage/{{quoteDetails.id}}" />
+    {{!--
+    <link rel="stylesheet" href="./static/styles/styles.css" /> --}}
     <title>Quote Details Page</title>
 </head>
