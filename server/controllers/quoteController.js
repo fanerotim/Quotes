@@ -13,14 +13,25 @@ const { isGuest } = require('../route-guards/isGuest');
 //     }
 // })
 
+router.get('/ogImage/:quoteId', (req, res) => {
+    const { quoteId } = req.params;
+
+    try {
+        res.status(200).json({ message: 'successful request!' })
+    } catch (err) {
+        const statusCode = err.status | 500;
+        res.status(statusCode).json({ message: err.message })
+    }
+})
+
 router.get('/last-three-quotes', async (req, res) => {
 
     try {
         const mostRecentQuotes = await quoteService.getMostRecentlyAddedQuotes();
         res.status(200).json(mostRecentQuotes)
-    } catch(err) {
+    } catch (err) {
         const statusCode = err.status || 500;
-        res.status(statusCode).json({message: err.message});
+        res.status(statusCode).json({ message: err.message });
     }
 })
 
@@ -121,8 +132,8 @@ router.post('/get-likes-count', async (req, res) => {
     try {
         const likesCount = await quoteService.getLikesCount(quoteId);
         return res.status(200).json(likesCount);
-    } catch(err) {
-        return res.status(400).json({message: err.message})
+    } catch (err) {
+        return res.status(400).json({ message: err.message })
     }
 })
 

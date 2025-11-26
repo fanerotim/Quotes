@@ -3,7 +3,7 @@ const userService = require('../services/userService');
 
 exports.auth = async (req, res, next) => {
     const accessToken = req.headers.accesstoken;
-    console.log(req.headers, 'this is the auth middleware. i listen to each request made to the api')
+
     if (!accessToken) {
         return next();
     }
