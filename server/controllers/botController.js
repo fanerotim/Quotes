@@ -3,8 +3,7 @@ const quoteService = require('../services/quoteService');
 
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
-    console.log('I am the route that is responsible to handle bot requests')
-
+    
     try {
         const result = await quoteService.getQuote(id);
         const quoteDetails = result[0];
@@ -13,7 +12,6 @@ router.get('/:id', async (req, res, next) => {
         console.error(err.message);
         throw err;
     }
-
 })
 
 module.exports = router;
