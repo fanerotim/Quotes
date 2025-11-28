@@ -20,11 +20,10 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         const quoteDetails = await quoteService.getOgImageMetaTag(quoteId);
         // res.status(200).json({message: 'Successful req / response cycle'});
         // render dynamic svg
-        res.set('Content-Type', 'image/svg+xml')
-        res.render('ogImage', {quoteDetails, layout: false})
+        res.render('ogImage', {quoteDetails, layout: false});
     } catch (err) {
         const statusCode = err.status | 500;
-        res.status(statusCode).json({ message: err.message })
+        res.status(statusCode).json({ message: err.message });
     }
 })
 
