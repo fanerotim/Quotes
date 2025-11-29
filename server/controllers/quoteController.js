@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const quoteService = require('../services/quoteService');
 const { isGuest } = require('../route-guards/isGuest');
-const { convert } = require('convert-svg-to-png');
-const { executablePath } = require('puppeteer');
+
+const { promises } = require('fs');
+const { join } = require('path');
+const { Resvg } = require('@resvg/resvg-js');
 
 // this is no longer being used, but keeping in for now;
 // router.get('/', async (req, res) => {
@@ -18,21 +20,28 @@ const { executablePath } = require('puppeteer');
 router.get('/ogImage/:quoteId', async (req, res) => {
     const { quoteId } = req.params;
 
-    try {
+    //test
+    const svg = await promises.readFile(join(__dirname, '../views/test.svg'))
+    const options = {
+        background: 'rgba(178, 178, 178, 0.9)',
+        fitTo: {
+            mode: 'width',
+            value: 1200,
+        }
+    }
 
-        const png = await convert('<svg viewBox="0 0 240 80"><style>.small {font: italic 15px sans-serif;}</style><text x="20" y="35" class="small">Some quote here...</text></svg>', {
-            launch: { executablePath },
-            height: 300,
-            width: 803
-        })
+    try {
+        const resvg = new Resvg(svg, options)
+        const pngData = resvg.render();
+        const pngBuffer = pngData.asPng();
+        await promises.writeFile(join(__dirname, '../views/quote.png'), pngBuffer);
+        res.set('Content-Type', 'image/png');
+        res.send(pngBuffer);
 
         // const quoteDetails = await quoteService.getOgImageMetaTag(quoteId);
         // res.status(200).json({message: 'Successful req / response cycle'});
         // render dynamic svg
         // res.render('ogImage', { quoteDetails, layout: false });
-
-        res.set('Content-Type', 'image/png');
-        res.send(png)
     } catch (err) {
         const statusCode = err.status | 500;
         res.status(statusCode).json({ message: err.message });
