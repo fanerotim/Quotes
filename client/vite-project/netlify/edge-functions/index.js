@@ -1,10 +1,4 @@
 export default async (req, context) => {
-    const path = context.url.pathname;
-    
-    if (path.startsWith('quotes/ogImage')) {
-        console.log('request made to ogImage')
-        return context.next();
-    }
 
     // keeping the url hardcoded for now as initially this file was not able to read the env variables
     const url = new URL(`${context.url.pathname}`, 'https://quotes-117d.onrender.com/quotes');
