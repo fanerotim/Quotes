@@ -7,7 +7,7 @@ export default async (req, context) => {
 
 export const config = {
     path: '/quotes/*',
-    excludedPath: '/robots.txt',
+    excludedPath: ['/robots.txt', '/quotes/ogImage/*'],
     // this solutions works. it detects the facebookbot, so we can redirect based on this condition
     header: {
         'user-agent': '(facebookexternalhit)'
