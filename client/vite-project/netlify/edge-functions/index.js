@@ -1,5 +1,6 @@
 export default async (req, context) => {
-
+    const path = context.url.pathname;
+    console.log('path');
     // keeping the url hardcoded for now as initially this file was not able to read the env variables
     const url = new URL(`${context.url.pathname}`, 'https://quotes-117d.onrender.com/quotes');
     return Response.redirect(url, 301);
@@ -7,7 +8,7 @@ export default async (req, context) => {
 
 export const config = {
     path: '/quotes/*',
-    excludedPath: ['/robots.txt', '/quotes/ogImage/1', '/quotes/ogImage/2', '/quotes/ogImage/3', '/quotes/ogImage/4'],
+    excludedPath: ['/robots.txt'],
     // this solutions works. it detects the facebookbot, so we can redirect based on this condition
     header: {
         'user-agent': '(facebookexternalhit)'
