@@ -19,7 +19,7 @@ const { Resvg } = require('@resvg/resvg-js');
 
 router.get('/ogImage/:quoteId', async (req, res) => {
     const { quoteId } = req.params;
-
+    console.log('I am checking if the bot made it to here,', req.headers)
     //test
     const svg = await promises.readFile(join(__dirname, '../views/test.svg'))
     const options = {
@@ -36,8 +36,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         const pngBuffer = pngData.asPng();
         await promises.writeFile(join(__dirname, '../views/quote.png'), pngBuffer);
         res.set('Content-Type', 'image/png');
-        res.set('Content-Length', pngBuffer.length)
-        res.status(200).send(pngBuffer);
+        res.send(pngBuffer);
 
         // const quoteDetails = await quoteService.getOgImageMetaTag(quoteId);
         // res.status(200).json({message: 'Successful req / response cycle'});
