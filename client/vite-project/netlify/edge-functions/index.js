@@ -2,6 +2,7 @@ export default async (req, context) => {
 
     // keeping the url hardcoded for now as initially this file was not able to read the env variables
     const url = new URL(`${context.url.pathname}`, 'https://quotes-117d.onrender.com/quotes');
+    console.log(url, 'this is the url to which I am redirecting')
     return Response.redirect(url, 301);
 };
 
