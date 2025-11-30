@@ -3,7 +3,7 @@ const quoteService = require('../services/quoteService');
 
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
-    console.log('the bot was redirected to this place and i am logging headers', req.headers)
+    console.log('opps - bot controller')
     try {
         const result = await quoteService.getQuote(id);
         const quoteDetails = result[0];
