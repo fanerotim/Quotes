@@ -19,7 +19,7 @@ const { Resvg } = require('@resvg/resvg-js');
 
 router.get('/ogImage/:quoteId', async (req, res) => {
     const { quoteId } = req.params;
-    console.log('I am checking if the bot made it to here,', req.headers)
+
     //test
     const svg = await promises.readFile(join(__dirname, '../views/test.svg'))
     const options = {
@@ -34,11 +34,11 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         const resvg = new Resvg(svg, options)
         const pngData = resvg.render();
         const pngBuffer = pngData.asPng();
-        // await promises.writeFile(join(__dirname, '../views/quote.png'), pngBuffer);
+        await promises.writeFile(join(__dirname, '../views/quote.png'), pngBuffer);
         res.set('Content-Type', 'image/png');
-        res.set('Content-Length', pngBuffer.length)
+        res.set('Content-Length', pngBuffer.length);
         res.send(pngBuffer);
-
+    
         // const quoteDetails = await quoteService.getOgImageMetaTag(quoteId);
         // res.status(200).json({message: 'Successful req / response cycle'});
         // render dynamic svg
@@ -62,7 +62,7 @@ router.get('/last-three-quotes', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-
+    console.log('opps - quote controller')
     try {
         const quote = await quoteService.getQuote(id);
         return res.status(200).json(quote);
