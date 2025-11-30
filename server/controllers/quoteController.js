@@ -19,7 +19,7 @@ const { Resvg } = require('@resvg/resvg-js');
 
 router.get('/ogImage/:quoteId', async (req, res) => {
     const { quoteId } = req.params;
-
+    console.log('oops - i was called. /ogImage route')
     //test
     const svg = await promises.readFile(join(__dirname, '../views/test.svg'))
     const options = {
@@ -37,6 +37,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         await promises.writeFile(join(__dirname, '../views/quote.png'), pngBuffer);
         res.set('Content-Type', 'image/png');
         res.set('Content-Length', pngBuffer.length);
+        console.log('here is also the buffer i am returning')
         res.send(pngBuffer);
     
         // const quoteDetails = await quoteService.getOgImageMetaTag(quoteId);
@@ -62,7 +63,7 @@ router.get('/last-three-quotes', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
-    console.log('opps - quote controller')
+
     try {
         const quote = await quoteService.getQuote(id);
         return res.status(200).json(quote);
