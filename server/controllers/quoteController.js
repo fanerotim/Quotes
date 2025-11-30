@@ -37,7 +37,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         await promises.writeFile(join(__dirname, '../views/quote.png'), pngBuffer);
         res.set('Content-Type', 'image/png');
         res.set('Content-Length', pngBuffer.length);
-        console.log('here is also the buffer i am returning')
+        console.log('here is also the buffer i am returning', pngBuffer)
         res.send(pngBuffer);
     
         // const quoteDetails = await quoteService.getOgImageMetaTag(quoteId);
