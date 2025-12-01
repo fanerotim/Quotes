@@ -19,7 +19,7 @@ const { Resvg } = require('@resvg/resvg-js');
 
 router.get('/ogImage/:quoteId', async (req, res) => {
     const { quoteId } = req.params;
-    console.log('oops - i was called. /ogImage route')
+
     //test
     const svg = await promises.readFile(join(__dirname, '../views/test.svg'))
     const options = {
@@ -34,10 +34,14 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         const resvg = new Resvg(svg, options)
         const pngData = resvg.render();
         const pngBuffer = pngData.asPng();
-        await promises.writeFile(join(__dirname, '../views/quote.png'), pngBuffer);
+        // no need to create a png file for now
+        // await promises.writeFile(join(__dirname, '../views/quote.png'), pngBuffer);
+        
+        // when i commented out the content type the facebook bot was able to read the image
+        // its new content type is application/octet-stream
         // res.set('Content-Type', 'image/png');
         // res.set('Content-Length', pngBuffer.length);
-        console.log('here is also the buffer i am returning', pngBuffer)
+        
         res.send(pngBuffer);
     
         // const quoteDetails = await quoteService.getOgImageMetaTag(quoteId);
