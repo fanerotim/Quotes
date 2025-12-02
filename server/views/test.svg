@@ -1,10 +1,16 @@
 
-    <svg viewBox="0 0 1200 250" xmlns="http://www.w3.org/2000/svg">
-        <style>
-            .small {
-            font: italic 5px sans-serif;
-            }
-
-        </style>
-        <text x="20" y="35" class="small">Some humans would do anything to see if it was possible to do it. If you put a large switch in some cave somewhere, with a sign on it saying 'End-of-the-World Switch. PLEASE DO NOT TOUCH', the paint wouldn't even have time to dry.</text>
+    <svg 
+        height="150" 
+        width="300"
+        
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        
+        <text 
+            x="150" 
+            y="75"
+            font-size="5px"
+        >
+            Some humans would do anything to see if it was possible to do it. If you put a large switch in some cave somewhere, with a sign on it saying 'End-of-the-World Switch. PLEASE DO NOT TOUCH', the paint wouldn't even have time to dry.
+        </text>
     </svg>
