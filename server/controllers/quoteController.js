@@ -24,7 +24,8 @@ router.get('/ogImage/:quoteId', async (req, res) => {
 
     //get quote data / text
     const quoteDetails = await quoteService.getQuote(quoteId);
-    const quoteText = quoteDetails[0].text;
+    
+    const quoteText = quoteDetails[0]?.text;
     //write / create a dynamic svg first
     const dynamicSvg = await createDynamicSvg(quoteText);
     //test
@@ -46,8 +47,8 @@ router.get('/ogImage/:quoteId', async (req, res) => {
 
         // when i commented out the content type the facebook bot was able to read the image
         // its new content type is application/octet-stream
-        res.set('Content-Type', 'image/png');
-        res.set('Content-Length', pngBuffer.length);
+        // res.set('Content-Type', 'image/png');
+        // res.set('Content-Length', pngBuffer.length);
 
         res.send(pngBuffer);
 
