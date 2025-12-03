@@ -7,7 +7,7 @@ router.get('/:id', async (req, res, next) => {
     try {
         const result = await quoteService.getQuote(id);
         const quoteDetails = result[0];
-        res.render('bot', { quoteDetails });
+        res.render('bot', { quoteDetails, layout: false });
     } catch (err) {
         console.error(err.message);
         throw err;
