@@ -47,14 +47,10 @@ router.get('/ogImage/:quoteId', async (req, res) => {
 
         // when i commented out the content type the facebook bot was able to read the image
         // its new content type is application/octet-stream
-        // res.set('Content-Type', 'image/png');
+        res.set('Content-Type', 'image/png');
+        // keeping content-length commented out for now for testing purposes
         // res.set('Content-Length', pngBuffer.length);
         res.send(pngBuffer);
-
-        // const quoteDetails = await quoteService.getOgImageMetaTag(quoteId);
-        // res.status(200).json({message: 'Successful req / response cycle'});
-        // render dynamic svg
-        // res.render('ogImage', { quoteDetails, layout: false });
     } catch (err) {
         const statusCode = err.status | 500;
         res.status(statusCode).json({ message: err.message });
