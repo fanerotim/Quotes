@@ -1,14 +1,14 @@
 const { promises } = require('fs');
 const { join } = require('path');
 
-const createDynamicSvg = async (text) => {
+const createDynamicSvg = async (text, author) => {
 
     const content = `
     <svg 
         viewBox="0 0 1200 150"
         xmlns="http://www.w3.org/2000/svg"
         height="150"
-        width="600"
+        width="400"
     >
         <style>
 
@@ -21,10 +21,21 @@ const createDynamicSvg = async (text) => {
 
         <text
             x="5"
-            y="30" 
+            y="35" 
+            class="text"
+            textLength="900"
+        >
+            ${text.substring(0, 80)}...
+        </text>
+
+        <text
+            x="5"
+            y="35"
+            dy="55"
+            dx="510" 
             class="text"
         >
-            ${text}
+            A quote by ${author}
         </text>
     </svg>`
 
