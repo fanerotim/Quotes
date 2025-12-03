@@ -24,6 +24,10 @@ router.get('/ogImage/:quoteId', async (req, res) => {
 
     //get quote data / text
     const quoteRequestResult = await quoteService.getQuote(quoteId);
+
+    if (quoteRequestResult.length < 1) {
+        throw new Error('No quote found!')
+    }
     const { text, author } = quoteRequestResult[0];
     //write / create a dynamic svg first
     const dynamicSvg = await createDynamicSvg(text, author);
