@@ -11,14 +11,14 @@ const createDynamicSvg = async (text, author) => {
         <style>
 
             .text {
-                font-size: 15px;
+                font-size: 5px;
                 fill: rgba(40, 40, 40, 0.8);
             }
 
         </style>
 
         <text
-            x="5"
+            x="50"
             y="35"
             dy="55"
             dx="50" 
