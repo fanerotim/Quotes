@@ -24,7 +24,7 @@ const createDynamicSvg = async (text, author) => {
             y="35"
             class="text"
         >
-            ${author}
+            ${text}
         </text>
     </svg>`
 
