@@ -3,7 +3,7 @@ const quoteService = require('../services/quoteService');
 
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
-
+    console.log('i was called to render dynamic head', req.headers)
     try {
         const result = await quoteService.getQuote(id);
         const quoteDetails = result[0];
