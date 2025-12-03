@@ -10,6 +10,6 @@ export const config = {
     excludedPath: ['/robots.txt'],
     // this solutions works. it detects the facebookbot, so we can redirect based on this condition
     header: {
-        'user-agent': '(facebookexternalhit|LinkedInBot|Facebot)'
+        'user-agent': '(facebookexternalhit)'
     }
 }
