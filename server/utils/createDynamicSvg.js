@@ -12,7 +12,7 @@ const createDynamicSvg = async (text, author) => {
         <style>
 
             .text {
-                font-size: 18px;
+                font-size: 36px;
                 fill: rgba(40, 40, 40, 0.8);
             }
 
@@ -26,8 +26,8 @@ const createDynamicSvg = async (text, author) => {
             ${text}
             <tspan 
                 fill="red"
-                font-size="20px"
-                x="35"
+                font-size="72px"
+                x="15%"
                 y="30%"
             >
                 "
@@ -38,7 +38,7 @@ const createDynamicSvg = async (text, author) => {
         <text
             dx="60%"
             dy="80%"
-            font-size="3px"
+            font-size="19px"
         >
             A quote by ${author}
         </text>
