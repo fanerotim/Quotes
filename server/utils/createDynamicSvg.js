@@ -30,6 +30,7 @@ const createDynamicSvg = async (text, author) => {
             x="5%"
             y="140px"
             class="text"
+            textLength="1000"
         >
             ${text}
             <tspan 
@@ -44,10 +45,11 @@ const createDynamicSvg = async (text, author) => {
         </text>
 
         <text
-            x="50px"
-            y="300px"
+            x="5%"
+            y="450px"
             font-size="28px"
             font-weight="700"
+            fill="grey"
         >
           - ${author}
         </text>
