@@ -38,7 +38,11 @@ router.get('/ogImage/:quoteId', async (req, res) => {
     const svg = await promises.readFile(join(__dirname, '../views/quoteOgImage.svg'))
 
     const options = {
-        background: 'rgba(255, 255, 255)',
+        background: 'rgba(220, 177, 177, 0.9)',
+        fillTo: {
+            mode: 'width',
+            value: 2400
+        }
     }
 
     try {
