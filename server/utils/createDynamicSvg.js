@@ -8,15 +8,15 @@ const createDynamicSvg = async (text, author) => {
 
     const content = `
     <svg 
-        width="1200"
-        height="630"
+        width="1920"
+        height="1080"
         xmlns="http://www.w3.org/2000/svg"
     >
         <style>
 
             .text {
                 font-size: 40px;
-                fill: rgba(40, 40, 40, 0.8);
+                fill: rgba(12, 12, 12, 0.8);
             }
 
         </style>
@@ -25,7 +25,7 @@ const createDynamicSvg = async (text, author) => {
             x="5%"
             y="100px"
             class="text"
-            textLength="900"
+            textLength="1200"
         >
             ${text}
             <tspan 
