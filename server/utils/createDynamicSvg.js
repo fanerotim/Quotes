@@ -8,8 +8,8 @@ const createDynamicSvg = async (text, author) => {
 
     const content = `
     <svg 
-        width="1100"
-        height="600"
+        width="3600"
+        height="2400"
         xmlns="http://www.w3.org/2000/svg"
     >
         <style>
