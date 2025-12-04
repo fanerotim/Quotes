@@ -8,8 +8,8 @@ const createDynamicSvg = async (text, author) => {
 
     const content = `
     <svg 
-        width="1920"
-        height="1080"
+        width="1200"
+        height="630"
         xmlns="http://www.w3.org/2000/svg"
     >
         <style>
@@ -25,7 +25,6 @@ const createDynamicSvg = async (text, author) => {
             x="5%"
             y="100px"
             class="text"
-            textLength="1200"
         >
             ${text}
             <tspan 
@@ -43,7 +42,6 @@ const createDynamicSvg = async (text, author) => {
             x="800px"
             y="200px"
             font-size="20px"
-            textLength="300px"
         >
            ${author}
         </text>
