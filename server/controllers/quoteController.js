@@ -23,26 +23,26 @@ router.get('/ogImage/:quoteId', async (req, res) => {
     const { quoteId } = req.params;
 
     //get quote data / text
-    const quoteRequestResult = await quoteService.getQuote(quoteId);
+    const quoteRequest = await quoteService.getQuote(quoteId);
 
-    if (quoteRequestResult.length < 1) {
+    // if no quote, we will still get an empty arr
+    if (quoteRequest.length < 1) {
         throw new Error('No quote found!')
     }
-    const { text, author } = quoteRequestResult[0];
-    //write / create a dynamic svg first
-    const dynamicSvg = await createDynamicSvg(text, author);
-    //test
-    const svg = await promises.readFile(join(__dirname, '../views/test.svg'))
+
+    const { text, author } = quoteRequest[0];
+
+    // write / create a dynamic svg first by calling the utility / helper fn
+    await createDynamicSvg(text, author);
+
+    const svg = await promises.readFile(join(__dirname, '../views/quoteOgImage.svg'))
+
     const options = {
         background: 'rgba(255, 255, 255, 0.9)',
-        fitTo: {
-            mode: 'width',
-            value: 510,
-        }
     }
 
     try {
-        const resvg = new Resvg(svg, options)
+        const resvg = new Resvg(svg, options);
         const pngData = resvg.render();
         const pngBuffer = pngData.asPng();
         // when i commented out the content type the facebook bot was able to read the image
