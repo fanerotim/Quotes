@@ -3,6 +3,9 @@ const { join } = require('path');
 
 const createDynamicSvg = async (text, author) => {
 
+    // Found a useful information that will save me a lot of useless commits, as I should be able to replicate the facebook preview locally now
+    // Rectangular image thumbnails appear at 470x246 pixels in the feed.
+
     const content = `
     <svg 
         width="1200"
@@ -19,16 +22,17 @@ const createDynamicSvg = async (text, author) => {
         </style>
 
         <text
-            x="20%"
-            y="40%"
+            x="5%"
+            y="100px"
             class="text"
+            textLength="460"
         >
             ${text}
             <tspan 
                 fill="red"
-                font-size="72px"
-                x="15%"
-                y="30%"
+                font-size="100px"
+                x="3%"
+                y="50px"
             >
                 "
             </tspan>
@@ -36,8 +40,8 @@ const createDynamicSvg = async (text, author) => {
         </text>
 
         <text
-            dx="60%"
-            dy="80%"
+            x="250px"
+            y="200px"
             font-size="19px"
         >
             A quote by ${author}
