@@ -7,52 +7,51 @@ const createDynamicSvg = async (text, author) => {
     // Rectangular image thumbnails appear at 470x246 pixels in the feed.
 
     const content = `
-    <svg
-  width="1200"
-  height="630"
-  viewBox="0 0 1200 630"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <style>
-    .quote {
-      font-family: Arial, sans-serif;
-      font-size: 60px;
-      font-weight: 600;
-      fill: #222;
-    }
+    <svg 
+        width="1200"
+        height="630"
+        viewBox="0 0 1200 630"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <style>
 
-    .author {
-      font-family: Arial, sans-serif;
-      font-size: 40px;
-      font-weight: 700;
-      fill: #444;
-    }
+            .text {
+                font-size: 64px;
+                font-weight: 800;
+                fill: rgba(0, 0, 0, 0.8);
+                background: "pink";
+            }
 
-    .mark {
-      font-family: Arial, sans-serif;
-      font-size: 140px;
-      font-weight: 900;
-      fill: #e63946;
-    }
-  </style>
+        </style>
 
-  <!-- background -->
-  <rect width="1200" height="630" fill="#f3f3f3" />
+        <rect width="1200" height="630" fill="rgba(200, 200, 200, 0.7)" />
 
-  <!-- opening quote mark -->
-  <text x="60" y="160" class="mark">“</text>
+        <text
+            x="5%"
+            y="140px"
+            class="text"
+        >
+            ${text}
+            <tspan 
+                fill="red"
+                font-size="110px"
+                x="3%"
+                y="100px"
+            >
+                “
+            </tspan>
 
-  <!-- quote text (multi-line friendly position) -->
-  <text x="140" y="160" class="quote">
-    TESTING QUOTE TEXT GOES HERE
-  </text>
+        </text>
 
-  <!-- author -->
-  <text x="140" y="520" class="author">
-    — Author Name
-  </text>
-</svg>
-`
+        <text
+            x="50px"
+            y="300px"
+            font-size="28px"
+            font-weight="700"
+        >
+          - ${author}
+        </text>
+    </svg>`
 
     try {
         await promises.writeFile(join(__dirname, '../views/quoteOgImage.svg'), content);
