@@ -39,6 +39,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
 
     const options = {
         background: 'rgba(255, 255, 255, 0.9)',
+        textRendering: 1,
     }
 
     try {
