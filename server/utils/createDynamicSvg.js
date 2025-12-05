@@ -1,10 +1,10 @@
 const { promises } = require('fs');
 const { join } = require('path');
+const { prepareOgImageText } = require('./prepareOgImageText');
 
 const createDynamicSvg = async (text, author) => {
 
-    // Found a useful information that will save me a lot of useless commits, as I should be able to replicate the facebook preview locally now
-    // Rectangular image thumbnails appear at 470x246 pixels in the feed.
+    const outputText = prepareOgImageText(text);
 
     const content = `
     <svg 
@@ -16,8 +16,9 @@ const createDynamicSvg = async (text, author) => {
         <style>
 
             .text {
-                font-size: 64px;
-                font-weight: 800;
+                font-size: 40px;
+                font-weight: 600;
+                font-variant: small-caps;
                 fill: rgba(0, 0, 0, 0.8);
                 background: "pink";
             }
@@ -30,17 +31,36 @@ const createDynamicSvg = async (text, author) => {
             x="5%"
             y="140px"
             class="text"
-            textLength="1000"
         >
-            ${text}
-            <tspan 
-                fill="red"
-                font-size="110px"
-                x="3%"
-                y="100px"
-            >
-                “
-            </tspan>
+            ${outputText[0]}
+        <tspan 
+            fill="red"
+            font-size="110px"
+            x="3%"
+            y="100px"
+        >
+            “
+        </tspan>
+
+        </text>
+
+        <text
+            x="5%"
+            y="140px"
+            dy="60"
+            class="text"
+        >
+            ${outputText[1]}
+
+        </text>
+
+        <text
+            x="5%"
+            y="140px"
+            dy="120"
+            class="text"
+        >
+            ${outputText[2]}...
 
         </text>
 
@@ -49,7 +69,7 @@ const createDynamicSvg = async (text, author) => {
             y="450px"
             font-size="28px"
             font-weight="700"
-            fill="grey"
+            fill="rgba(27, 27, 27, 0.7)"
         >
           - ${author}
         </text>
