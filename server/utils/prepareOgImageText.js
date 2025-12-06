@@ -1,31 +1,30 @@
 const prepareOgImageText = (text) => {
 
-    // convert text into an string[];
+    // convert the text of the current quote into a string[];
     const wordsInText = text.split(' ');
     const lastWord = wordsInText[wordsInText.length - 1];
+    const lineLength = 40;
     const textOutput = [];
 
-    let line = '';
+    let line = [];
 
-    // TODO; this is the first idea i got when writing this functionality. i am still testing it, so it is not optimized and from my tests it works. 
-    // See if it can be optimized
     for (word of wordsInText) {
+        const currentLineLength = line.join(' ').length;
 
-        if (line.length === 0) {
-            line += word;
-        } else if (line.length + word.length <= 40) {
-            line += ` ${word}`;
+        // if current word is the last word in the text we have unique case - the loop ends and it wil. 
+        // so we need to add the current word to the current line at this point despite the fact that the current line length is < textLength and then add this line to the arr to be returned
+        if (word === lastWord) {
+            line.push(word);
+            textOutput.push(line.join(' '));
+            return textOutput;
+        }
 
-            // if no more words in wordsInText[] (quote ended) add the line. 
-            // otherwise this line is not handled by other conditionals and it gets lost
-            if (word === lastWord) {
-                textOutput.push(line);
-            }
-
+        if (currentLineLength + word.length <= lineLength) {
+            line.push(word);
         } else {
-            textOutput.push(line);
-            line = '';
-            line += word;
+            const lineOfText = line.join(' ');
+            textOutput.push(lineOfText);
+            line = [word];
         }
     }
 

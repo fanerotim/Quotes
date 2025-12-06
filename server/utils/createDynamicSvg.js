@@ -50,7 +50,7 @@ const createDynamicSvg = async (text, author) => {
 
         <text
             x="5%"
-            y="450px"
+            y="580px"
             font-size="28px"
             font-weight="700"
             fill="rgba(27, 27, 27, 0.7)"
