@@ -25,7 +25,8 @@ const useAddQuote = () => {
             // set isLoading to true
             updateState('SET_LOADING');
             validateInputs(values);
-            await addQuote(values);
+            const quoteDetails = await addQuote(values);
+            const quoteId = quoteDetails.id;
             // set success to true. reset isLoading state e.g. set to false
             updateState('SET_SUCCESS');
             // update local storage status of hasMore to true to make sure load more button is enabled again
@@ -33,7 +34,7 @@ const useAddQuote = () => {
             // redirect to quotes page after success
             // for now i am writing a timeout here, as i want the modal to be visible for x amount of settings before redirecting the user
             setTimeout(() => {
-                navigate('/quotes');
+                navigate(`/quotes/${quoteId}`);
             }, delayMs);
         } catch (err) {
             // if err > update error state with err.message
