@@ -1,12 +1,14 @@
 const { promises } = require('fs');
 const { join } = require('path');
 const { prepareOgImageText } = require('./prepareOgImageText');
+const { generateSvgMarkup } = require('./generateSvgMarkup');
 
 const createDynamicSvg = async (text, author) => {
 
     const outputText = prepareOgImageText(text);
+    const lines = generateSvgMarkup(outputText);
 
-    const content = `
+    let content = `
     <svg 
         width="1200"
         height="630"
@@ -44,25 +46,7 @@ const createDynamicSvg = async (text, author) => {
 
         </text>
 
-        <text
-            x="5%"
-            y="140px"
-            dy="60"
-            class="text"
-        >
-            ${outputText[1]}
-
-        </text>
-
-        <text
-            x="5%"
-            y="140px"
-            dy="120"
-            class="text"
-        >
-            ${outputText[2]}...
-
-        </text>
+        ${[...lines]}
 
         <text
             x="5%"
