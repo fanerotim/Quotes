@@ -12,7 +12,6 @@ const generateSvgMarkup = (textArr) => {
         </text>`
         )
     }
-    console.log(svg);
     return svg;
 }
 

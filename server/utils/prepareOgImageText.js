@@ -13,7 +13,7 @@ const prepareOgImageText = (text) => {
 
         if (line.length === 0) {
             line += word;
-        } else if (line.length + word.length <= 50) {
+        } else if (line.length + word.length <= 40) {
             line += ` ${word}`;
 
             // if no more words in wordsInText[] (quote ended) add the line. 
