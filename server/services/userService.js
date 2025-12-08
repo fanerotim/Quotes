@@ -65,7 +65,9 @@ const register = async (email, password) => {
                 // generate an html template that is used in the email message
                 const html = generateEmailTemplate({ type: 'WELCOME_EMAIL', email })
                 // finally send the email
-                const sentEmail = await sendEmail(email, html);
+                // App is not yet hosted, so cannot send emails. 
+                // commenting this out to test an issue as app crashes at the moment
+                // const sentEmail = await sendEmail(email, html);
                 return resolve(result);
             } catch (err) {
                 console.error(err);
