@@ -41,7 +41,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         background: 'rgba(220, 177, 177, 0.9)',
         fillTo: {
             mode: 'width',
-            value: 1200
+            value: 2400
         }
     }
 
