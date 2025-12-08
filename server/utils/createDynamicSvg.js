@@ -6,8 +6,7 @@ const { generateSvgMarkup } = require('./generateSvgMarkup');
 const createDynamicSvg = async (text, author) => {
 
     const ogImageTextArray = prepareOgImageText(text);
-    const svgArray = generateSvgMarkup(ogImageTextArray, author);
-    const svg = svgArray.join(' ');
+    const svg = generateSvgMarkup(ogImageTextArray, author);
 
     try {
         await promises.writeFile(join(__dirname, '../views/quoteOgImage.svg'), svg);
@@ -17,6 +16,5 @@ const createDynamicSvg = async (text, author) => {
     }
 }
 
-module.exports = {
-    createDynamicSvg
+module.exports = {    createDynamicSvg
 }

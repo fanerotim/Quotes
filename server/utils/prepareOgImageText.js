@@ -27,7 +27,7 @@ const prepareOgImageText = (text) => {
             line = [word];
         }
     }
-
+    
     return textOutput;
 }
 
