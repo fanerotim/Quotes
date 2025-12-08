@@ -41,7 +41,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         background: 'rgba(220, 177, 177, 0.9)',
         fillTo: {
             mode: 'width',
-            value: 2400
+            value: 2048
         }
     }
 
@@ -52,7 +52,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         // when i commented out the content type the facebook bot was able to read the image
         // its new content type is application/octet-stream
         res.set('Content-Type', 'image/png');
-        res.set('Content-Length', pngBuffer.length);
+        // res.set('Content-Length', pngBuffer.length);
         res.send(pngBuffer);
     } catch (err) {
         const statusCode = err.status | 500;
