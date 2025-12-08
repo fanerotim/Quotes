@@ -1,6 +1,9 @@
 const generateSvgMarkup = (textArr, author) => {
     const svg = [];
 
+    const linesCount = 6;
+    const textToRender = textArr.length > linesCount ? textArr.slice(0, linesCount) : textArr.slice(0)
+
     const firstLineOfText = `
     <svg 
         width="1200"
@@ -19,7 +22,7 @@ const generateSvgMarkup = (textArr, author) => {
             font-variant="small-caps"
             fill="rgba(255, 255, 255)"
         >
-            ${textArr.shift()}
+            ${textToRender.shift()}
         <tspan 
             fill="red"
             font-size="110px"
@@ -33,7 +36,7 @@ const generateSvgMarkup = (textArr, author) => {
 
     svg.push(firstLineOfText);
 
-    for (let i = 0; i < textArr.length; i++) {
+    for (let i = 0; i < textToRender.length; i++) {
         svg.push(
         `<text 
             x="8%" 
@@ -44,7 +47,12 @@ const generateSvgMarkup = (textArr, author) => {
             font-variant="small-caps"
             fill="rgba(255, 255, 255)"
         >
-            ${textArr[i]}
+            ${
+                // if text is longer that what we can show add ellipsis at the end 
+                textArr.length > linesCount && i === textToRender.length - 1 
+                    ? `${textToRender[i]}...` 
+                    : textToRender[i]
+            }
         </text>`
         )
     }
