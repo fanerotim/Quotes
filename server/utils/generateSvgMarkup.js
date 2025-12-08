@@ -8,24 +8,16 @@ const generateSvgMarkup = (textArr, author) => {
         viewBox="0 0 1200 630"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <style>
 
-            .text {
-                font-size: 40px;
-                font-weight: 600;
-                font-variant: small-caps;
-                fill: rgba(255, 255, 255);
-                background: "pink";
-            }
-
-        </style>
-
-        <rect width="1200" height="630" fill="rgba(18, 18, 18, 0.7)" />
+        <rect width="1200" height="630" fill="rgba(18, 18, 18)" />
 
         <text
             x="8%"
             y="140px"
-            class="text"
+            font-size="40px"
+            font-weight="700"
+            font-variant="small-caps"
+            fill="rgba(255, 255, 255)"
         >
             ${textArr.shift()}
         <tspan 
@@ -42,12 +34,16 @@ const generateSvgMarkup = (textArr, author) => {
     svg.push(firstLineOfText);
 
     for (let i = 0; i < textArr.length; i++) {
-        svg.push(`
-        <text 
+        svg.push(
+        `<text 
             x="8%" 
             y="140px" 
             dy="${55 * (i + 1)}px" 
-            class="text">
+            font-size="40px"
+            font-weight="700"
+            font-variant="small-caps"
+            fill="rgba(255, 255, 255)"
+        >
             ${textArr[i]}
         </text>`
         )
@@ -59,12 +55,13 @@ const generateSvgMarkup = (textArr, author) => {
             y="580px"
             font-size="28px"
             font-weight="700"
-            fill="rgba(243, 243, 243)"
+            font-variant="small-caps"
+            fill="rgba(255, 255, 255)"
         >
           - ${author}
         </text>
-    </svg>
-    `
+    </svg>`
+
     svg.push(lastLineOfText);
     // return svg as text
     return svg.join(' ');
