@@ -13,6 +13,7 @@ const sendEmail = async (email, html) => {
         })
         return emailTransaction;
     } catch (err) {
+        console.log('Error - sendEmail fn`')
         console.error(err);
     }
 }
