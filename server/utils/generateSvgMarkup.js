@@ -6,13 +6,13 @@ const generateSvgMarkup = (textArr, author) => {
 
     const firstLineOfText = `
     <svg 
-        viewBox="0 0 1200 630"
-        width="1200"
-        height="630"
+        viewBox="0 0 600 315"
+        width="600"
+        height="315"
         xmlns="http://www.w3.org/2000/svg"
     >
 
-        <rect width="1200" height="630" fill="rgba(18, 18, 18)" />
+        <rect width="600" height="315" fill="rgba(18, 18, 18)" />
 
         <text
             x="8%"
