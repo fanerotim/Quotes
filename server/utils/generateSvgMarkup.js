@@ -6,8 +6,8 @@ const generateSvgMarkup = (textArr, author) => {
 
     const firstLineOfText = `
     <svg 
-        viewBox="0 0 1200 630"
-        width="1200"
+        viewBox="0 0 2480 630"
+        width="2480"
         height="630"
         xmlns="http://www.w3.org/2000/svg"
     >
