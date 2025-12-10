@@ -39,8 +39,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
 
     const options = {
         font: {
-            fontFiles: [join(__dirname, '../fonts/Poppins/Poppins-Regular.ttf')],
-            loadSystemFonts: false
+            fontFiles: [join(__dirname, '../fonts/Poppins/Poppins-Regular.ttf')]
         },
         fitTo: {
             mode: 'width',
