@@ -43,7 +43,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         },
         fitTo: {
             mode: 'width',
-            value: 1920
+            value: 1200
         }
     }
 

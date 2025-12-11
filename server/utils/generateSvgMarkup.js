@@ -6,15 +6,15 @@ const generateSvgMarkup = (textArr, author) => {
 
     const firstLineOfText = `
     <svg 
-        viewBox="0 0 1920 1080"
-        width="1920"
-        height="1080"
+        viewBox="0 0 1200 630"
+        width="1200"
+        height="630"
         xmlns="http://www.w3.org/2000/svg"
     >
 
         <rect 
-            width="1920" 
-            height="1080" 
+            width="1200" 
+            height="630" 
             fill="rgba(255, 255, 255)"
             shape-rendering="crispEdges" 
         />
@@ -22,7 +22,7 @@ const generateSvgMarkup = (textArr, author) => {
         <text
             x="8%"
             y="140px"
-            font-size="68px"
+            font-size="40px"
             fill="black"
         >
             ${textToRender.shift()}
@@ -45,7 +45,7 @@ const generateSvgMarkup = (textArr, author) => {
             x="8%" 
             y="140px" 
             dy="${55 * (i + 1)}px" 
-            font-size="68px"
+            font-size="40px"
             fill="black"
         >
             ${
