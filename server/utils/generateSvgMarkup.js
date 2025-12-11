@@ -6,16 +6,16 @@ const generateSvgMarkup = (textArr, author) => {
 
     const firstLineOfText = `
     <svg 
-        viewBox="0 0 1200 630"
-        width="1200"
-        height="630"
+        viewBox="0 0 2400 1260"
+        width="2400"
+        height="1260"
         xmlns="http://www.w3.org/2000/svg"
     >
 
         <rect 
-            width="1200" 
-            height="630" 
-            fill="rgba(255, 255, 255)"
+            width="2400" 
+            height="1260" 
+            fill="rgba(245, 245, 245)"
             shape-rendering="crispEdges" 
         />
 
@@ -23,7 +23,10 @@ const generateSvgMarkup = (textArr, author) => {
             x="8%"
             y="140px"
             font-size="48px"
-            fill="rgb(5, 5, 5)"
+            fill="rgb(35, 35, 35)"
+            font-weight="bold"
+            stroke="rgb(35, 35, 35)"
+            stroke-width="2px"
         >
             ${textToRender.shift()}
         <tspan 
@@ -46,7 +49,10 @@ const generateSvgMarkup = (textArr, author) => {
             y="140px" 
             dy="${55 * (i + 1)}px" 
             font-size="48px"
-            fill="rgb(5, 5, 5)"
+            fill="rgb(35, 35, 35)"
+            font-weight="bold"
+            stroke="rgb(35, 35, 35)"
+            stroke-width="2px"
         >
             ${
                 // if text is longer that what we can show add ellipsis at the end 
