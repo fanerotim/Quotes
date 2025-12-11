@@ -23,8 +23,7 @@ const generateSvgMarkup = (textArr, author) => {
             x="8%"
             y="140px"
             font-size="48px"
-            fill="white"
-            stroke="black"
+            fill="rgb(5, 5, 5)"
         >
             ${textToRender.shift()}
         <tspan 
@@ -47,8 +46,7 @@ const generateSvgMarkup = (textArr, author) => {
             y="140px" 
             dy="${55 * (i + 1)}px" 
             font-size="48px"
-            fill="white"
-            stroke="black"
+            fill="rgb(5, 5, 5)"
         >
             ${
                 // if text is longer that what we can show add ellipsis at the end 
