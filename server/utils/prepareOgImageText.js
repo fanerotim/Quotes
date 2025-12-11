@@ -3,7 +3,7 @@ const prepareOgImageText = (text) => {
     // convert the text of the current quote into a string[];
     const wordsInText = text.split(' ');
     const lastWord = wordsInText[wordsInText.length - 1];
-    const lineLength = 35;
+    const lineLength = 40;
     const textOutput = [];
 
     let line = [];
