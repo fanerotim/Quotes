@@ -22,7 +22,7 @@ const generateSvgMarkup = (textArr, author) => {
         <text
             x="8%"
             y="140px"
-            font-size="48px"
+            font-size="96px"
             fill="rgb(35, 35, 35)"
             font-weight="bold"
             stroke="rgb(35, 35, 35)"
@@ -48,7 +48,7 @@ const generateSvgMarkup = (textArr, author) => {
             x="8%" 
             y="140px" 
             dy="${55 * (i + 1)}px" 
-            font-size="48px"
+            font-size="96px"
             fill="rgb(35, 35, 35)"
             font-weight="bold"
             stroke="rgb(35, 35, 35)"
@@ -68,7 +68,7 @@ const generateSvgMarkup = (textArr, author) => {
         <text
             x="8%"
             y="580px"
-            font-size="28px"
+            font-size="56px"
             fill="rgba(40, 40, 40, .9)"
         >
           - ${author}
