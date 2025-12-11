@@ -21,7 +21,7 @@ const generateSvgMarkup = (textArr, author) => {
 
         <text
             x="8%"
-            y="140px"
+            y="280px"
             font-size="96px"
             fill="rgb(35, 35, 35)"
             font-weight="bold"
@@ -31,9 +31,9 @@ const generateSvgMarkup = (textArr, author) => {
             ${textToRender.shift()}
         <tspan 
             fill="red"
-            font-size="110px"
+            font-size="220px"
             x="3%"
-            y="140px"
+            y="280px"
         >
             “
         </tspan>
@@ -46,8 +46,8 @@ const generateSvgMarkup = (textArr, author) => {
         svg.push(
         `<text 
             x="8%" 
-            y="140px" 
-            dy="${55 * (i + 1)}px" 
+            y="280px" 
+            dy="${110 * (i + 1)}px" 
             font-size="96px"
             fill="rgb(35, 35, 35)"
             font-weight="bold"
@@ -67,7 +67,7 @@ const generateSvgMarkup = (textArr, author) => {
     const lastLineOfText = `
         <text
             x="8%"
-            y="580px"
+            y="1160px"
             font-size="56px"
             fill="rgba(40, 40, 40, .9)"
         >
