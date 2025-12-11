@@ -18,11 +18,7 @@ const generateSvgMarkup = (textArr, author) => {
             x="8%"
             y="140px"
             font-size="40px"
-            font-weight="bold"
-            font-variant="small-caps"
-            fill="rgba(255, 255, 255)"
-            stroke="rgba(255, 255, 255)"
-            stroke-width="1px"
+            fill="rgba(105, 155, 115)"
         >
             ${textToRender.shift()}
         <tspan 
@@ -45,11 +41,7 @@ const generateSvgMarkup = (textArr, author) => {
             y="140px" 
             dy="${55 * (i + 1)}px" 
             font-size="40px"
-            font-weight="bold"
-            font-variant="small-caps"
-            fill="rgba(255, 255, 255)"
-            stroke="white"
-            stroke-width="1px"
+            fill="rgba(105, 155, 115)"
         >
             ${
                 // if text is longer that what we can show add ellipsis at the end 
@@ -66,8 +58,6 @@ const generateSvgMarkup = (textArr, author) => {
             x="8%"
             y="580px"
             font-size="28px"
-            font-weight="700"
-            font-variant="small-caps"
             fill="rgba(255, 255, 255)"
         >
           - ${author}
