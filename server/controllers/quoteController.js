@@ -39,7 +39,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
 
     const options = {
         font: {
-            fontFiles: [join(__dirname, '../fonts/Poppins/Poppins-Bold.ttf')]
+            fontFiles: [join(__dirname, '../fonts/Poppins/Poppins-SemiBold.ttf')]
         },
         fitTo: {
             mode: 'width',
@@ -54,7 +54,7 @@ router.get('/ogImage/:quoteId', async (req, res) => {
         // when i commented out the content type the facebook bot was able to read the image
         // its new content type is application/octet-stream
         res.set('Content-Type', 'image/png');
-        res.set('Content-Length', pngBuffer.length);
+        // res.set('Content-Length', pngBuffer.length);
         res.send(pngBuffer);
     } catch (err) {
         const statusCode = err.status | 500;
