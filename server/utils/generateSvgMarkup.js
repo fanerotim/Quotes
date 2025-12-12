@@ -10,8 +10,11 @@ const generateSvgMarkup = (textArr, author) => {
     
     const backgroundColor = "rgba(227, 227, 227, 1)";
     
+    const quotesSignColor = 'rgba(148, 45, 45, 1)';
     const quotesSignSize = 150;
     const quotesSignYOffset = 120;
+
+    const authorTextColor = 'rgba(152, 67, 67, 1)';
 
     const firstLineOfText = `
     <svg 
@@ -38,7 +41,7 @@ const generateSvgMarkup = (textArr, author) => {
         >
             ${textToRender.shift()}
         <tspan 
-            fill="red"
+            fill="${quotesSignColor}"
             font-size="${quotesSignSize}px"
             font-weight="bold"
             x="3%"
@@ -76,11 +79,11 @@ const generateSvgMarkup = (textArr, author) => {
         <text
             x="8%"
             y="240px"
-            font-size="20px"
+            font-size="16px"
             font-weight="bold"
-            stroke="rgba(9, 4, 4, 0.9)"
-            fill="rgba(9, 4, 4, 0.9)"
-            storke-width="1px"
+            stroke="${authorTextColor}"
+            fill="${authorTextColor}"
+            storke-width="2px"
         >
           - ${author}
         </text>
