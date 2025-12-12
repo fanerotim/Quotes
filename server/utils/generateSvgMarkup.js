@@ -1,10 +1,17 @@
 const generateSvgMarkup = (textArr, author) => {
     const svg = [];
 
-    const linesCount = 6;
+    const linesCount = 4;
     const textToRender = textArr.length > linesCount ? textArr.slice(0, linesCount) : textArr.slice(0)
-    const quoteTextSize = 26;
-    const quotesSignSize = 300;
+    
+    const quoteTextSize = 28;
+    const quoteTextColor = "rgba(19, 19, 19, 1)";
+    const quoteTextYOffset = 100;
+    
+    const backgroundColor = "rgba(227, 227, 227, 1)";
+    
+    const quotesSignSize = 150;
+    const quotesSignYOffset = 120;
 
     const firstLineOfText = `
     <svg 
@@ -17,23 +24,25 @@ const generateSvgMarkup = (textArr, author) => {
         <rect 
             width="2400" 
             height="1260" 
-            fill="rgba(255, 255, 255)"
+            fill="${backgroundColor}"
         />
 
         <text
             x="8%"
-            y="120px"
+            y="${quoteTextYOffset}px"
             font-size="${quoteTextSize}px"
-            fill="rgb(0, 0, 0)"
-            stroke="rgb(255, 255, 255)"
-            stroke-width="1px"
+            font-weight="bold"
+            fill="${quoteTextColor}"
+            stroke="${quoteTextColor}"
+            stroke-width="2px"
         >
             ${textToRender.shift()}
         <tspan 
             fill="red"
             font-size="${quotesSignSize}px"
+            font-weight="bold"
             x="3%"
-            y="228px"
+            y="${quotesSignYOffset}px"
         >
             “
         </tspan>
@@ -46,12 +55,13 @@ const generateSvgMarkup = (textArr, author) => {
         svg.push(
         `<text 
             x="8%" 
-            y="120px" 
-            dy="${32 * (i + 1)}px" 
+            y="${quoteTextYOffset}px" 
+            dy="${30 * (i + 1)}px" 
+            font-weight="bold"
             font-size="${quoteTextSize}px"
-            fill="rgb(0, 0, 0)"
-            stroke="rgb(255, 255, 255)"
-            stroke-width="1px"
+            fill="${quoteTextColor}"
+            stroke="${quoteTextColor}"
+            stroke-width="2px"
         >
             ${
                 // if text is longer that what we can show add ellipsis at the end 
@@ -65,9 +75,12 @@ const generateSvgMarkup = (textArr, author) => {
     const lastLineOfText = `
         <text
             x="8%"
-            y="500px"
-            font-size="33px"
-            fill="rgba(40, 40, 40, .9)"
+            y="240px"
+            font-size="20px"
+            font-weight="bold"
+            stroke="rgba(9, 4, 4, 0.9)"
+            fill="rgba(9, 4, 4, 0.9)"
+            storke-width="1px"
         >
           - ${author}
         </text>
