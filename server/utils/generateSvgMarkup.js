@@ -1,14 +1,14 @@
 const generateSvgMarkup = (textArr, author) => {
     const svg = [];
 
-    const linesCount = 4;
+    const linesCount = 5;
     const textToRender = textArr.length > linesCount ? textArr.slice(0, linesCount) : textArr.slice(0)
     
-    const quoteTextSize = 28;
-    const quoteTextColor = "rgba(19, 19, 19, 1)";
-    const quoteTextYOffset = 100;
+    const quoteTextSize = 25;
+    const quoteTextColor = "rgba(1, 1, 1, 1)";
+    const quoteTextYOffset = 90;
     
-    const backgroundColor = "rgba(227, 227, 227, 1)";
+    const backgroundColor = "rgba(245, 245, 245, 1)";
     
     const quotesSignColor = 'rgba(148, 45, 45, 1)';
     const quotesSignSize = 150;
@@ -36,8 +36,8 @@ const generateSvgMarkup = (textArr, author) => {
             font-size="${quoteTextSize}px"
             font-weight="bold"
             fill="${quoteTextColor}"
-            stroke="${quoteTextColor}"
-            stroke-width="2px"
+            stroke="${backgroundColor}"
+            stroke-width=".1px"
         >
             ${textToRender.shift()}
         <tspan 
@@ -59,12 +59,12 @@ const generateSvgMarkup = (textArr, author) => {
         `<text 
             x="8%" 
             y="${quoteTextYOffset}px" 
-            dy="${30 * (i + 1)}px" 
+            dy="${26 * (i + 1)}px" 
             font-weight="bold"
             font-size="${quoteTextSize}px"
             fill="${quoteTextColor}"
-            stroke="${quoteTextColor}"
-            stroke-width="2px"
+            stroke="${backgroundColor}"
+            stroke-width=".1px"
         >
             ${
                 // if text is longer that what we can show add ellipsis at the end 
