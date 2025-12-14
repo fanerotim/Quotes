@@ -1,40 +1,47 @@
 
     <svg 
-        width="1200"
-        height="630"
+        viewBox="0 0 500 261"
+        width="2400"
+        height="1260"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <style>
 
-            .text {
-                font-size: 18px;
-                fill: rgba(40, 40, 40, 0.8);
-            }
-
-        </style>
+        <rect 
+            width="2400" 
+            height="1260" 
+            fill="rgba(245, 245, 245, 1)"
+        />
 
         <text
-            x="20%"
-            y="40%"
-            class="text"
+            x="8%"
+            y="90px"
+            font-size="25px"
+            font-weight="bold"
+            fill="rgba(1, 1, 1, 1)"
+            stroke="rgba(245, 245, 245, 1)"
+            stroke-width=".1px"
         >
-            It all ends in tears anyway.
-            <tspan 
-                fill="red"
-                font-size="20px"
-                x="35"
-                y="30%"
-            >
-                "
-            </tspan>
+            A boo is a lot louder than a cheer!
+        <tspan 
+            fill="rgba(148, 45, 45, 1)"
+            font-size="150px"
+            font-weight="bold"
+            x="3%"
+            y="120px"
+        >
+            “
+        </tspan>
 
-        </text>
-
+        </text> 
         <text
-            dx="60%"
-            dy="80%"
-            font-size="3px"
+            x="8%"
+            y="240px"
+            font-size="16px"
+            font-weight="bold"
+            stroke="rgba(152, 67, 67, 1)"
+            fill="rgba(152, 67, 67, 1)"
+            storke-width="2px"
         >
-            A quote by Jack Kerouac
+          - Lance Armstrong
         </text>
     </svg>
