@@ -15,7 +15,7 @@
         <text
             x="8%"
             y="90px"
-            font-size="25px"
+            font-size="20px"
             font-weight="bold"
             fill="rgba(1, 1, 1, 1)"
             stroke="rgba(245, 245, 245, 1)"

@@ -4,7 +4,7 @@ const generateSvgMarkup = (textArr, author) => {
     const linesCount = 5;
     const textToRender = textArr.length > linesCount ? textArr.slice(0, linesCount) : textArr.slice(0)
     
-    const quoteTextSize = 25;
+    const quoteTextSize = 20;
     const quoteTextColor = "rgba(1, 1, 1, 1)";
     const quoteTextYOffset = 90;
     
@@ -33,7 +33,7 @@ const generateSvgMarkup = (textArr, author) => {
         <text
             x="8%"
             y="${quoteTextYOffset}px"
-            font-size="${quoteTextSize}px"
+            font-size="20px"
             font-weight="bold"
             fill="${quoteTextColor}"
             stroke="${backgroundColor}"
@@ -61,7 +61,7 @@ const generateSvgMarkup = (textArr, author) => {
             y="${quoteTextYOffset}px" 
             dy="${26 * (i + 1)}px" 
             font-weight="bold"
-            font-size="${quoteTextSize}px"
+            font-size="20px"
             fill="${quoteTextColor}"
             stroke="${backgroundColor}"
             stroke-width=".1px"
