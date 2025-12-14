@@ -38,9 +38,9 @@ router.get('/ogImage/:quoteId', async (req, res) => {
     const svg = await promises.readFile(join(__dirname, '../views/quoteOgImage.svg'))
 
     const options = {
-        // font: {
-        //     fontFiles: [join(__dirname, '../fonts/Poppins/Poppins-Bold.ttf')]
-        // },
+        font: {
+            fontFiles: [join(__dirname, '../fonts/Poppins/Poppins-Bold.ttf')]
+        },
         fitTo: {
             width: '2400'
         }
