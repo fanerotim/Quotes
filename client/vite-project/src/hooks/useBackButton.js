@@ -9,7 +9,7 @@ const useBackButton = () => {
     const location = useLocation();
     const currentLocation = location.pathname;
     //find the index of the current location in the routes []
-    //should be ok if i just specify the last index of the arr as I am now popping last item of routes when user goes back, but will refactor at later point
+    //should be ok if i just specify the last index of the arr as I am now removing the last item inside routes[] when user goes back. will refactor at later point
     const currentRouteIndex = routes.indexOf(currentLocation);
     const prevRouteIndex = currentRouteIndex - 1;
 
