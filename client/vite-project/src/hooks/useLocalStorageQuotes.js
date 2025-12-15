@@ -19,7 +19,7 @@ const useLocalStorageQuotes = () => {
             const initialQuotes = await requestQuotes(offset, limit);
             localStorage.setItem('quotes', JSON.stringify(initialQuotes));
 
-            // set initial status of hasMore (controls load more quotes button
+            // set initial status of hasMore (controls load more quotes button)
             initialQuotes.length < limit
                 ? setHasMoreStatus(false)
                 : setHasMoreStatus(true);
