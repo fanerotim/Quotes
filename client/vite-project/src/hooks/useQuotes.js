@@ -7,7 +7,7 @@ import useQuoteContext from "./useQuoteContext";
 import useLocalStorageQuotes from './useLocalStorageQuotes';
 
 const useQuotes = () => {
-    const { quotes, updateQuotes } = useQuoteContext();
+    const { quotes, updateQuotes, setHasSearched } = useQuoteContext();
     const { getQuotesFromLocalStorage } = useLocalStorageQuotes();
 
     const { createMap, scrollToItem } = useScroll();
@@ -26,7 +26,8 @@ const useQuotes = () => {
     }
 
     useEffect(() => {
-
+        // reset hasSearched value. I am hiding loadMore button if user has searched for an author
+        setHasSearched(false);
         // check what quotes we have in localStorage (current cache) and update context state
         const currentQuotes = getQuotesFromLocalStorage();
         updateQuotes(currentQuotes);

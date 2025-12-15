@@ -1,4 +1,4 @@
-// i am not using any custom styles for this button, but keeping the import here in case i need add specific styles later on
+// i am not using any custom styles for this button, but keeping the import here in case i need to add specific styles later on
 import styles from './LoadMoreQuotes.module.scss'
 import globalStyles from '../../App.module.scss';
 import useLoadMoreQuotes from '../../hooks/useLoadMoreQuotes';
@@ -14,11 +14,11 @@ const LoadMoreQuotes = () => {
 
     return (
         <>
-        {getHasMoreStatus() && <button
-            onClick={clickHandler}
-            className={globalStyles.submit__button}>
-            Load More
-        </button>}
+            {getHasMoreStatus() && <button
+                onClick={clickHandler}
+                className={globalStyles.submit__button}>
+                Load More
+            </button>}
         </>
     )
 }

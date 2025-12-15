@@ -3,6 +3,7 @@ import QuoteCard from '../quote-card/QuoteCard';
 import LoadMoreQuotes from '../load-more-quotes/LoadMoreQuotes';
 import Search from '../search/Search';
 import useQuotes from '../../hooks/useQuotes';
+import useQuoteContext from '../../hooks/useQuoteContext';
 
 const Quotes = () => {
 
@@ -11,6 +12,8 @@ const Quotes = () => {
         mapRefs,
         clickHandler
     } = useQuotes();
+
+    const { hasSearched } = useQuoteContext();
 
     return (
         <section className={styles.quotes__container}>
@@ -39,14 +42,14 @@ const Quotes = () => {
                             onCardClick={() => clickHandler(quote.id)} />
                     ))}
                 </ul>)
-                : <h1 
-                    className={styles.quotes__noQuotesFound__message}    
-                    >
-                        No quotes found
+                : <h1
+                    className={styles.quotes__noQuotesFound__message}
+                >
+                    No quotes found
                 </h1>}
 
             <div className={styles.load__more__button__wrapper}>
-                {quotes?.length > 0 && <LoadMoreQuotes
+                {quotes?.length > 0 && !hasSearched && <LoadMoreQuotes
                     className={styles.load__more__button} />}
             </div>
 

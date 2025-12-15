@@ -2,9 +2,9 @@ import { createContext, useState } from "react";
 import { useEffect } from "react";
 import useLocalStorageQuotes from "../hooks/useLocalStorageQuotes";
 
-const { 
+const {
     setInitialQuotesInLocalStorage,
-    getQuotesFromLocalStorage } 
+    getQuotesFromLocalStorage }
     = useLocalStorageQuotes();
 
 export const QuoteContext = createContext();
@@ -13,6 +13,7 @@ export const QuoteContextProvider = ({ children }) => {
 
     // everything works now apart from setting initial quotes. it was overriding setting new quotes;
     const [quotes, setQuotes] = useState([]);
+    const [hasSearched, setHasSearched] = useState(false);
 
     const updateQuotes = (newQuotes) => {
         setQuotes(newQuotes);
@@ -24,14 +25,14 @@ export const QuoteContextProvider = ({ children }) => {
         if (!currentQuotesInLocalStorage) {
             setInitialQuotesInLocalStorage();
         }
-        
+
         setQuotes(currentQuotesInLocalStorage);
-        
+
     }, [])
 
     return (
         <QuoteContext.Provider
-            value={{ quotes, updateQuotes }}>
+            value={{ quotes, updateQuotes, hasSearched, setHasSearched }}>
             {children}
         </QuoteContext.Provider>
     )
