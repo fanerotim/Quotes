@@ -14,7 +14,7 @@ const clearBlacklistedJWTCron = () => {
 
         try {
             const clearedJWTsResult = await clearBlacklistedJWTTask();
-            // log cron execution into cron log
+            // log cron execution in cron.log
             logger('CRON_LOG', { type: 'cron execution', cron_name: options.name, time: currentTime, date: new Date().toDateString(), message: 'successfully cleared blacklisted_tokens table' })
         } catch (err) {
             console.error(err);
