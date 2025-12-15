@@ -2,6 +2,7 @@ import styles from './LastThreeQuotes.module.scss';
 import useGetLastThreeQuotes from '../../hooks/useGetLastThreeQuotes';
 import { useNavigate } from 'react-router-dom'
 import { CiHeart } from 'react-icons/ci';
+import Loader from '../loader/Loader';
 
 const LastThreeQuotes = () => {
 
@@ -18,6 +19,9 @@ const LastThreeQuotes = () => {
             >
                 Most recent quotes
             </h1>
+
+            {lastThreeQuotes.length < 1 && <Loader/>}
+
             {lastThreeQuotes.map((quote) => (
                 <div
                     onClick={() => navigate(`/quotes/${quote.id}`)}
@@ -36,8 +40,8 @@ const LastThreeQuotes = () => {
                     >
                         <div
                             className={styles.likes__icon__and__likes__count__container}
-                        >   
-                            <CiHeart 
+                        >
+                            <CiHeart
                                 className={styles.last__three__quote__likes__icon}
                             />
                             {/* <LikeCountIcon
