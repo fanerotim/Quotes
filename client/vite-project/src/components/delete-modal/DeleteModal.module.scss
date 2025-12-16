@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    // TODO; modal does not cover the full heigh of the page if the page has been scrolled.
-    height: 100%;
+    // TODO; modal does not cover the full height of the page if the page has been scrolled.
+    height: 100vh;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.9);
     position: absolute;

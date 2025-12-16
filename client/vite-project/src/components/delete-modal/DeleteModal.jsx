@@ -5,6 +5,10 @@ import SuccessModal from '../success-modal/SuccessModal';
 const DeleteModal = ({ isOpen, onDelete, toggleIsOpen, isLoading, success }) => {
 
     if (isOpen) {
+        // modal is not taking full height of the page. 
+        // scrolling to top as a temp fix of this issue;
+        // TODO: render modal properly and remove the window.scrollTo fix
+        window.scrollTo(0, 0);
         document.body.style.overflowY = 'hidden';
     } else {
         document.body.style.overflowY = 'scroll';

@@ -18,8 +18,8 @@ const useForm = (initialValues) => {
         // custom select is built with a div and a paragraph. they do not have value prop, so to update values we use their textContent
         // that's why we have this conditional logic here. keeping it for now as it works and will be optimized in the future
         if (e.target.nodeName === 'DIV' || e.target.nodeName === 'P') {
-            
-           setValues((oldValues) => {
+
+            setValues((oldValues) => {
                 return {
                     ...oldValues,
                     'category': e.target.textContent
@@ -27,7 +27,7 @@ const useForm = (initialValues) => {
             })
             return;
         }
- 
+
         setValues((oldValues) => {
             // TODO; add support for checkbox - this does not work for checkboxes;
             return {

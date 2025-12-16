@@ -62,7 +62,6 @@ const QuoteDetails = () => {
                     >
                         {canLike && <LikeButton updateLikeCount={updateLikeCount} />}
                     </div>
-
                     <div className={styles.social__sharing}>
                         <SocialSharingButtons />
                     </div>

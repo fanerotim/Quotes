@@ -100,7 +100,7 @@ const UserProfile = () => {
             >
                 Quotes you added
             </h1>
-
+ 
             <div
                 className={styles.quote__card__container}
             >
