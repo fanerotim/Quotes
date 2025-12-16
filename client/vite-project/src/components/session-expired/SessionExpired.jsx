@@ -11,6 +11,7 @@ const SessionExpired = () => {
 
     // TODO: think if the useEffect is needed, i can potentially update overflowY of body on click in the below clickHandler
     useEffect(() => {
+        window.scrollTo(0, 0);
         // make sure page cannot be scrolled when modal pops up
         const bodyElement = document.querySelector('body');
         bodyElement.style.overflowY = 'hidden';
