@@ -3,8 +3,8 @@ const generateSvgMarkup = (textArr, author) => {
 
     const linesCount = 5;
     const textToRender = textArr.length > linesCount ? textArr.slice(0, linesCount) : textArr.slice(0)
-    
-    const quoteTextSize = 20;
+    // for some reason this constant was causing issues in prod. it was not being read, so font-size is hardcoded for text elements
+    const quoteTextSize = 18;
     const quoteTextColor = "rgba(1, 1, 1, 1)";
     const quoteTextYOffset = 90;
     
@@ -33,7 +33,7 @@ const generateSvgMarkup = (textArr, author) => {
         <text
             x="8%"
             y="${quoteTextYOffset}px"
-            font-size="20px"
+            font-size="18px"
             font-weight="bold"
             fill="${quoteTextColor}"
             stroke="${backgroundColor}"
@@ -61,7 +61,7 @@ const generateSvgMarkup = (textArr, author) => {
             y="${quoteTextYOffset}px" 
             dy="${26 * (i + 1)}px" 
             font-weight="bold"
-            font-size="20px"
+            font-size="18px"
             fill="${quoteTextColor}"
             stroke="${backgroundColor}"
             stroke-width=".1px"
@@ -79,7 +79,7 @@ const generateSvgMarkup = (textArr, author) => {
         <text
             x="8%"
             y="240px"
-            font-size="16px"
+            font-size="14px"
             font-weight="bold"
             stroke="${authorTextColor}"
             fill="${authorTextColor}"
