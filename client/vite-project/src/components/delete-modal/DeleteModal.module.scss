@@ -22,7 +22,7 @@
 
 .delete__modal__heading {
     font-size: .95rem;
-    font-weight: 300;
+    font-weight: 400;
     padding: 1rem;
 }
 
@@ -30,6 +30,11 @@
     display: flex;
     justify-content: end;
     gap: 2rem;
+}
+
+// specifically remove margin on buttons as I am using global button style for the 'No' button and it is fine except for the top margin, which brakes alignment
+.delete__modal__buttons__wrapper button {
+    margin: 0;
 }
 
 .delete__modal__approve__btn,
@@ -41,16 +46,17 @@
     padding: .3rem 1.3rem;
     border-radius: .1rem;
     transition: background-color .3s;
-    color: white;
 }
 
 .delete__modal__approve__btn {
-    background-color: rgb(162, 20, 20);
-    color: rgb(239, 239, 239);
+    outline: 1px solid rgb(200, 200, 200);
+    color: rgb(22, 22, 22);
+    font-weight:bold;
 
     &:hover {
         background-color: rgb(172, 0, 0);
         color: rgb(208, 208, 208);
+        outline: none;
     }
 }
 

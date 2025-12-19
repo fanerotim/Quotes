@@ -1,4 +1,5 @@
 import styles from './DeleteModal.module.scss';
+import global from '../../App.module.scss';
 import Loader from '../loader/Loader';
 import SuccessModal from '../success-modal/SuccessModal';
 
@@ -60,7 +61,8 @@ const DeleteModal = ({ isOpen, onDelete, toggleIsOpen, isLoading, success }) => 
                             </button>
                             <button
                                 onClick={toggleIsOpen}
-                                className={styles.delete__modal__reject__btn}
+                                // className={styles.delete__modal__reject__btn}
+                                className={global.submit__button}
                             >
                                 No
                             </button>
