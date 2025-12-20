@@ -11,13 +11,13 @@ const useForm = (initialValues) => {
 
         // SPAN is the dropdown icon (up/down icon) of the custom select. it does not have textContent, so we just return if we click on it
         // keeping this for now as it works and will optimize in the future
-        if (e.target.nodeName === 'SPAN') {
+        if (e.target.tagName === 'SPAN') {
             return
         }
 
         // custom select is built with a div and a paragraph. they do not have value prop, so to update values we use their textContent
         // that's why we have this conditional logic here. keeping it for now as it works and will be optimized in the future
-        if (e.target.nodeName === 'DIV' || e.target.nodeName === 'P') {
+        if (e.target.tagName === 'DIV' || e.target.tagName === 'P') {
 
             setValues((oldValues) => {
                 return {
