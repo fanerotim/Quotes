@@ -14,6 +14,7 @@ const expressConfig = (app) => {
     // app.use(express.static('server/static'))
     app.use(express.json());
 
+    // TODO: debug why originURL is not being detected as env variable. it should not be hardcoded
     const originURL = process.env.NODE_ENV === 'production' ? 'https://fanerotim-quotes.netlify.app' : 'http://localhost:5173';
 
     app.use(cors({
